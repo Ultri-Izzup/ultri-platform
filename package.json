@@ -1,0 +1,30 @@
+{
+  "name": "ultri-infrastructure",
+  "version": "1.0.0",
+  "description": "Backend resources suitable for any frontend client",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev:dump": "export PGPASSWORD=ultri_postgres_root_pass && sh ./docker-postgres/scripts/dump.sh",
+    "dev:postman": "newman run postman/Automated.postman_collection.json -e  postman/LOCAL.postman_environment.json",
+    "dev:quasar": "cd frontend && quasar dev",
+    "dev:docker": "docker compose -f dev-compose.yaml up",
+    "dev:windows": "docker compose -f dev-windows-compose.yaml up",
+    "up": "(docker compose -f dev-compose.yaml up) & (cd frontend && quasar dev)",
+    "tab:quasar": "ttab -t 'Quasar' npm run dev:quasar",
+    "tab:backend": "ttab -t 'Docker' npm run dev:docker",
+    "dev:shell": "run-s tab:quasar tab:backend",
+    "dev:browsers": "opener https://www.example.com:9000 && opener https://example.com/documentation  && opener http://localhost:5000",
+    "preview": "concurrently -p \"[{name}]\" -n \"QUASAR,DOCKER,BROWSER\" -c \"bgBlue.bold,bgGreen.bold,bgRed.bold\" \"npm:dev:quasar\" \"npm:dev:docker\" \"npm:dev:browsers\" "
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "npm-run-all": "^4.1.5",
+    "opener": "^1.5.2",
+    "ttab": "^0.8.0"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
+}

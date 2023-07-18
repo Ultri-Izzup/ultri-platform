@@ -1,0 +1,53 @@
+{
+  "name": "app",
+  "version": "0.0.1",
+  "description": "Ultri Tech Co-op",
+  "productName": "Ultri",
+  "author": "Brian Winkers <bwinkers@gmail.com>",
+  "private": true,
+  "scripts": {
+    "lint": "eslint --ext .js,.vue ./",
+    "format": "prettier --write \"**/*.{js,vue,scss,html,md,json}\" --ignore-path .gitignore",
+    "test": "echo \"No test specified\" && exit 0",
+    "dev": "quasar dev",
+    "build": "quasar build",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:pub": "vitepress build docs && rm -Rf public/co-op/* && cp -Rf docs/.vitepress/dist/* public/co-op/",
+    "docs:preview": "vitepress preview docs"
+  },
+  "dependencies": {
+    "@fastify/cookie": "^8.3.0",
+    "@quasar/extras": "^1.0.0",
+    "@vueuse/core": "^10.1.2",
+    "axios": "^1.2.1",
+    "calendar-link": "^2.4.0",
+    "nanoid": "^4.0.2",
+    "pinia": "^2.0.11",
+    "quasar": "^2.6.0",
+    "supertokens-web-js": "^0.6.0",
+    "vue": "^3.0.0",
+    "vue-i18n": "^9.0.0",
+    "vue-json-pretty": "^2.2.4",
+    "vue-native-websocket-vue3": "^3.1.7",
+    "vue-router": "^4.0.0"
+  },
+  "devDependencies": {
+    "@intlify/vite-plugin-vue-i18n": "^3.3.1",
+    "@quasar/app-vite": "^1.0.0",
+    "@quasar/quasar-app-extension-qcalendar": "^4.0.0-beta.15",
+    "autoprefixer": "^10.4.2",
+    "eslint": "^8.10.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-vue": "^9.0.0",
+    "papaparse": "^5.4.1",
+    "postcss": "^8.4.14",
+    "prettier": "^2.5.1",
+    "vitepress": "^1.0.0-beta.1"
+  },
+  "engines": {
+    "node": "^18 || ^16 || ^14.19",
+    "npm": ">= 6.13.4",
+    "yarn": ">= 1.21.1"
+  }
+}

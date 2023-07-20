@@ -1,11 +1,8 @@
 import { defineStore } from "pinia";
-import { store } from "@/store/pinia/store";
-import main from "@/main";
-import { SocketStore } from "@/type/PiniaType";
 
 export const useSocketStore = defineStore({
   id: "socket",
-  state: (): SocketStore => ({
+  state: () => ({
     // 连接状态
     isConnected: false,
     // 消息内容
@@ -19,7 +16,7 @@ export const useSocketStore = defineStore({
   }),
   actions: {
     // 连接打开
-    SOCKET_ONOPEN(event: any) {
+    SOCKET_ONOPEN(event) {
       console.log("successful websocket connection");
       main.config.globalProperties.$socket = event.currentTarget;
       this.isConnected = true;
@@ -34,7 +31,7 @@ export const useSocketStore = defineStore({
       }, this.heartBeatInterval);
     },
     // 连接关闭
-    SOCKET_ONCLOSE(event: any) {
+    SOCKET_ONCLOSE(event) {
       this.isConnected = false;
       // 连接关闭时停掉心跳消息
       window.clearInterval(this.heartBeatTimer);
@@ -43,15 +40,15 @@ export const useSocketStore = defineStore({
       console.log(event);
     },
     // 发生错误
-    SOCKET_ONERROR(event: any) {
+    SOCKET_ONERROR(event) {
       console.error(event);
     },
     // 收到服务端发送的消息
-    SOCKET_ONMESSAGE(message: any) {
+    SOCKET_ONMESSAGE(message) {
       this.message = message;
     },
     // 自动重连
-    SOCKET_RECONNECT(count: any) {
+    SOCKET_RECONNECT(count) {
       console.info("消息系统重连中...", count);
     },
     // 重连错误
@@ -63,5 +60,5 @@ export const useSocketStore = defineStore({
 
 // Need to be used outside the setup
 export function useSocketStoreWithOut() {
-  return useSocketStore(store);
+  return useSocketStore();
 }

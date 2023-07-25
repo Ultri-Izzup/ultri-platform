@@ -107,6 +107,7 @@
       <WelcomeDialog v-model="auth.isNewMember"></WelcomeDialog>
       <OrgCreateLogbookEntryDialog v-model="org.showOrgCreateLogbookEntryDialog"></OrgCreateLogbookEntryDialog>
       <OrgCreateDialog v-model="org.showOrgCreateDialog"></OrgCreateDialog>
+      <OrgMissionDialog v-model="org.showOrgMissionDialog"></OrgMissionDialog>
       <!-- PAGE VIEW -->
       <router-view />
     </q-page-container>
@@ -136,6 +137,7 @@ import WelcomeDialog from "../components/WelcomeDialog.vue";
 
 import OrgCreateDialog from "../components/OrgCreateDialog.vue";
 import OrgCreateLogbookEntryDialog from "../components/OrgCreateLogbookEntryDialog.vue";
+import OrgMissionDialog from "../components/OrgMissionDialog.vue";
 
 const $q = useQuasar()
 

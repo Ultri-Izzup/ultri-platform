@@ -94,6 +94,7 @@ async function createRoutes(server, options) {
       return result;
     }
   );
+  
 }
 
 export default fastifyPlugin(createRoutes);

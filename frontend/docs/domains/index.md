@@ -32,4 +32,4 @@ Contact us to find out how the co-op can help bring that vision to life.
 
 ## Have a domain you aren't using?
 
-Are you're parking a domain and would rather see it put to good use? Contact us about how we can help monetize your domain, while helping build the co-op. Join our [Discord](https://discord.gg/GE8NqcJx) or send email to info@opensociocracy.org.
+Are you're parking a domain and would rather see it put to good use? Contact us about how we can help monetize your domain, while helping build the co-op. Join our [Discord](https://discord.gg/rZBBhKwe) or send email to info@opensociocracy.org.

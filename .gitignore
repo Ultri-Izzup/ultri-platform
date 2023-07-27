@@ -130,5 +130,4 @@ dist
 .pnp.*
 gateway/certs/example.com+2-key.pem
 gateway/certs/example.com+2.pem
-gateway/certs/example.com+2-key.pem
-.gitignore
+

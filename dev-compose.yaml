@@ -11,8 +11,8 @@ services:
       retries: 10
     ports:
       - "5432:5432"
-    restart: no
-    env_file: .env
+    restart: "no"
+    env_file: ".env"
     networks:
       - ultri-net
     volumes:
@@ -23,7 +23,7 @@ services:
   redis:
     image: redis:7.0.7
     container_name: ultri-redis
-    restart: no
+    restart: "no"
     ports:
       - "6379:6379"
     networks:
@@ -46,7 +46,7 @@ services:
       - POSTGRESQL_TABLE_SCHEMA=supertokens
     networks:
       - ultri-net
-    restart: no
+    restart: "no"
     healthcheck:
       test: >
         bash -c 'exec 3<>/dev/tcp/0.0.0.0/3567 && echo -e "GET /hello HTTP/1.1\r\nhost: 0.0.0.0:3567\r\nConnection: close\r\n\r\n" >&3 && cat <&3 | grep "Hello"'
@@ -57,8 +57,8 @@ services:
   smtp4dev:
     container_name: ultri-smtp4dev
     image: rnwood/smtp4dev:v3
-    restart: no
-    env_file: .env
+    restart: "no"
+    env_file: ".env"
     networks:
       - ultri-net
     ports:
@@ -72,7 +72,7 @@ services:
   api:
     container_name: ultri-nugget-api
     image: ultri/nugget-api
-    restart: no
+    restart: "no"
     build: ./api
     # command: ["npm", "run", "dev"]
     # command: ["npm", "run", "start:debug"]
@@ -92,7 +92,7 @@ services:
   gateway:
     image: ultri/open-platform-gateway:latest
     container_name: ultri-gateway
-    restart: no
+    restart: "no"
     ports:
       - "80:80"
       - "443:443"
@@ -114,7 +114,7 @@ services:
   #quasar:
   #  image: ultri/frontend
   #  container_name: ultri-frontend
-  #  restart: no
+  #  restart: "no"
   #  build: ./frontend
   #  command: ["quasar", "dev"]
   #  ports:

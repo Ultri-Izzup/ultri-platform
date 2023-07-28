@@ -131,3 +131,4 @@ dist
 gateway/certs/example.com+2-key.pem
 gateway/certs/example.com+2.pem
 
+yarn.lock

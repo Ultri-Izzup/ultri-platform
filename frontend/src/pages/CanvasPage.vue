@@ -1,33 +1,22 @@
 <template>
   <q-page class="flex justify-center outer-container">
-    <!-- Container to hold everything -->
     <div class="full-width container">
-      <!-- Row 1 - the top row of a full page canvas -->
-      <div class="row" style="height: 80%">
-
-        <!-- The 1 column of the 1 row-->
-        <div class="col col1 q-pa-md">
+      <u-row height="80">
+        <div class="col q-pa-md">
           <q-card class="full-height u-box">
             <q-card-section>
               Key Partners
             </q-card-section>
           </q-card>
         </div>
-
-        <!-- The 2 column of the 1 row-->
-        <div class="col col2 fit">
-
-          <!-- 1st sub row of , row 1, col 2-->
-          <div class="row u-height-50 q-pa-md">
+        <div class="col fit">
+          <u-row height="50" class="q-pa-md">
             <q-card class="full-width u-box">
               <q-card-section>
                 Key Activities
               </q-card-section>
             </q-card>
-
-          </div>
-
-          <!-- 2nd sub row of , row 1, col 2-->
+          </u-row>
           <div class="row u-height-50 q-pa-md">
             <q-card class="full-width u-box">
               <q-card-section>
@@ -35,72 +24,54 @@
               </q-card-section>
             </q-card>
           </div>
-
         </div>
-
-        <!-- The 3 column of the 1 row-->
-        <div class="col col3  q-pa-md">
+        <div class="col q-pa-md">
           <q-card class="full-height u-box">
             <q-card-section>
               Value Propositions
             </q-card-section>
           </q-card>
         </div>
-
-        <!-- The 4 column of the 1 row-->
-        <div class="col col4">
-  
-          <!-- 1st sub row of , row 1, col 4-->
+        <div class="col">
           <div class="row u-height-50  q-pa-md">
             <q-card class="full-width u-box">
               <q-card-section>
                 Customer Relations
               </q-card-section>
             </q-card>
-
           </div>
-
-          <!-- 2nd sub row of , row 1, col 4-->
           <div class="row u-height-50  q-pa-md">
             <q-card class="full-width u-box">
               <q-card-section>
                 Channels
               </q-card-section>
             </q-card>
-
           </div>
-
         </div>
-
-        <!-- The 5 column of the 1 row-->
-        <div class="col col5  q-pa-md">
+        <div class="col q-pa-md">
           <q-card class="full-height u-box">
             <q-card-section>
               Customer Segments
             </q-card-section>
           </q-card>
         </div>
-
-      </div>
-      <div class="row" style="height: 20%">
-        <!-- The 1 column of the 2 row-->
-        <div class="col col1-2 q-pa-md">
+      </u-row>
+      <u-row height="20">
+        <div class="col q-pa-md">
           <q-card class="full-height u-box">
             <q-card-section>
               Cost Structure
             </q-card-section>
           </q-card>
         </div>
-
-        <!-- The 2 column of the 2 row-->
-        <div class="col col2-2 q-pa-md">
+        <div class="col q-pa-md">
           <q-card class="full-height u-box">
             <q-card-section>
               Revenue Stream
             </q-card-section>
           </q-card>
         </div>
-      </div>
+      </u-row>
     </div>
   </q-page>
 </template>
@@ -109,6 +80,7 @@
 import { ref } from "vue";
 import { nanoid } from 'nanoid';
 import TextClamp from 'vue3-text-clamp';
+import URow from '../components/ultri/URow.vue';
 
 const partners = ref([]);
 const activities = ref([]);

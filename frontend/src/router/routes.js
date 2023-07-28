@@ -66,7 +66,7 @@ const routes = [
       {
         name: "logbook",
         path: "",
-        component: () => import("pages/LogbookPage.vue")
+        component: () => import("src/pages/OrgLogbookPage.vue")
       }
     ]
   },
@@ -135,6 +135,24 @@ const routes = [
     },
     component: () => import("layouts/MainLayout.vue"),
     children: [{ path: "", component: () => import("pages/OrgHomePage.vue") }]
+  },
+
+  {
+    path: "/org/:orgUid/logbook",
+    meta: {
+      drawer: "Logbook"
+    },
+    component: () => import("layouts/MainLayout.vue"),
+    children: [{ path: "", component: () => import("pages/OrgLogbookPage.vue") }]
+  },
+
+  {
+    path: "/org/:orgUid/circles",
+    meta: {
+      drawer: "Circle"
+    },
+    component: () => import("layouts/MainLayout.vue"),
+    children: [{ path: "", component: () => import("pages/OrgCirclesPage.vue") }]
   },
 
   {

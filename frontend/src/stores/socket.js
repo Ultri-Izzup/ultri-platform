@@ -1,67 +1,63 @@
 import { defineStore } from "pinia";
-import { store } from "@/store/pinia/store";
-import main from "@/main";
-import { SocketStore } from "@/type/PiniaType";
 
 export const useSocketStore = defineStore({
-  id: "socket",
-  state: (): SocketStore => ({
-    // 连接状态
+  id: 'socket',
+  state: () => ({
+    // Connection Status
     isConnected: false,
-    // 消息内容
-    message: "",
-    // 重新连接错误
+    // Message content
+    message: '',
+    // Reconnect error
     reconnectError: false,
-    // 心跳消息发送时间
+    // Heartbeat message sending time
     heartBeatInterval: 50000,
-    // 心跳定时器
-    heartBeatTimer: 0
+    // Heartbeat timer
+    heartBeatTimer: 0,
   }),
   actions: {
-    // 连接打开
-    SOCKET_ONOPEN(event: any) {
-      console.log("successful websocket connection");
-      main.config.globalProperties.$socket = event.currentTarget;
+    // Connection open
+    SOCKET_ONOPEN(event) {
+      this.socket = event.currentTarget;
       this.isConnected = true;
-      // 连接成功时启动定时发送心跳消息，避免被服务器断开连接
+      // When the connection is successful, start sending heartbeat messages regularly to avoid being disconnected by the server
       this.heartBeatTimer = window.setInterval(() => {
-        const message = "心跳消息";
+        const message = 'Heartbeat message';
         this.isConnected &&
-          main.config.globalProperties.$socket.sendObj({
+          this.socket.sendObj({
             code: 200,
-            msg: message
+            msg: message,
           });
       }, this.heartBeatInterval);
     },
-    // 连接关闭
-    SOCKET_ONCLOSE(event: any) {
+    // Connection closed
+    SOCKET_ONCLOSE(event) {
       this.isConnected = false;
-      // 连接关闭时停掉心跳消息
+      // Stop the heartbeat message when the connection is closed
       window.clearInterval(this.heartBeatTimer);
       this.heartBeatTimer = 0;
-      console.log("连接已断开: " + new Date());
+      console.log('The line is disconnected: ' + new Date());
       console.log(event);
     },
-    // 发生错误
-    SOCKET_ONERROR(event: any) {
+    // An error occurred
+    SOCKET_ONERROR(event) {
       console.error(event);
     },
-    // 收到服务端发送的消息
-    SOCKET_ONMESSAGE(message: any) {
+    // Receive the message sent by the server
+    SOCKET_ONMESSAGE(message) {
       this.message = message;
     },
-    // 自动重连
-    SOCKET_RECONNECT(count: any) {
-      console.info("消息系统重连中...", count);
+    // Auto reconnect
+    SOCKET_RECONNECT(count) {
+      console.info('Message system reconnecting...', count);
     },
-    // 重连错误
+    // Reconnect error
     SOCKET_RECONNECT_ERROR() {
       this.reconnectError = true;
-    }
-  }
+    },
+  },
 });
 
 // Need to be used outside the setup
 export function useSocketStoreWithOut() {
-  return useSocketStore(store);
+  return useSocketStore();
 }

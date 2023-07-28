@@ -105,6 +105,35 @@ const OrgService = (postgres) => {
     }
   };
 
+  const updateMissionStatement = async (memberUid, orgUid, mission) => {
+    const client = await postgres.connect();
+
+    let query;
+    let values;
+
+    query = `SELECT "nuggetUid", "updatedAt" 
+        FROM set_org_mission_statement(
+          $1, $2, $3
+      )`;
+
+    values = [memberUid, orgUid, mission];
+
+    try {
+      const result = await client.query(query, values);
+
+      const newData = result.rows[0];
+
+      // Note: avoid doing expensive computation here, this will block releasing the client
+      return {
+        nuggetUid: newData.nuggetUid,
+        updatedAt: newData.updatedAt,
+      };
+    } finally {
+      // Release the client immediately after query resolves, or upon error
+      client.release();
+    }
+  };
+
   const deleteMemberOrg = async (memberUid, orgUid) => {
     const client = await postgres.connect();
 
@@ -128,7 +157,7 @@ const OrgService = (postgres) => {
     }
   };
 
-  return { getAccountOrgs, createOrg, getMemberOrgs, createMemberOrg, deleteMemberOrg };
+  return { getAccountOrgs, createOrg, getMemberOrgs, createMemberOrg, deleteMemberOrg, updateMissionStatement };
 };
 
 export default fp((server, options, next) => {

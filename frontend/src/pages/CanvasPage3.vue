@@ -1,104 +1,67 @@
 <template>
   <q-page class="flex justify-center outer-container">
-    <!-- Container to hold everything -->
-    <div class="full-width container">
-      <!-- Row 1 - the top row of a full page canvas -->
-      <div class="row" style="height: 80%">
+    <div class="row full-width overflow-hidden overflow-hidden-y">
+      <div class="row full-width  overflow-hidden overflow-hidden-y">
+        <div class="row full-width key-activities  overflow-hidden overflow-hidden-y" style="height: 70vh">
+          <div class="row full-width  overflow-hidden overflow-hidden-y">
+            <div class="col key-partners q-ma-sm  overflow-hidden overflow-hidden-y">
+              <div class="infobox fit">
+                <div class="col  overflow-hidden overflow-hidden-y">
+                  <div class="row box-head justify-center q-pa-xs text-bold text-h6">
+                    <q-space />Key Partners<q-space /><q-icon name="mdi-plus-circle-outline" size="sm" class="q-mr-md" @click="showEntryDialog('partners')"></q-icon>
+                  </div>
+                  <div class="row box-body q-pa-sm overflow-hidden overflow-hidden-y qa-md">
+                    <ol type="A">
+                      <text-clamp :text='lotsOfText' :max-lines='2' />
+                    </ol>
 
-        <!-- The 1 column of the 1 row-->
-        <div class="col col1 q-pa-md">
-          <q-card class="full-height u-box">
-            <q-card-section>
-              Key Partners
-            </q-card-section>
-          </q-card>
-        </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col fit">
+              <div class="row fit">
+                <div class="row full-width key-activities q-pa-sm">
+                  <div class="infobox fit q-pa-sm">Key Activities</div>
+                </div>
+                <div class="row full-width key-resources q-pa-sm">
+                  <div class="infobox fit q-pa-sm">Key Resources</div>
+                </div>
+              </div>
+            </div>
 
-        <!-- The 2 column of the 1 row-->
-        <div class="col col2 fit">
+            <div class="col value-propositions q-ma-sm">
+              <div class="infobox fit q-pa-sm">Value Propositions</div>
+            </div>
 
-          <!-- 1st sub row of , row 1, col 2-->
-          <div class="row u-height-50 q-pa-md">
-            <q-card class="full-width u-box">
-              <q-card-section>
-                Key Activities
-              </q-card-section>
-            </q-card>
+            <div class="col fit">
+              <div class="row fit">
+                <div
+                  class="row customer-relationships full-width key-activities q-pa-sm"
+                >
+                  <div class="infobox fit q-pa-sm">Customer Relationships</div>
+                </div>
 
+                <div class="row channels full-width key-resources q-pa-sm">
+                  <div class="infobox fit q-pa-sm">Channels</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col customer-segments q-ma-sm">
+              <div class="infobox fit q-pa-sm">Customer Segments</div>
+            </div>
           </div>
-
-          <!-- 2nd sub row of , row 1, col 2-->
-          <div class="row u-height-50 q-pa-md">
-            <q-card class="full-width u-box">
-              <q-card-section>
-                Key Resources
-              </q-card-section>
-            </q-card>
+        </div>
+        <div class="row full-width key-resources" style="height: 15vh">
+          <div class="row full-width">
+            <div class="col cost-structure q-ma-sm">
+              <div class="infobox fit q-pa-sm">Cost Structure</div>
+            </div>
+            <div class="col revenue-stream q-ma-sm">
+              <div class="infobox fit q-pa-sm">Revenue Stream</div>
+            </div>
           </div>
-
-        </div>
-
-        <!-- The 3 column of the 1 row-->
-        <div class="col col3  q-pa-md">
-          <q-card class="full-height u-box">
-            <q-card-section>
-              Value Propositions
-            </q-card-section>
-          </q-card>
-        </div>
-
-        <!-- The 4 column of the 1 row-->
-        <div class="col col4">
-  
-          <!-- 1st sub row of , row 1, col 4-->
-          <div class="row u-height-50  q-pa-md">
-            <q-card class="full-width u-box">
-              <q-card-section>
-                Customer Relations
-              </q-card-section>
-            </q-card>
-
-          </div>
-
-          <!-- 2nd sub row of , row 1, col 4-->
-          <div class="row u-height-50  q-pa-md">
-            <q-card class="full-width u-box">
-              <q-card-section>
-                Channels
-              </q-card-section>
-            </q-card>
-
-          </div>
-
-        </div>
-
-        <!-- The 5 column of the 1 row-->
-        <div class="col col5  q-pa-md">
-          <q-card class="full-height u-box">
-            <q-card-section>
-              Customer Segments
-            </q-card-section>
-          </q-card>
-        </div>
-
-      </div>
-      <div class="row" style="height: 20%">
-        <!-- The 1 column of the 2 row-->
-        <div class="col col1-2 q-pa-md">
-          <q-card class="full-height u-box">
-            <q-card-section>
-              Cost Structure
-            </q-card-section>
-          </q-card>
-        </div>
-
-        <!-- The 2 column of the 2 row-->
-        <div class="col col2-2 q-pa-md">
-          <q-card class="full-height u-box">
-            <q-card-section>
-              Revenue Stream
-            </q-card-section>
-          </q-card>
         </div>
       </div>
     </div>
@@ -185,58 +148,6 @@ const maxLines = "3";
 </script>
 
 <style lang="scss">
-.container {
-  background-color: lightgray
-}
-
-.col1 {
-  background-color: lightblue;
-  //  margin: 5px;
-  // padding: 5px;
-}
-
-.col2 {
-  background-color: lightcoral;
-  // margin: 5px;
-}
-
-.col3 {
-  background-color: lightsalmon;
-  // margin: 5px;
-}
-
-.col4 {
-  background-color: greenyellow;
-  // margin: 5px;
-}
-
-.col5 {
-  background-color: orchid;
-  // margin: 5px;
-}
-
-.col1-2 {
-  background-color: steelblue;
-  // margin: 5px;
-}
-
-.col2-2 {
-  background-color: peru;
-  //margin: 5px;
-}
-
-.u-height-50 {
-  height: 50%;
-}
-
-.u-box {
-  border-radius: 5px;
-  border-color: lightgray;
-  border-style: solid;
-  border-width: 2px;
-}
-
-
 .box-head {
   background-color: $primary;
   border-color: $primary;
@@ -270,4 +181,5 @@ const maxLines = "3";
 .canvas-container {
   border-style: solid;
   background-color: white;
-}</style>
+}
+</style>

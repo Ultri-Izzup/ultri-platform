@@ -128,3 +128,6 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+gateway/certs/example.com+2-key.pem
+gateway/certs/example.com+2.pem
+

@@ -77,6 +77,7 @@
       <CanvasDrawer v-if="route.meta.drawer == 'Canvas'"></CanvasDrawer>
       <DashboardDrawer v-if="route.meta.drawer == 'Dashboard'"></DashboardDrawer>
       <OrgDrawer v-if="route.meta.drawer == 'Org'"></OrgDrawer>
+      <CircleDrawer v-if="route.meta.drawer == 'Circle'"></CircleDrawer>
     </q-drawer>
 
     <q-footer >
@@ -107,6 +108,7 @@
       <WelcomeDialog v-model="auth.isNewMember"></WelcomeDialog>
       <OrgCreateLogbookEntryDialog v-model="org.showOrgCreateLogbookEntryDialog"></OrgCreateLogbookEntryDialog>
       <OrgCreateDialog v-model="org.showOrgCreateDialog"></OrgCreateDialog>
+      <OrgMissionDialog v-model="org.showOrgMissionDialog"></OrgMissionDialog>
       <!-- PAGE VIEW -->
       <router-view />
     </q-page-container>
@@ -130,12 +132,14 @@ import HomepageDrawer from "./drawers/HomepageDrawer.vue";
 import CanvasDrawer from "./drawers/CanvasDrawer.vue";
 import DashboardDrawer from "./drawers/DashboardDrawer.vue";
 import OrgDrawer from "./drawers/OrgDrawer.vue";
+import CircleDrawer from "./drawers/CircleDrawer.vue";
 
 import PasswordlessAuthDialog from "../components/PasswordlessDialog.vue";
 import WelcomeDialog from "../components/WelcomeDialog.vue";
 
 import OrgCreateDialog from "../components/OrgCreateDialog.vue";
 import OrgCreateLogbookEntryDialog from "../components/OrgCreateLogbookEntryDialog.vue";
+import OrgMissionDialog from "../components/OrgMissionDialog.vue";
 
 const $q = useQuasar()
 

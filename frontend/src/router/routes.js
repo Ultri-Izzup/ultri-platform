@@ -147,6 +147,15 @@ const routes = [
   },
 
   {
+    path: "/org/:orgUid/circles",
+    meta: {
+      drawer: "Circle"
+    },
+    component: () => import("layouts/MainLayout.vue"),
+    children: [{ path: "", component: () => import("pages/OrgCirclesPage.vue") }]
+  },
+
+  {
     path: "/stores",
     component: () => import("layouts/MainLayout.vue"),
     children: [

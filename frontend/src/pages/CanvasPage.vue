@@ -3,39 +3,48 @@
     <div class="container q-pa-md">
       <q-card class="key-partners">
         <q-card-section> Key Partners </q-card-section>
-        {{ lotsOfText }}
+        <q-separator></q-separator>
+        <q-card-section>{{ lotsOfText }}</q-card-section>
       </q-card>
 
       <q-card class="key-activities">
         <q-card-section> Key Activities </q-card-section>
+        <q-separator></q-separator>
       </q-card>
 
       <q-card class="key-resources">
-        <q-card-section> Key Resources </q-card-section></q-card
-      >
+        <q-card-section> Key Resources </q-card-section
+        ><q-separator></q-separator
+      ></q-card>
 
       <q-card class="value-propositions">
         <q-card-section> Value Propositions </q-card-section>
+        <q-separator></q-separator>
       </q-card>
 
       <q-card class="customer-rel">
         <q-card-section> Customer Relations </q-card-section>
+        <q-separator></q-separator>
       </q-card>
 
       <q-card class="channels">
         <q-card-section> Channels </q-card-section>
+        <q-separator></q-separator>
       </q-card>
 
       <q-card class="customer-seg">
         <q-card-section> Customer Segments </q-card-section>
+        <q-separator></q-separator>
       </q-card>
 
       <q-card class="cost-structure">
         <q-card-section> Cost Structure </q-card-section>
+        <q-separator></q-separator>
       </q-card>
 
       <q-card class="revenue">
         <q-card-section> Revenue Stream </q-card-section>
+        <q-separator></q-separator>
       </q-card>
     </div>
   </q-page>

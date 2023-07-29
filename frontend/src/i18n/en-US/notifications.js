@@ -1,6 +1,7 @@
 export default {
-  'notifications.hint': 'Notifications',
-  'notifications.title': 'Notifications',
-  'notifications.caption': 'Realtime account information'
+  notifications: {
+    hint: "Notifications",
+    title: "Notifications",
+    caption: "Realtime account information",
+  },
 };
-

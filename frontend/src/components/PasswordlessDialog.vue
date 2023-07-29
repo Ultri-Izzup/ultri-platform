@@ -3,7 +3,7 @@
     <q-card class="q-dialog-plugin" v-if="view == 'enterEmail'">
       <q-form @submit="onEmailSubmit" @reset="onEmailReset">
         <q-bar class="dialog-qbar">
-          {{  $t('auth.passwordless.dialog.dialog-title') }}
+          {{  $t('auth.passwordless.dialog.DialogTitle') }}
           <q-space></q-space>
 
           <q-btn dense flat icon="mdi-close" v-close-popup @click="auth.setTargetUrl(null)">
@@ -13,11 +13,11 @@
         <q-card-section>
           <div class="dialog-header row">
             <div class="col">
-              {{ $t('auth.passwordless.dialog.email-form-title') }}
+              {{ $t('auth.passwordless.dialog.email-formTitle') }}
             </div>
           </div>
           <div class="dialog-body">
-            {{ $t('auth.passwordless.dialog.email-form-body') }}
+            {{ $t('auth.passwordless.dialog.email-formBody') }}
           </div>
         </q-card-section>
         <q-card-section>
@@ -41,7 +41,7 @@
     <q-card class="q-dialog-plugin" v-if="view == 'enterCode'">
       <q-form @submit="onCodeSubmit" @reset="onCodeReset">
         <q-bar  class="dialog-qbar">
-          {{  $t('auth.passwordless.dialog.dialog-title') }}
+          {{  $t('auth.passwordless.dialog.DialogTitle') }}
           <q-space></q-space>
 
           <q-btn dense flat icon="mdi-close" v-close-popup @click="auth.setTargetUrl(null)">
@@ -51,12 +51,12 @@
         <q-card-section>
           <div class="dialog-header row">
             <div class="col">
-              {{ $t('auth.passwordless.dialog.code-form-title') }}
+              {{ $t('auth.passwordless.dialog.code-formTitle') }}
             </div>
 
           </div>
           <div class="dialog-body">
-            {{ $t('auth.passwordless.dialog.code-form-body') }}
+            {{ $t('auth.passwordless.dialog.code-formBody') }}
           </div>
           <q-card-section>
             <q-input

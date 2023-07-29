@@ -134,7 +134,7 @@ const maxLines = "3";
 
 <style lang="scss">
 .container {
-  background-color: lightgray;
+  //background-color: lightgray;
 }
 
 .col1 {

@@ -1,86 +1,51 @@
 <template>
-  <q-page class="flex justify-center outer-container">
-    <div class="full-width container">
-      <u-row height="80">
-        <div class="col q-pa-md">
-          <q-card class="full-height u-box">
-            <q-card-section>
-              Key Partners
-            </q-card-section>
-          </q-card>
-        </div>
-        <div class="col fit">
-          <u-row height="50" class="q-pa-md">
-            <q-card class="full-width u-box">
-              <q-card-section>
-                Key Activities
-              </q-card-section>
-            </q-card>
-          </u-row>
-          <div class="row u-height-50 q-pa-md">
-            <q-card class="full-width u-box">
-              <q-card-section>
-                Key Resources
-              </q-card-section>
-            </q-card>
-          </div>
-        </div>
-        <div class="col q-pa-md">
-          <q-card class="full-height u-box">
-            <q-card-section>
-              Value Propositions
-            </q-card-section>
-          </q-card>
-        </div>
-        <div class="col">
-          <div class="row u-height-50  q-pa-md">
-            <q-card class="full-width u-box">
-              <q-card-section>
-                Customer Relations
-              </q-card-section>
-            </q-card>
-          </div>
-          <div class="row u-height-50  q-pa-md">
-            <q-card class="full-width u-box">
-              <q-card-section>
-                Channels
-              </q-card-section>
-            </q-card>
-          </div>
-        </div>
-        <div class="col q-pa-md">
-          <q-card class="full-height u-box">
-            <q-card-section>
-              Customer Segments
-            </q-card-section>
-          </q-card>
-        </div>
-      </u-row>
-      <u-row height="20">
-        <div class="col q-pa-md">
-          <q-card class="full-height u-box">
-            <q-card-section>
-              Cost Structure
-            </q-card-section>
-          </q-card>
-        </div>
-        <div class="col q-pa-md">
-          <q-card class="full-height u-box">
-            <q-card-section>
-              Revenue Stream
-            </q-card-section>
-          </q-card>
-        </div>
-      </u-row>
+  <q-page class="">
+    <div class="container q-pa-md">
+      <q-card class="key-partners">
+        <q-card-section> Key Partners </q-card-section>
+        {{ lotsOfText }}
+      </q-card>
+
+      <q-card class="key-activities">
+        <q-card-section> Key Activities </q-card-section>
+      </q-card>
+
+      <q-card class="key-resources">
+        <q-card-section> Key Resources </q-card-section></q-card
+      >
+
+      <q-card class="value-propositions">
+        <q-card-section> Value Propositions </q-card-section>
+      </q-card>
+
+      <q-card class="customer-rel">
+        <q-card-section> Customer Relations </q-card-section>
+      </q-card>
+
+      <q-card class="channels">
+        <q-card-section> Channels </q-card-section>
+      </q-card>
+
+      <q-card class="customer-seg">
+        <q-card-section> Customer Segments </q-card-section>
+      </q-card>
+
+      <q-card class="cost-structure">
+        <q-card-section> Cost Structure </q-card-section>
+      </q-card>
+
+      <q-card class="revenue">
+        <q-card-section> Revenue Stream </q-card-section>
+      </q-card>
     </div>
   </q-page>
 </template>
 
 <script setup>
 import { ref } from "vue";
-import { nanoid } from 'nanoid';
-import TextClamp from 'vue3-text-clamp';
-import URow from '../components/ultri/URow.vue';
+import { nanoid } from "nanoid";
+import TextClamp from "vue3-text-clamp";
+import URow from "../components/ultri/URow.vue";
 
 const partners = ref([]);
 const activities = ref([]);
@@ -102,63 +67,65 @@ const editEntryTxt = ref(null);
 const editEntryUid = ref(null);
 
 const showEntryDialog = (box) => {
-  console.log(box)
+  console.log(box);
   newEntryType.value = box;
   newEntryDialog.value = true;
-}
+};
 
 const showEditDialog = (boxType, uid) => {
-
   const editObj = partners.value.filter((obj) => obj.uid == uid);
-  console.log(editObj[0].txt)
+  console.log(editObj[0].txt);
   editEntryTxt.value = editObj[0].txt;
   editEntryType.value = boxType;
   editEntryUid.value = editObj[0].uid;
   editEntryDialog.value = true;
-}
+};
 
 const addEntry = () => {
-  partners.value.push({ uid: nanoid(), txt: newEntryTxt.value })
+  partners.value.push({ uid: nanoid(), txt: newEntryTxt.value });
   newEntryTxt.value = null;
-}
+};
 
 const updateEntry = () => {
   // We really replace the object
-  partners.value = partners.value.filter((obj) => obj.uid !== editEntryUid.value);
-  partners.value.push({ uid: nanoid(), txt: editEntryTxt.value })
+  partners.value = partners.value.filter(
+    (obj) => obj.uid !== editEntryUid.value
+  );
+  partners.value.push({ uid: nanoid(), txt: editEntryTxt.value });
   editEntryTxt.value = null;
   editEntryType.value = null;
   editEntryUid.value = null;
   editEntryDialog.value = false;
-}
+};
 
 const deleteEntry = () => {
   // We really replace the object
-  partners.value = partners.value.filter((obj) => obj.uid !== editEntryUid.value);
+  partners.value = partners.value.filter(
+    (obj) => obj.uid !== editEntryUid.value
+  );
   editEntryTxt.value = null;
   editEntryType.value = null;
   editEntryUid.value = null;
   editEntryDialog.value = false;
-}
+};
 
 const edit = (boxType, uid) => {
-
   console.log(boxType, uid);
   editEntryType.value = boxType;
   editEntryUid.value = uid;
   editEntryDialog.value = true;
   editEntryTxt.value = activities.value;
+};
 
-}
-
-const lotsOfText = "edfweewfwty w ef wef ew f we f wef we f erfdgblkpo kokjoi]k ]oko] k]ok]okppppppperfdyvgerfviytsfdvcsdgosikppppppperfdyvgerfviytsfdvcsdgosikppppppperfdyvgerfviytsfdvcsdgosikppppppperfdyvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btr b t rewfwef w ef wef ew f we f wef we f erfdgblkpo kokjoi]k ]oko] k]ok]okppppppperfdyvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btr b t rewfwef w ef wef ew f we f wef we f erfdgblkpo kokjoi]k ]oko] k]ok]okppppppperfdyvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btr b t rewfwef w ef wef ew f we f wef we f erfdgblkpo kokjoi]k ]oko] k]ok]okppppppperfdyvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btr b t rewfwef w ef wef ew f we f wef we f erfdgblkpo kokjoi]k ]oko] k]ok]okppppppperfdyvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btr b t rewfwef w ef wef ew f we f wef we f erfdgblkpo kokjoi]k ]oko] k]ok]okppppppperfdyvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btr b t rewfwef w ef wef ew f we f wef we f erfdgblkpo kokjoi]k ]oko] k]ok]okppppppperfdyvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btryvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btr b t rewfwef w ef wef ew f we f wef we f erfdgblkpo kokjoi]k ]oko] k]ok]okppppppperfdyvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btr b t rewfwef w ef wef ew f we f wef we f erfdgblkpo kokjoi]k ]oko] k]ok]okppppppperfdyvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btr b t rewfwef w ef wef ew f we f wef we f erfdgblkpo kokjoi]k ]oko] k]ok]okppppppperfdyvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btr b t rewfwef w ef wef ew f we f wef we f erfdgblkpo kokjoi]k ]oko] k]ok]okppppppperfdyvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btr b t rewfwef w ef wef ew f we f wef we f erfdgblkpo kokjoi]k ]oko] k]ok]okppppppperfdyvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btr b t rewfwef w ef wef ew f we f wef we f erfdgblkpo kokjoi]k ]oko] k]ok]okppppppperfdyvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btr b t r THE_END";
+const lotsOfText =
+  "edfweewfwty w ef wef ew f we f wef we f erfdgblkpo kokjoi]k ]oko] k]ok]okpppppppe rfdyvgerfviytsfdvcsdgosikppp pppperfdyvgerfviytsfdvcsdgosikppppppperfdyvgerfviytsfdvcsdgosikppppppperfdyvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btr b t rewfwef w ef wef ew f we f wef we f erfdgblkpo kokjoi]k ]oko] k]ok]okppppppperfdyvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btr b t rewfwef w ef wef ew f we f wef we f erfdgblkpo kokjoi]k ]oko] k]ok]okppppppperfdyvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btr b t rewfwef w ef wef ew f we f wef we f erfdgblkpo kokjoi]k ]oko] k]ok]okppppppperfdyvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btr b t rewfwef w ef wef ew f we f wef we f erfdgblkpo kokjoi]k ]oko] k]ok]okppppppperfdyvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btr b t rewfwef w ef wef ew f we f wef we f erfdgblkpo kokjoi]k ]oko] k]ok]okppppppperfdyvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btr b t rewfwef w ef wef ew f we f wef we f erfdgblkpo kokjoi]k ]oko] k]ok]okppppppperfdyvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btryvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btr b t rewfwef w ef wef ew f we f wef we f erfdgblkpo kokjoi]k ]oko] k]ok]okppppppperfdyvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btr b t rewfwef w ef wef ew f we f wef we f erfdgblkpo kokjoi]k ]oko] k]ok]okppppppperfdyvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btr b t rewfwef w ef wef ew f we f wef we f erfdgblkpo kokjoi]k ]oko] k]ok]okppppppperfdyvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btr b t rewfwef w ef wef ew f we f wef we f erfdgblkpo kokjoi]k ]oko] k]ok]okppppppperfdyvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btr b t rewfwef w ef wef ew f we f wef we f erfdgblkpo kokjoi]k ]oko] k]ok]okppppppperfdyvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btr b t rewfwef w ef wef ew f we f wef we f erfdgblkpo kokjoi]k ]oko] k]ok]okppppppperfdyvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btr b t r THE_END";
 
 const maxLines = "3";
 </script>
 
 <style lang="scss">
 .container {
-  background-color: lightgray
+  background-color: lightgray;
 }
 
 .col1 {
@@ -208,7 +175,6 @@ const maxLines = "3";
   border-width: 2px;
 }
 
-
 .box-head {
   background-color: $primary;
   border-color: $primary;
@@ -242,4 +208,71 @@ const maxLines = "3";
 .canvas-container {
   border-style: solid;
   background-color: white;
-}</style>
+}
+//display grid
+.container {
+  height: 90vh;
+  display: grid;
+}
+
+.container > * {
+  word-break: break-word;
+  overflow: scroll;
+  padding: 10px;
+}
+.test {
+  border: 1px solid black;
+}
+.container > * {
+  padding: 10px;
+  min-height: 100%;
+}
+
+@media screen and (min-width: 1300px) {
+  .container {
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 10px;
+  }
+  .key-partners {
+    grid-column: 1/3;
+    grid-row: 1/5;
+  }
+  .key-activities {
+    grid-column: 3/5;
+    grid-row: 1/3;
+  }
+  .key-resources {
+    grid-column: 3/5;
+    grid-row: 3/5;
+  }
+  .value-propositions {
+    grid-column: 5/7;
+    grid-row: 1/5;
+  }
+  .customer-rel {
+    grid-column: 7/9;
+    grid-row: 1/3;
+  }
+  .channels {
+    grid-column: 7/9;
+    grid-row: 3/5;
+  }
+  .customer-seg {
+    grid-column: 9/11;
+    grid-row: 1/5;
+  }
+  .cost-structure {
+    grid-column: 1/6;
+    grid-row: 5/6;
+  }
+  .revenue {
+    grid-column: 6/11;
+    grid-row: 5/6;
+  }
+}
+//allows scroll bars to be hidden
+::-webkit-scrollbar {
+  display: none;
+}
+</style>

@@ -29,7 +29,7 @@ export default {
   'orgs.drawer.metrics-label': 'Costs and Usage',
   'orgs.drawer.metrics-caption': 'The organizations usage',
   'orgs.drawer.define-org-label': 'Define Organization',
-  'orgs.drawer.logbook-caption': 'Manage your activity',
+  'orgs.drawer.logbook-caption': 'View your activity',
   'orgs.drawer.logbook-label': 'Logbook',
   'orgs.drawer.members-caption': 'Members and permissons',
   'orgs.drawer.members-dashboard-caption': 'Access member data',

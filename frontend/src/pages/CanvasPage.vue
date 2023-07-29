@@ -1,239 +1,60 @@
 <template>
-  <q-page class="flex justify-center outer-container">
-    <!-- THIS DIV IS VISIBLE ON A X-SMALL SCREEN (class=xs)-->
-    <div class="xs row full-width">
-      <div class="row full-width" style="height: 11%">
-        <div class="col key-partners q-ma-xs">
-          <div class="infobox fit q-pa-xs">X-SMALL Key Partners</div>
-        </div>
-      </div>
-      <div class="row full-width" style="height: 11%">
-        <div class="row full-width">
-          <div class="col key-activities q-ma-xs">
-            <div class="infobox fit q-pa-xs">Key Activities</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row full-width" style="height: 11%">
-        <div class="col key-resources q-ma-xs">
-          <div class="infobox fit q-pa-xs">Key Resources</div>
-        </div>
-      </div>
-
-      <div class="row full-width" style="height: 11%">
-        <div class="row full-width">
-          <div class="col value-propositions q-ma-xs">
-            <div class="infobox fit q-pa-xs">Value Propositions</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row full-width" style="height: 11%">
-        <div class="row full-width">
-          <div class="col customer-relationships q-ma-xs">
-            <div class="infobox fit q-pa-xs">Customer Relationships</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row full-width" style="height: 11%">
-        <div class="row full-width">
-          <div class="row channels full-width key-resources q-ma-xs">
-            <div class="infobox fit q-pa-xs">Channels</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row full-width" style="height: 11%">
-        <div class="row full-width">
-          <div class="col customer-segments q-ma-xs">
-            <div class="infobox fit q-pa-xs">Customer Segments</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row full-width" style="height: 11%">
-        <div class="row full-width">
-          <div class="col cost-structure q-ma-xs">
-            <div class="infobox fit q-pa-xs">Cost Structure</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row full-width" style="height: 12%">
-        <div class="row full-width">
-          <div class="col revenue-stream q-ma-xs">
-            <div class="infobox fit q-pa-xs">Revenue Stream</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- THIS DIV IS VISIBLE ON A MEDIUM SCREEN (class=md)-->
-    <div class="gt-xs lt-lg row full-width">
-      <div class="row full-width">
-        <div class="row full-width key-activities" style="height: 33%">
-          <div class="row full-width">
-            <div class="col key-partners q-ma-sm">
-              <div class="infobox fit q-pa-sm">MEDIUM Key Partners</div>
-            </div>
-            <div class="col fit">
-              <div class="row fit">
-                <div class="row full-width key-activities">
-                  <div class="q-pa-sm fit">
-                    <div class="infobox fit q-pa-sm">Key Activities</div>
-                  </div>
-                </div>
-                <div class="row full-width key-resources">
-                  <div class="q-pa-sm fit">
-                    <div class="infobox fit q-pa-sm">Key Resources</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row full-width key-resources" style="height: 14%">
-          <div class="col value-propositions q-ma-sm">
-            <div class="infobox fit q-pa-sm">Value Propositions</div>
-          </div>
-        </div>
-        <div class="row full-width key-resources" style="height: 33%">
-          <div class="col fit">
-            <div class="row fit">
-              <div class="row customer-relationships full-width key-activities">
-                <div class="q-pa-sm fit">
-                  <div class="infobox fit q-pa-sm">Customer Relationships</div>
-                </div>
-              </div>
-              <div class="row channels full-width key-resources">
-                <div class="q-pa-sm fit">
-                  <div class="infobox fit q-pa-sm">Channels</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col customer-segments q-ma-sm">
-            <div class="infobox fit q-pa-sm">Customer Segments</div>
-          </div>
-        </div>
-        <div class="row full-width key-resources" style="height: 20%">
-          <div class="row full-width">
-            <div class="col cost-structure q-ma-sm">
-              <div class="infobox fit q-pa-sm">Cost Structure</div>
-            </div>
-            <div class="col revenue-stream q-ma-sm">
-              <div class="infobox fit q-pa-sm">Revenue Stream</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- THIS DIV IS VISIBLE ON A SCREEN GREATER THAN MEDIUM (class=sm)-->
-    <div class="gt-md row full-width">
-      <div class="row full-width">
-        <div class="row full-width key-activities" style="height: 80%">
-          <div class="row full-width">
-            <div class="col key-partners q-ma-sm">
-              <div class="infobox fit">
-                <div class="col">
-                  <div class="row box-head justify-center q-pa-xs text-bold text-h6">
-                    <q-space />Key Partners<q-space /><q-icon name="mdi-plus-circle-outline" size="sm" class="q-mr-md" @click="showEntryDialog('partners')"></q-icon>
-                  </div>
-                  <div class="row box-body q-pa-sm">
-                    <ol type="A">
-                      <li v-for="partner in partners"  :key="partner.uid" @click="showEditDialog('partner', partner.uid)">
-                        {{ partner.txt }}
-                      </li>
-
-                    </ol>
-
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col fit">
-              <div class="row fit">
-                <div class="row full-width key-activities q-pa-sm">
-                  <div class="infobox fit q-pa-sm">Key Activities</div>
-                </div>
-                <div class="row full-width key-resources q-pa-sm">
-                  <div class="infobox fit q-pa-sm">Key Resources</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col value-propositions q-ma-sm">
-              <div class="infobox fit q-pa-sm">Value Propositions</div>
-            </div>
-
-            <div class="col fit">
-              <div class="row fit">
-                <div
-                  class="row customer-relationships full-width key-activities q-pa-sm"
-                >
-                  <div class="infobox fit q-pa-sm">Customer Relationships</div>
-                </div>
-
-                <div class="row channels full-width key-resources q-pa-sm">
-                  <div class="infobox fit q-pa-sm">Channels</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col customer-segments q-ma-sm">
-              <div class="infobox fit q-pa-sm">Customer Segments</div>
-            </div>
-          </div>
-        </div>
-        <div class="row full-width key-resources" style="height: 20%">
-          <div class="row full-width">
-            <div class="col cost-structure q-ma-sm">
-              <div class="infobox fit q-pa-sm">Cost Structure</div>
-            </div>
-            <div class="col revenue-stream q-ma-sm">
-              <div class="infobox fit q-pa-sm">Revenue Stream</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <q-dialog v-model="newEntryDialog" persistent>
-      <q-card style="min-width: 350px">
-        <q-card-section class="text-h6">Add {{newEntryType}} value</q-card-section>
-
-        <q-card-section class="q-pt-none">
-          <q-input type="textarea" dense v-model="newEntryTxt" autofocus @keyup.enter="prompt = false"></q-input>
-        </q-card-section>
-
-        <q-card-actions align="right" class="text-primary">
-          <q-btn flat label="Cancel" v-close-popup></q-btn>
-          <q-btn flat label="Add" @click="addEntry" v-close-popup></q-btn>
-        </q-card-actions>
+  <q-page class="">
+    <div class="container q-pa-md">
+      <q-card class="key-partners">
+        <q-card-section> Key Partners </q-card-section>
+        <q-separator></q-separator>
+        <q-card-section>{{ lotsOfText }}</q-card-section>
       </q-card>
-    </q-dialog>
-    <q-dialog v-model="editEntryDialog" persistent>
-      <q-card style="min-width: 350px">
-        <q-card-section class="text-h6">Edit {{editEntryType}} value</q-card-section>
 
-        <q-card-section class="q-pt-none">
-          <q-input type="textarea" dense v-model="editEntryTxt" autofocus @keyup.enter="prompt = false"></q-input>
-        </q-card-section>
-
-        <q-card-actions align="right" class="text-primary">
-          <q-btn flat label="Delete"  @click="deleteEntry" v-close-popup></q-btn>
-          <q-space />
-          <q-btn flat label="Cancel" v-close-popup></q-btn>
-          <q-btn flat label="Update" @click="updateEntry" v-close-popup></q-btn>
-        </q-card-actions>
+      <q-card class="key-activities">
+        <q-card-section> Key Activities </q-card-section>
+        <q-separator></q-separator>
       </q-card>
-    </q-dialog>
+
+      <q-card class="key-resources">
+        <q-card-section> Key Resources </q-card-section
+        ><q-separator></q-separator
+      ></q-card>
+
+      <q-card class="value-propositions">
+        <q-card-section> Value Propositions </q-card-section>
+        <q-separator></q-separator>
+      </q-card>
+
+      <q-card class="customer-rel">
+        <q-card-section> Customer Relations </q-card-section>
+        <q-separator></q-separator>
+      </q-card>
+
+      <q-card class="channels">
+        <q-card-section> Channels </q-card-section>
+        <q-separator></q-separator>
+      </q-card>
+
+      <q-card class="customer-seg">
+        <q-card-section> Customer Segments </q-card-section>
+        <q-separator></q-separator>
+      </q-card>
+
+      <q-card class="cost-structure">
+        <q-card-section> Cost Structure </q-card-section>
+        <q-separator></q-separator>
+      </q-card>
+
+      <q-card class="revenue">
+        <q-card-section> Revenue Stream </q-card-section>
+        <q-separator></q-separator>
+      </q-card>
+    </div>
   </q-page>
 </template>
 
 <script setup>
 import { ref } from "vue";
-import { nanoid } from 'nanoid'
+import { nanoid } from "nanoid";
+import TextClamp from "vue3-text-clamp";
+import URow from "../components/ultri/URow.vue";
 
 const partners = ref([]);
 const activities = ref([]);
@@ -255,57 +76,114 @@ const editEntryTxt = ref(null);
 const editEntryUid = ref(null);
 
 const showEntryDialog = (box) => {
-  console.log(box)
+  console.log(box);
   newEntryType.value = box;
   newEntryDialog.value = true;
-}
+};
 
 const showEditDialog = (boxType, uid) => {
-
   const editObj = partners.value.filter((obj) => obj.uid == uid);
-  console.log(editObj[0].txt)
+  console.log(editObj[0].txt);
   editEntryTxt.value = editObj[0].txt;
   editEntryType.value = boxType;
   editEntryUid.value = editObj[0].uid;
   editEntryDialog.value = true;
-}
+};
 
 const addEntry = () => {
-  partners.value.push({ uid: nanoid(), txt: newEntryTxt.value })
+  partners.value.push({ uid: nanoid(), txt: newEntryTxt.value });
   newEntryTxt.value = null;
-}
+};
 
 const updateEntry = () => {
   // We really replace the object
-  partners.value = partners.value.filter((obj) => obj.uid !== editEntryUid.value);
-  partners.value.push({ uid: nanoid(), txt: editEntryTxt.value })
+  partners.value = partners.value.filter(
+    (obj) => obj.uid !== editEntryUid.value
+  );
+  partners.value.push({ uid: nanoid(), txt: editEntryTxt.value });
   editEntryTxt.value = null;
   editEntryType.value = null;
   editEntryUid.value = null;
   editEntryDialog.value = false;
-}
+};
 
 const deleteEntry = () => {
   // We really replace the object
-  partners.value = partners.value.filter((obj) => obj.uid !== editEntryUid.value);
+  partners.value = partners.value.filter(
+    (obj) => obj.uid !== editEntryUid.value
+  );
   editEntryTxt.value = null;
   editEntryType.value = null;
   editEntryUid.value = null;
   editEntryDialog.value = false;
-}
+};
 
 const edit = (boxType, uid) => {
-
   console.log(boxType, uid);
   editEntryType.value = boxType;
   editEntryUid.value = uid;
   editEntryDialog.value = true;
   editEntryTxt.value = activities.value;
+};
 
-}
+const lotsOfText =
+  "edfweewfwty w ef wef ew f we f wef we f erfdgblkpo kokjoi]k ]oko] k]ok]okpppppppe rfdyvgerfviytsfdvcsdgosikppp pppperfdyvgerfviytsfdvcsdgosikppppppperfdyvgerfviytsfdvcsdgosikppppppperfdyvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btr b t rewfwef w ef wef ew f we f wef we f erfdgblkpo kokjoi]k ]oko] k]ok]okppppppperfdyvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btr b t rewfwef w ef wef ew f we f wef we f erfdgblkpo kokjoi]k ]oko] k]ok]okppppppperfdyvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btr b t rewfwef w ef wef ew f we f wef we f erfdgblkpo kokjoi]k ]oko] k]ok]okppppppperfdyvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btr b t rewfwef w ef wef ew f we f wef we f erfdgblkpo kokjoi]k ]oko] k]ok]okppppppperfdyvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btr b t rewfwef w ef wef ew f we f wef we f erfdgblkpo kokjoi]k ]oko] k]ok]okppppppperfdyvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btr b t rewfwef w ef wef ew f we f wef we f erfdgblkpo kokjoi]k ]oko] k]ok]okppppppperfdyvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btryvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btr b t rewfwef w ef wef ew f we f wef we f erfdgblkpo kokjoi]k ]oko] k]ok]okppppppperfdyvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btr b t rewfwef w ef wef ew f we f wef we f erfdgblkpo kokjoi]k ]oko] k]ok]okppppppperfdyvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btr b t rewfwef w ef wef ew f we f wef we f erfdgblkpo kokjoi]k ]oko] k]ok]okppppppperfdyvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btr b t rewfwef w ef wef ew f we f wef we f erfdgblkpo kokjoi]k ]oko] k]ok]okppppppperfdyvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btr b t rewfwef w ef wef ew f we f wef we f erfdgblkpo kokjoi]k ]oko] k]ok]okppppppperfdyvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btr b t rewfwef w ef wef ew f we f wef we f erfdgblkpo kokjoi]k ]oko] k]ok]okppppppperfdyvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btr b t r THE_END";
+
+const maxLines = "3";
 </script>
 
 <style lang="scss">
+.container {
+  background-color: lightgray;
+}
+
+.col1 {
+  background-color: lightblue;
+  //  margin: 5px;
+  // padding: 5px;
+}
+
+.col2 {
+  background-color: lightcoral;
+  // margin: 5px;
+}
+
+.col3 {
+  background-color: lightsalmon;
+  // margin: 5px;
+}
+
+.col4 {
+  background-color: greenyellow;
+  // margin: 5px;
+}
+
+.col5 {
+  background-color: orchid;
+  // margin: 5px;
+}
+
+.col1-2 {
+  background-color: steelblue;
+  // margin: 5px;
+}
+
+.col2-2 {
+  background-color: peru;
+  //margin: 5px;
+}
+
+.u-height-50 {
+  height: 50%;
+}
+
+.u-box {
+  border-radius: 5px;
+  border-color: lightgray;
+  border-style: solid;
+  border-width: 2px;
+}
+
 .box-head {
   background-color: $primary;
   border-color: $primary;
@@ -313,22 +191,97 @@ const edit = (boxType, uid) => {
   border-top-right-radius: 0.5em;
   color: white;
 }
+
 .infobox {
   border: solid;
   border-color: lightgrey;
   border-radius: 1em;
 }
+
 .outer-container {
   border-style: double;
+  border-color: blue;
 }
-.outer-card-container {
+
+.canvas-box {
   border-style: dotted;
+  padding: 5px;
+  margin: 5px;
+  border-color: green;
 }
+
 .card-section-container {
   border-style: dashed;
 }
+
 .canvas-container {
   border-style: solid;
   background-color: white;
+}
+//display grid
+.container {
+  height: 90vh;
+  display: grid;
+}
+
+.container > * {
+  word-break: break-word;
+  overflow: scroll;
+  padding: 10px;
+}
+.test {
+  border: 1px solid black;
+}
+.container > * {
+  padding: 10px;
+  min-height: 100%;
+}
+
+@media screen and (min-width: 1300px) {
+  .container {
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 10px;
+  }
+  .key-partners {
+    grid-column: 1/3;
+    grid-row: 1/5;
+  }
+  .key-activities {
+    grid-column: 3/5;
+    grid-row: 1/3;
+  }
+  .key-resources {
+    grid-column: 3/5;
+    grid-row: 3/5;
+  }
+  .value-propositions {
+    grid-column: 5/7;
+    grid-row: 1/5;
+  }
+  .customer-rel {
+    grid-column: 7/9;
+    grid-row: 1/3;
+  }
+  .channels {
+    grid-column: 7/9;
+    grid-row: 3/5;
+  }
+  .customer-seg {
+    grid-column: 9/11;
+    grid-row: 1/5;
+  }
+  .cost-structure {
+    grid-column: 1/6;
+    grid-row: 5/6;
+  }
+  .revenue {
+    grid-column: 6/11;
+    grid-row: 5/6;
+  }
+}
+//allows scroll bars to be hidden
+::-webkit-scrollbar {
+  display: none;
 }
 </style>

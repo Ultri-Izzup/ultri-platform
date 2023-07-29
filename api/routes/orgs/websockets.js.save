@@ -1,5 +1,21 @@
 import fastifyPlugin from "fastify-plugin";
 import { verifySession } from "supertokens-node/recipe/session/framework/fastify/index.js";
+//import jwt, { JwtHeader, SigningKeyCallback } from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
+const { JwtHeader, SigningKeyCallback } = jwt;
+//import JwksClient from "jwks-client"; 
+
+// functions to fetch jwks
+//var client = JwksClient({
+//  jwksUri: 'http://localhost:3000/auth/jwt/jwks.json'
+//});
+
+function getKey(header, callback) {
+  client.getSigningKey(header.kid, function (err, key) {
+    var signingKey = key.getPublicKey();
+    callback(err, signingKey);
+  });
+}
 
 async function createRoutes(server, options) {
 
@@ -14,12 +30,16 @@ async function createRoutes(server, options) {
       {  websocket: true },
       async (connection, request) => {
 
+        console.log(request)
+
         // Get the token from the querystring
         const token = request.params.token;
 
+        console.log('JWT TOKEN', token)
+
         // Client message
         connection.socket.on('message', message => {
-            console.log(`Client message: ${message}`);
+            console.log(`WS Client message: ${message}`);
         });
 
         // Client disconnect

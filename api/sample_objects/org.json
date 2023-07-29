@@ -1,0 +1,53 @@
+{
+  "nugget": {
+    "nuggetType": "org",
+    "pubAt": "2023-05-25",
+    "internalName": "Org definition for Ultri",
+    "publicTitle": "Ultri Co-op",
+    "blocks": [
+      {
+        "blockType": "mission",
+        "data": {
+          "missionStatement": "Helping good people do great things"
+        }
+      },
+      {
+        "blockType": "okr",
+        "data": {
+          "objectives": {
+            "abc": {
+              "objective": "Extend run way",
+              "keyResults": {
+                "aaa": {
+                  "result": "Obtain grant"
+                },
+                "bbb": {
+                  "result": "25 Paying Users"
+                },
+                "ccc": {
+                  "result": "Avoid becoming an employer"
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "blockType": "circles",
+        "data": {
+          "circles": ["abc", "xyz"]
+        }
+      },
+      {
+        "blockType": "drivers",
+        "data": {
+          "drivers": {
+            "abc": "Help startups, start up",
+            "efg": "Better jobs for open source developers",
+            "xyz": "Software owned by the people who use it"
+          }
+        }
+      }
+    ]
+  }
+}

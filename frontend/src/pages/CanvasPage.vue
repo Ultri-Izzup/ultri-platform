@@ -2,49 +2,69 @@
   <q-page class="">
     <div class="container q-pa-md">
       <q-card class="key-partners">
-        <q-card-section> Key Partners </q-card-section>
-        <q-separator></q-separator>
+        <q-card-section class="sticky-title">
+          <p>Key Partners</p>
+          <q-separator></q-separator>
+        </q-card-section>
+
         <q-card-section>{{ lotsOfText }}</q-card-section>
       </q-card>
 
       <q-card class="key-activities">
-        <q-card-section> Key Activities </q-card-section>
-        <q-separator></q-separator>
+        <q-card-section class="sticky-title">
+          <p>Key Activities</p>
+          <q-separator></q-separator>
+        </q-card-section>
+        {{ lotsOfText }}
       </q-card>
 
       <q-card class="key-resources">
-        <q-card-section> Key Resources </q-card-section
-        ><q-separator></q-separator
-      ></q-card>
+        <q-card-section class="sticky-title"
+          ><p>Key Resources</p>
+          <q-separator></q-separator>
+        </q-card-section>
+      </q-card>
 
       <q-card class="value-propositions">
-        <q-card-section> Value Propositions </q-card-section>
-        <q-separator></q-separator>
+        <q-card-section class="sticky-title">
+          <p>Value Propositions</p>
+          <q-separator></q-separator>
+        </q-card-section>
       </q-card>
 
       <q-card class="customer-rel">
-        <q-card-section> Customer Relations </q-card-section>
-        <q-separator></q-separator>
+        <q-card-section class="sticky-title">
+          <p>Customer Relations</p>
+          <q-separator></q-separator
+        ></q-card-section>
       </q-card>
 
       <q-card class="channels">
-        <q-card-section> Channels </q-card-section>
-        <q-separator></q-separator>
+        <q-card-section class="sticky-title">
+          <p>Channels</p>
+          <q-separator></q-separator>
+        </q-card-section>
       </q-card>
 
       <q-card class="customer-seg">
-        <q-card-section> Customer Segments </q-card-section>
-        <q-separator></q-separator>
+        <q-card-section class="sticky-title">
+          <p>Customer Segments</p>
+          <q-separator></q-separator>
+        </q-card-section>
       </q-card>
 
       <q-card class="cost-structure">
-        <q-card-section> Cost Structure </q-card-section>
-        <q-separator></q-separator>
+        <q-card-section class="sticky-title">
+          <p>Cost Structure</p>
+          <q-separator></q-separator
+        ></q-card-section>
       </q-card>
 
       <q-card class="revenue">
-        <q-card-section> Revenue Stream </q-card-section>
-        <q-separator></q-separator>
+        <q-card-section class="sticky-title"
+          ><p>Revenue Stream</p>
+          <q-separator></q-separator
+        ></q-card-section>
       </q-card>
     </div>
   </q-page>
@@ -199,5 +219,11 @@ const maxLines = "3";
 //allows scroll bars to be hidden
 ::-webkit-scrollbar {
   display: none;
+}
+.sticky-title {
+  position: sticky;
+  top: -10px;
+  background-color: white;
+  z-index: 2;
 }
 </style>

@@ -1,58 +1,42 @@
 <template>
   <q-page class="">
     <div class="container q-pa-md">
-      <div class="key-partners">
-        <q-card style="min-height: 100%">
-          <q-card-section> Key Partners </q-card-section>
-          <p>{{ lotsOfText }}</p>
-        </q-card>
-      </div>
+      <q-card style="min-height: 100%" class="key-partners">
+        <q-card-section> Key Partners </q-card-section>
+        <p>{{ lotsOfText }}</p>
+      </q-card>
 
-      <div class="key-activities">
-        <q-card class="" style="min-height: 100%">
-          <q-card-section> Key Activities </q-card-section>
-        </q-card>
-      </div>
+      <q-card class="key-activities" style="min-height: 100%">
+        <q-card-section> Key Activities </q-card-section>
+      </q-card>
 
-      <div class="key-resources">
-        <q-card style="min-height: 100%">
-          <q-card-section> Key Resources </q-card-section></q-card
-        >
-      </div>
+      <q-card style="min-height: 100%" class="key-resources">
+        <q-card-section> Key Resources </q-card-section></q-card
+      >
 
-      <div class="value-propositions">
-        <q-card class="" style="min-height: 100%; padding: 20px">
-          <q-card-section> Value Propositions </q-card-section>
-        </q-card>
-      </div>
+      <q-card style="min-height: 100%" class="value-propositions">
+        <q-card-section> Value Propositions </q-card-section>
+      </q-card>
 
-      <div class="customer-rel">
-        <q-card class="" style="min-height: 100%">
-          <q-card-section> Customer Relations </q-card-section>
-        </q-card>
-      </div>
-      <div class="channels">
-        <q-card class="" style="min-height: 100%">
-          <q-card-section> Channels </q-card-section>
-        </q-card>
-      </div>
+      <q-card style="min-height: 100%" class="customer-rel">
+        <q-card-section> Customer Relations </q-card-section>
+      </q-card>
 
-      <div class="customer-seg">
-        <q-card class="" style="min-height: 100%">
-          <q-card-section> Customer Segments </q-card-section>
-        </q-card>
-      </div>
+      <q-card style="min-height: 100%" class="channels">
+        <q-card-section> Channels </q-card-section>
+      </q-card>
 
-      <div class="cost-structure">
-        <q-card class="" style="min-height: 100%">
-          <q-card-section> Cost Structure </q-card-section>
-        </q-card>
-      </div>
-      <div class="revenue">
-        <q-card class="" style="min-height: 100%">
-          <q-card-section> Revenue Stream </q-card-section>
-        </q-card>
-      </div>
+      <q-card style="min-height: 100%" class="customer-seg">
+        <q-card-section> Customer Segments </q-card-section>
+      </q-card>
+
+      <q-card style="min-height: 100%" class="cost-structure">
+        <q-card-section> Cost Structure </q-card-section>
+      </q-card>
+
+      <q-card style="min-height: 100%" class="revenue">
+        <q-card-section> Revenue Stream </q-card-section>
+      </q-card>
     </div>
   </q-page>
 </template>

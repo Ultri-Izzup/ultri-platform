@@ -3,7 +3,7 @@
     <div class="container q-pa-md">
       <q-card class="key-partners">
         <q-card-section> Key Partners </q-card-section>
-        <p>{{ lotsOfText }}</p>
+        {{ lotsOfText }}
       </q-card>
 
       <q-card class="key-activities">
@@ -223,7 +223,7 @@ const maxLines = "3";
 .test {
   border: 1px solid black;
 }
-.container * {
+.container > * {
   padding: 10px;
   min-height: 100%;
 }

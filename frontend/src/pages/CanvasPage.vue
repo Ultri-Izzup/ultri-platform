@@ -133,91 +133,6 @@ const maxLines = "3";
 </script>
 
 <style lang="scss">
-.container {
-  background-color: lightgray;
-}
-
-.col1 {
-  background-color: lightblue;
-  //  margin: 5px;
-  // padding: 5px;
-}
-
-.col2 {
-  background-color: lightcoral;
-  // margin: 5px;
-}
-
-.col3 {
-  background-color: lightsalmon;
-  // margin: 5px;
-}
-
-.col4 {
-  background-color: greenyellow;
-  // margin: 5px;
-}
-
-.col5 {
-  background-color: orchid;
-  // margin: 5px;
-}
-
-.col1-2 {
-  background-color: steelblue;
-  // margin: 5px;
-}
-
-.col2-2 {
-  background-color: peru;
-  //margin: 5px;
-}
-
-.u-height-50 {
-  height: 50%;
-}
-
-.u-box {
-  border-radius: 5px;
-  border-color: lightgray;
-  border-style: solid;
-  border-width: 2px;
-}
-
-.box-head {
-  background-color: $primary;
-  border-color: $primary;
-  border-top-left-radius: 0.5em;
-  border-top-right-radius: 0.5em;
-  color: white;
-}
-
-.infobox {
-  border: solid;
-  border-color: lightgrey;
-  border-radius: 1em;
-}
-
-.outer-container {
-  border-style: double;
-  border-color: blue;
-}
-
-.canvas-box {
-  border-style: dotted;
-  padding: 5px;
-  margin: 5px;
-  border-color: green;
-}
-
-.card-section-container {
-  border-style: dashed;
-}
-
-.canvas-container {
-  border-style: solid;
-  background-color: white;
-}
 //display grid
 .container {
   height: 90vh;
@@ -228,6 +143,7 @@ const maxLines = "3";
   word-break: break-word;
   overflow: scroll;
   padding: 10px;
+  box-shadow: 1px 10px 10px rgba(128, 128, 128, 0.2);
 }
 .test {
   border: 1px solid black;

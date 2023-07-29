@@ -1,40 +1,40 @@
 <template>
   <q-page class="">
     <div class="container q-pa-md">
-      <q-card style="min-height: 100%" class="key-partners">
+      <q-card class="key-partners">
         <q-card-section> Key Partners </q-card-section>
         <p>{{ lotsOfText }}</p>
       </q-card>
 
-      <q-card class="key-activities" style="min-height: 100%">
+      <q-card class="key-activities">
         <q-card-section> Key Activities </q-card-section>
       </q-card>
 
-      <q-card style="min-height: 100%" class="key-resources">
+      <q-card class="key-resources">
         <q-card-section> Key Resources </q-card-section></q-card
       >
 
-      <q-card style="min-height: 100%" class="value-propositions">
+      <q-card class="value-propositions">
         <q-card-section> Value Propositions </q-card-section>
       </q-card>
 
-      <q-card style="min-height: 100%" class="customer-rel">
+      <q-card class="customer-rel">
         <q-card-section> Customer Relations </q-card-section>
       </q-card>
 
-      <q-card style="min-height: 100%" class="channels">
+      <q-card class="channels">
         <q-card-section> Channels </q-card-section>
       </q-card>
 
-      <q-card style="min-height: 100%" class="customer-seg">
+      <q-card class="customer-seg">
         <q-card-section> Customer Segments </q-card-section>
       </q-card>
 
-      <q-card style="min-height: 100%" class="cost-structure">
+      <q-card class="cost-structure">
         <q-card-section> Cost Structure </q-card-section>
       </q-card>
 
-      <q-card style="min-height: 100%" class="revenue">
+      <q-card class="revenue">
         <q-card-section> Revenue Stream </q-card-section>
       </q-card>
     </div>
@@ -225,6 +225,7 @@ const maxLines = "3";
 }
 .container * {
   padding: 10px;
+  min-height: 100%;
 }
 
 @media screen and (min-width: 1300px) {

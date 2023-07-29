@@ -2,49 +2,69 @@
   <q-page class="">
     <div class="container q-pa-md">
       <q-card class="key-partners">
-        <q-card-section> Key Partners </q-card-section>
-        <q-separator></q-separator>
+        <q-card-section class="sticky-title">
+          <p>Key Partners</p>
+          <q-separator></q-separator>
+        </q-card-section>
+
         <q-card-section>{{ lotsOfText }}</q-card-section>
       </q-card>
 
       <q-card class="key-activities">
-        <q-card-section> Key Activities </q-card-section>
-        <q-separator></q-separator>
+        <q-card-section class="sticky-title">
+          <p>Key Activities</p>
+          <q-separator></q-separator>
+        </q-card-section>
+        {{ lotsOfText }}
       </q-card>
 
       <q-card class="key-resources">
-        <q-card-section> Key Resources </q-card-section
-        ><q-separator></q-separator
-      ></q-card>
+        <q-card-section class="sticky-title"
+          ><p>Key Resources</p>
+          <q-separator></q-separator>
+        </q-card-section>
+      </q-card>
 
       <q-card class="value-propositions">
-        <q-card-section> Value Propositions </q-card-section>
-        <q-separator></q-separator>
+        <q-card-section class="sticky-title">
+          <p>Value Propositions</p>
+          <q-separator></q-separator>
+        </q-card-section>
       </q-card>
 
       <q-card class="customer-rel">
-        <q-card-section> Customer Relations </q-card-section>
-        <q-separator></q-separator>
+        <q-card-section class="sticky-title">
+          <p>Customer Relations</p>
+          <q-separator></q-separator
+        ></q-card-section>
       </q-card>
 
       <q-card class="channels">
-        <q-card-section> Channels </q-card-section>
-        <q-separator></q-separator>
+        <q-card-section class="sticky-title">
+          <p>Channels</p>
+          <q-separator></q-separator>
+        </q-card-section>
       </q-card>
 
       <q-card class="customer-seg">
-        <q-card-section> Customer Segments </q-card-section>
-        <q-separator></q-separator>
+        <q-card-section class="sticky-title">
+          <p>Customer Segments</p>
+          <q-separator></q-separator>
+        </q-card-section>
       </q-card>
 
       <q-card class="cost-structure">
-        <q-card-section> Cost Structure </q-card-section>
-        <q-separator></q-separator>
+        <q-card-section class="sticky-title">
+          <p>Cost Structure</p>
+          <q-separator></q-separator
+        ></q-card-section>
       </q-card>
 
       <q-card class="revenue">
-        <q-card-section> Revenue Stream </q-card-section>
-        <q-separator></q-separator>
+        <q-card-section class="sticky-title"
+          ><p>Revenue Stream</p>
+          <q-separator></q-separator
+        ></q-card-section>
       </q-card>
     </div>
   </q-page>
@@ -133,91 +153,6 @@ const maxLines = "3";
 </script>
 
 <style lang="scss">
-.container {
-  background-color: lightgray;
-}
-
-.col1 {
-  background-color: lightblue;
-  //  margin: 5px;
-  // padding: 5px;
-}
-
-.col2 {
-  background-color: lightcoral;
-  // margin: 5px;
-}
-
-.col3 {
-  background-color: lightsalmon;
-  // margin: 5px;
-}
-
-.col4 {
-  background-color: greenyellow;
-  // margin: 5px;
-}
-
-.col5 {
-  background-color: orchid;
-  // margin: 5px;
-}
-
-.col1-2 {
-  background-color: steelblue;
-  // margin: 5px;
-}
-
-.col2-2 {
-  background-color: peru;
-  //margin: 5px;
-}
-
-.u-height-50 {
-  height: 50%;
-}
-
-.u-box {
-  border-radius: 5px;
-  border-color: lightgray;
-  border-style: solid;
-  border-width: 2px;
-}
-
-.box-head {
-  background-color: $primary;
-  border-color: $primary;
-  border-top-left-radius: 0.5em;
-  border-top-right-radius: 0.5em;
-  color: white;
-}
-
-.infobox {
-  border: solid;
-  border-color: lightgrey;
-  border-radius: 1em;
-}
-
-.outer-container {
-  border-style: double;
-  border-color: blue;
-}
-
-.canvas-box {
-  border-style: dotted;
-  padding: 5px;
-  margin: 5px;
-  border-color: green;
-}
-
-.card-section-container {
-  border-style: dashed;
-}
-
-.canvas-container {
-  border-style: solid;
-  background-color: white;
-}
 //display grid
 .container {
   height: 90vh;
@@ -228,6 +163,7 @@ const maxLines = "3";
   word-break: break-word;
   overflow: scroll;
   padding: 10px;
+  box-shadow: 1px 10px 10px rgba(128, 128, 128, 0.2);
 }
 .test {
   border: 1px solid black;
@@ -283,5 +219,11 @@ const maxLines = "3";
 //allows scroll bars to be hidden
 ::-webkit-scrollbar {
   display: none;
+}
+.sticky-title {
+  position: sticky;
+  top: -10px;
+  background-color: white;
+  z-index: 2;
 }
 </style>

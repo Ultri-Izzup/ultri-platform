@@ -1,33 +1,37 @@
 <template>
-  <q-card>
+  <q-card class="container-card">
     <q-card-section class="top-q-card">
       <p>{{ title }}</p>
-      <q-icon name="mdi-plus-circle-outline" size="20px"></q-icon>
+      <q-icon
+        name="mdi-plus-circle-outline"
+        size="20px"
+        @click="dialogVisible = true"
+      ></q-icon>
     </q-card-section>
     <q-separator></q-separator>
-    <q-card-section
-      >Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi
-      inventore beatae tempora ipsa deleniti nulla accusamus, alias tenetur hic
-      veritatis? Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum
-      illum ab eaque quasi accusantium quas, nam tenetur dolores aliquam
-      doloremque sunt dignissimos, ipsam ex enim quisquam ratione corrupti
-      provident explicabo fugiat officia, sapiente adipisci? Ducimus dolorum non
-      quisquam, dicta laborum magnam vero quia nobis? Autem, a. Voluptatem
-      similique repellat, rerum totam doloremque omnis eum cum vero ipsam
-      quaerat incidunt provident? Maxime, nemo, harum deleniti, quidem dolorem
-      non aut mollitia fugit repellat omnis dolorum beatae excepturi eius
-      voluptate pariatur consectetur similique odio architecto ipsam. Numquam
-      molestiae nihil quibusdam autem, commodi accusantium architecto sunt
-      repellendus. Natus magni quis, architecto officiis quam
-      corrupti!</q-card-section
-    >
+    <q-dialog v-model="dialogVisible">
+      <q-card>
+        <q-card-section>
+          <!-- Dialog content goes here -->
+          <p>This is a dialog content</p>
+        </q-card-section>
+
+        <q-card-actions align="evenly">
+          <!-- Dialog actions (buttons) go here -->
+          <q-btn label="add" color="primary" @click="dialogVisible = false" />
+          <q-btn label="Close" color="primary" @click="dialogVisible = false" />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
   </q-card>
 </template>
 
 <script setup>
+import { ref } from "vue";
 const props = defineProps({
   title: String,
 });
+const dialogVisible = ref(false);
 </script>
 <style scoped>
 ::-webkit-scrollbar {
@@ -42,14 +46,14 @@ const props = defineProps({
   justify-content: space-between;
   align-items: center;
   padding: 0px;
-  padding-bottom: 10px;
+  padding-bottom: 1px;
 }
 p {
   margin: 0;
   padding: 10px;
 }
 
-.q-card {
+.container-card {
   word-break: break-word;
   overflow: scroll;
   padding: 10px;

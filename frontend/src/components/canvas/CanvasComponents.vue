@@ -1,7 +1,7 @@
 <template>
-  <q-card class="container-card">
+  <q-card class="container-card" :class="info.class">
     <q-card-section class="top-q-card">
-      <p>{{ title }}</p>
+      <p>{{ info.title }}</p>
       <q-icon
         name="mdi-plus-circle-outline"
         size="20px"
@@ -9,6 +9,7 @@
       ></q-icon>
     </q-card-section>
     <q-separator></q-separator>
+    <ol></ol>
     <q-dialog v-model="dialogVisible">
       <q-card>
         <q-card-section>
@@ -29,7 +30,7 @@
 <script setup>
 import { ref } from "vue";
 const props = defineProps({
-  title: String,
+  info: Object,
 });
 const dialogVisible = ref(false);
 </script>

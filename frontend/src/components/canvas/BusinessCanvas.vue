@@ -1,10 +1,9 @@
 <template>
   <q-page class="container q-pa-md">
     <CanvasComponents
-      v-for="item in canvasPage"
-      :key="item.id"
-      :class="item.class"
-      :title="item.title"
+      v-for="info in canvasPage"
+      :info="info"
+      :key="info.id"
     ></CanvasComponents>
   </q-page>
 </template>

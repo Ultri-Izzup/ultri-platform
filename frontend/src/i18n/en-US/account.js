@@ -1,7 +1,9 @@
 export default {
-  'account.title': 'Account',
-  'account.caption': 'Switch account',
-  'account.hint': 'Account',
-  'account.personal': 'Personal Account',
-  'account.add-account': 'Add Account'
+  account: {
+    title: "Account",
+    caption: "Switch account",
+    hint: "Account",
+    personal: "Personal Account",
+    "add-account": "Add Account",
+  },
 };

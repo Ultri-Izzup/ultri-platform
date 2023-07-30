@@ -1,76 +1,32 @@
 <template>
   <q-page class="">
     <div class="container q-pa-md">
-      <q-card class="key-partners">
+      <q-card v-for="item in layout" :key="item.id" :class="item.class">
         <q-card-section class="sticky-title">
-          <p>Key Partners</p>
+          <p>{{ item.title }}</p>
           <q-separator></q-separator>
         </q-card-section>
-
-        <q-card-section>{{ lotsOfText }}</q-card-section>
-      </q-card>
-
-      <q-card class="key-activities">
-        <q-card-section class="sticky-title">
-          <p>Key Activities</p>
-          <q-separator></q-separator>
-        </q-card-section>
-        {{ lotsOfText }}
-      </q-card>
-
-      <q-card class="key-resources">
-        <q-card-section class="sticky-title"
-          ><p>Key Resources</p>
-          <q-separator></q-separator>
-        </q-card-section>
-      </q-card>
-
-      <q-card class="value-propositions">
-        <q-card-section class="sticky-title">
-          <p>Value Propositions</p>
-          <q-separator></q-separator>
-        </q-card-section>
-      </q-card>
-
-      <q-card class="customer-rel">
-        <q-card-section class="sticky-title">
-          <p>Customer Relations</p>
-          <q-separator></q-separator
-        ></q-card-section>
-      </q-card>
-
-      <q-card class="channels">
-        <q-card-section class="sticky-title">
-          <p>Channels</p>
-          <q-separator></q-separator>
-        </q-card-section>
-      </q-card>
-
-      <q-card class="customer-seg">
-        <q-card-section class="sticky-title">
-          <p>Customer Segments</p>
-          <q-separator></q-separator>
-        </q-card-section>
-      </q-card>
-
-      <q-card class="cost-structure">
-        <q-card-section class="sticky-title">
-          <p>Cost Structure</p>
-          <q-separator></q-separator
-        ></q-card-section>
-      </q-card>
-
-      <q-card class="revenue">
-        <q-card-section class="sticky-title"
-          ><p>Revenue Stream</p>
-          <q-separator></q-separator
-        ></q-card-section>
       </q-card>
     </div>
   </q-page>
 </template>
 
 <script setup>
+const layout = [
+  { title: "Key Partners", class: "key-partners", id: 1 },
+  { title: "Key Activities", class: "key-activities", id: 2 },
+  { title: "Key Resources", class: "key-resources", id: 3 },
+  { title: "Value Propositions", class: "value-propositions", id: 4 },
+  { title: "Customer Relations", class: "customer-rel", id: 5 },
+  { title: "Channels", class: "channels", id: 6 },
+  { title: "Customer Segments", class: "customer-seg", id: 7 },
+  {
+    title: "Cost Structure",
+    class: "cost-structure",
+    id: 8,
+  },
+  { title: "Revenue", class: "revenue", id: 9 },
+];
 import { ref } from "vue";
 import { nanoid } from "nanoid";
 import TextClamp from "vue3-text-clamp";
@@ -165,9 +121,7 @@ const maxLines = "3";
   padding: 10px;
   box-shadow: 1px 10px 10px rgba(128, 128, 128, 0.2);
 }
-.test {
-  border: 1px solid black;
-}
+
 .container > * {
   padding: 10px;
   min-height: 100%;
@@ -227,3 +181,60 @@ const maxLines = "3";
   z-index: 2;
 }
 </style>
+<!-- unused code,will keep till discarded -->
+<!-- <q-card class="key-activities">
+        <q-card-section class="sticky-title">
+          <p>Key Activities</p>
+          <q-separator></q-separator>
+        </q-card-section>
+        {{ lotsOfText }}www
+      </q-card>
+
+      <q-card class="key-resources">
+        <q-card-section class="sticky-title"
+          ><p>Key Resources</p>
+          <q-separator></q-separator>
+        </q-card-section>
+      </q-card>
+
+      <q-card class="value-propositions">
+        <q-card-section class="sticky-title">
+          <p>Value Propositions</p>
+          <q-separator></q-separator>
+        </q-card-section>
+      </q-card>
+
+      <q-card class="customer-rel">
+        <q-card-section class="sticky-title">
+          <p>Customer Relations</p>
+          <q-separator></q-separator
+        ></q-card-section>
+      </q-card>
+
+      <q-card class="channels">
+        <q-card-section class="sticky-title">
+          <p>Channels</p>
+          <q-separator></q-separator>
+        </q-card-section>
+      </q-card>
+
+      <q-card class="customer-seg">
+        <q-card-section class="sticky-title">
+          <p>Customer Segments</p>
+          <q-separator></q-separator>
+        </q-card-section>
+      </q-card>
+
+      <q-card class="cost-structure">
+        <q-card-section class="sticky-title">
+          <p>Cost Structure</p>
+          <q-separator></q-separator
+        ></q-card-section>
+      </q-card>
+
+      <q-card class="revenue">
+        <q-card-section class="sticky-title"
+          ><p>Revenue Stream</p>
+          <q-separator></q-separator
+        ></q-card-section>
+      </q-card> -->

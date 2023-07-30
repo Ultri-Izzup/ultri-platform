@@ -14,9 +14,9 @@
       <q-card>
         <q-card-section>
           <!-- Dialog content goes here -->
-          <p>This is a dialog content</p>
+          <p>Add {{ info.title }}</p>
         </q-card-section>
-
+        <q-input class="input"></q-input>
         <q-card-actions align="evenly">
           <!-- Dialog actions (buttons) go here -->
           <q-btn label="add" color="primary" @click="dialogVisible = false" />
@@ -60,5 +60,12 @@ p {
   padding: 10px;
   box-shadow: 1px 10px 10px rgba(128, 128, 128, 0.2);
   min-height: 100%;
+}
+.q-dialog .q-card {
+  min-width: 350px;
+}
+.input {
+  width: 100%;
+  padding: 0 20px;
 }
 </style>

@@ -42,6 +42,7 @@ const props = defineProps({
   justify-content: space-between;
   align-items: center;
   padding: 0px;
+  padding-bottom: 10px;
 }
 p {
   margin: 0;

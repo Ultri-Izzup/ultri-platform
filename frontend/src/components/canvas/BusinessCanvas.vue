@@ -1,13 +1,17 @@
 <template>
   <q-page class="container q-pa-md">
-    <CanvasComponents :data="canvasPage"></CanvasComponents>
-
-    ></q-page
-  >
+    <CanvasComponents
+      v-for="item in canvasPage"
+      :key="item.id"
+      :class="item.class"
+      :title="item.title"
+    ></CanvasComponents>
+  </q-page>
 </template>
 
 <script setup>
 import CanvasComponents from "./CanvasComponents.vue";
+import { ref } from "vue";
 const canvasPage = [
   { title: "Key Partners", class: "key-partners", id: 1 },
   { title: "Key Activities", class: "key-activities", id: 2 },
@@ -23,31 +27,27 @@ const canvasPage = [
   },
   { title: "Revenue", class: "revenue", id: 9 },
 ];
+const keyPartners = ref([]);
+const keyActivities = ref([]);
+const keyResources = ref([]);
+const valuePropositions = ref([]);
+const customerRel = ref([]);
+const channels = ref([]);
+const customerSeg = ref([]);
+const costStructure = ref([]);
 </script>
 
 <style lang="scss">
 .container {
-  height: 90vh;
+  height: 85vh;
   display: grid;
-}
-
-.container > * {
-  word-break: break-word;
-  overflow: scroll;
-  padding: 10px;
-  box-shadow: 1px 10px 10px rgba(128, 128, 128, 0.2);
-}
-
-.container > * {
-  padding: 10px;
-  min-height: 100%;
+  gap: 10px;
 }
 
 @media screen and (min-width: 1300px) {
   .container {
     grid-template-columns: repeat(10, 1fr);
     grid-template-rows: repeat(5, 1fr);
-    gap: 10px;
   }
   .key-partners {
     grid-column: 1/3;
@@ -85,15 +85,5 @@ const canvasPage = [
     grid-column: 6/11;
     grid-row: 5/6;
   }
-}
-//allows scroll bars to be hidden
-::-webkit-scrollbar {
-  display: none;
-}
-.sticky-title {
-  position: sticky;
-  top: -10px;
-  background-color: white;
-  z-index: 2;
 }
 </style>

@@ -1,7 +1,5 @@
 <template>
-  <component :is="currentComponent"
-    ><BusinessCanvas></BusinessCanvas> <CoopCanvas></CoopCanvas
-  ></component>
+  <component :is="BusinessCanvas"></component>
 </template>
 
 <script setup>
@@ -12,77 +10,65 @@ import URow from "../components/ultri/URow.vue";
 import BusinessCanvas from "../components/canvas/BusinessCanvas.vue";
 import CoopCanvas from "../components/canvas/CoopCanvas.vue";
 
-const currentComponent = ref("CoopCanvas");
+// const newEntryDialog = ref(false);
+// const newEntryType = ref(false);
+// const newEntryTxt = ref(null);
 
-const partners = ref([]);
-const activities = ref([]);
-const resources = ref([]);
-const valueProps = ref([]);
-const custRelations = ref([]);
-const channels = ref([]);
-const custSegments = ref([]);
-const costs = ref([]);
-const revenue = ref([]);
+// const editEntryDialog = ref(false);
+// const editEntryType = ref(false);
+// const editEntryTxt = ref(null);
+// const editEntryUid = ref(null);
 
-const newEntryDialog = ref(false);
-const newEntryType = ref(false);
-const newEntryTxt = ref(null);
+// const showEntryDialog = (box) => {
+//   console.log(box);
+//   newEntryType.value = box;
+//   newEntryDialog.value = true;
+// };
 
-const editEntryDialog = ref(false);
-const editEntryType = ref(false);
-const editEntryTxt = ref(null);
-const editEntryUid = ref(null);
+// const showEditDialog = (boxType, uid) => {
+//   const editObj = partners.value.filter((obj) => obj.uid == uid);
+//   console.log(editObj[0].txt);
+//   editEntryTxt.value = editObj[0].txt;
+//   editEntryType.value = boxType;
+//   editEntryUid.value = editObj[0].uid;
+//   editEntryDialog.value = true;
+// };
 
-const showEntryDialog = (box) => {
-  console.log(box);
-  newEntryType.value = box;
-  newEntryDialog.value = true;
-};
+// const addEntry = () => {
+//   partners.value.push({ uid: nanoid(), txt: newEntryTxt.value });
+//   newEntryTxt.value = null;
+// };
 
-const showEditDialog = (boxType, uid) => {
-  const editObj = partners.value.filter((obj) => obj.uid == uid);
-  console.log(editObj[0].txt);
-  editEntryTxt.value = editObj[0].txt;
-  editEntryType.value = boxType;
-  editEntryUid.value = editObj[0].uid;
-  editEntryDialog.value = true;
-};
+// const updateEntry = () => {
+//   // We really replace the object
+//   partners.value = partners.value.filter(
+//     (obj) => obj.uid !== editEntryUid.value
+//   );
+//   partners.value.push({ uid: nanoid(), txt: editEntryTxt.value });
+//   editEntryTxt.value = null;
+//   editEntryType.value = null;
+//   editEntryUid.value = null;
+//   editEntryDialog.value = false;
+// };
 
-const addEntry = () => {
-  partners.value.push({ uid: nanoid(), txt: newEntryTxt.value });
-  newEntryTxt.value = null;
-};
+// const deleteEntry = () => {
+//   // We really replace the object
+//   partners.value = partners.value.filter(
+//     (obj) => obj.uid !== editEntryUid.value
+//   );
+//   editEntryTxt.value = null;
+//   editEntryType.value = null;
+//   editEntryUid.value = null;
+//   editEntryDialog.value = false;
+// };
 
-const updateEntry = () => {
-  // We really replace the object
-  partners.value = partners.value.filter(
-    (obj) => obj.uid !== editEntryUid.value
-  );
-  partners.value.push({ uid: nanoid(), txt: editEntryTxt.value });
-  editEntryTxt.value = null;
-  editEntryType.value = null;
-  editEntryUid.value = null;
-  editEntryDialog.value = false;
-};
-
-const deleteEntry = () => {
-  // We really replace the object
-  partners.value = partners.value.filter(
-    (obj) => obj.uid !== editEntryUid.value
-  );
-  editEntryTxt.value = null;
-  editEntryType.value = null;
-  editEntryUid.value = null;
-  editEntryDialog.value = false;
-};
-
-const edit = (boxType, uid) => {
-  console.log(boxType, uid);
-  editEntryType.value = boxType;
-  editEntryUid.value = uid;
-  editEntryDialog.value = true;
-  editEntryTxt.value = activities.value;
-};
+// const edit = (boxType, uid) => {
+//   console.log(boxType, uid);
+//   editEntryType.value = boxType;
+//   editEntryUid.value = uid;
+//   editEntryDialog.value = true;
+//   editEntryTxt.value = activities.value;
+// };
 
 const lotsOfText =
   "edfweewfwty w ef wef ew f we f wef we f erfdgblkpo kokjoi]k ]oko] k]ok]okpppppppe rfdyvgerfviytsfdvcsdgosikppp pppperfdyvgerfviytsfdvcsdgosikppppppperfdyvgerfviytsfdvcsdgosikppppppperfdyvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btr b t rewfwef w ef wef ew f we f wef we f erfdgblkpo kokjoi]k ]oko] k]ok]okppppppperfdyvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btr b t rewfwef w ef wef ew f we f wef we f erfdgblkpo kokjoi]k ]oko] k]ok]okppppppperfdyvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btr b t rewfwef w ef wef ew f we f wef we f erfdgblkpo kokjoi]k ]oko] k]ok]okppppppperfdyvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btr b t rewfwef w ef wef ew f we f wef we f erfdgblkpo kokjoi]k ]oko] k]ok]okppppppperfdyvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btr b t rewfwef w ef wef ew f we f wef we f erfdgblkpo kokjoi]k ]oko] k]ok]okppppppperfdyvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btr b t rewfwef w ef wef ew f we f wef we f erfdgblkpo kokjoi]k ]oko] k]ok]okppppppperfdyvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btryvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btr b t rewfwef w ef wef ew f we f wef we f erfdgblkpo kokjoi]k ]oko] k]ok]okppppppperfdyvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btr b t rewfwef w ef wef ew f we f wef we f erfdgblkpo kokjoi]k ]oko] k]ok]okppppppperfdyvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btr b t rewfwef w ef wef ew f we f wef we f erfdgblkpo kokjoi]k ]oko] k]ok]okppppppperfdyvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btr b t rewfwef w ef wef ew f we f wef we f erfdgblkpo kokjoi]k ]oko] k]ok]okppppppperfdyvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btr b t rewfwef w ef wef ew f we f wef we f erfdgblkpo kokjoi]k ]oko] k]ok]okppppppperfdyvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btr b t rewfwef w ef wef ew f we f wef we f erfdgblkpo kokjoi]k ]oko] k]ok]okppppppperfdyvgerfviytsfdvcsdgosikppppppppppppppp fd gvtr gb rt  tyrb  tr ght rg tr b  bt rb tr b tr b tr  rb tr b tr btr b tr btr b t r THE_END";

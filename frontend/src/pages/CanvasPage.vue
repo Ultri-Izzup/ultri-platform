@@ -1,36 +1,35 @@
 <template>
   <q-page class="">
-    <div class="container q-pa-md">
-      <q-card v-for="item in layout" :key="item.id" :class="item.class">
-        <q-card-section class="sticky-title">
-          <p>{{ item.title }}</p>
-          <q-separator></q-separator>
-        </q-card-section>
-      </q-card>
-    </div>
+    <component :is="currentComponent"></component>
   </q-page>
 </template>
 
 <script setup>
-const layout = [
-  { title: "Key Partners", class: "key-partners", id: 1 },
-  { title: "Key Activities", class: "key-activities", id: 2 },
-  { title: "Key Resources", class: "key-resources", id: 3 },
-  { title: "Value Propositions", class: "value-propositions", id: 4 },
-  { title: "Customer Relations", class: "customer-rel", id: 5 },
-  { title: "Channels", class: "channels", id: 6 },
-  { title: "Customer Segments", class: "customer-seg", id: 7 },
-  {
-    title: "Cost Structure",
-    class: "cost-structure",
-    id: 8,
-  },
-  { title: "Revenue", class: "revenue", id: 9 },
-];
-import { ref } from "vue";
+// Import computed
+import { ref, computed } from "vue";
+// Import useRoute composable
+import { useRoute} from "vue-router";
 import { nanoid } from "nanoid";
 import TextClamp from "vue3-text-clamp";
 import URow from "../components/ultri/URow.vue";
+
+// Import the canvas components
+import BusinessCanvas from "../components/BusinessCanvas.vue";
+import CoopCanvas from "../components/CoopCanvas.vue";
+
+// Create a route instance
+const route = useRoute();
+// Get the canvasName from the route params
+const canvasName = route.params.canvasName;
+
+// Define a mapping of canvas names to their respective component name 
+const canvases = {
+  business: BusinessCanvas,
+  coop: CoopCanvas,
+};
+
+// Use the current canvasName to find the mapped component
+const currentComponent = computed(() => canvases[canvasName])
 
 const partners = ref([]);
 const activities = ref([]);

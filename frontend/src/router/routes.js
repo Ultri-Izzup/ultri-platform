@@ -87,6 +87,24 @@ const routes = [
     ]
   },
 
+
+  {
+    path: "/canvastest/:canvasName",
+    component: () => import("layouts/MainLayout.vue"),
+    meta: {
+      drawer: "Canvas",
+      app: "Logbook"
+    },
+    children: [
+      {
+        name: "canvas",
+        path: "",
+        component: () => import("pages/CanvasPage.vue")
+      }
+    ]
+  },
+
+
   {
     path: "/dashboard",
     component: () => import("layouts/MainLayout.vue"),

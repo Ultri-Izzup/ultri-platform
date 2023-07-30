@@ -99,7 +99,7 @@ const routes = [
       {
         name: "canvas",
         path: "",
-        component: () => import("pages/CanvasPage.vue")
+        component: () => import("pages/TestCanvasPage.vue")
       }
     ]
   },

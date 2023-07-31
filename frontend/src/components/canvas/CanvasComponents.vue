@@ -27,7 +27,8 @@
           <!-- Dialog content goes here -->
           <p>Add {{ info.title }}</p>
         </q-card-section>
-        <q-input v-model="qinput" class="input"></q-input>
+        <q-input v-model.trim="qinput" class="input"></q-input>
+        <q-banner class="bg-red text-white q-pa-sm q-mt-sm text-center"  v-if="errorMessage">Please add more characters</q-banner>
         <q-card-actions align="evenly">
           <!-- Dialog actions (buttons) go here -->
           <q-btn label="add" color="primary" @click="addToList()" />
@@ -43,14 +44,20 @@
 import { nanoid } from 'nanoid'
 import { ref } from "vue";
 function addToList(){
+  if(qinput.value.length<2){
+    errorMessage.value=true;
+    return;
+
+  }
  props.addItem(listToRender.value,qinput.value);
   qinput.value="";
+  errorMessage.value=null;
 }
 const props = defineProps({
   info: Object,
   addItem: Function
 });
-
+const errorMessage= ref(null)
 const listToRender = ref(props.info.listToRender);
 const dialogVisible = ref(false);
 const qinput = ref("")

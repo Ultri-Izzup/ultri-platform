@@ -9,7 +9,17 @@
       ></q-icon>
     </q-card-section>
     <q-separator></q-separator>
-    <ol></ol>
+    <q-list separator>
+      <q-item
+        v-for="item in listToRender"
+        :key="item.id"
+        clickable
+        class="q-pa-sm items-center"
+      >
+        {{ item.text }}
+      </q-item>
+    </q-list>
+
     <q-dialog v-model="dialogVisible">
       <q-card>
         <q-card-section>
@@ -32,8 +42,10 @@ import { ref } from "vue";
 const props = defineProps({
   info: Object,
 });
+const listToRender = ref(props.info.listToRender);
 const dialogVisible = ref(false);
 </script>
+
 <style scoped>
 ::-webkit-scrollbar {
   display: none;

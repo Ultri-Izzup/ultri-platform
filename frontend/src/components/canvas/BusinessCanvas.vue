@@ -1,3 +1,78 @@
+<script setup>
+import { reverse } from "d3";
+import CanvasComponents from "./CanvasComponents.vue";
+import { ref } from "vue";
+
+const keyPartners = ref([
+  { text: "mama mia", id: 1 },
+  { text: "mama mia", id: 2 },
+  { text: "mama mia", id: 3 },
+  {
+    text: "mama asdasdsadsadsada asd asd asd asd asd ass a a s dasd sad asdasd sad asmia",
+    id: 4,
+  },
+]);
+const keyActivities = ref([]);
+const keyResources = ref([]);
+const valuePropositions = ref([]);
+const customerRel = ref([]);
+const channels = ref([]);
+const customerSeg = ref([]);
+const costStructure = ref([]);
+const revenue = ref([]);
+
+const canvasPage = [
+  {
+    title: "Key Partners",
+    class: "key-partners",
+    id: 1,
+    listToRender: keyPartners,
+  },
+  {
+    title: "Key Activities",
+    class: "key-activities",
+    id: 2,
+    listToRender: keyActivities,
+  },
+  {
+    title: "Key Resources",
+    class: "key-resources",
+    id: 3,
+    listToRender: keyResources,
+  },
+  {
+    title: "Value Propositions",
+    class: "value-propositions",
+    id: 4,
+    listToRender: valuePropositions,
+  },
+  {
+    title: "Customer Relations",
+    class: "customer-rel",
+    id: 5,
+    listToRender: customerRel,
+  },
+  {
+    title: "Channels",
+    class: "channels",
+    id: 6,
+    listToRender: channels,
+  },
+  {
+    title: "Customer Segments",
+    class: "customer-seg",
+    id: 7,
+    listToRender: customerSeg,
+  },
+  {
+    title: "Cost Structure",
+    class: "cost-structure",
+    id: 8,
+    listToRender: costStructure,
+  },
+  { title: "Revenue", class: "revenue", id: 9, listToRender: revenue },
+];
+</script>
 <template>
   <q-page class="container q-pa-md">
     <CanvasComponents
@@ -7,35 +82,6 @@
     ></CanvasComponents>
   </q-page>
 </template>
-
-<script setup>
-import CanvasComponents from "./CanvasComponents.vue";
-import { ref } from "vue";
-const canvasPage = [
-  { title: "Key Partners", class: "key-partners", id: 1 },
-  { title: "Key Activities", class: "key-activities", id: 2 },
-  { title: "Key Resources", class: "key-resources", id: 3 },
-  { title: "Value Propositions", class: "value-propositions", id: 4 },
-  { title: "Customer Relations", class: "customer-rel", id: 5 },
-  { title: "Channels", class: "channels", id: 6 },
-  { title: "Customer Segments", class: "customer-seg", id: 7 },
-  {
-    title: "Cost Structure",
-    class: "cost-structure",
-    id: 8,
-  },
-  { title: "Revenue", class: "revenue", id: 9 },
-];
-const keyPartners = ref([]);
-const keyActivities = ref([]);
-const keyResources = ref([]);
-const valuePropositions = ref([]);
-const customerRel = ref([]);
-const channels = ref([]);
-const customerSeg = ref([]);
-const costStructure = ref([]);
-</script>
-
 <style lang="scss">
 .container {
   height: 85vh;

@@ -17,6 +17,7 @@
         class="q-pa-sm items-center"
       >
         {{ item.text }}
+    
       </q-item>
     </q-list>
 
@@ -26,10 +27,10 @@
           <!-- Dialog content goes here -->
           <p>Add {{ info.title }}</p>
         </q-card-section>
-        <q-input class="input"></q-input>
+        <q-input v-model="qinput" class="input"></q-input>
         <q-card-actions align="evenly">
           <!-- Dialog actions (buttons) go here -->
-          <q-btn label="add" color="primary" @click="dialogVisible = false" />
+          <q-btn label="add" color="primary" @click="addToList()" />
           <q-btn label="Close" color="primary" @click="dialogVisible = false" />
         </q-card-actions>
       </q-card>
@@ -38,12 +39,21 @@
 </template>
 
 <script setup>
+
+import { nanoid } from 'nanoid'
 import { ref } from "vue";
+function addToList(){
+ props.addItem(listToRender.value,qinput.value);
+  qinput.value="";
+}
 const props = defineProps({
   info: Object,
+  addItem: Function
 });
+
 const listToRender = ref(props.info.listToRender);
 const dialogVisible = ref(false);
+const qinput = ref("")
 </script>
 
 <style scoped>

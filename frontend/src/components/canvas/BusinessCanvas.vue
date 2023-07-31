@@ -2,16 +2,9 @@
 import { reverse } from "d3";
 import CanvasComponents from "./CanvasComponents.vue";
 import { ref } from "vue";
+import { nanoid } from "nanoid";
 
-const keyPartners = ref([
-  { text: "mama mia", id: 1 },
-  { text: "mama mia", id: 2 },
-  { text: "mama mia", id: 3 },
-  {
-    text: "mama asdasdsadsadsada asd asd asd asd asd ass a a s dasd sad asdasd sad asmia",
-    id: 4,
-  },
-]);
+const keyPartners = ref([]);
 const keyActivities = ref([]);
 const keyResources = ref([]);
 const valuePropositions = ref([]);
@@ -20,7 +13,9 @@ const channels = ref([]);
 const customerSeg = ref([]);
 const costStructure = ref([]);
 const revenue = ref([]);
-
+function addItemToList(array,text){
+  array.push({text:text,id:nanoid()})
+}
 const canvasPage = [
   {
     title: "Key Partners",
@@ -79,6 +74,7 @@ const canvasPage = [
       v-for="info in canvasPage"
       :info="info"
       :key="info.id"
+      :addItem = "addItemToList"
     ></CanvasComponents>
   </q-page>
 </template>

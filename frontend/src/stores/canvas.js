@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { useStorage } from '@vueuse/core';
 
-export const useNuggetStore = defineStore('canvas', {
+export const useCanvasStore = defineStore('canvas', {
   state: () => ({
     business: useStorage('business', {}),
     coop: useStorage('coop', {}),

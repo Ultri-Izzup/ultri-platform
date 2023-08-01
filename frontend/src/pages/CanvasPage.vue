@@ -1,7 +1,7 @@
 <template>
   <div>
     <CanvasList />
-    <component :is="currentComponent" :currentData="canvas[canvasName]" />
+    <component :is="currentComponent" />
   </div>
 </template>
 
@@ -57,14 +57,15 @@ const currentComponent = computed(() => canvases[canvasName.value]);
 // 2. Integrated, there is an orgUid in the URL and we load existing canvas data for the org.
 //    We want to lazy load the canvas data, so we load only what is needed.
 // We only need to load data when a specific canvas is defined.
-if(canvasName.value && route.params.orgUid) {
+if (canvasName.value && route.params.orgUid) {
   // Fetch the org canvas into the store
   // canvas.loadCanvas(canvasName.value, route.params.orgUid)
-  console.log('Loading fake data for: ' + route.params.orgUid)
+  console.log("Loading fake data for: " + route.params.orgUid);
+  const mockPartners = new Map();
+  mockPartners.set("abcdef", { uid: "abcdef", text: "Start.coop" });
+  mockPartners.set("bcdefg", { uid: "bcdefg", text: "NLnet" });
+  canvas.setCanvasData("business", mockPartners);
 }
-
-
-
 </script>
 
 <style lang="scss">

@@ -49,7 +49,7 @@ export default {
       selectOrCreateAnOrganization: "Select or add an organization",
     },
 
-    lobookEntryDialog: {
+    logbookEntryDialog: {
       title: "Logbook Entry",
       formTitle: "Provide title and type",
       formBody: "Enter a title and select the type below",

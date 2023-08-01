@@ -1,7 +1,7 @@
 import account from './account';
 import apps from './apps';
 import auth from './auth';
-import canvasPage from './canvasPage';
+import canvas from './canvas';
 import homepage from './homepage';
 import homepageDrawer from './homepageDrawer';
 import member from './member';
@@ -15,6 +15,7 @@ export default {
   ...account,
   ...apps,
   ...auth,
+  ...canvas,
   ...homepage,
   ...homepageDrawer,
   ...member,

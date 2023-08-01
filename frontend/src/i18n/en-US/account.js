@@ -4,6 +4,6 @@ export default {
     caption: "Switch account",
     hint: "Account",
     personal: "Personal Account",
-    "add-account": "Add Account",
+    addAccount: "Add Account",
   },
 };

@@ -1,1 +1,1 @@
-<template><div>Hi</div></template>
+<template><div>Co-op Canvas</div></template>

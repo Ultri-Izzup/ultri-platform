@@ -1,3 +1,14 @@
+<template>
+  <q-page class="container q-pa-md">
+    <CanvasSection
+      v-for="info in canvasPage"
+      :info="info"
+      :key="info.id"
+      :addItem = "addItemToList"
+    ></CanvasSection>
+  </q-page>
+</template>
+
 <script setup>
 import CanvasSection from "./CanvasSection.vue";
 import { ref } from "vue";
@@ -67,16 +78,8 @@ const canvasPage = [
   { title: "Revenue", class: "revenue", id: 9, listToRender: revenue },
 ];
 </script>
-<template>
-  <q-page class="container q-pa-md">
-    <CanvasSection
-      v-for="info in canvasPage"
-      :info="info"
-      :key="info.id"
-      :addItem = "addItemToList"
-    ></CanvasSection>
-  </q-page>
-</template>
+
+
 <style lang="scss">
 .container {
   height: 85vh;

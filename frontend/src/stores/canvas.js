@@ -3,9 +3,9 @@ import { useStorage } from '@vueuse/core';
 
 export const useCanvasStore = defineStore('canvas', {
   state: () => ({
-    business: useStorage('business', {}),
-    coop: useStorage('coop', {}),
-    s3: useStorage('s3', {}),
+    business: useStorage('business', new Map()),
+    coop: useStorage('coop', new Map()),
+    s3: useStorage('s3', new Map()),
   }),
   getters: {},
   actions: {
@@ -13,9 +13,9 @@ export const useCanvasStore = defineStore('canvas', {
       this[canvas] = data;
     },
     reset() {
-      this.business = {};
-      this.coop = {};
-      this.s3 = {};
+      this.business = new Map();
+      this.coop = new Map();
+      this.s3 = new Map();
     },
   },
 });

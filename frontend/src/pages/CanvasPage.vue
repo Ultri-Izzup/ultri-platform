@@ -5,7 +5,7 @@
 <script setup>
 
 import BusinessCanvas from "../components/canvas/BusinessCanvas.vue";
-//import CoopCanvas from "../components/canvas/CoopCanvas.vue";
+import CoopCanvas from "../components/canvas/CoopCanvas.vue";
 
 </script>
 

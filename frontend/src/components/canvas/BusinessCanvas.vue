@@ -1,13 +1,9 @@
 <template>
   <q-page class="container q-pa-md">
-    <pre>
-
-  </pre>
     <CanvasSection
       v-for="info in canvasDef"
       :info="info"
       :key="info.id"
-      :currentData="currentData[info.key]"
     />
   </q-page>
 </template>
@@ -19,88 +15,64 @@ import { useI18n } from "vue-i18n";
 
 import CanvasSection from "./CanvasSection.vue";
 
-const props = defineProps({
-  currentData: Object
-})
 
 // Create i18n accessor as t
 const { t } = useI18n();
 
-const keyPartners = ref([]);
-const keyActivities = ref([]);
-const keyResources = ref([]);
-const valuePropositions = ref([]);
-const customerRel = ref([]);
-const channels = ref([]);
-const customerSeg = ref([]);
-const costStructure = ref([]);
-const revenue = ref([]);
-function addItemToList(array,text){
-  array.push({text,id:nanoid()})
-}
-function editItemToList(arr,id,textToBeEdited){
-  let elementToFind= arr.find(element=>element.id===id);
-  elementToFind.text=textToBeEdited;
-}
+// Define the canvas sections
 const canvasDef = [
   {
     title: t('canvas.business.partner.title'),
     class: "key-partners",
     key: "partners",
     id: 1,
-    listToRender: keyPartners,
   },
   {
-    title: "Key Activities",
+    title: t('canvas.business.activities.title', 'Activities'),
     class: "key-activities",
     key: "activities",
     id: 2,
-    listToRender: keyActivities,
   },
   {
-    title: "Key Resources",
+    title: t('canvas.business.resources.title', 'Resources'),
     class: "key-resources",
     key: "resources",
     id: 3,
-    listToRender: keyResources,
   },
   {
-    title: "Value Propositions",
+    title: t('canvas.business.valuProps.title', 'Value Propositions'),
     class: "value-propositions",
     key: "valueProps",
     id: 4,
-    listToRender: valuePropositions,
   },
   {
-    title: "Customer Relations",
+    title: t('canvas.business.custRelations.title', 'Customer Relations'),
     class: "customer-rel",
     key: "custRelations",
     id: 5,
-    listToRender: customerRel,
   },
   {
-    title: "Channels",
+    title: t('canvas.business.channels.title', 'Channels'),
     class: "channels",
     key: "channels",
     key: "channels",
     id: 6,
-    listToRender: channels,
   },
   {
-    title: "Customer Segments",
+    title: t('canvas.business.custSegments.title', 'Customer Segments'),
     class: "customer-seg",
     key: "custSegments",
     id: 7,
-    listToRender: customerSeg,
   },
   {
-    title: "Cost Structure",
+    title: t('canvas.business.costs.title', 'Costs'),
     class: "cost-structure",
     key: "costs",
     id: 8,
-    listToRender: costStructure,
   },
-  { title: "Revenue", class: "revenue", key: "revenue", id: 9, listToRender: revenue },
+  { title: t('canvas.business.revenue.title', 'Revenue'),
+  class: "revenue",
+  key: "revenue", id: 9 },
 ];
 </script>
 
@@ -111,6 +83,8 @@ const canvasDef = [
   gap: 10px;
 }
 
+// Define the canvas section classes
+// @TODO - Add a link to a doc that explains how to create a new canvas and define the CSS.
 @media screen and (min-width: 1300px) {
   .container {
     grid-template-columns: repeat(10, 1fr);

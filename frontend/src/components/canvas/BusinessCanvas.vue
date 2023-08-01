@@ -1,3 +1,14 @@
+<template>
+  <q-page class="container q-pa-md">
+    <CanvasComponents
+      v-for="info in canvasPage"
+      :info="info"
+      :key="info.id"
+      :addItem = "addItemToList"
+      :editItemToList="editItemToList"
+    ></CanvasComponents>
+  </q-page>
+</template>
 <script setup>
 import { reverse } from "d3";
 import CanvasComponents from "./CanvasComponents.vue";
@@ -14,7 +25,11 @@ const customerSeg = ref([]);
 const costStructure = ref([]);
 const revenue = ref([]);
 function addItemToList(array,text){
-  array.push({text:text,id:nanoid()})
+  array.push({text,id:nanoid()})
+}
+function editItemToList(arr,id,textToBeEdited){
+  let elementToFind= arr.find(element=>element.id==id);
+  elementToFind.text=textToBeEdited;
 }
 const canvasPage = [
   {
@@ -68,16 +83,7 @@ const canvasPage = [
   { title: "Revenue", class: "revenue", id: 9, listToRender: revenue },
 ];
 </script>
-<template>
-  <q-page class="container q-pa-md">
-    <CanvasComponents
-      v-for="info in canvasPage"
-      :info="info"
-      :key="info.id"
-      :addItem = "addItemToList"
-    ></CanvasComponents>
-  </q-page>
-</template>
+
 <style lang="scss">
 .container {
   height: 85vh;

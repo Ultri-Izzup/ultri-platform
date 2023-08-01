@@ -112,7 +112,7 @@ const routes = [
     },
     children: [
       {
-        name: "canvases",
+        name: "orgCanvases",
         path: "",
         component: () => import("pages/CanvasPage.vue")
       }
@@ -127,7 +127,7 @@ const routes = [
     },
     children: [
       {
-        name: "canvasPage",
+        name: "orgCanvasPage",
         path: "",
         component: () => import("pages/CanvasPage.vue")
       }

@@ -52,34 +52,18 @@ watch(
 // Use the current canvasName to find the mapped component
 const currentComponent = computed(() => canvases[canvasName.value]);
 
-// @TODO Call store to load existing data
-//Add some data to store for now, we shoule create a methods vs. mutating the store data directly
-
-const mockData = {
-  partners: [
-    {
-      uid: nanoid(),
-      memberUid: "fsdfsfs",
-      text: "First Business Partner entry",
-    },
-    {
-      uid: nanoid(),
-      memberUid: "gthrhty",
-      text: "Second Business Partner entry",
-    },
-  ],
-  channels: [
-  { uid: nanoid(), memberUid: "fsdfsfs", text: "First Business channel entry" },
-  {
-    uid: nanoid(),
-    memberUid: "gthrhty",
-    text: "Second Business channel entry",
-  },
-]
-};
+// The canvases display has two modes:
+// 1. Standalone, the page doesn't have an orgId available, provides a fresh page with no data.
+// 2. Integrated, there is an orgUid in the URL and we load existing canvas data for the org.
+//    We want to lazy load the canvas data, so we load only what is needed.
+// We only need to load data when a specific canvas is defined.
+if(canvasName.value && route.params.orgUid) {
+  // Fetch the org canvas into the store
+  // canvas.loadCanvas(canvasName.value, route.params.orgUid)
+  console.log('Loading fake data for: ' + route.params.orgUid)
+}
 
 
-canvas.setCanvasData("business", mockData);
 
 </script>
 

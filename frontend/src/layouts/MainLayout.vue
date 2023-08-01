@@ -148,10 +148,6 @@ const auth = useAuthStore();
 const color = useColorStore();
 const org = useOrgStore();
 
-console.log(color)
-
-console.log(org)
-
 watch(
   () => route.params.orgUid,
   () => {

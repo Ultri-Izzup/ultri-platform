@@ -33,7 +33,6 @@ if (process.env.DEV) {
 if (process.env.PROD) {
   apiHost = "https://api.service.ultri.com";
 }
-console.log("APIHOST", apiHost);
 
 SuperTokens.init({
   // enableDebugLogs: true,
@@ -51,5 +50,4 @@ SuperTokens.init({
 
 const $q = useQuasar();
 
-console.log($q.dark.isActive);
 </script>

@@ -10,7 +10,7 @@
   </q-page>
 </template>
 <script setup>
-import { reverse } from "d3";
+import { reverse, text } from "d3";
 import CanvasComponents from "./CanvasComponents.vue";
 import { ref } from "vue";
 import { nanoid } from "nanoid";
@@ -28,8 +28,12 @@ function addItemToList(array,text){
   array.push({text,id:nanoid()})
 }
 function editItemToList(arr,id,textToBeEdited){
-  let elementToFind= arr.find(element=>element.id===id);
-  elementToFind.text=textToBeEdited;
+ 
+  
+  let elementToFind=arr.find(element=>element.id==id);
+  
+  elementToFind.text= textToBeEdited;
+  
 }
 const canvasPage = [
   {

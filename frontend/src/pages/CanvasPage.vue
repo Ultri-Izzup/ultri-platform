@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- canvas list just for testing -->
     <CanvasList />
     <component :is="currentComponent" />
   </div>
@@ -62,9 +63,12 @@ if (canvasName.value && route.params.orgUid) {
   // canvas.loadCanvas(canvasName.value, route.params.orgUid)
   console.log("Loading fake data for: " + route.params.orgUid);
   const mockPartners = new Map();
-  mockPartners.set("abcdef", { uid: "abcdef", text: "Start.coop" });
-  mockPartners.set("bcdefg", { uid: "bcdefg", text: "NLnet" });
-  canvas.setCanvasData("business", mockPartners);
+  let mok = nanoid();
+  mockPartners.set(mok, { uid: mok, text: "Start.coop" });
+  mok = nanoid();
+  mockPartners.set(mok, { uid: mok, text: "NLnet" });
+
+  canvas.setCanvasData("business", "partners", mockPartners);
 }
 </script>
 

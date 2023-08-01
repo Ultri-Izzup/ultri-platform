@@ -1,20 +1,20 @@
 <template>
   <q-page class="container q-pa-md">
-    <CanvasSection
-      v-for="info in canvasDef"
-      :info="info"
-      :key="info.id"
-    />
+    {{ canvas.business }}
+    <CanvasSection v-for="info in canvasDef" :info="info" canvasName="business" :key="info.id" />
   </q-page>
 </template>
 
 <script setup>
-import { ref } from "vue";
-import { nanoid } from "nanoid";
 import { useI18n } from "vue-i18n";
+
+// Import canvas store
+import { useCanvasStore } from "../../stores/canvas";
 
 import CanvasSection from "./CanvasSection.vue";
 
+// Access canvas store
+const canvas = useCanvasStore();
 
 // Create i18n accessor as t
 const { t } = useI18n();
@@ -22,57 +22,59 @@ const { t } = useI18n();
 // Define the canvas sections
 const canvasDef = [
   {
-    title: t('canvas.business.partner.title'),
+    title: t("canvas.business.partner.title"),
     class: "key-partners",
-    key: "partners",
+    sectionKey: "partners",
     id: 1,
   },
   {
-    title: t('canvas.business.activities.title', 'Activities'),
+    title: t("canvas.business.activities.title", "Activities"),
     class: "key-activities",
-    key: "activities",
+    sectionKey: "activities",
     id: 2,
   },
   {
-    title: t('canvas.business.resources.title', 'Resources'),
+    title: t("canvas.business.resources.title", "Resources"),
     class: "key-resources",
-    key: "resources",
+    sectionKey: "resources",
     id: 3,
   },
   {
-    title: t('canvas.business.valuProps.title', 'Value Propositions'),
+    title: t("canvas.business.valuProps.title", "Value Propositions"),
     class: "value-propositions",
-    key: "valueProps",
+    sectionKey: "valueProps",
     id: 4,
   },
   {
-    title: t('canvas.business.custRelations.title', 'Customer Relations'),
+    title: t("canvas.business.custRelations.title", "Customer Relations"),
     class: "customer-rel",
-    key: "custRelations",
+    sectionKey: "custRelations",
     id: 5,
   },
   {
-    title: t('canvas.business.channels.title', 'Channels'),
+    title: t("canvas.business.channels.title", "Channels"),
     class: "channels",
-    key: "channels",
-    key: "channels",
+    sectionKey: "channels",
     id: 6,
   },
   {
-    title: t('canvas.business.custSegments.title', 'Customer Segments'),
+    title: t("canvas.business.custSegments.title", "Customer Segments"),
     class: "customer-seg",
-    key: "custSegments",
+    sectionKey: "custSegments",
     id: 7,
   },
   {
-    title: t('canvas.business.costs.title', 'Costs'),
+    title: t("canvas.business.costs.title", "Costs"),
     class: "cost-structure",
-    key: "costs",
+    sectionKey: "costs",
     id: 8,
   },
-  { title: t('canvas.business.revenue.title', 'Revenue'),
-  class: "revenue",
-  key: "revenue", id: 9 },
+  {
+    title: t("canvas.business.revenue.title", "Revenue"),
+    class: "revenue",
+    sectionKey: "revenue",
+    id: 9,
+  },
 ];
 </script>
 

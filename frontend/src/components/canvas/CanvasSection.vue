@@ -10,9 +10,10 @@
     </q-card-section>
     <q-separator></q-separator>
     <q-list separator>
+      {{info}}
+      {{canvas[canvasName][info.sectionKey]}}
       <q-item
-        v-for="item in editable"
-        :key="item.key"
+        v-for="[k, item] in canvas[canvasName][info.sectionKey]" :key="k"
         clickable
         class="q-pa-sm items-center"
         @click="editToList(item)"
@@ -59,73 +60,28 @@
 import { ref, unref } from "vue";
 import { nanoid } from "nanoid";
 
+// Import stores
+import { useCanvasStore } from "../../stores/canvas";
+// Instantiate our stores early so they are available
+const canvas = useCanvasStore();
+
 const props = defineProps({
+  // Canvas section definition
   info: Object,
-  currentData: Object,
-  addItem: Function,
-  editItemToList: Function,
+  // The canvas name to use in looking up store data
+  canvasName: String
 });
 
-const editable = unref(props.currentData);
-
-console.log(props.currentData);
-
-function addToList(key) {
-  add.value = true;
-  if (qinput.value.length < 2) {
-    errorMessage.value = true;
-    return;
-  }
-
-  editable.push({ uid: nanoid(), text: qinput.value });
-  qinput.value = "";
-  errorMessage.value = null;
-  dialogVisible.value = false;
-}
-
-function updateList(item) {
-  add.value = false;
-  if (qinput.value.length < 2) {
-    errorMessage.value = true;
-    return;
-  }
-
-  console.log('Key', item)
-  //const editIx = editable.findIndex(item => item.uid = key)
-  //console.log(editIx)
-
-  editable.push({ uid: nanoid(), text: qinput.value });
-
-  qinput.value = "";
-  errorMessage.value = null;
-  dialogVisible.value = false;
-}
-
-function editToList(item) {
-  add.value = false;
-  dialogVisible.value = true;
-  qinput.value = item.text;
-  id.value = item.id;
-}
-function closeDialogBox() {
-  dialogVisible.value = false;
-  add.value = true;
-  qinput.value = "";
-}
-function publishEdit() {
-  dialogVisible.value = false;
-  id.value = "";
-  qinput.value = "";
-  add.value = true;
-}
+console.log('INFO', props.info)
 
 const id = ref("");
 const currentItem = ref();
 const add = ref(true);
 const errorMessage = ref(null);
-const listToRender = ref(props.info.listToRender);
 const dialogVisible = ref(false);
 const qinput = ref("");
+
+
 </script>
 
 <style scoped>

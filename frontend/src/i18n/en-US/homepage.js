@@ -1,11 +1,15 @@
 export default {
-  'homepage.heading1': 'Software',
-  'homepage.heading2': 'cooperatively',
-  'homepage.heading3': 'owned by the users',
-  'homepage.heading4': 'and developers',
-  'homepage.tagline': 'Just Own It!',
-  'homepage.button': 'Join the Discussion',
-  'homepage.signedIn.heading': 'Welcome',
-  'homepage.signedIn.tagline': 'Build in public underway',
-  'homepage.signedIn.button': 'Dashboard'
+  homepage: {
+    heading1: "Software",
+    heading2: "cooperatively",
+    heading3: "owned by the users",
+    heading4: "and developers",
+    tagline: "Just Own It!",
+    button: "Join the Discussion",
+    signedIn: {
+      heading: "Welcome",
+      tagline: "Build in public underway",
+      button: "Dashboard",
+    },
+  },
 };

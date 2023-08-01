@@ -13,16 +13,16 @@
         <q-card-section>
           <div class="dialog-header row">
             <div class="col">
-              {{ $t('orgs.mission-statement-dialog.form-title') }}
+              {{ $t('orgs.mission-statement-dialog.formTitle') }}
             </div>
           </div>
           <div class="dialog-body">
-            {{ $t('orgs.mission-statement-dialog.form-body') }}
+            {{ $t('orgs.mission-statement-dialog.formBody') }}
           </div>
         </q-card-section>
         <q-card-section>
           <q-input
-            :label="$t('orgs.mission-statement-dialog.title-hint')"
+            :label="$t('orgs.mission-statement-dialog.titleHint')"
             v-model="mission"
           ></q-input>
           </q-card-section>

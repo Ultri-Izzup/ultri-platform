@@ -3,7 +3,7 @@
     <q-card class="q-dialog-plugin">
       <q-form @submit="onSubmit" @reset="onReset">
         <q-bar class="dialog-qbar">
-          {{ $t("orgs.create-dialog.dialog-title") }}
+          {{ $t("orgs.CreateDialog.DialogTitle") }}
           <q-space></q-space>
 
           <q-btn
@@ -19,16 +19,16 @@
         <q-card-section>
           <div class="dialog-header row">
             <div class="col">
-              {{ $t("orgs.create-dialog.create-form-title") }}
+              {{ $t("orgs.CreateDialog.createFormTitle") }}
             </div>
           </div>
           <div class="dialog-body">
-            {{ $t("orgs.create-dialog.create-form-body") }}
+            {{ $t("orgs.CreateDialog.createFormBody") }}
           </div>
         </q-card-section>
         <q-card-section>
           <q-input
-            :label="$t('orgs.create-dialog.org-name-hint')"
+            :label="$t('orgs.CreateDialog.orgNameHint')"
             v-model="orgName"
           ></q-input>
         </q-card-section>
@@ -38,7 +38,7 @@
             icon="mdi-office-building-plus"
             color="primary"
             type="submit"
-            :label="$t('orgs.create-dialog.submit-button')"
+            :label="$t('orgs.CreateDialog.submitButton')"
             :disable="!submitEnabled"
           ></q-btn>
         </q-card-actions>

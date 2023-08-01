@@ -104,6 +104,37 @@ const routes = [
   },
 
   {
+    path: "/orgs/:orgUid/canvas",
+    component: () => import("layouts/MainLayout.vue"),
+    meta: {
+      drawer: "Canvas",
+      app: "Logbook"
+    },
+    children: [
+      {
+        name: "canvases",
+        path: "",
+        component: () => import("pages/CanvasPage.vue")
+      }
+    ]
+  },
+  {
+    path: "/orgs/:orgUid/canvas/:canvasName",
+    component: () => import("layouts/MainLayout.vue"),
+    meta: {
+      drawer: "Canvas",
+      app: "Logbook"
+    },
+    children: [
+      {
+        name: "canvasPage",
+        path: "",
+        component: () => import("pages/CanvasPage.vue")
+      }
+    ]
+  },
+
+  {
     path: "/dashboard",
     component: () => import("layouts/MainLayout.vue"),
     meta: {

@@ -11,14 +11,13 @@
     <q-separator></q-separator>
     <q-list separator>
       <q-item
-        v-for="item in listToRender"
-        :key="item.id"
+        v-for="item in editable"
+        :key="item.key"
         clickable
         class="q-pa-sm items-center"
         @click="editToList(item)"
       >
         {{ item.text }}
-    
       </q-item>
     </q-list>
 
@@ -29,11 +28,25 @@
           <p>Add {{ info.title }}</p>
         </q-card-section>
         <q-input v-model.trim="qinput" class="input"></q-input>
-        <q-banner class="bg-red text-white q-pa-sm q-mt-sm text-center"  v-if="errorMessage">Please add more characters</q-banner>
+        <q-banner
+          class="bg-red text-white q-pa-sm q-mt-sm text-center"
+          v-if="errorMessage"
+          >Please add more characters</q-banner
+        >
         <q-card-actions align="evenly">
           <!-- Dialog actions (buttons) go here -->
-          <q-btn label="add" v-if="add" color="primary" @click="addToList()" />
-          <q-btn label="Edit" v-else color="primary" @click="editItemToList(listToRender,id,qinput),publishEdit();" />
+          <q-btn
+            label="add"
+            v-if="add"
+            color="primary"
+            @click="addToList(info.key)"
+          />
+          <q-btn
+            label="Edit"
+            v-else
+            color="primary"
+            @click="updateList(info)"
+          />
 
           <q-btn label="Close" color="primary" @click="closeDialogBox" />
         </q-card-actions>
@@ -43,52 +56,76 @@
 </template>
 
 <script setup>
+import { ref, unref } from "vue";
+import { nanoid } from "nanoid";
 
-import { nanoid } from 'nanoid'
-import { ref } from "vue";
-function addToList(){
- 
-  add.value=true;
-  if(qinput.value.length<2){
-    errorMessage.value=true;
-    return;
-
-  }
- props.addItem(listToRender.value,qinput.value);
-  qinput.value="";
-  errorMessage.value=null;
-}
-function editToList(item){
-  add.value=false;
-  dialogVisible.value=true;
-  qinput.value=item.text;
-  id.value = item.id;
- 
-}
-function closeDialogBox(){
-  dialogVisible.value  = false
-  add.value=true;
-  qinput.value="";
-  
-}
-function publishEdit(){
-  dialogVisible.value=false;
-  id.value="";
-  qinput.value="";
-  add.value=true;
-}
 const props = defineProps({
   info: Object,
+  currentData: Object,
   addItem: Function,
-  editItemToList:Function
+  editItemToList: Function,
 });
-const id=ref("");
-const add=ref(true);
-const errorMessage= ref(null)
+
+const editable = unref(props.currentData);
+
+console.log(props.currentData);
+
+function addToList(key) {
+  add.value = true;
+  if (qinput.value.length < 2) {
+    errorMessage.value = true;
+    return;
+  }
+
+  editable.push({ uid: nanoid(), text: qinput.value });
+  qinput.value = "";
+  errorMessage.value = null;
+  dialogVisible.value = false;
+}
+
+function updateList(item) {
+  add.value = false;
+  if (qinput.value.length < 2) {
+    errorMessage.value = true;
+    return;
+  }
+
+  console.log('Key', item)
+  //const editIx = editable.findIndex(item => item.uid = key)
+  //console.log(editIx)
+
+  editable.push({ uid: nanoid(), text: qinput.value });
+
+  qinput.value = "";
+  errorMessage.value = null;
+  dialogVisible.value = false;
+}
+
+function editToList(item) {
+  add.value = false;
+  dialogVisible.value = true;
+  qinput.value = item.text;
+  id.value = item.id;
+}
+function closeDialogBox() {
+  dialogVisible.value = false;
+  add.value = true;
+  qinput.value = "";
+}
+function publishEdit() {
+  dialogVisible.value = false;
+  id.value = "";
+  qinput.value = "";
+  add.value = true;
+}
+
+const id = ref("");
+const currentItem = ref();
+const add = ref(true);
+const errorMessage = ref(null);
 const listToRender = ref(props.info.listToRender);
 const dialogVisible = ref(false);
-const qinput = ref("")
-
+const qinput = ref("");
 </script>
 
 <style scoped>

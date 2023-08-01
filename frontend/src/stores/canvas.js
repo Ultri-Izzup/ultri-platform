@@ -9,6 +9,9 @@ export const useCanvasStore = defineStore('canvas', {
   }),
   getters: {},
   actions: {
+    setCanvasData(canvas, data) {
+      this[canvas] = data;
+    },
     reset() {
       this.business = {};
       this.coop = {};

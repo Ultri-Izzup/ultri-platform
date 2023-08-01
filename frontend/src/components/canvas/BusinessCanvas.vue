@@ -1,19 +1,30 @@
 <template>
   <q-page class="container q-pa-md">
+    <pre>
+
+  </pre>
     <CanvasSection
       v-for="info in canvasDef"
       :info="info"
       :key="info.id"
-      :addItem = "addItemToList"
-      :editItemToList="editItemToList"
-    ></CanvasSection>
+      :currentData="currentData[info.key]"
+    />
   </q-page>
 </template>
 
 <script setup>
-import CanvasSection from "./CanvasSection.vue";
 import { ref } from "vue";
 import { nanoid } from "nanoid";
+import { useI18n } from "vue-i18n";
+
+import CanvasSection from "./CanvasSection.vue";
+
+const props = defineProps({
+  currentData: Object
+})
+
+// Create i18n accessor as t
+const { t } = useI18n();
 
 const keyPartners = ref([]);
 const keyActivities = ref([]);
@@ -33,54 +44,63 @@ function editItemToList(arr,id,textToBeEdited){
 }
 const canvasDef = [
   {
-    title: "Key Partners",
+    title: t('canvas.business.partner.title'),
     class: "key-partners",
+    key: "partners",
     id: 1,
     listToRender: keyPartners,
   },
   {
     title: "Key Activities",
     class: "key-activities",
+    key: "activities",
     id: 2,
     listToRender: keyActivities,
   },
   {
     title: "Key Resources",
     class: "key-resources",
+    key: "resources",
     id: 3,
     listToRender: keyResources,
   },
   {
     title: "Value Propositions",
     class: "value-propositions",
+    key: "valueProps",
     id: 4,
     listToRender: valuePropositions,
   },
   {
     title: "Customer Relations",
     class: "customer-rel",
+    key: "custRelations",
     id: 5,
     listToRender: customerRel,
   },
   {
     title: "Channels",
     class: "channels",
+    key: "channels",
+    key: "channels",
     id: 6,
     listToRender: channels,
   },
   {
     title: "Customer Segments",
     class: "customer-seg",
+    key: "custSegments",
     id: 7,
     listToRender: customerSeg,
   },
   {
     title: "Cost Structure",
     class: "cost-structure",
+    key: "costs",
     id: 8,
     listToRender: costStructure,
   },
-  { title: "Revenue", class: "revenue", id: 9, listToRender: revenue },
+  { title: "Revenue", class: "revenue", key: "revenue", id: 9, listToRender: revenue },
 ];
 </script>
 

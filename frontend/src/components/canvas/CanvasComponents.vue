@@ -33,7 +33,7 @@
         <q-card-actions align="evenly">
           <!-- Dialog actions (buttons) go here -->
           <q-btn label="add" v-if="add" color="primary" @click="addToList()" />
-          <q-btn label="Edit" v-else color="primary" @click="editItemToList(listToRender,id,qinput)" />
+          <q-btn label="Edit" v-else color="primary" @click="editItemToList(listToRender,id,qinput),publishEdit();" />
 
           <q-btn label="Close" color="primary" @click="closeDialogBox" />
         </q-card-actions>
@@ -71,7 +71,12 @@ function closeDialogBox(){
   qinput.value="";
   
 }
-
+function publishEdit(){
+  dialogVisible.value=false;
+  id.value="";
+  qinput.value="";
+  add.value=true;
+}
 const props = defineProps({
   info: Object,
   addItem: Function,

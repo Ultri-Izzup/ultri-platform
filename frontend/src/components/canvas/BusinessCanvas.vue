@@ -1,7 +1,7 @@
 <template>
   <q-page class="container q-pa-md">
     <CanvasSection
-      v-for="info in canvasPage"
+      v-for="info in canvasDef"
       :info="info"
       :key="info.id"
       :addItem = "addItemToList"
@@ -26,7 +26,7 @@ const revenue = ref([]);
 function addItemToList(array,text){
   array.push({text:text,id:nanoid()})
 }
-const canvasPage = [
+const canvasDef = [
   {
     title: "Key Partners",
     class: "key-partners",

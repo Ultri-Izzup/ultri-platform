@@ -1,6 +1,5 @@
 <script setup>
-import { reverse } from "d3";
-import CanvasComponents from "./CanvasComponents.vue";
+import CanvasSection from "./CanvasSection.vue";
 import { ref } from "vue";
 import { nanoid } from "nanoid";
 
@@ -70,12 +69,12 @@ const canvasPage = [
 </script>
 <template>
   <q-page class="container q-pa-md">
-    <CanvasComponents
+    <CanvasSection
       v-for="info in canvasPage"
       :info="info"
       :key="info.id"
       :addItem = "addItemToList"
-    ></CanvasComponents>
+    ></CanvasSection>
   </q-page>
 </template>
 <style lang="scss">

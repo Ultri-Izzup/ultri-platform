@@ -7,16 +7,16 @@
       <q-expansion-item
         expand-separator
         icon="mdi-account-group"
-        :label="$t('homepageDrawer.co-op-ownership.label')"
-        :caption="$t('homepageDrawer.co-op-ownership.caption')"
+        :label="$t('homepageDrawer.coopOwnership.label')"
+        :caption="$t('homepageDrawer.coopOwnership.caption')"
         group="coops"
       >
         <q-card>
           <q-card-section>
-            {{ $t('homepageDrawer.co-op-ownership.blurb') }}
+            {{ $t('homepageDrawer.coopOwnership.blurb') }}
           </q-card-section>
           <q-card-actions class="justify-center">
-            <q-btn  class="text-center" rounded color="primary" :label="$t('homepageDrawer.join-the-discussion')" href="https://discord.gg/MSY9Yhss"></q-btn>
+            <q-btn  class="text-center" rounded color="primary" :label="$t('homepageDrawer.joinTheDiscussion')" href="https://discord.gg/MSY9Yhss"></q-btn>
           </q-card-actions>
           <q-card-actions class="justify-center">
             <a href="https://coop.ultri.com">Watch it get made</a>
@@ -26,17 +26,17 @@
       <q-expansion-item
         expand-separator
         icon="mdi-account"
-        :label="$t('homepageDrawer.user-ownership.label')"
-        :caption="$t('homepageDrawer.user-ownership.caption')"
+        :label="$t('homepageDrawer.userOwnership.label')"
+        :caption="$t('homepageDrawer.userOwnership.caption')"
         group="coops"
       >
         <q-card>
           <q-card-section>
-            {{ $t('homepageDrawer.user-ownership.blurb') }}
+            {{ $t('homepageDrawer.userOwnership.blurb') }}
           </q-card-section>
         </q-card>
         <q-card-actions class="text-center justify-center">
-            <q-btn  class="text-center items-center" rounded color="primary" :label="$t('homepageDrawer.join-the-discussion')" href="https://discord.gg/MSY9Yhss"></q-btn>
+            <q-btn  class="text-center items-center" rounded color="primary" :label="$t('homepageDrawer.joinTheDiscussion')" href="https://discord.gg/MSY9Yhss"></q-btn>
           </q-card-actions>
           <q-card-actions class="justify-center">
             <a href="https://coop.ultri.com">Watch it get made</a>
@@ -45,16 +45,16 @@
       <q-expansion-item
         expand-separator
         icon="mdi-code-braces"
-        :label="$t('homepageDrawer.developer-ownership.label')"
-        :caption="$t('homepageDrawer.developer-ownership.caption')"
+        :label="$t('homepageDrawer.developerOwnership.label')"
+        :caption="$t('homepageDrawer.developerOwnership.caption')"
         group="coops"
       >
         <q-card>
           <q-card-section>
-            {{ $t('homepageDrawer.developer-ownership.blurb') }}
+            {{ $t('homepageDrawer.developerOwnership.blurb') }}
           </q-card-section>
           <q-card-actions class="text-center justify-center">
-            <q-btn  class="text-center items-center" rounded color="primary" :label="$t('homepageDrawer.join-the-discussion')" href="https://discord.gg/MSY9Yhss"></q-btn>
+            <q-btn  class="text-center items-center" rounded color="primary" :label="$t('homepageDrawer.joinTheDiscussion')" href="https://discord.gg/MSY9Yhss"></q-btn>
           </q-card-actions>
           <q-card-actions class="justify-center">
             <a href="https://coop.ultri.com">Watch it get made</a>

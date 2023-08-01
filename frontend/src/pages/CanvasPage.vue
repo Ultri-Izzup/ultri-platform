@@ -1,5 +1,6 @@
 <template>
   <div>
+    <CanvasList />
     <component :is="currentComponent" :currentData="canvas[canvasName]" />
   </div>
 </template>

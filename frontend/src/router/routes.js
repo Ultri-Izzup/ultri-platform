@@ -96,7 +96,7 @@ const routes = [
     },
     children: [
       {
-        name: "canvas",
+        name: "canvasPage",
         path: "",
         component: () => import("pages/CanvasPage.vue")
       }

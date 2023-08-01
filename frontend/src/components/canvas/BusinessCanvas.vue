@@ -5,6 +5,7 @@
       :info="info"
       :key="info.id"
       :addItem = "addItemToList"
+      :editItemToList="editItemToList"
     ></CanvasSection>
   </q-page>
 </template>
@@ -24,7 +25,11 @@ const customerSeg = ref([]);
 const costStructure = ref([]);
 const revenue = ref([]);
 function addItemToList(array,text){
-  array.push({text:text,id:nanoid()})
+  array.push({text,id:nanoid()})
+}
+function editItemToList(arr,id,textToBeEdited){
+  let elementToFind= arr.find(element=>element.id===id);
+  elementToFind.text=textToBeEdited;
 }
 const canvasDef = [
   {
@@ -78,7 +83,6 @@ const canvasDef = [
   { title: "Revenue", class: "revenue", id: 9, listToRender: revenue },
 ];
 </script>
-
 
 <style lang="scss">
 .container {

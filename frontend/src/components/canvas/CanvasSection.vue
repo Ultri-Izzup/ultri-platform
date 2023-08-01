@@ -15,6 +15,7 @@
         :key="item.id"
         clickable
         class="q-pa-sm items-center"
+        @click="editToList(item)"
       >
         {{ item.text }}
     
@@ -31,8 +32,10 @@
         <q-banner class="bg-red text-white q-pa-sm q-mt-sm text-center"  v-if="errorMessage">Please add more characters</q-banner>
         <q-card-actions align="evenly">
           <!-- Dialog actions (buttons) go here -->
-          <q-btn label="add" color="primary" @click="addToList()" />
-          <q-btn label="Close" color="primary" @click="dialogVisible = false" />
+          <q-btn label="add" v-if="add" color="primary" @click="addToList()" />
+          <q-btn label="Edit" v-else color="primary" @click="editItemToList(listToRender,id,qinput),publishEdit();" />
+
+          <q-btn label="Close" color="primary" @click="closeDialogBox" />
         </q-card-actions>
       </q-card>
     </q-dialog>
@@ -44,6 +47,8 @@
 import { nanoid } from 'nanoid'
 import { ref } from "vue";
 function addToList(){
+ 
+  add.value=true;
   if(qinput.value.length<2){
     errorMessage.value=true;
     return;
@@ -53,14 +58,37 @@ function addToList(){
   qinput.value="";
   errorMessage.value=null;
 }
+function editToList(item){
+  add.value=false;
+  dialogVisible.value=true;
+  qinput.value=item.text;
+  id.value = item.id;
+ 
+}
+function closeDialogBox(){
+  dialogVisible.value  = false
+  add.value=true;
+  qinput.value="";
+  
+}
+function publishEdit(){
+  dialogVisible.value=false;
+  id.value="";
+  qinput.value="";
+  add.value=true;
+}
 const props = defineProps({
   info: Object,
-  addItem: Function
+  addItem: Function,
+  editItemToList:Function
 });
+const id=ref("");
+const add=ref(true);
 const errorMessage= ref(null)
 const listToRender = ref(props.info.listToRender);
 const dialogVisible = ref(false);
 const qinput = ref("")
+
 </script>
 
 <style scoped>

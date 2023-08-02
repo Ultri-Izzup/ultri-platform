@@ -1,8 +1,16 @@
 <template>
   <div>
     <!-- canvas list just for testing -->
-    <CanvasList />
     <component :is="currentComponent" />
+    <q-page-sticky position="bottom-right" :offset="fabPos">
+      <q-fab
+        icon="mdi-download"
+        direction="up"
+        color="accent"
+        :disable="draggingFab"
+        v-touch-pan.prevent.mouse="moveFab"
+      />
+    </q-page-sticky>
   </div>
 </template>
 
@@ -77,6 +85,19 @@ if (canvasName.value && route.params.orgUid) {
   canvas.setCanvasData("business", "partners", mockPartners);
   canvas.setCanvasData("business", "activities", mockActivities);
 }
+
+// FAB - Floating Action Button to save/download
+const fabPos = ref([18, 18]);
+const draggingFab = ref(false);
+const onClick = () => {
+  // console.log('Clicked on a fab action')
+};
+
+const moveFab = (ev) => {
+  draggingFab.value = ev.isFirst !== true && ev.isFinal !== true;
+
+  fabPos.value = [fabPos.value[0] - ev.delta.x, fabPos.value[1] - ev.delta.y];
+};
 </script>
 
 <style lang="scss">

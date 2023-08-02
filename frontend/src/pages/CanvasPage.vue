@@ -92,7 +92,8 @@ if (canvasName.value && route.params.orgUid) {
 const fabPos = ref([18, 18]);
 const draggingFab = ref(false);
 const onDownloadClick = () => {
-  console.log('Download Data')
+  console.log('Download Data for ' + canvasName.value)
+
 };
 const moveFab = (ev) => {
   draggingFab.value = ev.isFirst !== true && ev.isFinal !== true;

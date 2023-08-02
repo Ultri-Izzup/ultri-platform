@@ -46,6 +46,12 @@
             color="primary"
             @click="updateItem(info.sectionKey, currentItem)"
           />
+          <q-btn
+           v-if="!add"
+            label="Delete"
+            color="secondary"
+            @click="deleteItem(info.sectionKey, currentItem)"
+          />
 
           <q-btn label="Close" color="primary" @click="closeDialogBox" />
         </q-card-actions>
@@ -90,7 +96,11 @@ const showEditItem = async (section, itemUid) => {
 
 const updateItem = async (section, itemUid) => {
   canvas[props.canvasName][section].set(itemUid, {uid: itemUid, text: itemInput.value}),
-  currentItem.value = null;
+  closeDialogBox();
+}
+
+const deleteItem = async (section, itemUid) => {
+  canvas[props.canvasName][section].delete(itemUid),
   closeDialogBox();
 }
 

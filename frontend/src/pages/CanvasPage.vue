@@ -13,12 +13,13 @@
         @click="onDownloadClick()"
       />
     </q-page-sticky>
+    <a id="downloadAnchorElem" style="display:none"></a>
   </div>
 </template>
 
 <script setup>
 // Import major 3rd party modules, in rough order of precedence
-import { ref, computed, watch } from "vue";
+import { ref, computed, watch, isProxy, toRaw } from "vue";
 import { useRoute } from "vue-router";
 
 // Import stores
@@ -92,8 +93,52 @@ if (canvasName.value && route.params.orgUid) {
 const fabPos = ref([18, 18]);
 const draggingFab = ref(false);
 const onDownloadClick = () => {
-  console.log('Download Data for ' + canvasName.value)
+  console.log("Download Data for " + canvasName.value);
 
+  // Get the canvas sections one at a time
+  const canvasProps = Object.entries(canvas[canvasName.value]);
+
+  // Define an object to hold our ouput
+  const outObj = {canvas: {} };
+
+  outObj['canvas'][canvasName.value] = {}
+
+  canvasProps.forEach((section) => {
+    let outVal = [];
+    console.log(section);
+    // The first element is the section name
+    const sectionName = section[0];
+
+    // The second element is the data
+    const sectionData = section[1];
+
+    let rawData;
+
+    if (isProxy(sectionData)) {
+      rawData = toRaw(sectionData);
+      if (rawData instanceof Map) {
+        let itemArray = [];
+        console.log("Converting Map to array", rawData);
+        rawData.forEach((item) => {
+          console.log(item)
+          itemArray.push(item)
+        })
+        outVal = itemArray;
+      }
+    }
+
+    outObj['canvas'][canvasName.value][sectionName] = outVal;
+
+  });
+
+  var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(outObj, 0, 2));
+  console.log(dataStr)
+  var dlAnchorElem = document.getElementById('downloadAnchorElem');
+  dlAnchorElem.setAttribute("href", dataStr);
+  dlAnchorElem.setAttribute("download", "canvas.json");
+  dlAnchorElem.click();
+
+  console.log(outObj);
 };
 const moveFab = (ev) => {
   draggingFab.value = ev.isFirst !== true && ev.isFinal !== true;

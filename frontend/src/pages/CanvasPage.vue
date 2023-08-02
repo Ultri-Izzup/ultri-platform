@@ -1,14 +1,16 @@
 <template>
   <div>
-    <!-- canvas list just for testing -->
+    <CanvasList v-if="!canvasName"></CanvasList>
     <component :is="currentComponent" />
     <q-page-sticky position="bottom-right" :offset="fabPos">
       <q-fab
+        v-if="canvasName"
         icon="mdi-download"
         direction="up"
         color="accent"
         :disable="draggingFab"
         v-touch-pan.prevent.mouse="moveFab"
+        @click="onDownloadClick()"
       />
     </q-page-sticky>
   </div>
@@ -89,15 +91,14 @@ if (canvasName.value && route.params.orgUid) {
 // FAB - Floating Action Button to save/download
 const fabPos = ref([18, 18]);
 const draggingFab = ref(false);
-const onClick = () => {
-  // console.log('Clicked on a fab action')
+const onDownloadClick = () => {
+  console.log('Download Data')
 };
-
 const moveFab = (ev) => {
   draggingFab.value = ev.isFirst !== true && ev.isFinal !== true;
-
   fabPos.value = [fabPos.value[0] - ev.delta.x, fabPos.value[1] - ev.delta.y];
 };
+
 </script>
 
 <style lang="scss">

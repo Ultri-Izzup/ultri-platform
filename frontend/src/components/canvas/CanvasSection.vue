@@ -10,13 +10,11 @@
     </q-card-section>
     <q-separator></q-separator>
     <q-list separator>
-      {{info}}
-      {{canvas[canvasName][info.sectionKey]}}
       <q-item
         v-for="[k, item] in canvas[canvasName][info.sectionKey]" :key="k"
         clickable
         class="q-pa-sm items-center"
-        @click="editToList(item)"
+        @click="showEditItem(info.sectionKey, item.uid)"
       >
         {{ item.text }}
       </q-item>
@@ -28,7 +26,7 @@
           <!-- Dialog content goes here -->
           <p>Add {{ info.title }}</p>
         </q-card-section>
-        <q-input v-model.trim="qinput" class="input"></q-input>
+        <q-input v-model.trim="itemInput" class="input"></q-input>
         <q-banner
           class="bg-red text-white q-pa-sm q-mt-sm text-center"
           v-if="errorMessage"
@@ -40,13 +38,13 @@
             label="add"
             v-if="add"
             color="primary"
-            @click="addToList(info.key)"
+            @click="addItem(info.sectionKey, currentItem)"
           />
           <q-btn
             label="Edit"
             v-else
             color="primary"
-            @click="updateList(info)"
+            @click="updateItem(info.sectionKey, currentItem)"
           />
 
           <q-btn label="Close" color="primary" @click="closeDialogBox" />
@@ -72,14 +70,50 @@ const props = defineProps({
   canvasName: String
 });
 
+const currentItem = ref();
+
 console.log('INFO', props.info)
 
 const id = ref("");
-const currentItem = ref();
 const add = ref(true);
 const errorMessage = ref(null);
 const dialogVisible = ref(false);
-const qinput = ref("");
+const itemInput = ref("");
+
+const showEditItem = async (section, itemUid) => {
+  currentItem.value = itemUid;
+  add.value = false;
+  errorMessage.value = null;
+  dialogVisible.value = true;
+  itemInput.value = canvas[props.canvasName][section].get(itemUid).text
+}
+
+const updateItem = async (section, itemUid) => {
+  canvas[props.canvasName][section].set(itemUid, {uid: itemUid, text: itemInput.value}),
+  currentItem.value = null;
+  closeDialogBox();
+}
+
+const addItem = async (section) => {
+  const newUid = nanoid();
+
+  console.log(canvas[props.canvasName][section] instanceof Map)
+
+  if(canvas[props.canvasName][section] instanceof Map == false) {
+    canvas[props.canvasName][section] = new Map();
+  }
+
+  canvas[props.canvasName][section].set(newUid, {uid: newUid, text: itemInput.value});
+
+  closeDialogBox();
+}
+
+function closeDialogBox(){
+  currentItem.value = null;
+  dialogVisible.value  = false;
+  add.value=true;
+  itemInput.value=null
+}
 
 
 </script>

@@ -68,7 +68,14 @@ if (canvasName.value && route.params.orgUid) {
   mok = nanoid();
   mockPartners.set(mok, { uid: mok, text: "NLnet" });
 
+  const mockActivities = new Map();
+  mok = nanoid();
+  mockActivities.set(mok, { uid: mok, text: "Sell stuff" });
+  mok = nanoid();
+  mockActivities.set(mok, { uid: mok, text: "Make cool code" });
+
   canvas.setCanvasData("business", "partners", mockPartners);
+  canvas.setCanvasData("business", "activities", mockActivities);
 }
 </script>
 

@@ -1,6 +1,5 @@
 <template>
   <q-page class="container q-pa-md">
-    {{ canvas.business }}
     <CanvasSection v-for="info in canvasDef" :info="info" canvasName="business" :key="info.id" />
   </q-page>
 </template>

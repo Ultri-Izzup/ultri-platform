@@ -1,7 +1,7 @@
 <template>
   <div>
     <q-toolbar class="bg-primary text-white shadow-2">
-      <q-toolbar-title>Ultri Co-op</q-toolbar-title>
+      <q-btn flat icon="mdi-arrow-left" size="md" v-if="orgUid" no-caps clickable :to="{ name: 'orgDashboard', params: { orgUid: orgUid }}"><q-toolbar-title>Ultri Co-op</q-toolbar-title></q-btn><q-toolbar-title v-if="!orgUid">Ultri Co-op</q-toolbar-title>
     </q-toolbar>
     <q-list>
       <q-item clickable v-ripple :to="{ name: toRoute, params: { canvasName: 'business' }}">

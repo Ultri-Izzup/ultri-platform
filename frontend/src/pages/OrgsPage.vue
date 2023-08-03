@@ -1,13 +1,19 @@
 <template>
   <q-page class="flex row fit justify-center">
-    <q-card class="q-pa-xl">
+    <q-card flat class="q-pa-xl">
       <q-card-section>
-        <div class="text-h3">Organizations</div>
+        <div class="text-h3">Your Organizations</div>
       </q-card-section>
       <q-card-section>
-        <div class="text-h5">
-          Organizations provide a unique set of members with roles specific to
-          the organization.
+        <div class="q-pa-md" style="max-width: 400px">
+          <q-list>
+            <q-item clickable :to="'/org/'+ org.uid" v-ripple v-for="[key, org]  in orgStore.orgs" :key="key">
+              <q-item-section>
+                <q-item-label>{{org.name}}</q-item-label>
+                <q-item-label caption>{{org.uid}}</q-item-label>
+              </q-item-section>
+            </q-item>
+          </q-list>
         </div>
       </q-card-section>
     </q-card>
@@ -18,11 +24,8 @@
 import { ref, watch, computed } from "vue";
 import { useOrgStore } from "../stores/org";
 
-const org = useOrgStore();
-org.loadOrgs();
-console.log(org.orgs)
-
-
+const orgStore = useOrgStore();
+orgStore.loadOrgs();
 </script>
 
 <style lang="scss">

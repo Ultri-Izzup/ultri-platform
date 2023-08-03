@@ -72,7 +72,7 @@
         :label="$t('orgs.drawer.defineOrgLabel')"
         :caption="$t('orgs.drawer.defineOrgCaption')"
         group="top-level"
-        header-class="text-weight-medium"
+        header-class="text-weight-bolder"
       >
         <!-- MISSION STATEMENT -->
         <q-expansion-item
@@ -87,42 +87,6 @@
           <div v-else class="text-center justify-center q-py-md">
             <q-btn label="Define Mission" @click="org.triggerOrgMissionDialog"></q-btn>
           </div>
-        </q-expansion-item>
-
-        <!-- OKR -->
-        <q-expansion-item
-          expand-separator
-          icon="mdi-checkbook"
-          :label="$t('orgs.drawer.okrLabel')"
-          :caption="$t('orgs.drawer.okrCaption')"
-          group="org-management"
-          header-class="text-weight-medium"
-        >
-          OKR - List of Objectives, that expand to show key results
-          <!-- LIST OBJECTIVES -->
-          <q-expansion-item
-            v-for="[ix, item] in org.$state.orgMembers"
-            :key="ix"
-            expand-icon-toggle
-            expand-separator
-            :label="item.name"
-            :caption="item.uid"
-            :to="'/org/' + org.currentOrgUid + '/member/' + item.uid"
-          >
-            <!-- KEY RESULTS -->
-            <q-card>
-              <q-card-actions>
-                <!-- OBJECTIVE CONTROLS -->
-                <q-btn
-                  flat
-                  icon="mdi-delete"
-                  size="sm"
-                  @click="org.deleteMemberOrg(item.uid)"
-                  >{{ $t("nav.delete") }}</q-btn
-                >
-              </q-card-actions>
-            </q-card>
-          </q-expansion-item>
         </q-expansion-item>
 
         <!-- DRIVERS -->
@@ -253,16 +217,16 @@
           </q-item>
         </q-expansion-item>
 
-        <!-- CANVAS -->
+        <!-- OKR -->
         <q-expansion-item
           expand-separator
           icon="mdi-checkbook"
-          :label="$t('orgs.drawer.canvasesLabel')"
-          :caption="$t('orgs.drawer.canvasesCaption')"
+          :label="$t('orgs.drawer.okrLabel')"
+          :caption="$t('orgs.drawer.okrCaption')"
           group="org-management"
           header-class="text-weight-medium"
         >
-          Access to our dynamic business canvases
+          OKR - List of Objectives, that expand to show key results
           <!-- LIST OBJECTIVES -->
           <q-expansion-item
             v-for="[ix, item] in org.$state.orgMembers"
@@ -288,6 +252,19 @@
             </q-card>
           </q-expansion-item>
         </q-expansion-item>
+
+        <!-- CANVAS -->
+        <q-item clickable :to="'/org/' + org.currentOrgUid + '/canvas'">
+        <q-item-section avatar>
+          <q-icon name="mdi-book-cog" />
+        </q-item-section>
+        <q-item-section>
+          <q-item-label class="text-weight-medium">{{ $t('orgs.drawer.canvasesLabel') }}</q-item-label>
+          <q-item-label caption>
+            {{ $t('orgs.drawer.canvasesCaption') }}
+          </q-item-label>
+        </q-item-section>
+      </q-item>
       </q-expansion-item>
 
       <!-- METRICS -->
@@ -334,15 +311,16 @@
         :label="$t('orgs.drawer.membersLabel')"
         :caption="$t('orgs.drawer.membersCaption')"
         group="org-management"
-        header-class="text-weight-medium"
+        header-class="text-weight-bolder"
       >
         <!-- MEMBER SEARCH -->
-        <q-item>
+        <!-- <q-item>
           <q-item-section avatar>
             <q-icon name="mdi-account-search" />
           </q-item-section>
           <q-input label="Search Members"></q-input>
         </q-item>
+        -->
 
         <!-- LIST SEARCH MEMBERS -->
         <q-expansion-item
@@ -407,7 +385,7 @@
           <q-icon name="mdi-book-cog" />
         </q-item-section>
         <q-item-section>
-          <q-item-label>{{ $t("orgs.drawer.logbookLabel") }}</q-item-label>
+          <q-item-label class="text-weight-bolder">{{ $t("orgs.drawer.logbookLabel") }}</q-item-label>
           <q-item-label caption>
             {{ $t("orgs.drawer.logbookDashboardCaption") }}
           </q-item-label>

@@ -104,7 +104,7 @@ const routes = [
   },
 
   {
-    path: "/orgs/:orgUid/canvas",
+    path: "/org/:orgUid/canvas",
     component: () => import("layouts/MainLayout.vue"),
     meta: {
       drawer: "Canvas",
@@ -119,7 +119,7 @@ const routes = [
     ]
   },
   {
-    path: "/orgs/:orgUid/canvas/:canvasName",
+    path: "/org/:orgUid/canvas/:canvasName",
     component: () => import("layouts/MainLayout.vue"),
     meta: {
       drawer: "Canvas",
@@ -181,7 +181,7 @@ const routes = [
       drawer: "Logbook"
     },
     component: () => import("layouts/MainLayout.vue"),
-    children: [{ path: "", component: () => import("pages/OrgHomePage.vue") }]
+    children: [{ path: "", component: () => import("src/pages/OrgPage.vue") }]
   },
 
   {

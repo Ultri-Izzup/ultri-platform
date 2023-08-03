@@ -101,8 +101,6 @@ const onOKClick = () => {
 const onSubmit = async () => {
   submitted.value = true;
   const resultData = await org.setOrgMission(org.currentOrgUid, mission.value);
-  console.log(resultData)
-
 };
 
 const onReset = () => {

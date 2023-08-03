@@ -59,7 +59,7 @@ import { useI18n } from "vue-i18n";
 
 const { t } = useI18n();
 
-const org = useOrgStore();
+const orgStore = useOrgStore();
 
 const props = defineProps({});
 
@@ -103,7 +103,7 @@ const onOKClick = () => {
 
 const onSubmit = async () => {
   submitted.value = true;
-  const orgData = await org.createOrg(orgName.value);
+  const orgData = await orgStore.createOrg(orgName.value);
 
   reset();
   router.push("/org/" + orgData.uid);
@@ -114,7 +114,7 @@ const onReset = () => {
 };
 
 watch(orgName, (newValue, oldValue) => {
-  if (org.validateOrgName(newValue)) {
+  if (orgStore.validateOrgName(newValue)) {
     validOrgName.value = true;
   } else {
     validOrgName.value = false;

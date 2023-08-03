@@ -2,18 +2,40 @@
   <div>
     <CanvasList v-if="!canvasName"></CanvasList>
     <component :is="currentComponent" />
-    <q-page-sticky position="bottom-right" :offset="fabPos">
+    <q-page-sticky position="bottom-right" :offset="fabPos" class="ontop">
       <q-fab
         v-if="canvasName"
-        icon="mdi-download"
+        icon="mdi-file-arrow-up-down-outline"
         direction="up"
         color="accent"
         :disable="draggingFab"
         v-touch-pan.prevent.mouse="moveFab"
-        @click="onDownloadClick()"
-      />
+        class="ontop"
+      >
+        <q-fab-action
+          @click="onDownloadClick()"
+          color="primary"
+          icon="mdi-download"
+          :disable="draggingFab"
+          class="ontop"
+        ></q-fab-action>
+        <q-fab-action
+          @click="onUploadClick"
+          color="primary"
+          icon="mdi-upload"
+          :disable="draggingFab"
+          class="ontop"
+        ></q-fab-action>
+        <q-fab-action
+          @click="onDeleteClick()"
+          color="secondary"
+          icon="mdi-delete"
+          :disable="draggingFab"
+          class="ontop"
+        ></q-fab-action>
+      </q-fab>
     </q-page-sticky>
-    <a id="downloadAnchorElem" style="display:none"></a>
+    <a id="downloadAnchorElem" style="display: none"></a>
   </div>
 </template>
 
@@ -42,7 +64,7 @@ const canvases = {
 };
 
 // Instantiate our stores early so they are available
-const canvas = useCanvasStore();
+const canvasStore = useCanvasStore();
 
 // Create a route instance
 const route = useRoute();
@@ -67,16 +89,23 @@ const currentComponent = computed(() => canvases[canvasName.value]);
 // FAB - Floating Action Button to save/download
 const fabPos = ref([18, 18]);
 const draggingFab = ref(false);
+const onUploadClick = () => {
+  console.log("Upload Data for " + canvasName.value);
+}
+const onDeleteClick = () => {
+  console.log("Delete All Data for " + canvasName.value);
+  canvasStore.clearCanvas(canvasName.value)
+}
 const onDownloadClick = () => {
   console.log("Download Data for " + canvasName.value);
 
   // Get the canvas sections one at a time
-  const canvasProps = Object.entries(canvas[canvasName.value]);
+  const canvasProps = Object.entries(canvasStore[canvasName.value]);
 
   // Define an object to hold our ouput
-  const outObj = {canvas: {} };
+  const outObj = { canvas: {} };
 
-  outObj['canvas'][canvasName.value] = {}
+  outObj["canvas"][canvasName.value] = {};
 
   canvasProps.forEach((section) => {
     let outVal = [];
@@ -95,22 +124,22 @@ const onDownloadClick = () => {
         let itemArray = [];
         console.log("Converting Map to array", rawData);
         rawData.forEach((item) => {
-          console.log(item)
-          itemArray.push(item)
-        })
+          console.log(item);
+          itemArray.push(item);
+        });
         outVal = itemArray;
       }
     }
 
-    outObj['canvas'][canvasName.value][sectionName] = outVal;
-
+    outObj["canvas"][canvasName.value][sectionName] = outVal;
   });
 
-  var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(outObj, 0, 2));
-  console.log(dataStr)
-  var dlAnchorElem = document.getElementById('downloadAnchorElem');
+  var dataStr =
+    "data:text/json;charset=utf-8," +
+    encodeURIComponent(JSON.stringify(outObj, 0, 2));
+  var dlAnchorElem = document.getElementById("downloadAnchorElem");
   dlAnchorElem.setAttribute("href", dataStr);
-  dlAnchorElem.setAttribute("download", "canvas.json");
+  dlAnchorElem.setAttribute("download", canvasName.value + "-canvas.json");
   dlAnchorElem.click();
 
   console.log(outObj);
@@ -119,9 +148,10 @@ const moveFab = (ev) => {
   draggingFab.value = ev.isFirst !== true && ev.isFinal !== true;
   fabPos.value = [fabPos.value[0] - ev.delta.x, fabPos.value[1] - ev.delta.y];
 };
-
 </script>
 
 <style lang="scss">
-//display grid
+.ontop {
+  z-index: 3;
+}
 </style>

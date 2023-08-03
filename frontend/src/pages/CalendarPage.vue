@@ -120,7 +120,7 @@ import {
 
 import { useMeta, useQuasar } from "quasar";
 
-import CalendarEventDialog from "../components/CalendarEventDialog.vue";
+import CalendarEventDialog from "../components/calendar/dialog/CalendarEventDialog.vue";
 
 const CURRENT_DAY = new Date();
 function getCurrentDay(day) {

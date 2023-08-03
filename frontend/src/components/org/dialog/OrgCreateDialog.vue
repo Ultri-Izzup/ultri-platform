@@ -3,7 +3,7 @@
     <q-card class="q-dialog-plugin">
       <q-form @submit="onSubmit" @reset="onReset">
         <q-bar class="dialog-qbar">
-          {{ $t("orgs.CreateDialog.DialogTitle") }}
+          {{ $t("orgs.dialog.createOrg.title") }}
           <q-space></q-space>
 
           <q-btn
@@ -19,17 +19,18 @@
         <q-card-section>
           <div class="dialog-header row">
             <div class="col">
-              {{ $t("orgs.CreateDialog.createFormTitle") }}
+              {{ $t("orgs.dialog.createOrg.createFormTitle") }}
             </div>
           </div>
           <div class="dialog-body">
-            {{ $t("orgs.CreateDialog.createFormBody") }}
+            {{ $t("orgs.dialog.createOrg.createFormBody") }}
           </div>
         </q-card-section>
         <q-card-section>
           <q-input
-            :label="$t('orgs.CreateDialog.orgNameHint')"
+            :label="$t('orgs.dialog.createOrg.orgNameHint')"
             v-model="orgName"
+            type="textarea"
           ></q-input>
         </q-card-section>
         <!-- buttons example -->
@@ -38,7 +39,7 @@
             icon="mdi-office-building-plus"
             color="primary"
             type="submit"
-            :label="$t('orgs.CreateDialog.submitButton')"
+            :label="$t('orgs.dialog.createOrg.submitButton')"
             :disable="!submitEnabled"
           ></q-btn>
         </q-card-actions>
@@ -52,7 +53,7 @@ import { ref, computed, watch } from "vue";
 import { useDialogPluginComponent } from "quasar";
 import { useRouter } from "vue-router";
 
-import { useOrgStore } from "../stores/org";
+import { useOrgStore } from "../../../stores/org";
 
 import { useI18n } from "vue-i18n";
 

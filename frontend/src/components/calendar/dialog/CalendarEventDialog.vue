@@ -2,11 +2,11 @@
   <q-dialog>
     <q-card>
       <q-bar>
-        <span v-if="$q.screen.lt.md">GCC</span><span v-else>Ultri Co-op</span>
+        <span v-if="$q.screen.lt.md">Ultri</span><span v-else>Ultri Co-op</span>
 
         <q-space></q-space>
 
-        <q-btn icon="close" round dense v-close-popup></q-btn>
+        <q-btn icon="mdi-close" round dense v-close-popup></q-btn>
       </q-bar>
       <q-card-section>
         <div class="text-body1 text-weight-medium q-px-md col eventPopup">

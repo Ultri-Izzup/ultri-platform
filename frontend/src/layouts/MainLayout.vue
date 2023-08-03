@@ -123,9 +123,8 @@ import { useAuthStore } from "../stores/auth";
 import { useOrgStore } from "../stores/org";
 import { useColorStore } from "../stores/color";
 
-import NotificationsButton from "../components/NotificationsButton.vue";
-import MemberButton from "../components/MemberButton.vue";
-import SignInButton from "../components/SignInButton.vue";
+import NotificationsButton from "../components/ultri/button/NotificationsButton.vue";
+import MemberButton from "../components/ultri/button/MemberButton.vue";
 
 import LogbookDrawer from "./drawers/LogbookDrawer.vue";
 import HomepageDrawer from "./drawers/HomepageDrawer.vue";
@@ -134,12 +133,12 @@ import DashboardDrawer from "./drawers/DashboardDrawer.vue";
 import OrgDrawer from "./drawers/OrgDrawer.vue";
 import CircleDrawer from "./drawers/CircleDrawer.vue";
 
-import PasswordlessAuthDialog from "../components/PasswordlessDialog.vue";
-import WelcomeDialog from "../components/WelcomeDialog.vue";
+import PasswordlessAuthDialog from "../components/auth/dialog/PasswordlessDialog.vue";
+import WelcomeDialog from "../components/auth/dialog/WelcomeDialog.vue";
 
-import OrgCreateDialog from "../components/OrgCreateDialog.vue";
-import OrgCreateLogbookEntryDialog from "../components/OrgCreateLogbookEntryDialog.vue";
-import OrgMissionDialog from "../components/OrgMissionDialog.vue";
+import OrgCreateDialog from "../components/org/dialog/OrgCreateDialog.vue";
+import OrgCreateLogbookEntryDialog from "../components/org/dialog/OrgCreateLogbookEntryDialog.vue";
+import OrgMissionDialog from "../components/org/dialog/OrgMissionDialog.vue";
 
 const $q = useQuasar()
 

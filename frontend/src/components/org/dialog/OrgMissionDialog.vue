@@ -3,7 +3,7 @@
     <q-card class="q-dialog-plugin">
       <q-form @submit="onSubmit" @reset="onReset">
         <q-bar class="dialog-qbar">
-          {{  $t('orgs.logbookEntryDialog.title') }}
+          {{  $t('orgs.dialog.missionStatement.title') }}
           <q-space></q-space>
 
           <q-btn dense flat icon="mdi-close" v-close-popup @click="auth.setTargetUrl(null)">
@@ -13,32 +13,27 @@
         <q-card-section>
           <div class="dialog-header row">
             <div class="col">
-              {{ $t('orgs.logbookEntryDialog.formTitle') }}
+              {{ $t('orgs.dialog.missionStatement.form.title') }}
             </div>
           </div>
           <div class="dialog-body">
-            {{ $t('orgs.logbookEntryDialog.formBody') }}
+            {{ $t('orgs.dialog.missionStatement.form.body') }}
           </div>
         </q-card-section>
         <q-card-section>
           <q-input
-            :label="$t('orgs.logbookEntryDialog.titleHint')"
-            v-model="publicTitle"
+            :label="$t('orgs.dialog.missionStatement.form.hint')"
+            v-model="mission"
+            autogrow
           ></q-input>
           </q-card-section>
-            <q-card-section>
-          <q-select filled v-model="nuggetType"
-                      :options="nuggetTypes"
-                      :label="$t('orgs.logbookEntryDialog.typeLabel')">
-          </q-select>
-        </q-card-section>
         <!-- buttons example -->
         <q-card-actions align="center">
           <q-btn
-            icon="mdi-office-building-plus"
+            icon="mdi-content-save"
             color="primary"
             type="submit"
-            :label="$t('orgs.logbookEntryDialog.submitButton')"
+            :label="$t('controls.save')"
             :disable="!submitEnabled"
           ></q-btn>
         </q-card-actions>
@@ -52,7 +47,7 @@ import { ref, computed, watch } from 'vue';
 import { useDialogPluginComponent } from 'quasar';
 import { useRouter } from 'vue-router';
 
-import { useOrgStore } from '../stores/org';
+import { useOrgStore } from '../../../stores/org';
 
 import { useI18n } from "vue-i18n";
 
@@ -66,34 +61,16 @@ const router = useRouter();
 
 const nuggetType = ref(null)
 
-const publicTitle = ref(null);
-const validTitle = ref(false);
+const mission = ref(null);
 const submitted = ref(false);
+const validMission = ref(false);
 const submitEnabled = computed(() => {
-  return publicTitle.value && ! submitted.value && validTitle.value && nuggetType.value ? true : false;
+  return mission.value && ! submitted.value ? true : false;
 });
 
-const nuggetTypes = [
-  {
-    id: 'proposal',
-    label: t('orgs.logbookEntryDialog.type.proposal')
-  },
-  {
-    id: 'decision',
-    label: t('orgs.logbookEntryDialog.type.decision')
-  },
-  {
-    id: 'agreement',
-    label: t('orgs.logbookEntryDialog.type.agreement')
-  },
-  {
-    id: 'peerReview',
-    label: t('orgs.logbookEntryDialog.type.peerReview')
-  }
-]
 
 const reset = () => {
-  publicTitle.value = null;
+  mission.value = null;
   submitted.value = false;
 };
 
@@ -123,21 +100,20 @@ const onOKClick = () => {
 
 const onSubmit = async () => {
   submitted.value = true;
-  const entryData = await org.createOrg(publicTitle.value);
+  const resultData = await org.setOrgMission(org.currentOrgUid, mission.value);
+  console.log(resultData)
 
-  console.log(orgData.uid)
-  router.push('/org/'+ orgData.uid)
 };
 
 const onReset = () => {
-  publicTitle.value = null;
+  mission.value = null;
 };
 
-watch(publicTitle, (newValue, oldValue) => {
-  if (org.validateTitle(newValue)) {
-    validTitle.value = true;
+watch(mission, (newValue, oldValue) => {
+  if (org.validateMission(newValue)) {
+    validMission.value = true;
   } else {
-    validTitle.value = false;
+    validMission.value = false;
   }
 });
 

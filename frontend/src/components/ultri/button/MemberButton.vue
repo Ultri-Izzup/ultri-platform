@@ -97,8 +97,8 @@
 </template>
 
 <script setup language="ts">
-import { useAuthStore } from "../stores/auth";
-import { useColorStore } from "../stores/color";
+import { useAuthStore } from "../../../stores/auth";
+import { useColorStore } from "../../../stores/color";
 
 import { useQuasar } from "quasar";
 import { useI18n } from "vue-i18n";

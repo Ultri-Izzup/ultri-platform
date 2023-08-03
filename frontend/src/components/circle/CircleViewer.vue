@@ -25,6 +25,4 @@ const marginRight = 20;
 const marginBottom = 30;
 const marginLeft = 40;
 
-
-
 </script>

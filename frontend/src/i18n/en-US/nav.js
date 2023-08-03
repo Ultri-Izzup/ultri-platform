@@ -24,5 +24,6 @@ export default {
     "co-op": "Co-op",
     organizations: "Organizations",
     orgs: "Orgs",
+    joinTheDiscussion: "Join the Discussion"
   },
 };

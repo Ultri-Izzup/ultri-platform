@@ -9,7 +9,7 @@
 
 <script setup language="ts">
 
-import { useAuthStore } from '../stores/auth';
+import { useAuthStore } from '../../../stores/auth';
 const auth = useAuthStore();
 
 const triggerSignInDialog = async () => {

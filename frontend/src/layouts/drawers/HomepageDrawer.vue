@@ -16,7 +16,7 @@
             {{ $t('homepageDrawer.coopOwnership.blurb') }}
           </q-card-section>
           <q-card-actions class="justify-center">
-            <q-btn  class="text-center" rounded color="primary" :label="$t('homepageDrawer.join-the-discussion')" href="https://discord.gg/MSY9Yhss"></q-btn>
+            <q-btn  class="text-center" rounded color="primary" :label="$t('nav.joinTheDiscussion')" href="https://discord.gg/MSY9Yhss"></q-btn>
           </q-card-actions>
           <q-card-actions class="justify-center">
             <a href="https://coop.ultri.com">Watch it get made</a>
@@ -36,7 +36,7 @@
           </q-card-section>
         </q-card>
         <q-card-actions class="text-center justify-center">
-            <q-btn  class="text-center items-center" rounded color="primary" :label="$t('homepageDrawer.join-the-discussion')" href="https://discord.gg/MSY9Yhss"></q-btn>
+            <q-btn  class="text-center items-center" rounded color="primary" :label="$t('nav.joinTheDiscussion')" href="https://discord.gg/MSY9Yhss"></q-btn>
           </q-card-actions>
           <q-card-actions class="justify-center">
             <a href="https://coop.ultri.com">Watch it get made</a>
@@ -54,7 +54,7 @@
             {{ $t('homepageDrawer.developerOwnership.blurb') }}
           </q-card-section>
           <q-card-actions class="text-center justify-center">
-            <q-btn  class="text-center items-center" rounded color="primary" :label="$t('homepageDrawer.join-the-discussion')" href="https://discord.gg/MSY9Yhss"></q-btn>
+            <q-btn  class="text-center items-center" rounded color="primary" :label="$t('nav.joinTheDiscussion')" href="https://discord.gg/MSY9Yhss"></q-btn>
           </q-card-actions>
           <q-card-actions class="justify-center">
             <a href="https://coop.ultri.com">Watch it get made</a>

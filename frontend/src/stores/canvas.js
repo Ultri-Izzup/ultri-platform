@@ -35,7 +35,7 @@ export const useCanvasStore = defineStore("canvas", {
     clearCanvas(canvas) {
       switch(canvas) {
         case 'business': {
-          this.actions.resetBusiness();
+          this.resetBusiness();
         }
       }
     },

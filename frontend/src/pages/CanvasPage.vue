@@ -36,6 +36,7 @@
       </q-fab>
     </q-page-sticky>
     <a id="downloadAnchorElem" style="display: none"></a>
+    <UploadCanvasDialog v-model="displayUpload"></UploadCanvasDialog>
   </div>
 </template>
 
@@ -52,9 +53,8 @@ import BusinessCanvas from "../components/canvas/BusinessCanvas.vue";
 import CoopCanvas from "../components/canvas/CoopCanvas.vue";
 import S3Canvas from "../components/canvas/S3Canvas.vue";
 import CanvasList from "../components/canvas/CanvasList.vue";
+import UploadCanvasDialog from "../components/canvas/dialog/UploadCanvasDialog.vue";
 
-// Remove when test data is removed
-import { nanoid } from "nanoid";
 
 // Define a mapping of canvas names to their respective component name
 const canvases = {
@@ -89,8 +89,13 @@ const currentComponent = computed(() => canvases[canvasName.value]);
 // FAB - Floating Action Button to save/download
 const fabPos = ref([18, 18]);
 const draggingFab = ref(false);
+
+const displayUpload = ref(false);
+
 const onUploadClick = () => {
   console.log("Upload Data for " + canvasName.value);
+  // Display dialog
+  displayUpload.value = true;
 }
 const onDeleteClick = () => {
   console.log("Delete All Data for " + canvasName.value);

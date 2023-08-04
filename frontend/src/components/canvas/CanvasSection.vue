@@ -17,6 +17,7 @@
     </q-card-section>
     <q-separator></q-separator>
     <q-list separator>
+      <p v-show="(canvas[canvasName][info.sectionKey].size === 0 )|| Object.keys(canvas[canvasName][info.sectionKey]).length === 0 && canvas[canvasName][info.sectionKey].constructor === Object">{{info.instructions}}</p>
       <q-item
         v-for="[k, item] in canvas[canvasName][info.sectionKey]" :key="k"
         clickable
@@ -42,6 +43,12 @@
         <q-card-actions align="evenly">
           <!-- Dialog actions (buttons) go here -->
           <q-btn
+           v-if="!add"
+            label="Delete"
+            color="secondary"
+            @click="deleteItem(info.sectionKey, currentItem)"
+          />
+          <q-btn
             label="add"
             v-if="add"
             color="primary"
@@ -53,12 +60,7 @@
             color="primary"
             @click="updateItem(info.sectionKey, currentItem)"
           />
-          <q-btn
-           v-if="!add"
-            label="Delete"
-            color="secondary"
-            @click="deleteItem(info.sectionKey, currentItem)"
-          />
+
 
           <q-btn label="Close" color="primary" @click="closeDialogBox" />
         </q-card-actions>

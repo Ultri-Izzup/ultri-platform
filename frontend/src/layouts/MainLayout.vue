@@ -32,6 +32,9 @@
           <router-link to="/benefits" class="navbar-text-link" color="primary">{{ $t("nav.benefits") }}</router-link>
           </span> -->
           <span class="q-pr-lg">
+          <router-link to="/canvas" class="navbar-text-link" color="primary">{{ $t("nav.canvas") }}</router-link>
+          </span>
+          <span class="q-pr-lg">
           <router-link to="/pricing" class="navbar-text-link" color="primary">{{ $t("nav.pricing") }}</router-link>
           </span>
           <span class="q-pr-lg">

@@ -72,7 +72,7 @@
 
     <!-- LEFT DRAWER -->
     <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
-      <HomepageDrawer v-if="route.meta.drawer == 'Homepage'"></HomepageDrawer>
+      <DefaultDrawer v-if="route.meta.drawer == 'Default'"></DefaultDrawer>
       <LogbookDrawer v-if="route.meta.drawer == 'Logbook'"></LogbookDrawer>
       <CanvasDrawer v-if="route.meta.drawer == 'Canvas'"></CanvasDrawer>
       <DashboardDrawer v-if="route.meta.drawer == 'Dashboard'"></DashboardDrawer>
@@ -127,7 +127,7 @@ import NotificationsButton from "../components/ultri/button/NotificationsButton.
 import MemberButton from "../components/ultri/button/MemberButton.vue";
 
 import LogbookDrawer from "./drawers/LogbookDrawer.vue";
-import HomepageDrawer from "./drawers/HomepageDrawer.vue";
+import DefaultDrawer from "./drawers/DefaultDrawer.vue";
 import CanvasDrawer from "./drawers/CanvasDrawer.vue";
 import DashboardDrawer from "./drawers/DashboardDrawer.vue";
 import OrgDrawer from "./drawers/OrgDrawer.vue";

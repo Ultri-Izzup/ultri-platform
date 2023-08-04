@@ -3,7 +3,7 @@ const routes = [
     path: "/",
     component: () => import("layouts/MainLayout.vue"),
     meta: {
-      drawer: "Homepage",
+      drawer: "Default",
       app: "Coop"
     },
     children: [
@@ -15,7 +15,7 @@ const routes = [
     path: "/pricing",
     component: () => import("layouts/MainLayout.vue"),
     meta: {
-      drawer: "Homepage",
+      drawer: "Default",
       app: "Coop"
     },
     children: [
@@ -31,7 +31,7 @@ const routes = [
     path: "/calendar",
     component: () => import("layouts/MainLayout.vue"),
     meta: {
-      drawer: "Homepage",
+      drawer: "Default",
       app: "Coop"
     },
     children: [

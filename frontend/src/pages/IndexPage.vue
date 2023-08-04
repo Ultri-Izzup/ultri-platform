@@ -48,7 +48,7 @@
         size="xl"
         :label="$t('homepage.button')"
         color="primary"
-        href="https://discord.gg/MSY9Yhss"
+        href="https://discord.gg/kSxMTVra"
         rounded
       ></q-btn>
     </div>

@@ -8,7 +8,7 @@ export default {
       domainsCaption: "Meet the objectives",
       domainsLabel: "Circles / Groups",
       canvasesCaption: "Perspective on organization",
-      canvasesLabel: "Business Canvas",
+      canvasesLabel: "Business Model Canvas",
       okrCaption: "Address drivers",
       okrLabel: "OKR",
       missionStatementCaption: "A single guiding vision",

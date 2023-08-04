@@ -51,7 +51,10 @@ import { useCanvasStore } from "../stores/canvas";
 // Import the individual canvas SFC module
 import BusinessCanvas from "../components/canvas/BusinessCanvas.vue";
 import CoopCanvas from "../components/canvas/CoopCanvas.vue";
-import S3Canvas from "../components/canvas/S3Canvas.vue";
+import S3OrganizationCanvas from "../components/canvas/S3OrganizationCanvas.vue";
+import S3DelegationCanvas from "../components/canvas/S3DelegationCanvas.vue";
+import S3TeamCanvas from "../components/canvas/S3TeamCanvas.vue";
+import LeanCanvas from "../components/canvas/LeanCanvas.vue";
 import CanvasList from "../components/canvas/CanvasList.vue";
 import UploadCanvasDialog from "../components/canvas/dialog/UploadCanvasDialog.vue";
 
@@ -60,7 +63,10 @@ import UploadCanvasDialog from "../components/canvas/dialog/UploadCanvasDialog.v
 const canvases = {
   business: BusinessCanvas,
   coop: CoopCanvas,
-  s3: S3Canvas,
+  "s3-organization": S3OrganizationCanvas,
+  "s3-delegation": S3DelegationCanvas,
+  "s3-team": S3TeamCanvas,
+  lean: LeanCanvas
 };
 
 // Instantiate our stores early so they are available
@@ -78,6 +84,8 @@ watch(
   () => {
     if (route.params.canvasName) {
       canvasName.value = route.params.canvasName;
+    } else {
+      canvasName.value = null;
     }
   },
   { immediate: true } // Makes it take effect on first load

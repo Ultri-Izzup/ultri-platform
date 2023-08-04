@@ -1,7 +1,14 @@
 <template>
   <q-card class="container-card" :class="info.class">
     <q-card-section class="top-q-card">
-      <p class="text-bold">{{ info.title }}</p>
+      <p class="text-bold">{{ info.title }}
+        <sup>
+          ?
+          <q-tooltip>
+          {{ info.instructions }}
+        </q-tooltip>
+        </sup>
+      </p>
       <q-icon
         name="mdi-plus-circle-outline"
         size="20px"

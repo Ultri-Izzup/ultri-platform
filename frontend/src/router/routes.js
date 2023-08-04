@@ -3,7 +3,7 @@ const routes = [
     path: "/",
     component: () => import("layouts/MainLayout.vue"),
     meta: {
-      drawer: "Default",
+      drawer: "Homepage",
       app: "Coop"
     },
     children: [

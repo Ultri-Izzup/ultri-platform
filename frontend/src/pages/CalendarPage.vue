@@ -100,6 +100,17 @@
         </template>
       </q-calendar-month>
     </div>
+    <q-card flat>
+      <q-card-section>
+        <div class="justify-center text-center">
+        The meetings take place in our Discord and are open to all. You are welcome to attend.
+      </div>
+      </q-card-section>
+      <q-card-actions class="justify-center">
+        <q-btn label="Visit Discord" color="primary" href="https://discord.gg/kSxMTVra"></q-btn>
+      </q-card-actions>
+    </q-card>
+
   </q-page>
 </template>
 

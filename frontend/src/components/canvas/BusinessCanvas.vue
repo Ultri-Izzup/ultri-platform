@@ -21,7 +21,7 @@ const { t } = useI18n();
 // Define the canvas sections
 const canvasDef = [
   {
-    title: t("canvas.business.partner.title"),
+    title: t("canvas.business.partners.title"),
     instructions: t("canvas.business.partners.instructions"),
     class: "key-partners",
     sectionKey: "partners",

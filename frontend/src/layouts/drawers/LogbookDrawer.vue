@@ -154,6 +154,42 @@
           </q-item>
         </q-expansion-item>
 
+                <!-- OKR -->
+                <q-expansion-item
+          expand-separator
+          icon="mdi-checkbook"
+          :label="$t('orgs.drawer.okrLabel')"
+          :caption="$t('orgs.drawer.okrCaption')"
+          group="org-management"
+          header-class="text-weight-medium"
+        >
+          OKR - List of Objectives, that expand to show key results
+          <!-- LIST OBJECTIVES -->
+          <q-expansion-item
+            v-for="[ix, item] in org.$state.orgMembers"
+            :key="ix"
+            expand-icon-toggle
+            expand-separator
+            :label="item.name"
+            :caption="item.uid"
+            :to="'/org/' + org.currentOrgUid + '/member/' + item.uid"
+          >
+            <!-- KEY RESULTS -->
+            <q-card>
+              <q-card-actions>
+                <!-- OBJECTIVE CONTROLS -->
+                <q-btn
+                  flat
+                  icon="mdi-delete"
+                  size="sm"
+                  @click="org.deleteMemberOrg(item.uid)"
+                  >{{ $t("nav.delete") }}</q-btn
+                >
+              </q-card-actions>
+            </q-card>
+          </q-expansion-item>
+        </q-expansion-item>
+
         <!-- DOMAINS -->
         <q-expansion-item
           expand-separator
@@ -217,46 +253,10 @@
           </q-item>
         </q-expansion-item>
 
-        <!-- OKR -->
-        <q-expansion-item
-          expand-separator
-          icon="mdi-checkbook"
-          :label="$t('orgs.drawer.okrLabel')"
-          :caption="$t('orgs.drawer.okrCaption')"
-          group="org-management"
-          header-class="text-weight-medium"
-        >
-          OKR - List of Objectives, that expand to show key results
-          <!-- LIST OBJECTIVES -->
-          <q-expansion-item
-            v-for="[ix, item] in org.$state.orgMembers"
-            :key="ix"
-            expand-icon-toggle
-            expand-separator
-            :label="item.name"
-            :caption="item.uid"
-            :to="'/org/' + org.currentOrgUid + '/member/' + item.uid"
-          >
-            <!-- KEY RESULTS -->
-            <q-card>
-              <q-card-actions>
-                <!-- OBJECTIVE CONTROLS -->
-                <q-btn
-                  flat
-                  icon="mdi-delete"
-                  size="sm"
-                  @click="org.deleteMemberOrg(item.uid)"
-                  >{{ $t("nav.delete") }}</q-btn
-                >
-              </q-card-actions>
-            </q-card>
-          </q-expansion-item>
-        </q-expansion-item>
-
         <!-- CANVAS -->
         <q-item clickable :to="'/org/' + org.currentOrgUid + '/canvas'">
         <q-item-section avatar>
-          <q-icon name="mdi-book-cog" />
+          <q-icon name="mdi-artboard" />
         </q-item-section>
         <q-item-section>
           <q-item-label class="text-weight-medium">{{ $t('orgs.drawer.canvasesLabel') }}</q-item-label>

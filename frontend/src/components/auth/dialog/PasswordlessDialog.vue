@@ -87,7 +87,7 @@
   </q-dialog>
 </template>
 
-<script setup language="ts">
+<script setup>
 import { ref, computed, watch } from 'vue';
 import { useDialogPluginComponent } from 'quasar';
 

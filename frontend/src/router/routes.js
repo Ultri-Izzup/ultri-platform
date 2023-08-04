@@ -181,7 +181,7 @@ const routes = [
       drawer: "Logbook"
     },
     component: () => import("layouts/MainLayout.vue"),
-    children: [{ path: "", component: () => import("src/pages/OrgPage.vue") }]
+    children: [{ path: "", name:"orgDashboard", component: () => import("src/pages/OrgPage.vue") }]
   },
 
   {

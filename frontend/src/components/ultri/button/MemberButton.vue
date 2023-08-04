@@ -8,7 +8,7 @@
         :label="account.currentAccountName"
         :caption="$t('account.caption')"
         expand-icon="mdi-menu-down"
-        v-if="auth.isSignedIn"
+        v-if="authStore.isSignedIn"
       >
         <q-card>
           <q-card-section>
@@ -38,7 +38,7 @@
       </q-item>
       -->
       <!--
-      <q-item clickable v-close-popup @click="color.toggleDarkMode()">
+      <q-item clickable v-close-popup @click="colorStore.toggleDarkMode()">
         <q-item-section avatar>
           <q-icon name="mdi-theme-light-dark" color="primary"/>
         </q-item-section>
@@ -47,7 +47,7 @@
         </q-item-section>
       </q-item>
       -->
-      <q-item clickable v-close-popup v-if="auth.isSignedIn" to="/dashboard">
+      <q-item clickable v-close-popup v-if="authStore.isSignedIn" to="/dashboard">
         <q-item-section avatar>
           <q-icon name="mdi-view-dashboard" color="primary" />
         </q-item-section>
@@ -56,7 +56,7 @@
         </q-item-section>
       </q-item>
 
-      <q-item clickable v-close-popup v-if="auth.isSignedIn" to="/orgs">
+      <q-item clickable v-close-popup v-if="authStore.isSignedIn" to="/orgs">
         <q-item-section avatar>
           <q-icon name="mdi-office-building" color="primary" />
         </q-item-section>
@@ -68,7 +68,7 @@
       <q-item
         clickable
         v-close-popup
-        v-if="!auth.isSignedIn"
+        v-if="!authStore.isSignedIn"
         @click="triggerSignInDialog()"
       >
         <q-item-section avatar>
@@ -82,8 +82,8 @@
       <q-item
         clickable
         v-close-popup
-        v-if="auth.isSignedIn"
-        @click="auth.signOut('/')"
+        v-if="authStore.isSignedIn"
+        @click="authStore.signOut('/')"
       >
         <q-item-section avatar>
           <q-icon name="mdi-logout" color="primary" />
@@ -111,11 +111,11 @@ const router = useRouter();
 
 const $q = useQuasar();
 
-const auth = useAuthStore();
+const authStore = useAuthStore();
+const colorStore = useColorStore();
 
-const color = useColorStore();
-$q.dark.set(color.darkMode);
-color.$subscribe((mutation, state) => {
+$q.dark.set(colorStore.darkMode);
+colorStore.$subscribe((mutation, state) => {
   $q.dark.set(state.darkMode);
 });
 
@@ -127,7 +127,7 @@ const locales = [
 ];
 
 const triggerSignInDialog = async () => {
-  auth.setTargetUrl("/");
-  auth.setSignInRequired(true);
+  authStore.setTargetUrl("/");
+  authStore.setSignInRequired(true);
 };
 </script>

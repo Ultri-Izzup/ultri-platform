@@ -3,7 +3,7 @@
     <q-card class="q-dialog-plugin">
       <q-form @submit="onSubmit" @reset="onReset">
         <q-bar class="dialog-qbar">
-          {{  $t('orgs.logbookEntryDialog.title') }}
+          {{  $t('orgs.dialog.logbookEntry.title') }}
           <q-space></q-space>
 
           <q-btn dense flat icon="mdi-close" v-close-popup @click="auth.setTargetUrl(null)">
@@ -13,23 +13,23 @@
         <q-card-section>
           <div class="dialog-header row">
             <div class="col">
-              {{ $t('orgs.logbookEntryDialog.formTitle') }}
+              {{ $t('orgs.dialog.logbookEntry.formTitle') }}
             </div>
           </div>
           <div class="dialog-body">
-            {{ $t('orgs.logbookEntryDialog.formBody') }}
+            {{ $t('orgs.dialog.logbookEntry.formBody') }}
           </div>
         </q-card-section>
-        <q-card-section>
+        <q-card-section>authStore.
           <q-input
-            :label="$t('orgs.logbookEntryDialog.titleHint')"
+            :label="$t('orgs.dialog.logbookEntry.titleHint')"
             v-model="publicTitle"
           ></q-input>
           </q-card-section>
             <q-card-section>
           <q-select filled v-model="nuggetType"
                       :options="nuggetTypes"
-                      :label="$t('orgs.logbookEntryDialog.typeLabel')">
+                      :label="$t('orgs.dialog.logbookEntry.typeLabel')">
           </q-select>
         </q-card-section>
         <!-- buttons example -->
@@ -38,7 +38,7 @@
             icon="mdi-office-building-plus"
             color="primary"
             type="submit"
-            :label="$t('orgs.logbookEntryDialog.submitButton')"
+            :label="$t('orgs.dialog.logbookEntry.submitButton')"
             :disable="!submitEnabled"
           ></q-btn>
         </q-card-actions>
@@ -76,19 +76,19 @@ const submitEnabled = computed(() => {
 const nuggetTypes = [
   {
     id: 'proposal',
-    label: t('orgs.logbookEntryDialog.type.proposal')
+    label: t('orgs.dialog.logbookEntry.type.proposal')
   },
   {
     id: 'decision',
-    label: t('orgs.logbookEntryDialog.type.decision')
+    label: t('orgs.dialog.logbookEntry.type.decision')
   },
   {
     id: 'agreement',
-    label: t('orgs.logbookEntryDialog.type.agreement')
+    label: t('orgs.dialog.logbookEntry.type.agreement')
   },
   {
     id: 'peerReview',
-    label: t('orgs.logbookEntryDialog.type.peerReview')
+    label: t('orgs.dialog.logbookEntry.type.peerReview')
   }
 ]
 

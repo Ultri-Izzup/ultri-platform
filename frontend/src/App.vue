@@ -12,15 +12,17 @@ import Session from "supertokens-web-js/recipe/session";
 import Passwordless from "supertokens-web-js/recipe/passwordless";
 
 import { useAuthStore } from "./stores/auth";
+import { useOrgStore } from "./stores/org";
 
-const auth = useAuthStore();
+const authStore = useAuthStore();
+const orgStore = useOrgStore();
 
-const { isSignedIn } = storeToRefs(auth);
+const { isSignedIn } = storeToRefs(authStore);
 
 watch(isSignedIn, () => {
   console.log('SIGNED IN', isSignedIn)
   if(!isSignedIn.value) {
-    org.$reset();
+    orgStore.$reset();
   }
 });
 

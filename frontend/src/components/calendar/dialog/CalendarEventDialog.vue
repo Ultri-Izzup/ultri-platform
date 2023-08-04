@@ -2,7 +2,7 @@
   <q-dialog>
     <q-card>
       <q-bar>
-        <span v-if="$q.screen.lt.md">Ultri</span><span v-else>Ultri Co-op</span>
+        <span v-if="$q.screen.lt.md">Ultri</span><span v-else>Ultri</span>
 
         <q-space></q-space>
 

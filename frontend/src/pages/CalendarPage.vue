@@ -148,7 +148,7 @@ export default defineComponent({
     QCalendarMonth,
   },
   setup(props, { emit }) {
-    emit("newTitle", "Ultri Co-op Events");
+    emit("newTitle", "Ultri Events");
 
     const $q = useQuasar();
 

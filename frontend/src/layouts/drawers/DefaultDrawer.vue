@@ -1,7 +1,7 @@
 <template>
   <div>
     <q-toolbar class="bg-primary text-white shadow-2">
-      <q-btn flat icon="mdi-arrow-left" size="md" v-if="route.name != 'home'" no-caps clickable :to="{ name: 'home'}"><q-toolbar-title>Ultri Co-op</q-toolbar-title></q-btn><q-toolbar-title v-if="route.name == 'home'">Ultri Co-op</q-toolbar-title>
+      <q-btn flat icon="mdi-arrow-left" size="md" v-if="route.name != 'home'" no-caps clickable :to="{ name: 'home'}"><q-toolbar-title>Ultri</q-toolbar-title></q-btn><q-toolbar-title v-if="route.name == 'home'">Ultri</q-toolbar-title>
     </q-toolbar>
     <q-list>
       <q-expansion-item

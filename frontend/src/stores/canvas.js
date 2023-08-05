@@ -17,7 +17,7 @@ export const useCanvasStore = defineStore("canvas", {
       channels: new Map(),
       custSegments: new Map(),
       costs: new Map(),
-      revenue: new Map()
+      revenue: new Map(),
     }),
 
     // Define top level props for coop ownership canvas.
@@ -26,15 +26,26 @@ export const useCanvasStore = defineStore("canvas", {
     }),
 
     // Define top level props for one of the S3 canvas.
-    s3: useStorage("s3", {
+    delegation: useStorage("delegation", {
+      purpose: new Map(),
+      responsabilities: new Map(),
+      dependencies: new Map(),
+      constraints: new Map(),
+      challenges: new Map(),
+      deliverables: new Map(),
+      competencies: new Map(),
+      resources: new Map(),
+      delegator: new Map(),
+      metrics: new Map(),
+      monitoring: new Map(),
       // Create new maps for each canvgas section
-    })
+    }),
   }),
   getters: {},
   actions: {
     clearCanvas(canvas) {
-      switch(canvas) {
-        case 'business': {
+      switch (canvas) {
+        case "business": {
           this.resetBusiness();
         }
       }
@@ -57,8 +68,8 @@ export const useCanvasStore = defineStore("canvas", {
         channels: new Map(),
         custSegments: new Map(),
         costs: new Map(),
-        revenue: new Map()
+        revenue: new Map(),
       };
-    }
-  }
+    },
+  },
 });

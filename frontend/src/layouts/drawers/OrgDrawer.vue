@@ -211,7 +211,7 @@
 
       <!-- CIRCLES -->
       <q-separator></q-separator>
-      <q-item clickable :to="{}">
+      <q-item clickable :to="{ name: 'orgCircles', params: { orgUid: route.params.orgUid } }">
         <q-item-section avatar>
           <q-icon name="mdi-domain" />
         </q-item-section>
@@ -225,7 +225,7 @@
 
        <!-- MEMBERS -->
        <q-separator></q-separator>
-       <q-item clickable :to="{}">
+       <q-item clickable :to="{ name: 'orgMembers', params: { orgUid: route.params.orgUid } }">
         <q-item-section avatar>
           <q-icon name="mdi-account-multiple" />
         </q-item-section>

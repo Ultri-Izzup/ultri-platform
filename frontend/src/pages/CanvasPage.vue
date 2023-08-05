@@ -2,7 +2,7 @@
   <div>
     <CanvasList v-if="!canvasName"></CanvasList>
     <component :is="currentComponent" />
-    <q-page-sticky position="bottom-right" :offset="fabPos" class="ontop">
+    <q-page-sticky :position="Screen.gt.sm ? 'bottom-right' : 'bottom'" :offset="fabPos" class="ontop">
       <q-fab
         v-if="canvasName"
         icon="mdi-file-arrow-up-down-outline"
@@ -47,6 +47,8 @@ import { useRoute } from "vue-router";
 
 // Import stores
 import { useCanvasStore } from "../stores/canvas";
+
+import { Screen } from 'quasar';
 
 // Import the individual canvas SFC module
 import BusinessCanvas from "../components/canvas/BusinessCanvas.vue";

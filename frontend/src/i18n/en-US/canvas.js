@@ -1,6 +1,12 @@
 export default {
   canvas: {
-    description: 'Ultri has taken some of the best canvas ideas and created easy to use online versions. You can save your work and upload it later to make changes. Soon you will be able to import it into our application.',
+    description: 'Some of the best startup canvas ideas, in a free online version.',
+    features: {
+
+      download: 'Save you work in an easy to use JSON format',
+      upload: 'Upload the export later to update your data',
+      soon: 'Save to your Ultri Organization (coming soon)'
+    },
     callForAdditions: 'If you know of other canvas you would like converted, contact us, we will try our best to accomodate you.',
     business: {
       name: 'Business Model Canvas',

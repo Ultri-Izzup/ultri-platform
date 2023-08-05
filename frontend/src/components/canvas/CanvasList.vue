@@ -1,10 +1,15 @@
 <template>
   <div>
-    <div class="row q-pa-lg">
-      <div class="col-12 q-pa-md">
+    <div class="row q-pa-lg justify-center">
+      <div class="col-7 q-pa-md">
         <q-card class="q-pa-md">
           <q-card-section>
-            <p class="text-h6">{{ $t("canvas.description") }}</p>
+            <p class="text-h5">{{ $t("canvas.description") }}</p>
+            <ul>
+              <li><p class="text-h6">{{ $t("canvas.features.download") }}</p></li>
+              <li><p class="text-h6">{{ $t("canvas.features.upload") }}</p></li>
+              <li><p class="text-h6">{{ $t("canvas.features.soon") }}</p></li>
+            </ul>
           </q-card-section>
           <q-card-section>
             <p class="text-bold text-center">{{ $t("canvas.callForAdditions") }}</p>

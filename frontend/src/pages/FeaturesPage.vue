@@ -1,16 +1,13 @@
 <template>
-  <div>
-    <div class="row">
-      <q-btn label="Reset Features" @click="clearStores"></q-btn>
-    </div>
-    Features:
+  <q-page class="">
+    <div class="text-h6">Features:</div>
     <q-toggle v-for="(value, propertyName) in ufs.booleans"
       v-model="ufs.$state[value]" :key="propertyName"
       color="green"
-      label="auth"
+      :label="propertyName"
     ></q-toggle>
 
-  </div>
+  </q-page>
 </template>
 
 <script setup>

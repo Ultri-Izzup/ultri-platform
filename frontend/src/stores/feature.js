@@ -5,12 +5,14 @@ import { useStorage } from '@vueuse/core';
 const boolFeatures = {
   auth: 'authEnabled',
   pricing: 'pricingEnabled',
+  sociocracy: 'sociocracyOnly',
 }
 
 export const useFeatureStore = defineStore('feature', {
   state: () => ({
     authEnabled: false,
     pricingEnabled: false,
+    sociocracyOnly: false,
     disabledCanvas: [ 'delegation', 'team', 'organization', 'lean', 'coop']
   }),
 

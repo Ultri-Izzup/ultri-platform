@@ -47,7 +47,7 @@
         </q-item-section>
       </q-item>
       -->
-      <q-item clickable v-close-popup v-if="authStore.isSignedIn" to="/dashboard">
+      <q-item clickable v-close-popup v-if="authStore.isSignedIn && ufs.enabled('dashboard')" to="/dashboard">
         <q-item-section avatar>
           <q-icon name="mdi-view-dashboard" color="primary" />
         </q-item-section>
@@ -99,6 +99,7 @@
 <script setup language="ts">
 import { useAuthStore } from "../../../stores/auth";
 import { useColorStore } from "../../../stores/color";
+import { useFeatureStore } from "../../../stores/feature";
 
 import { useQuasar } from "quasar";
 import { useI18n } from "vue-i18n";
@@ -113,6 +114,7 @@ const $q = useQuasar();
 
 const authStore = useAuthStore();
 const colorStore = useColorStore();
+const ufs = useFeatureStore();
 
 $q.dark.set(colorStore.darkMode);
 colorStore.$subscribe((mutation, state) => {

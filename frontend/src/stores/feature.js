@@ -6,20 +6,22 @@ const boolFeatures = {
   auth: 'authEnabled',
   pricing: 'pricingEnabled',
   sociocracy: 'sociocracyOnly',
+  dashboard: 'memberDashboard',
 }
 
 export const useFeatureStore = defineStore('feature', {
   state: () => ({
-    authEnabled: false,
-    pricingEnabled: false,
-    sociocracyOnly: false,
+    authEnabled: useStorage('authEnabled', false),
+    pricingEnabled: useStorage('pricingEnabled', false),
+    sociocracyOnly: useStorage('sociocracyOnly', false),
+    memberDashboard: useStorage('memberDashboard', false),
     disabledCanvas: [ 'delegation', 'team', 'organization', 'lean', 'coop']
   }),
 
   getters: {
     booleans() {
       return boolFeatures;
-    }
+    },
   },
 
   actions: {

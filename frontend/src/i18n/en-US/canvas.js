@@ -78,8 +78,8 @@ export default {
           instructions:
             "What purpose does the team (or role) serve in the organization?",
         },
-        responsabilities: {
-          title: "Key Responsabilities",
+        responsibilities: {
+          title: "Key responsibilities",
           instructions:
             "What are the delegatee’s main responsibilities, i.e. objectives, or essential work and decision making being delegated?",
         },

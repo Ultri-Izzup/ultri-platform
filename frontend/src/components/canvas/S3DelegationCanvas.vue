@@ -23,8 +23,8 @@ const canvasDef = [
     id: 1,
   },
   {
-    title: t("canvas.s3.delegation.responsabilities.title"),
-    instructions: t("canvas.s3.delegation.responsabilities.instructions"),
+    title: t("canvas.s3.delegation.responsibilities.title"),
+    instructions: t("canvas.s3.delegation.responsibilities.instructions"),
     class: "responsibilities",
     sectionKey: "responsibilities",
     id: 2,
@@ -100,32 +100,54 @@ const canvasDef = [
 }
 @media screen and (min-width: 1024px) {
   .container {
-    /* grid-template-columns: repeat(10, 1fr);
-    grid-template-rows: repeat(5, 1fr); */
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(12, 1fr);
     gap: 10px;
     height: 85vh;
   }
   .purpose {
+    grid-row: 1/6;
+    grid-column: 1/4;
   }
   .responsibilities {
+    grid-row: 1/6;
+    grid-column: 4/7;
   }
   .dependencies {
+    grid-row: 1/6;
+    grid-column: 7/10;
   }
   .constraints {
+    grid-row: 1/6;
+    grid-column: 10/13;
   }
   .challenges {
+    grid-row: 6/9;
+    grid-column: 1/5;
   }
   .deliverables {
+    grid-row: 6/9;
+    grid-column: 5/9;
   }
   .competencies {
+    grid-row: 6/9;
+    grid-column: 9/13;
   }
   .resources {
+    grid-row: 9/13;
+    grid-column: 1/4;
   }
   .delegator {
+    grid-row: 9/13;
+    grid-column: 4/7;
   }
   .metrics {
+    grid-row: 9/13;
+    grid-column: 7/10;
   }
   .monitoring {
+    grid-row: 9/13;
+    grid-column: 10/13;
   }
 }
 </style>

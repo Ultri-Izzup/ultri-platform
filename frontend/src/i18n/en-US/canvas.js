@@ -1,5 +1,7 @@
 export default {
   canvas: {
+    description: 'Ultri has taken some of the best canvas ideas and created easy to use online versions. You can save your work and upload it later to make changes. Soon you will be able to import it into our application.',
+    callForAdditions: 'If you know of other canvas you would like converted, contact us, we will try our best to accomodate you.',
     business: {
       name: 'Business Model Canvas',
       description: 'Develop new business models or document existing ones',
@@ -42,25 +44,25 @@ export default {
     },
     coop: {
       name: 'Co-op Ownership Canvas',
-      description: 'Understand and refine your co-op ownership plans.'
+      description: 'Understand and refine your co-op ownership plans'
     },
     lean: {
       name: 'Lean Canvas',
-      description: 'Brainstorm new business models or analyze an existing one.'
+      description: 'Brainstorm new business models or analyze existing ones'
     },
     s3: {
       name: 'S3 Canvas',
       delegation: {
         name: 'Delegation Canvas',
-        description: 'Define the domain or boundaries of a circle or group.'
+        description: 'Define the domain or boundaries of a circle or group'
       },
       organization: {
         name: 'Organization Canvas',
-        description: 'Understand an organizations business model.'
+        description: 'Understand an organizations business model'
       },
       team: {
         name: 'Team Canvas',
-        description: 'Define the organization with an inward perspective.'
+        description: 'Define the organization with an inward perspective'
       }
     },
 

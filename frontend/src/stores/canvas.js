@@ -28,7 +28,7 @@ export const useCanvasStore = defineStore("canvas", {
     // Define top level props for one of the S3 canvas.
     delegation: useStorage("delegation", {
       purpose: new Map(),
-      responsabilities: new Map(),
+      responsibilities: new Map(),
       dependencies: new Map(),
       constraints: new Map(),
       challenges: new Map(),

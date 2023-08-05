@@ -25,8 +25,8 @@ const canvasDef = [
   {
     title: t("canvas.s3.delegation.responsabilities.title"),
     instructions: t("canvas.s3.delegation.responsabilities.instructions"),
-    class: "responsabilities",
-    sectionKey: "responsabilities",
+    class: "responsibilities",
+    sectionKey: "responsibilities",
     id: 2,
   },
   {
@@ -104,7 +104,7 @@ const canvasDef = [
   }
   .purpose {
   }
-  .responsabilities {
+  .responsibilities {
   }
   .dependencies {
   }

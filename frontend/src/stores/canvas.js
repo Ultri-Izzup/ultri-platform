@@ -47,6 +47,11 @@ export const useCanvasStore = defineStore("canvas", {
       switch (canvas) {
         case "business": {
           this.resetBusiness();
+          break;
+        }
+        case "delegation": {
+          this.resetDelegation();
+          break;
         }
       }
     },
@@ -56,7 +61,7 @@ export const useCanvasStore = defineStore("canvas", {
     $reset() {
       this.resetBusiness();
       this.coop = new Map();
-      this.s3 = new Map();
+      this.delegation = new Map();
     },
     resetBusiness() {
       this.business = {
@@ -69,6 +74,21 @@ export const useCanvasStore = defineStore("canvas", {
         custSegments: new Map(),
         costs: new Map(),
         revenue: new Map(),
+      };
+    },
+    resetDelegation() {
+      this.delegation = {
+        purpose: new Map(),
+        responsibilities: new Map(),
+        dependencies: new Map(),
+        constraints: new Map(),
+        challenges: new Map(),
+        deliverables: new Map(),
+        competencies: new Map(),
+        resources: new Map(),
+        delegator: new Map(),
+        metrics: new Map(),
+        monitoring: new Map(),
       };
     },
   },

@@ -95,6 +95,9 @@ const canvasDef = [
 ];
 </script>
 <style>
+.container {
+  display: grid;
+}
 @media screen and (min-width: 1024px) {
   .container {
     /* grid-template-columns: repeat(10, 1fr);

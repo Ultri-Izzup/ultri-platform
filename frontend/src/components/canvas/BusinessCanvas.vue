@@ -95,7 +95,7 @@ const canvasDef = [
 
 // Define the canvas section classes
 // @TODO - Add a link to a doc that explains how to create a new canvas and define the CSS.
-@media screen and (min-width: 1300px) {
+@media screen and (min-width: 1024px) {
   .container {
     grid-template-columns: repeat(10, 1fr);
     grid-template-rows: repeat(5, 1fr);

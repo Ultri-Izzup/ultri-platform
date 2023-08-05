@@ -1,9 +1,9 @@
 export default {
   homepage: {
-    heading1: "Software",
-    heading2: "cooperatively",
-    heading3: "owned by the users",
-    heading4: "and developers",
+    heading1: "The first free",
+    heading2: "canvas is now",
+    heading3: "available.",
+    heading4: "Check it out!",
     tagline: "Just Own It!",
     button: "Join the Discussion",
     signedIn: {

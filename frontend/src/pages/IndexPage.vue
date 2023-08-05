@@ -1,6 +1,5 @@
 <template>
   <q-page class="row items-center justify-evenly">
-    {{$q.dark.isActive}}
     <div
       class="text-h3 full-width text-center text-bold navbar-brand-link q-ma-lg"
     >
@@ -9,28 +8,26 @@
       {{ $t("homepage.heading2") }}
       <br />
       {{ $t("homepage.heading3") }}
-      <br />
-      {{ $t("homepage.heading4") }}
     </div>
 
     <div class="row fit justify-center">
       <div class="col-9 q-ma-lg">
         <q-card class="full-width">
           <q-card-section class="q-pa-md">
-            <a href="https://handbook.opensociocracy.org/">
+            <a href="/canvas/business">
               <q-img
                 :src="
                   colorStore.darkMode
-                    ? 'https://handbook.opensociocracy.org/ultri/handbook-screenshot-dk.png'
-                    : 'https://handbook.opensociocracy.org/ultri/handbook-screenshot-lt.png'
+                    ? 'https://platform.ultri.com/imgs/canvas/business-model-canvas-dark.png'
+                    : 'https://platform.ultri.com/imgs/canvas/business-model-canvas-light.png'
                 "
                 class="q-pa-md"
               >
-                <div class="absolute-top text-center gt-xs text-h3">
-                  Our first product: OpenSociocracy
+                <div class="absolute-full flex flex-center text-center gt-xs text-h3">
+                  A Better Business Model Canvas
                 </div>
-                <div class="absolute-bottom text-center lt-sm">
-                  Our first product: OpenSociocracy
+                <div class="absolute-full flex flex-center text-center lt-sm">
+                  Business Model Canvas
                 </div>
               </q-img>
             </a>

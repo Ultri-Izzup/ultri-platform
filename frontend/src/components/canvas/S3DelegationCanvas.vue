@@ -1,19 +1,34 @@
 <template>
-  <q-page class="container q-pa-md">
-    <CanvasSection
-      v-for="info in canvasDef"
-      :info="info"
-      canvasName="delegation"
-      :key="info.id"
-    />
+  <q-page class="flex flex-center" v-if="ufs.canvasDisabled('delegation')"
+    ><q-card
+      ><q-card-section class="q-pa-xl"
+        ><div class="text-h2">{{$t('canvas.s3.delegation.name')}}</div>
+        <div class="text-h2">{{$t('canvas.comingSoon')}}</div></q-card-section
+      ></q-card
+    ></q-page
+  >
+  <q-page v-else class="container q-pa-md">
+      <CanvasSection
+        v-for="info in canvasDef"
+        :info="info"
+        canvasName="delegation"
+        :key="info.id"
+      />
   </q-page>
 </template>
 <script setup>
 import { useI18n } from "vue-i18n";
+
 import CanvasSection from "./CanvasSection.vue";
+
 import { useCanvasStore } from "../../stores/canvas";
+import { useFeatureStore } from "../../stores/feature";
+
 const canvas = useCanvasStore();
+const ufs = useFeatureStore();
+
 const { t } = useI18n();
+
 const canvasDef = [
   {
     title: t("canvas.s3.delegation.purpose.title"),

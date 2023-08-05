@@ -100,7 +100,7 @@
         v-if="route.meta.drawer == 'Dashboard'"
       ></DashboardDrawer>
       <OrgDrawer v-if="route.meta.drawer == 'Org'"></OrgDrawer>
-      <CircleDrawer v-if="route.meta.drawer == 'Circle'"></CircleDrawer>
+      <CirclesDrawer v-if="route.meta.drawer == 'Circle'"></CirclesDrawer>
     </q-drawer>
 
     <q-footer>
@@ -188,7 +188,7 @@ import HomepageDrawer from "./drawers/HomepageDrawer.vue";
 import CanvasDrawer from "./drawers/CanvasDrawer.vue";
 import DashboardDrawer from "./drawers/DashboardDrawer.vue";
 import OrgDrawer from "./drawers/OrgDrawer.vue";
-import CircleDrawer from "./drawers/CircleDrawer.vue";
+import CirclesDrawer from "./drawers/CirclesDrawer.vue";
 
 import PasswordlessAuthDialog from "../components/auth/dialog/PasswordlessDialog.vue";
 import WelcomeDialog from "../components/auth/dialog/WelcomeDialog.vue";

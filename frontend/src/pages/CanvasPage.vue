@@ -2,11 +2,7 @@
   <div>
     <CanvasList v-if="!canvasName"></CanvasList>
     <component :is="currentComponent" />
-    <q-page-sticky
-      :position="Screen.gt.sm ? 'bottom-right' : 'bottom'"
-      :offset="fabPos"
-      class="ontop"
-    >
+    <q-page-sticky :position="Screen.gt.sm ? 'bottom-right' : 'bottom'" :offset="fabPos" class="ontop">
       <q-fab
         v-if="canvasName"
         icon="mdi-file-arrow-up-down-outline"
@@ -52,7 +48,7 @@ import { useRoute } from "vue-router";
 // Import stores
 import { useCanvasStore } from "../stores/canvas";
 
-import { Screen } from "quasar";
+import { Screen } from 'quasar';
 
 // Import the individual canvas SFC module
 import BusinessCanvas from "../components/canvas/BusinessCanvas.vue";
@@ -64,6 +60,7 @@ import LeanCanvas from "../components/canvas/LeanCanvas.vue";
 import CanvasList from "../components/canvas/CanvasList.vue";
 import UploadCanvasDialog from "../components/canvas/dialog/UploadCanvasDialog.vue";
 
+
 // Define a mapping of canvas names to their respective component name
 const canvases = {
   business: BusinessCanvas,
@@ -71,7 +68,7 @@ const canvases = {
   "s3-organization": S3OrganizationCanvas,
   "s3-delegation": S3DelegationCanvas,
   "s3-team": S3TeamCanvas,
-  lean: LeanCanvas,
+  lean: LeanCanvas
 };
 
 // Instantiate our stores early so they are available
@@ -109,11 +106,11 @@ const onUploadClick = () => {
   console.log("Upload Data for " + canvasName.value);
   // Display dialog
   displayUpload.value = true;
-};
+}
 const onDeleteClick = () => {
   console.log("Delete All Data for " + canvasName.value);
-  canvasStore.clearCanvas(canvasName.value);
-};
+  canvasStore.clearCanvas(canvasName.value)
+}
 const onDownloadClick = () => {
   console.log("Download Data for " + canvasName.value);
 

@@ -61,7 +61,7 @@ export const useCanvasStore = defineStore("canvas", {
     $reset() {
       this.resetBusiness();
       this.coop = new Map();
-      this.delegation = new Map();
+      this.resetDelegation();
     },
     resetBusiness() {
       this.business = {

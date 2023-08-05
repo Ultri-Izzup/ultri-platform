@@ -1,5 +1,6 @@
 <template>
   <q-page class="row items-center justify-evenly">
+    {{$q.dark.isActive}}
     <div
       class="text-h3 full-width text-center text-bold navbar-brand-link q-ma-lg"
     >
@@ -19,7 +20,7 @@
             <a href="https://handbook.opensociocracy.org/">
               <q-img
                 :src="
-                  color.darkMode
+                  colorStore.darkMode
                     ? 'https://handbook.opensociocracy.org/ultri/handbook-screenshot-dk.png'
                     : 'https://handbook.opensociocracy.org/ultri/handbook-screenshot-lt.png'
                 "
@@ -60,7 +61,10 @@ import { useQuasar } from "quasar";
 import { useAuthStore } from "../stores/auth";
 import { useColorStore } from "../stores/color";
 const auth = useAuthStore();
-const color = useColorStore();
+const colorStore = useColorStore();
+
+const $q = useQuasar();
+
 
 const triggerSignInDialog = async () => {
   auth.setTargetUrl("/member");

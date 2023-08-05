@@ -208,6 +208,18 @@ const orgStore = useOrgStore();
 const featureStore = useFeatureStore();
 
 watch(
+  () => colorStore.darkMode,
+  () => {
+    if (colorStore.darkMode) {
+      $q.dark.set(true)
+    } else {
+      $q.dark.set(false)
+    }
+  },
+  { immediate: true }
+);
+
+watch(
   () => route.params.orgUid,
   () => {
     if (route.params.orgUid) {

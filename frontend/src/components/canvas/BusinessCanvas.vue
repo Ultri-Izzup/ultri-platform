@@ -1,6 +1,11 @@
 <template>
   <q-page class="container q-pa-md">
-    <CanvasSection v-for="info in canvasDef" :info="info" canvasName="business" :key="info.id" />
+    <CanvasSection
+      v-for="info in canvasDef"
+      :info="info"
+      canvasName="business"
+      :key="info.id"
+    />
   </q-page>
 </template>
 
@@ -88,9 +93,7 @@ const canvasDef = [
 
 <style lang="scss">
 .container {
-  height: 85vh;
   display: grid;
-  gap: 10px;
 }
 
 // Define the canvas section classes
@@ -99,6 +102,8 @@ const canvasDef = [
   .container {
     grid-template-columns: repeat(10, 1fr);
     grid-template-rows: repeat(5, 1fr);
+    gap: 10px;
+    height: 85vh;
   }
   .key-partners {
     grid-column: 1/3;

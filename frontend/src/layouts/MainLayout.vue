@@ -43,7 +43,7 @@
               >{{ $t("nav.canvas") }}</router-link
             >
           </span>
-          <span class="q-pr-lg" v-if="featureStore.enabled('auth')">
+          <span class="q-pr-lg" v-if="featureStore.enabled('pricing')">
             <router-link
               to="/pricing"
               class="navbar-text-link"

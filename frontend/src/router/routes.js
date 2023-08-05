@@ -47,7 +47,7 @@ const routes = [
     path: "/orgs",
     component: () => import("layouts/MainLayout.vue"),
     meta: {
-      drawer: "Logbook",
+      drawer: "Org",
       app: "Logbook"
     },
     children: [
@@ -59,7 +59,7 @@ const routes = [
     path: "/logbook",
     component: () => import("layouts/MainLayout.vue"),
     meta: {
-      drawer: "Logbook",
+      drawer: "Org",
       app: "Logbook"
     },
     children: [
@@ -154,7 +154,7 @@ const routes = [
     path: "/org",
     component: () => import("layouts/MainLayout.vue"),
     meta: {
-      drawer: "Logbook",
+      drawer: "Org",
       app: "Logbook"
     },
     children: [
@@ -178,16 +178,34 @@ const routes = [
   {
     path: "/org/:orgUid",
     meta: {
-      drawer: "Logbook"
+      drawer: "Org"
     },
     component: () => import("layouts/MainLayout.vue"),
     children: [{ path: "", name:"orgDashboard", component: () => import("src/pages/OrgPage.vue") }]
   },
 
   {
+    path: "/org/:orgUid/circles",
+    meta: {
+      drawer: "Circles"
+    },
+    component: () => import("layouts/MainLayout.vue"),
+    children: [{ path: "", name:"orgCircles", component: () => import("src/pages/OrgCirclesPage.vue") }]
+  },
+
+  {
+    path: "/org/:orgUid/members",
+    meta: {
+      drawer: "Org"
+    },
+    component: () => import("layouts/MainLayout.vue"),
+    children: [{ path: "", name:"orgMembers", component: () => import("src/pages/OrgMembersPage.vue") }]
+  },
+
+  {
     path: "/org/:orgUid/logbook",
     meta: {
-      drawer: "Logbook"
+      drawer: "Org"
     },
     component: () => import("layouts/MainLayout.vue"),
     children: [{ path: "", component: () => import("pages/OrgLogbookPage.vue") }]

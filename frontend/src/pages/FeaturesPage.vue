@@ -9,6 +9,8 @@
       color="green"
       label="auth"
     ></q-toggle>
+
+  </div>
 </template>
 
 <script setup>

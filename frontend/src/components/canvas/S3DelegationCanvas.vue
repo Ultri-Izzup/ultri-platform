@@ -94,7 +94,7 @@ const canvasDef = [
   },
 ];
 </script>
-<style>
+<style scoped>
 .container {
   display: grid;
 }

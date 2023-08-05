@@ -91,7 +91,7 @@ const canvasDef = [
 ];
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .container {
   display: grid;
 }

@@ -2,15 +2,16 @@ import { defineStore } from 'pinia';
 
 import { useStorage } from '@vueuse/core';
 
-const features = {
+const boolFeatures = {
   auth: 'authEnabled',
-  pricing: 'pricingEnabled'
+  pricing: 'pricingEnabled',
 }
 
 export const useFeatureStore = defineStore('feature', {
   state: () => ({
     authEnabled: false,
     pricingEnabled: false,
+    disabledCanvas: [ 'delegation', 'team', 'organization', 'lean', 'coop']
   }),
 
   getters: {
@@ -22,7 +23,10 @@ export const useFeatureStore = defineStore('feature', {
       this.authEnabled = false;
     },
     enabled(feature) {
-      return this[features[feature]];
+      return this[boolFeatures[feature]];
+    },
+    canvasDisabled(canvas) {
+      return this.disabledCanvas.includes(canvas);
     }
   }
 });

@@ -15,7 +15,9 @@ export const useFeatureStore = defineStore('feature', {
   }),
 
   getters: {
-
+    booleans() {
+      return boolFeatures;
+    }
   },
 
   actions: {

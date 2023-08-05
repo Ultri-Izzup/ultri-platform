@@ -12,7 +12,7 @@
 
     <div class="row fit justify-center">
       <div class="col-9 q-ma-lg">
-        <q-card class="full-width">
+        <q-card class="full-width" flat>
           <q-card-section class="q-pa-md">
             <a href="/canvas/business">
               <q-img

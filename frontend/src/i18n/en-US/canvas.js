@@ -50,25 +50,25 @@ export default {
     },
     coop: {
       name: 'Co-op Ownership Canvas',
-      description: 'Understand and refine your co-op ownership plans'
+      description: 'Understand and refine your co-op ownership plans (soon).'
     },
     lean: {
       name: 'Lean Canvas',
-      description: 'Brainstorm new business models or analyze existing ones'
+      description: 'Brainstorm new business models or analyze existing ones (soon).'
     },
     s3: {
       name: 'S3 Canvas',
       delegation: {
         name: 'Delegation Canvas',
-        description: 'Define the domain or boundaries of a circle or group'
+        description: 'Define the domain or boundaries of a circle or group (soon).'
       },
       organization: {
         name: 'Organization Canvas',
-        description: 'Understand an organizations business model'
+        description: 'Understand an organizations business model (soon).'
       },
       team: {
         name: 'Team Canvas',
-        description: 'Define the organization with an inward perspective'
+        description: 'Define the organization with an inward perspective (soon).'
       }
     },
 

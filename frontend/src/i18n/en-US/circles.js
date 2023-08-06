@@ -17,11 +17,16 @@ export default {
       editor: {
         title: 'Circle Editor'
       },
+      newCircle: {
+        title: 'Add child circle',
+        saveChild: 'Save child'
+      },
       parentCircle: "Parent Circle",
       name: "Name",
       uid: "ID",
       delete: "Delete",
-      addChild: "Add Child"
+      addChild: "Add Child",
+      cancel: "Cancel"
     }
   },
 };

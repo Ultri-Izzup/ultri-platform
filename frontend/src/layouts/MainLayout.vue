@@ -167,6 +167,9 @@
       <CirclesDialog
         v-model="circlesStore.showCirclesDialog"
       ></CirclesDialog>
+      <NewCircleDialog
+        v-model="circlesStore.showNewCircleDialog"
+      ></NewCircleDialog>
       <!-- PAGE VIEW -->
       <router-view />
     </q-page-container>
@@ -201,6 +204,7 @@ import OrgCreateDialog from "../components/org/dialog/OrgCreateDialog.vue";
 import OrgCreateLogbookEntryDialog from "../components/org/dialog/OrgCreateLogbookEntryDialog.vue";
 import OrgMissionDialog from "../components/org/dialog/OrgMissionDialog.vue";
 import CirclesDialog from "../components/circles/dialog/CirclesDialog.vue";
+import NewCircleDialog from "../components/circles/dialog/NewCircleDialog.vue";
 
 const $q = useQuasar();
 

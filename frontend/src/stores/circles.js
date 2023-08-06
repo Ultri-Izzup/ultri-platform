@@ -22,6 +22,10 @@ export const useCirclesStore = defineStore("circles", () => {
     return orgCircles.value.map(circle => ({ value: circle.uid, label: circle.label}));
   })
 
+  const getUuid =  computed(() => {
+    return uuidv4();
+  })
+
   const setCurrentCircle = (uid) => {
     currentCircleUid.value = uid;
   };
@@ -32,7 +36,7 @@ export const useCirclesStore = defineStore("circles", () => {
   };
 
   const triggerNewCircleDialog = () => {
-    console.log('triggered')
+    console.log('triggeredNew')
     showNewCircleDialog.value = true;
   };
 
@@ -195,6 +199,7 @@ export const useCirclesStore = defineStore("circles", () => {
       //childCircle: []
     });
 
+
   }
 
   const $reset = () => {
@@ -216,6 +221,7 @@ export const useCirclesStore = defineStore("circles", () => {
     showNewCircleDialog,
     circleSelections,
     formMode,
+    getUuid,
     addChild,
     deleteCurrent,
     current,
@@ -223,6 +229,7 @@ export const useCirclesStore = defineStore("circles", () => {
     loadCircles,
     setCurrentCircle,
     triggerCircleDialog,
+    triggerNewCircleDialog,
     validateCircleName,
     $reset
   };

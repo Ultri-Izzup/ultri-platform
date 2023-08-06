@@ -4,7 +4,7 @@
       <q-form @submit="onSubmit" @reset="onReset">
         <!-- Toolbar -->
         <q-bar class="dialog-qbar">
-          {{ $t("circles.dialog.editor.title") }}
+          {{ $t("circles.dialog.newCircle.title") }}
           <q-space></q-space>
           <q-btn dense flat icon="mdi-close" v-close-popup @click="reset">
             <q-tooltip>{{ $t("nav.close") }} </q-tooltip>
@@ -15,30 +15,12 @@
             <div class="col-4">
               {{ $t("circles.dialog.name") }}
             </div>
-            <q-input v-model="currentData.label"></q-input>
-
-          </div>
-          <div class="row">
-            <div class="col-4">
-              {{ $t("circles.dialog.uid") }}
-            </div>
-            <div class="col-8">
-              {{circlesStore.current('uid') }}
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-4">
-              {{ $t("circles.dialog.parentCircle") }}
-            </div>
-              <div class="col-8">
-              <q-select filled v-model="currentData.parentCircle" map-options emit-value :options="circlesStore.circleSelections" label="Circles"></q-select>
-            </div>
+            <q-input v-model="newCircleName"></q-input>
           </div>
         </q-card-section>
         <q-card-actions class="justify-center">
-          <q-btn :label="$t('circles.dialog.addChild')" color="primary" @click="addChild()"></q-btn>
-          <q-btn :label="$t('circles.dialog.delete')" color="primary" @click="deleteCircle()"></q-btn>
+          <q-btn :label="$t('circles.dialog.newCircle.saveChild')" color="primary" @click="saveChild()"></q-btn>
+          <q-btn :label="$t('circles.dialog.cancel')" color="primary" @click="onDialogOK();"></q-btn>
         </q-card-actions>
       </q-form>
     </q-card>
@@ -51,6 +33,8 @@ import { useDialogPluginComponent } from "quasar";
 import { useCirclesStore } from "../../../stores/circles";
 
 const circlesStore = useCirclesStore();
+
+const newCircleName = ref(null)
 
 const reset = () => {};
 
@@ -90,16 +74,17 @@ const onOKClick = () => {
   // ...and it will also hide the dialog automatically
 };
 
-const deleteCircle = () => {
-  circlesStore.deleteCurrent();
+
+const saveChild = () => {
+  console.log('Saving child, ' + newCircleName.value + ' for: ' + circlesStore.currentCircleUid)
+
+  const newCircleObj = { uid: circlesStore.getUuid, label: newCircleName.value, parentCircle: circlesStore.currentCircleUid }
+
+  circlesStore.orgCircles.push(newCircleObj);
+
   onDialogOK();
-}
 
-const addChild = () => {
-  console.log('Adding child to: ' + circlesStore.currentCircleUid)
-  circlesStore.triggerNewCircleDialog();
 }
-
 
 const onSave = async () => {
   submitted.value = true;

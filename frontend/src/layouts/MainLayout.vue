@@ -164,6 +164,9 @@
       <OrgMissionDialog
         v-model="orgStore.showOrgMissionDialog"
       ></OrgMissionDialog>
+      <CirclesDialog
+        v-model="circlesStore.showCirclesDialog"
+      ></CirclesDialog>
       <!-- PAGE VIEW -->
       <router-view />
     </q-page-container>
@@ -178,6 +181,7 @@ import { useAuthStore } from "../stores/auth";
 import { useOrgStore } from "../stores/org";
 import { useColorStore } from "../stores/color";
 import { useFeatureStore } from "../stores/feature";
+import { useCirclesStore } from "../stores/circles";
 
 import NotificationsButton from "../components/ultri/button/NotificationsButton.vue";
 import MemberButton from "../components/ultri/button/MemberButton.vue";
@@ -207,6 +211,7 @@ const authStore = useAuthStore();
 const colorStore = useColorStore();
 const orgStore = useOrgStore();
 const featureStore = useFeatureStore();
+const circlesStore = useCirclesStore();
 
 watch(
   () => colorStore.darkMode,

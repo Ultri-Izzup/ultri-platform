@@ -4,7 +4,7 @@ import { ref } from "vue";
 import { api } from "boot/axios";
 
 
-export const useMemberStore = defineStore("members", () => {
+export const useMembersStore = defineStore("members", () => {
   const members = ref(useStorage("members", new Map()));
   const currentMemberUid = ref(useStorage("currentMemberUid", null));
   const invites = ref(useStorage("invites", new Map()));

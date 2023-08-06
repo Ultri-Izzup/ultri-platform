@@ -196,6 +196,7 @@ import WelcomeDialog from "../components/auth/dialog/WelcomeDialog.vue";
 import OrgCreateDialog from "../components/org/dialog/OrgCreateDialog.vue";
 import OrgCreateLogbookEntryDialog from "../components/org/dialog/OrgCreateLogbookEntryDialog.vue";
 import OrgMissionDialog from "../components/org/dialog/OrgMissionDialog.vue";
+import CirclesDialog from "../components/circles/dialog/CirclesDialog.vue";
 
 const $q = useQuasar();
 

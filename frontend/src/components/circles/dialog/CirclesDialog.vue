@@ -2,46 +2,39 @@
   <q-dialog ref="dialogRef" persistent>
     <q-card class="q-dialog-plugin">
       <q-form @submit="onSubmit" @reset="onReset">
+        <!-- Toolbar -->
         <q-bar class="dialog-qbar">
-          {{ $t("orgs.dialog.createOrg.title") }}
+          {{ $t("circles.dialog.editor.title") }}
           <q-space></q-space>
-
-          <q-btn
-            dense
-            flat
-            icon="mdi-close"
-            v-close-popup
-            @click="reset"
-          >
+          <q-btn dense flat icon="mdi-close" v-close-popup @click="reset">
             <q-tooltip>{{ $t("nav.close") }} </q-tooltip>
           </q-btn>
         </q-bar>
         <q-card-section>
-          <div class="dialog-header row">
-            <div class="col">
-              {{ $t("orgs.dialog.createOrg.createFormTitle") }}
+          <div class="row">
+            <div class="col-4">
+              {{ $t("circles.dialog.name") }}
+            </div>
+            <q-input v-model="currentData.label"></q-input>
+
+          </div>
+          <div class="row">
+            <div class="col-4">
+              {{ $t("circles.dialog.uid") }}
+            </div>
+            <div class="col-8">
+              {{circlesStore.current('uid') }}
             </div>
           </div>
-          <div class="dialog-body">
-            {{ $t("orgs.dialog.createOrg.createFormBody") }}
+
+          <div class="row">
+            <div class="col-4">
+              {{ $t("circles.dialog.parentCircle") }}
+            </div>
           </div>
         </q-card-section>
-        <q-card-section>
-          <q-input
-            :label="$t('orgs.dialog.createOrg.orgNameHint')"
-            v-model="orgName"
-            type="textarea"
-          ></q-input>
-        </q-card-section>
-        <!-- buttons example -->
-        <q-card-actions align="center">
-          <q-btn
-            icon="mdi-office-building-plus"
-            color="primary"
-            type="submit"
-            :label="$t('orgs.dialog.createOrg.submitButton')"
-            :disable="!submitEnabled"
-          ></q-btn>
+        <q-card-actions class="justify-center">
+          <q-btn :label="$t('circles.dialog.addChild')" color="primary" @click="addChild(circlesStore.currentCircleUid)"></q-btn>
         </q-card-actions>
       </q-form>
     </q-card>
@@ -49,33 +42,23 @@
 </template>
 
 <script setup>
-import { ref, computed, watch } from "vue";
+import { ref, computed, watch, unref } from "vue";
 import { useDialogPluginComponent } from "quasar";
-import { useRouter } from "vue-router";
+import { useCirclesStore } from "../../../stores/circles";
 
-import { useOrgStore } from "../../../stores/org";
+const circlesStore = useCirclesStore();
 
-import { useI18n } from "vue-i18n";
+const reset = () => {};
 
-const { t } = useI18n();
+const currentData = computed(() => {
+  return circlesStore.current();
+})
 
-const orgStore = useOrgStore();
+// currentData.value = circlesStore.current();
 
-const props = defineProps({});
-
-const router = useRouter();
-
-const orgName = ref(null);
-const validOrgName = ref(false);
-const submitted = ref(false);
-const submitEnabled = computed(() => {
-  return orgName.value && !submitted.value && validOrgName.value ? true : false;
-});
-
-const reset = () => {
-  orgName.value = null;
-  submitted.value = false;
-};
+// watch(circlesStore.currentCircleUid, (newValue, oldValue) => {
+//   currentData.value = circlesStore.current();
+// });
 
 defineEmits([
   // REQUIRED; need to specify some events that your
@@ -83,6 +66,8 @@ defineEmits([
   //...useDialogPluginComponent.emits,
   "ok",
 ]);
+
+const onSubmit = async () => {};
 
 const { dialogRef, onDialogOK } = useDialogPluginComponent();
 // dialogRef      - Vue ref to be applied to QDialog
@@ -101,25 +86,13 @@ const onOKClick = () => {
   // ...and it will also hide the dialog automatically
 };
 
-const onSubmit = async () => {
+const onSave = async () => {
   submitted.value = true;
-  const orgData = await orgStore.createOrg(orgName.value);
-
-  reset();
-  router.push("/org/" + orgData.uid);
 };
 
 const onReset = () => {
-  orgName.value = null;
+  currentData.value = []
 };
-
-watch(orgName, (newValue, oldValue) => {
-  if (orgStore.validateOrgName(newValue)) {
-    validOrgName.value = true;
-  } else {
-    validOrgName.value = false;
-  }
-});
 </script>
 
 <style scoped lang="scss"></style>

@@ -4,16 +4,17 @@
       {{ $t("circles.dashboard.title") }}
     </div>
     <div class="fit">
-      <div
-        v-if="hasCircles"
-      >
+      <div v-if="hasCircles">
         <div class="row">
+          {{ treeData.items }}
           <div class="col-12">
             <q-btn
               :label="$t('circles.reset.button.text')"
               color="primary"
               @click="circlesStore.$reset()"
-            ></q-btn>
+            ></q-btn
+            >Test{{ circlesStore.currentCircleUid }}
+            {{ circlesStore.current() }}
             <q-tree
               :nodes="treeData.items"
               node-key="uid"
@@ -74,8 +75,14 @@ const treeData = computed(() => {
 });
 
 watch(selected, () => {
-  console.log('SELECTED', selected)
-
+  const selectedState = selected.value ? "selected" : "unselected";
+  console.log("SELECTION CHANGED", selectedState, selected.value);
+  if (selectedState == "selected") {
+    circlesStore.currentCircleUid = selected.value;
+    circlesStore.triggerCircleDialog();
+  } else {
+    circlesStore.currentCircleUid = null;
+  }
 });
 
 // Load circle data for the org into the store

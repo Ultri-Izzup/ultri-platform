@@ -12,6 +12,14 @@ export default {
       button: {
         text: 'Reset'
       }
+    },
+    dialog: {
+      editor: {
+        title: 'Circle Editor'
+      },
+      parentCircle: "Parent Circle",
+      name: "Name",
+      uid: "ID"
     }
   },
 };

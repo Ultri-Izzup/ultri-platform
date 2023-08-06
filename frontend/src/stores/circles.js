@@ -12,14 +12,15 @@ export const useCirclesStore = defineStore("circles", () => {
   const currentCircleUid = ref(useStorage("currentCircleUid", null));
   const topCircleUid = ref(useStorage("topCircleUid", null));
   const fetching = ref(false);
-  const showCircleDialog = ref(false);
+  const showCirclesDialog = ref(false);
 
   const setCurrentCircle = (uid) => {
     currentCircleUid.value = uid;
   };
 
   const triggerCircleDialog = () => {
-    showCircleDialog.value = true;
+    console.log('triggered')
+    showCirclesDialog.value = true;
   };
 
   const validateCircleName = (orgName) => {
@@ -46,8 +47,24 @@ export const useCirclesStore = defineStore("circles", () => {
     console.log(circleData);
   };
 
+  const current = (propName) => {
+    console.log(propName)
+    console.log(currentCircleUid.value)
+
+    const found = orgCircles.value.find((element) => element.uid == currentCircleUid.value);
+    console.log(found)
+
+    if(propName) {
+      return found[propName]
+    }
+
+    return found;
+
+
+  }
+
   const initCircles = () => {
-    console.log('INIT1')
+    console.log('INIT')
 
     const missionUid = uuidv4();
     const generalUid = uuidv4();
@@ -162,7 +179,7 @@ export const useCirclesStore = defineStore("circles", () => {
     currentCircleUid.value = null;
     topCircleUid.value = null;
     fetching.value = false;
-    showCircleDialog.value = false;
+    showCirclesDialog.value = false;
   };
 
   return {
@@ -170,7 +187,8 @@ export const useCirclesStore = defineStore("circles", () => {
     currentCircleUid,
     topCircleUid,
     fetching,
-    showCircleDialog,
+    showCirclesDialog,
+    current,
     initCircles,
     loadCircles,
     setCurrentCircle,

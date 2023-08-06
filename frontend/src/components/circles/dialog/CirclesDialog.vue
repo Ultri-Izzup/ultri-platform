@@ -31,10 +31,14 @@
             <div class="col-4">
               {{ $t("circles.dialog.parentCircle") }}
             </div>
+              <div class="col-8">
+              <q-select filled v-model="currentData.parentCircle" map-options emit-value :options="circlesStore.circleSelections" label="Circles"></q-select>
+            </div>
           </div>
         </q-card-section>
         <q-card-actions class="justify-center">
-          <q-btn :label="$t('circles.dialog.addChild')" color="primary" @click="addChild(circlesStore.currentCircleUid)"></q-btn>
+          <q-btn :label="$t('circles.dialog.addChild')" color="primary" @click="addChild()"></q-btn>
+          <q-btn :label="$t('circles.dialog.delete')" color="primary" @click="deleteCircle()"></q-btn>
         </q-card-actions>
       </q-form>
     </q-card>
@@ -85,6 +89,18 @@ const onOKClick = () => {
   // or with payload: onDialogOK({ ... })
   // ...and it will also hide the dialog automatically
 };
+
+const deleteCircle = () => {
+  circlesStore.deleteCurrent();
+  onDialogOK();
+}
+
+const addChild = () => {
+
+  // Open add child dialog
+
+}
+
 
 const onSave = async () => {
   submitted.value = true;

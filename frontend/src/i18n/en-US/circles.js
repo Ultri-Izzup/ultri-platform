@@ -19,7 +19,9 @@ export default {
       },
       parentCircle: "Parent Circle",
       name: "Name",
-      uid: "ID"
+      uid: "ID",
+      delete: "Delete",
+      addChild: "Add Child"
     }
   },
 };

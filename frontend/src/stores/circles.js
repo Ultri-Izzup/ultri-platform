@@ -1,6 +1,6 @@
 import { defineStore, storeToRefs } from "pinia";
 import { useStorage } from "@vueuse/core";
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { api } from "boot/axios";
 import { v4 as uuidv4 } from "uuid";
 
@@ -13,6 +13,14 @@ export const useCirclesStore = defineStore("circles", () => {
   const topCircleUid = ref(useStorage("topCircleUid", null));
   const fetching = ref(false);
   const showCirclesDialog = ref(false);
+  const showNewCircleDialog = ref(false);
+
+  const formMode = ref('edit');
+
+  // Provide a q-select proper data to select from all circles
+  const circleSelections =  computed(() => {
+    return orgCircles.value.map(circle => ({ value: circle.uid, label: circle.label}));
+  })
 
   const setCurrentCircle = (uid) => {
     currentCircleUid.value = uid;
@@ -21,6 +29,11 @@ export const useCirclesStore = defineStore("circles", () => {
   const triggerCircleDialog = () => {
     console.log('triggered')
     showCirclesDialog.value = true;
+  };
+
+  const triggerNewCircleDialog = () => {
+    console.log('triggered')
+    showNewCircleDialog.value = true;
   };
 
   const validateCircleName = (orgName) => {
@@ -45,6 +58,17 @@ export const useCirclesStore = defineStore("circles", () => {
     const circleData = result.data;
 
     console.log(circleData);
+  };
+
+  const addChild = () => {
+
+  }
+
+  const deleteCurrent = () => {
+
+    orgCircles.value.splice(orgCircles.value.findIndex(item => item.uid === currentCircleUid.value), 1)
+
+    //console.log(circleData);
   };
 
   const current = (propName) => {
@@ -180,6 +204,7 @@ export const useCirclesStore = defineStore("circles", () => {
     topCircleUid.value = null;
     fetching.value = false;
     showCirclesDialog.value = false;
+    showNewCircleDialog.value = false;
   };
 
   return {
@@ -188,6 +213,11 @@ export const useCirclesStore = defineStore("circles", () => {
     topCircleUid,
     fetching,
     showCirclesDialog,
+    showNewCircleDialog,
+    circleSelections,
+    formMode,
+    addChild,
+    deleteCurrent,
     current,
     initCircles,
     loadCircles,

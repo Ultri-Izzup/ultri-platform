@@ -6,7 +6,7 @@
     <div class="fit">
       <div v-if="hasCircles">
         <div class="row">
-          {{ treeData.items }}
+          <pre>{{ treeData.items }}</pre>
           <div class="col-12">
             <q-btn
               :label="$t('circles.reset.button.text')"

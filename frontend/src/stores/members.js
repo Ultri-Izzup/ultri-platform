@@ -5,9 +5,9 @@ import { api } from "boot/axios";
 
 
 export const useMembersStore = defineStore("members", () => {
-  const members = ref(useStorage("members", new Map()));
+  const members = ref(useStorage("members", []));
   const currentMemberUid = ref(useStorage("currentMemberUid", null));
-  const invites = ref(useStorage("invites", new Map()));
+  const invites = ref(useStorage("invites", []));
   const currenInviteUid = ref(useStorage("currentInviteUid", null));
   const fetching = ref(false);
   const showMemberInviteDialog = ref(false);

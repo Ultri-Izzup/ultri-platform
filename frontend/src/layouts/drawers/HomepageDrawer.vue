@@ -10,7 +10,7 @@
         <p class="q-px-md">If you would like to help shape the product, join our Discord.</p>
       </q-card-section>
       <q-card-actions class="justify-center">
-        <q-btn label="Discord" color="primary" href="https://discord.gg/kSxMTVra"></q-btn>
+        <q-btn label="Discord" color="primary" href="https://discord.gg/jaJ3v6Zx"></q-btn>
       </q-card-actions>
     </q-card>
     <q-card flat>

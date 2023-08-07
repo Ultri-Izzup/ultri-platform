@@ -21,7 +21,7 @@
               rounded
               color="primary"
               :label="$t('nav.joinTheDiscussion')"
-              href="https://discord.gg/kSxMTVra"
+              href="https://discord.gg/jaJ3v6Zx"
             ></q-btn>
           </q-card-actions>
           <q-card-actions class="justify-center">
@@ -47,7 +47,7 @@
             rounded
             color="primary"
             :label="$t('nav.joinTheDiscussion')"
-            href="https://discord.gg/kSxMTVra"
+            href="https://discord.gg/jaJ3v6Zx"
           ></q-btn>
         </q-card-actions>
         <q-card-actions class="justify-center">
@@ -71,7 +71,7 @@
               rounded
               color="primary"
               :label="$t('nav.joinTheDiscussion')"
-              href="https://discord.gg/kSxMTVra"
+              href="https://discord.gg/jaJ3v6Zx"
             ></q-btn>
           </q-card-actions>
           <q-card-actions class="justify-center">

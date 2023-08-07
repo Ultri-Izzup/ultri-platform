@@ -64,22 +64,9 @@ const performUpload = async () => {
   const circlesData = await parseJsonFile(selectedFile.value);
   console.log(circlesData);
 
-  // Loop through canvas types
-  for (const [canvasName, value] of Object.entries(canvasData.canvas)) {
-    // Loop through canvas sections
-
-    for (const [section, itemArr] of Object.entries(value)) {
-      const items = new Map();
-      console.log(section)
-      console.log(itemArr)
-      itemArr.forEach(item => {
-        items.set(item.uid, item)
-      });
-      circlesStore.importData(data);
-    }
+  circlesStore.orgCircles = circlesData.circles;
 
     onDialogOK();
 
-  }
 };
 </script>

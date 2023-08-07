@@ -4,8 +4,8 @@
       {{ $t("circles.dashboard.title") }}
     </div>
     <div class="fit">
-      <div v-if="hasCircles">
-        <div class="row">
+      <div>
+        <div class="row" v-if="hasCircles">
           <!-- <pre>{{ treeData }}</pre> -->
           <div class="col-12">
             <q-btn
@@ -21,13 +21,20 @@
             ></q-tree>
           </div>
         </div>
+        <div v-else>
+          <q-btn
+            :label="$t('circles.firstCircle.button.text')"
+            color="primary"
+            @click="circlesStore.initCircles()"
+          ></q-btn>
+        </div>
+
         <q-page-sticky
           :position="Screen.gt.sm ? 'bottom-right' : 'bottom'"
           :offset="fabPos"
           class="ontop"
         >
           <q-fab
-            v-if="circlesStore.orgCircles.length > 0"
             icon="mdi-file-arrow-up-down-outline"
             direction="up"
             color="accent"
@@ -39,7 +46,7 @@
               @click="onDownloadClick()"
               color="primary"
               icon="mdi-download"
-              :disable="draggingFab"
+              :disable="draggingFab || circlesStore.orgCircles.length < 1"
               class="ontop"
             ></q-fab-action>
             <q-fab-action
@@ -53,20 +60,13 @@
               @click="onDeleteClick()"
               color="secondary"
               icon="mdi-delete"
-              :disable="draggingFab"
+              :disable="draggingFab || circlesStore.orgCircles.length < 1"
               class="ontop"
             ></q-fab-action>
           </q-fab>
         </q-page-sticky>
         <a id="downloadAnchorElem" style="display: none"></a>
         <UploadCirclesDialog v-model="displayUpload" />
-      </div>
-      <div v-else>
-        <q-btn
-          :label="$t('circles.firstCircle.button.text')"
-          color="primary"
-          @click="circlesStore.initCircles()"
-        ></q-btn>
       </div>
     </div>
   </q-page>
@@ -146,7 +146,7 @@ const onDownloadClick = () => {
   // Define an object to hold our ouput
   const outObj = { circles: {} };
 
-  outObj.circles = circlesStore.orgCircles;
+  outObj.circles[orgStore.currentOrgUid] = circlesStore.orgCircles;
 
   var dataStr =
     "data:text/json;charset=utf-8," +

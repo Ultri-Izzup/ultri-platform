@@ -87,8 +87,10 @@ export const useCirclesStore = defineStore("circles", () => {
     }
 
     return found;
+  }
 
-
+  const clear = () => {
+    $reset();
   }
 
   const initCircles = () => {
@@ -220,6 +222,7 @@ export const useCirclesStore = defineStore("circles", () => {
     showNewCircleDialog,
     circleSelections,
     formMode,
+    clear,
     addChild,
     deleteCurrent,
     current,

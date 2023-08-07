@@ -78,9 +78,11 @@ const onOKClick = () => {
 const saveChild = () => {
   console.log('Saving child, ' + newCircleName.value + ' for: ' + circlesStore.currentCircleUid)
 
-  const newCircleObj = { uid: circlesStore.getUuid, label: newCircleName.value, parentCircle: circlesStore.currentCircleUid }
+  const newCircleObj = { label: newCircleName.value, parentCircle: circlesStore.currentCircleUid }
 
-  circlesStore.orgCircles.push(newCircleObj);
+  circlesStore.addChild(newCircleObj);
+
+  newCircleName.value = null;
 
   onDialogOK();
 

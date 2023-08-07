@@ -39,6 +39,7 @@
         <q-card-actions class="justify-center">
           <q-btn :label="$t('circles.dialog.addChild')" color="primary" @click="addChild()"></q-btn>
           <q-btn :label="$t('circles.dialog.delete')" color="primary" @click="deleteCircle()"></q-btn>
+          <q-btn :label="$t('controls.close')" color="primary" @click="onDialogOK();"></q-btn>
         </q-card-actions>
       </q-form>
     </q-card>

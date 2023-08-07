@@ -6,17 +6,16 @@
     <div class="fit">
       <div v-if="hasCircles">
         <div class="row">
-          <pre>{{ treeData.items }}</pre>
+          <!-- <pre>{{ treeData }}</pre> -->
           <div class="col-12">
             <q-btn
               :label="$t('circles.reset.button.text')"
               color="primary"
               @click="circlesStore.$reset()"
             ></q-btn
-            >Test{{ circlesStore.currentCircleUid }}
-            {{ circlesStore.current() }}
+            >
             <q-tree
-              :nodes="treeData.items"
+              :nodes="treeData"
               node-key="uid"
               v-model:selected="selected"
               default-expand-all
@@ -38,6 +37,8 @@
 <script setup>
 import { onMounted, computed, ref, watch } from "vue";
 
+import { arrayToTree } from "performant-array-to-tree";
+
 import { useCirclesStore } from "../stores/circles";
 
 const circlesStore = useCirclesStore();
@@ -53,25 +54,15 @@ const hasCircles = computed(() => {
 });
 
 const treeData = computed(() => {
-  const buildTree = (parentId) => (item) => {
-    const children = circlesStore.orgCircles.filter(
-      (child) => child.parentCircle === item.uid
-    );
-    return {
-      ...item,
-      ...(children.length > 0 && {
-        children: children.map(buildTree(item.uid)),
-      }),
-    };
-  };
+  let tree = [];
+   tree = arrayToTree(circlesStore.orgCircles, {
+    id: "uid",
+    parentId: "parentCircle",
+    childrenField: "children",
+    dataField: null,
+  });
 
-  const nestedData = {
-    items: circlesStore.orgCircles
-      .filter((item) => !item.parentCircle)
-      .map(buildTree(undefined)),
-  };
-
-  return nestedData;
+  return tree;
 });
 
 watch(selected, () => {

@@ -98,17 +98,6 @@ export const useCirclesStore = defineStore("circles", () => {
 
     const missionUid = uuidv4();
     const generalUid = uuidv4();
-    const financeUid = uuidv4();
-    const productUid = uuidv4();
-    const operationsUid = uuidv4();
-    const technologyUid = uuidv4();
-    const frontendUid = uuidv4();
-    const infrastructureUid = uuidv4();
-    const testingUid = uuidv4();
-    const backendUid = uuidv4();
-    const marketingUid = uuidv4();
-    const salesUid = uuidv4();
-    const socialUid = uuidv4();
 
     orgCircles.value.push({
       uid: missionUid,

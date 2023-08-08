@@ -21,7 +21,7 @@
     <q-separator></q-separator>
     <q-list separator>
       <q-card-section
-        class="q-pa-lg text-italic text-bold"
+        class="q-pa-lg text-italic text-italic"
         v-show="
           canvas[canvasName][info.sectionKey].size === 0 ||
           (Object.keys(canvas[canvasName][info.sectionKey]).length === 0 &&

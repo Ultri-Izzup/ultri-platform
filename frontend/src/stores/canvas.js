@@ -40,6 +40,22 @@ export const useCanvasStore = defineStore("canvas", {
       monitoring: new Map(),
       // Create new maps for each canvgas section
     }),
+    organization: useStorage("organization", {
+      drivers: new Map(),
+      deliverables: new Map(),
+      customer: new Map(),
+      proposition: new Map(),
+      challenges: new Map(),
+      channels: new Map(),
+      resources: new Map(),
+      resources: new Map(),
+      partners: new Map(),
+      values: new Map(),
+      metrics: new Map(),
+      cost: new Map(),
+      revenue: new Map(),
+      // Create new maps for each canvgas section
+    }),
   }),
   getters: {},
   actions: {
@@ -51,6 +67,10 @@ export const useCanvasStore = defineStore("canvas", {
         }
         case "delegation": {
           this.resetDelegation();
+          break;
+        }
+        case "organization": {
+          this.resetOrganization();
           break;
         }
       }
@@ -89,6 +109,23 @@ export const useCanvasStore = defineStore("canvas", {
         delegator: new Map(),
         metrics: new Map(),
         monitoring: new Map(),
+      };
+    },
+    resetOrganization() {
+      this.organization = {
+        drivers: new Map(),
+        deliverables: new Map(),
+        customer: new Map(),
+        proposition: new Map(),
+        challenges: new Map(),
+        channels: new Map(),
+        resources: new Map(),
+        resources: new Map(),
+        partners: new Map(),
+        values: new Map(),
+        metrics: new Map(),
+        cost: new Map(),
+        revenue: new Map(),
       };
     },
   },

@@ -83,7 +83,8 @@ import OrgMissionDialog from "../components/org/dialog/OrgMissionDialog.vue";
 import CirclesDialog from "../components/circles/dialog/CirclesDialog.vue";
 import NewCircleDialog from "../components/circles/dialog/NewCircleDialog.vue";
 
-import UDynamicFooter from "../components/footer/UDynamicFooter.vue";
+import UHeader from "../components/ultri/UHeader.vue";
+
 import UToolbarTitle from "../components/ultri/UToolbarTitle.vue";
 import UToolbarControls from "../components/ultri/UToolbarControls.vue";
 

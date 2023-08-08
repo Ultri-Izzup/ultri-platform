@@ -12,7 +12,7 @@ services:
     ports:
       - "5432:5432"
     restart: "no"
-    env_file: .env
+    env_file: ".env"
     networks:
       - ultri-net
     volumes:
@@ -58,7 +58,7 @@ services:
     container_name: ultri-smtp4dev
     image: rnwood/smtp4dev:v3
     restart: "no"
-    env_file: .env
+    env_file: ".env"
     networks:
       - ultri-net
     ports:

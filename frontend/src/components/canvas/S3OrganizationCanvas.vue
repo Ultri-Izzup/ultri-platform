@@ -3,7 +3,7 @@
     <CanvasSection
       v-for="info in canvasDef"
       :info="info"
-      canvasName="business"
+      canvasName="organization"
       :key="info.id"
     />
   </q-page>
@@ -11,91 +11,122 @@
 <script setup>
 import CanvasSection from "./CanvasSection.vue";
 import { useI18n } from "vue-i18n";
+const { t } = useI18n();
 const canvasDef = [
   {
-    title: t("canvas.s3.delegation.purpose.title"),
-    instructions: t("canvas.s3.delegation.purpose.instructions"),
-    class: "purpose",
-    sectionKey: "purpose",
+    title: t("canvas.s3.organization.drivers.title"),
+    instructions: t("canvas.s3.organization.drivers.instructions"),
+    class: "drivers",
+    sectionKey: "drivers",
     id: 1,
   },
   {
-    title: t("canvas.s3.delegation.responsibilities.title"),
-    instructions: t("canvas.s3.delegation.responsibilities.instructions"),
-    class: "responsibilities",
-    sectionKey: "responsibilities",
+    title: t("canvas.s3.organization.deliverables.title"),
+    instructions: t("canvas.s3.organization.deliverables.instructions"),
+    class: "deliverables",
+    sectionKey: "deliverables",
     id: 2,
   },
   {
-    title: t("canvas.s3.delegation.dependencies.title"),
-    instructions: t("canvas.s3.delegation.dependencies.instructions"),
-    class: "dependencies",
-    sectionKey: "dependencies",
+    title: t("canvas.s3.organization.customer.title"),
+    instructions: t("canvas.s3.organization.customer.instructions"),
+    class: "customer",
+    sectionKey: "customer",
     id: 3,
   },
   {
-    title: t("canvas.s3.delegation.constraints.title"),
-    instructions: t("canvas.s3.delegation.constraints.instructions"),
-    class: "constraints",
-    sectionKey: "constraints",
+    title: t("canvas.s3.organization.proposition.title"),
+    instructions: t("canvas.s3.organization.proposition.instructions"),
+    class: "proposition",
+    sectionKey: "proposition",
     id: 4,
   },
   {
-    title: t("canvas.s3.delegation.challenges.title"),
-    instructions: t("canvas.s3.delegation.challenges.instructions"),
+    title: t("canvas.s3.organization.challenges.title"),
+    instructions: t("canvas.s3.organization.challenges.instructions"),
     class: "challenges",
     sectionKey: "challenges",
     id: 5,
   },
   {
-    title: t("canvas.s3.delegation.deliverables.title"),
-    instructions: t("canvas.s3.delegation.deliverables.instructions"),
-    class: "deliverables",
-    sectionKey: "deliverables",
+    title: t("ccanvas.s3.organization.channels.title"),
+    instructions: t("ccanvas.s3.organization.channels.instructions"),
+    class: "channels",
+    sectionKey: "channels",
     id: 6,
   },
   {
-    title: t("canvas.s3.delegation.competencies.title"),
-    instructions: t("canvas.s3.delegation.competencies.instructions"),
-    class: "competencies",
-    sectionKey: "competencies",
+    title: t("canvas.s3.organization.resources.title"),
+    instructions: t("canvas.s3.organization.resources.instructions"),
+    class: "resources",
+    sectionKey: "resources",
     id: 7,
   },
   {
-    title: t("canvas.s3.delegation.resources.title"),
-    instructions: t("canvas.s3.delegation.resources.instructions"),
-    class: "resources",
-    sectionKey: "resources",
+    title: t("canvas.s3.organization.partners.title"),
+    instructions: t("canvas.s3.organization.partners.instructions"),
+    class: "partners",
+    sectionKey: "partners",
     id: 8,
   },
   {
-    title: t("canvas.s3.delegation.delegator.title"),
-    instructions: t("canvas.s3.delegation.delegator.instructions"),
-    class: "delegator",
-    sectionKey: "delegator",
+    title: t("canvas.s3.organization.values.title"),
+    instructions: t("canvas.s3.organization.values.instructions"),
+    class: "values",
+    sectionKey: "values",
     id: 9,
   },
   {
-    title: t("canvas.s3.delegation.metrics.title"),
-    instructions: t("canvas.s3.delegation.metrics.instructions"),
+    title: t("canvas.s3.organization.metrics.title"),
+    instructions: t("canvas.s3.organization.metrics.instructions"),
     class: "metrics",
     sectionKey: "metrics",
     id: 10,
   },
   {
-    title: t("canvas.s3.delegation.monitoring.title"),
-    instructions: t("canvas.s3.delegation.monitoring.instructions"),
-    class: "monitoring",
-    sectionKey: "monitoring",
+    title: t("canvas.s3.organization.cost.title"),
+    instructions: t("canvas.s3.organization.cost.instructions"),
+    class: "cost",
+    sectionKey: "cost",
     id: 11,
   },
   {
-    title: t("canvas.s3.delegation.monitoring.title"),
-    instructions: t("canvas.s3.delegation.monitoring.instructions"),
-    class: "monitoring",
-    sectionKey: "monitoring",
+    title: t("canvas.s3.organization.revenue.title"),
+    instructions: t("canvas.s3.organization.revenue.instructions"),
+    class: "revenue",
+    sectionKey: "revenue",
     id: 12,
   },
 ];
-const t = useI18n();
 </script>
+<style scoped>
+.container {
+  display: grid;
+}
+@media screen and (min-width: 864px) {
+  .drivers {
+  }
+  .deliverables {
+  }
+  .customer {
+  }
+  .proposition {
+  }
+  .challenges {
+  }
+  .channels {
+  }
+  .resources {
+  }
+  .partners {
+  }
+  .values {
+  }
+  .metrics {
+  }
+  .cost {
+  }
+  .revenue {
+  }
+}
+</style>

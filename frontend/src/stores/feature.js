@@ -1,21 +1,21 @@
-import { defineStore } from 'pinia';
+import { defineStore } from "pinia";
 
-import { useStorage } from '@vueuse/core';
+import { useStorage } from "@vueuse/core";
 
 const boolFeatures = {
-  auth: 'authEnabled',
-  pricing: 'pricingEnabled',
-  sociocracy: 'sociocracyOnly',
-  dashboard: 'memberDashboard',
-}
+  auth: "authEnabled",
+  pricing: "pricingEnabled",
+  sociocracy: "sociocracyOnly",
+  dashboard: "memberDashboard",
+};
 
-export const useFeatureStore = defineStore('feature', {
+export const useFeatureStore = defineStore("feature", {
   state: () => ({
-    authEnabled: useStorage('authEnabled', false),
-    pricingEnabled: useStorage('pricingEnabled', false),
-    sociocracyOnly: useStorage('sociocracyOnly', false),
-    memberDashboard: useStorage('memberDashboard', false),
-    disabledCanvas: [ 'delegation', 'team', 'organization', 'lean', 'coop']
+    authEnabled: useStorage("authEnabled", false),
+    pricingEnabled: useStorage("pricingEnabled", false),
+    sociocracyOnly: useStorage("sociocracyOnly", false),
+    memberDashboard: useStorage("memberDashboard", false),
+    disabledCanvas: ["delegation", "team", "lean", "coop"],
   }),
 
   getters: {
@@ -33,6 +33,6 @@ export const useFeatureStore = defineStore('feature', {
     },
     canvasDisabled(canvas) {
       return this.disabledCanvas.includes(canvas);
-    }
-  }
+    },
+  },
 });

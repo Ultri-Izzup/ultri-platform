@@ -7,7 +7,7 @@ export default {
       upload: "Upload the export later to update your data",
       soon: "Save to your Ultri Organization (coming soon)",
     },
-    comingSoon: 'coming soon...',
+    comingSoon: "coming soon...",
     callForAdditions:
       "If you know of other canvas you would like converted, contact us, we will try our best to accomodate you.",
     business: {
@@ -133,6 +133,66 @@ export default {
       organization: {
         name: "Organization Canvas",
         description: "Understand an organizations business model (soon).",
+        drivers: {
+          title: "Key Drivers",
+          instructions:
+            "What are the top three drivers your organization responds to?",
+        },
+        deliverables: {
+          title: "Key Deliverables",
+          instructions:
+            "What are the top three drivers your organization responds to?",
+        },
+        customer: {
+          title: "Customer Segment",
+          instructions:
+            "Who will be your ideal customers? These should relate to the actors mentioned in your key drivers.",
+        },
+        proposition: {
+          title: "Unique Value Proposition",
+          instructions:
+            "What is the one thing that makes your organization unique? Explain what will convince your customers and your partners to choose your organization over others.",
+        },
+        challenges: {
+          title: "Key Challenges",
+          instructions:
+            "What are important constraints or risks your organization is facing? Look to your key drivers, customer segment and unique value proposition to identify them.",
+        },
+        channels: {
+          title: "Channels",
+          instructions:
+            "How does your organization deliver its value proposition to its customers? How do customers find out about your organization?",
+        },
+        resources: {
+          title: "Key Resources and Skills",
+          instructions:
+            "What does your organization need to sustain itself and create value for the customer? What skills do you need to create the key deliverables?",
+        },
+        partners: {
+          title: "Key Partners",
+          instructions:
+            "Who can provide essential support, services or materials to your organization? What might you outsource our buy?",
+        },
+        values: {
+          title: "Key Values",
+          instructions:
+            "Describe the culture of your collaboration, and how you will interact with the rest of the world. List three guidelines for behavior and/or ethical constraints you consider essential to the success of your organization.",
+        },
+        metrics: {
+          title: "Key Metrics",
+          instructions:
+            "How will you measure effectiveness of your response to your key drivers? Prefer simple, continuous and actionable metrics.",
+        },
+        cost: {
+          title: "Cost Structure",
+          instructions:
+            "What are fixed and running costs for your organization?",
+        },
+        revenue: {
+          title: "Revenue Streams",
+          instructions:
+            "How will you start and sustain your organization financially?          ",
+        },
       },
       team: {
         name: "Team Canvas",

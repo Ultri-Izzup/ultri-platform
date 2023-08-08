@@ -7,7 +7,7 @@
         round
         icon="mdi-menu"
         aria-label="Menu"
-        @click="toggleLeftDrawer"
+        @click="emit('toggleDrawer')"
       />
       <u-toolbar-title />
       <q-space></q-space>
@@ -17,11 +17,12 @@
 </template>
 
 <script setup>
-import { useRoute } from "vue-router";
-
 import { useColorStore } from "../../stores/color";
 
-const route = useRoute();
+import UToolbarTitle from "../../components/ultri/UToolbarTitle.vue";
+import UToolbarControls from "../../components/ultri/UToolbarControls.vue";
+
+const emit = defineEmits(['toggleDrawer'])
 
 // Stores
 const colorStore = useColorStore();

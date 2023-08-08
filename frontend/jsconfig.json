@@ -35,5 +35,6 @@
     "dist",
     ".quasar",
     "node_modules"
-  ]
+  ],
+  "allowJs": true
 }

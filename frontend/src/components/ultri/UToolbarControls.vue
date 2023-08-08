@@ -1,0 +1,55 @@
+<template>
+  <div>
+    <div>
+      <span class="q-pr-lg">
+        <router-link to="/canvas" class="navbar-text-link" color="primary">{{
+          $t("nav.canvas")
+        }}</router-link>
+      </span>
+      <span class="q-pr-lg" v-if="featureStore.enabled('pricing')">
+        <router-link to="/pricing" class="navbar-text-link" color="primary">{{
+          $t("nav.pricing")
+        }}</router-link>
+      </span>
+      <span class="q-pr-lg">
+        <router-link to="/calendar" class="navbar-text-link" color="primary">{{
+          $t("nav.calendar")
+        }}</router-link>
+      </span>
+
+      <q-toggle
+        v-model="colorStore.darkMode"
+        icon="mdi-theme-light-dark"
+        dense
+        color="blue-grey-9"
+        size="sm"
+      ></q-toggle>
+      <!-- NOTIFICATIONS BUTTON -->
+
+      <span v-if="featureStore.enabled('auth') && authStore.isSignedIn">
+        <NotificationsButton></NotificationsButton>
+        <q-tooltip>{{ $t("notifications.hint") }}</q-tooltip>
+      </span>
+
+      <!-- MEMBER BUTTON -->
+      <span v-if="featureStore.enabled('auth')">
+        <MemberButton></MemberButton>
+        <q-tooltip>{{ $t("member.hint") }}</q-tooltip>
+      </span>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { useColorStore } from "../../stores/color";
+import { useAuthStore } from "../../stores/auth";
+import { useFeatureStore } from "../../stores/feature";
+
+// Stores
+const colorStore = useColorStore();
+const authStore = useAuthStore();
+const featureStore = useFeatureStore();
+</script>
+
+<style lang="scss">
+</style>

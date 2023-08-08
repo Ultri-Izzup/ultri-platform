@@ -1,110 +1,16 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header :class="colorStore.darkMode ? 'u-navbar-dark' : 'u-navbar-light'">
-      <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="mdi-menu"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
-        />
-        <!-- LOGO
-        <q-avatar>
-          <img src="https://handbook.Ultri.org/logo_light.jpg" />
-        </q-avatar>
-        -->
-        <q-toolbar-title>
-          <span class="text-bold"
-            ><router-link :to="{ name: 'home' }" class="navbar-brand-link">{{
-              orgStore.currentOrgUid &&
-              authStore.isSignedIn &&
-              orgStore.orgs.get(orgStore.currentOrgUid) &&
-              route.meta.app &&
-              route.meta.app &&
-              route.params.orgUid == "Logbook"
-                ? orgStore.orgs.get(orgStore.currentOrgUid).name
-                : "Ultri"
-            }}</router-link></span
-          >
-        </q-toolbar-title>
-        <!-- TOOLBAR - RIGHT SIDE BUTTONS -->
-        <div>
-          <!--
-          <span class="q-pr-lg">
-          <router-link to="/benefits" class="navbar-text-link" color="primary">{{ $t("nav.benefits") }}</router-link>
-          </span> -->
-          <span class="q-pr-lg">
-            <router-link
-              to="/canvas"
-              class="navbar-text-link"
-              color="primary"
-              >{{ $t("nav.canvas") }}</router-link
-            >
-          </span>
-          <span class="q-pr-lg" v-if="featureStore.enabled('pricing')">
-            <router-link
-              to="/pricing"
-              class="navbar-text-link"
-              color="primary"
-              >{{ $t("nav.pricing") }}</router-link
-            >
-          </span>
-          <span class="q-pr-lg">
-            <router-link
-              to="/calendar"
-              class="navbar-text-link"
-              color="primary"
-              >{{ $t("nav.calendar") }}</router-link
-            >
-          </span>
-
-          <!-- DISPLAY SIGN BUTTON
-          <span>
-            <sign-in-button v-if="!authStore.isSignedIn"></sign-in-button>
-            <q-tooltip>{{ $t("nav.signIn") }}</q-tooltip></span
-          >
-          -->
-
-          <q-toggle
-            v-model="colorStore.darkMode"
-            icon="mdi-theme-light-dark"
-            dense
-            color="blue-grey-9"
-            size="sm"
-          ></q-toggle>
-          <!-- NOTIFICATIONS BUTTON -->
-
-          <span v-if="featureStore.enabled('auth') && authStore.isSignedIn">
-            <NotificationsButton></NotificationsButton>
-            <q-tooltip>{{ $t("notifications.hint") }}</q-tooltip>
-          </span>
-
-          <!-- MEMBER BUTTON -->
-          <span v-if="featureStore.enabled('auth')">
-            <MemberButton></MemberButton>
-            <q-tooltip>{{ $t("member.hint") }}</q-tooltip>
-          </span>
-        </div>
-      </q-toolbar>
-    </q-header>
-
+    <u-header @toggleDrawer="toggleLeftDrawer()"></u-header>
     <!-- LEFT DRAWER -->
     <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
-      <HomepageDrawer v-if="route.meta.drawer == 'Homepage'"></HomepageDrawer>
-      <DefaultDrawer v-if="route.meta.drawer == 'Default'"></DefaultDrawer>
-      <LogbookDrawer v-if="route.meta.drawer == 'Logbook'"></LogbookDrawer>
-      <CanvasDrawer v-if="route.meta.drawer == 'Canvas'"></CanvasDrawer>
-      <DashboardDrawer
-        v-if="route.meta.drawer == 'Dashboard'"
-      ></DashboardDrawer>
-      <OrgDrawer v-if="route.meta.drawer == 'Org'"></OrgDrawer>
-      <CirclesDrawer v-if="route.meta.drawer == 'Circle'"></CirclesDrawer>
+      <HomepageDrawer v-if="route.meta.drawer == 'Homepage'" />
+      <DefaultDrawer v-if="route.meta.drawer == 'Default'" />
+      <LogbookDrawer v-if="route.meta.drawer == 'Logbook'" />
+      <CanvasDrawer v-if="route.meta.drawer == 'Canvas'" />
+      <OrgDrawer v-if="route.meta.drawer == 'Org'" />
+      <OrgCirclesDrawer v-if="route.meta.drawer == 'OrgCircle'" />
+      <CirclesDrawer v-if="route.meta.drawer == 'Circle'" />
     </q-drawer>
-
-    <u-dynamic-footer></u-dynamic-footer>
-
 
     <!-- PAGE -->
     <q-page-container>
@@ -120,38 +26,30 @@
       <OrgMissionDialog
         v-model="orgStore.showOrgMissionDialog"
       ></OrgMissionDialog>
-      <CirclesDialog
-        v-model="circlesStore.showCirclesDialog"
-      ></CirclesDialog>
-      <NewCircleDialog
-        v-model="circlesStore.showNewCircleDialog"
-      ></NewCircleDialog>
       <!-- PAGE VIEW -->
       <router-view />
     </q-page-container>
+
+    <u-dynamic-footer />
   </q-layout>
 </template>
 
 <script setup>
-import { ref, watch, computed } from "vue";
+import { ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import { useQuasar } from "quasar";
 import { useAuthStore } from "../stores/auth";
 import { useOrgStore } from "../stores/org";
 import { useColorStore } from "../stores/color";
-import { useFeatureStore } from "../stores/feature";
 import { useCirclesStore } from "../stores/circles";
-
-import NotificationsButton from "../components/ultri/button/NotificationsButton.vue";
-import MemberButton from "../components/ultri/button/MemberButton.vue";
 
 import LogbookDrawer from "./drawers/LogbookDrawer.vue";
 import DefaultDrawer from "./drawers/DefaultDrawer.vue";
 import HomepageDrawer from "./drawers/HomepageDrawer.vue";
 import CanvasDrawer from "./drawers/CanvasDrawer.vue";
-import DashboardDrawer from "./drawers/DashboardDrawer.vue";
 import OrgDrawer from "./drawers/OrgDrawer.vue";
 import CirclesDrawer from "./drawers/CirclesDrawer.vue";
+import OrgCirclesDrawer from "./drawers/OrgCirclesDrawer.vue";
 
 import PasswordlessAuthDialog from "../components/auth/dialog/PasswordlessDialog.vue";
 import WelcomeDialog from "../components/auth/dialog/WelcomeDialog.vue";
@@ -159,9 +57,9 @@ import WelcomeDialog from "../components/auth/dialog/WelcomeDialog.vue";
 import OrgCreateDialog from "../components/org/dialog/OrgCreateDialog.vue";
 import OrgCreateLogbookEntryDialog from "../components/org/dialog/OrgCreateLogbookEntryDialog.vue";
 import OrgMissionDialog from "../components/org/dialog/OrgMissionDialog.vue";
-import CirclesDialog from "../components/circles/dialog/CirclesDialog.vue";
-import NewCircleDialog from "../components/circles/dialog/NewCircleDialog.vue";
 
+
+import UHeader from "../components/ultri/UHeader.vue";
 import UDynamicFooter from "../components/footer/UDynamicFooter.vue";
 
 const $q = useQuasar();
@@ -172,8 +70,6 @@ const route = useRoute();
 const authStore = useAuthStore();
 const colorStore = useColorStore();
 const orgStore = useOrgStore();
-const featureStore = useFeatureStore();
-const circlesStore = useCirclesStore();
 
 watch(
   () => colorStore.darkMode,

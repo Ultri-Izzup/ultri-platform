@@ -49,8 +49,8 @@ const canvasDef = [
     id: 5,
   },
   {
-    title: t("ccanvas.s3.organization.channels.title"),
-    instructions: t("ccanvas.s3.organization.channels.instructions"),
+    title: t("canvas.s3.organization.channels.title"),
+    instructions: t("canvas.s3.organization.channels.instructions"),
     class: "channels",
     sectionKey: "channels",
     id: 6,
@@ -104,29 +104,58 @@ const canvasDef = [
   display: grid;
 }
 @media screen and (min-width: 864px) {
+  .container {
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(7, 1fr);
+    height: 130vh;
+  }
   .drivers {
+    grid-column: 1/3;
+    grid-row: 1/3;
   }
   .deliverables {
+    grid-column: 3/5;
+    grid-row: 1/3;
   }
   .customer {
+    grid-column: 5/7;
+    grid-row: 1/3;
   }
   .proposition {
+    grid-column: 7/9;
+    grid-row: 1/3;
   }
   .challenges {
+    grid-column: 7/9;
+    grid-row: 3/5;
   }
   .channels {
+    grid-column: 5/7;
+    grid-row: 3/5;
   }
   .resources {
+    grid-column: 3/5;
+    grid-row: 3/5;
   }
   .partners {
+    grid-column: 1/3;
+    grid-row: 3/5;
   }
   .values {
+    grid-column: 5/9;
+    grid-row: 5/7;
   }
   .metrics {
+    grid-column: 1/5;
+    grid-row: 5/7;
   }
   .cost {
+    grid-column: 1/5;
+    grid-row: 7/8;
   }
   .revenue {
+    grid-column: 5/9;
+    grid-row: 7/8;
   }
 }
 </style>

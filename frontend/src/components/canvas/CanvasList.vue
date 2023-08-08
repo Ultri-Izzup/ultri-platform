@@ -40,7 +40,7 @@
           </q-card-section>
           <q-card-actions class="justify-center">
             <q-btn
-              :to="{ name: toRoute, params: { canvasName: 'business' } }"
+              :to="{ name: toRoute, params: { canvasName: 's3-organization' } }"
               color="primary"
               >{{ $t("canvas.s3.organization.name") }}</q-btn
             >

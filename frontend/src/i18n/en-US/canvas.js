@@ -74,7 +74,7 @@ export default {
       delegation: {
         name: "Delegation Canvas",
         description:
-          "Define the domain or boundaries of a circle or group (soon).",
+          "Define the domain or boundaries of a circle or group (coming Friday Aug 11).",
         purpose: {
           title: "Purpose",
           instructions:

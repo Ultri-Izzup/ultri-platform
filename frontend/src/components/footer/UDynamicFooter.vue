@@ -1,5 +1,8 @@
 <template>
-  <q-footer>
+  <q-footer v-if="route.name === 'canvasPage'">
+
+  </q-footer>
+  <q-footer v-else>
     <q-toolbar
       :class="colorStore.darkMode ? 'u-navbar-dark xs' : 'u-navbar-light xs'"
     >

@@ -29,9 +29,6 @@
       <CirclesDrawer v-if="route.meta.drawer == 'Circle'"></CirclesDrawer>
     </q-drawer>
 
-    <u-dynamic-footer></u-dynamic-footer>
-
-
     <!-- PAGE -->
     <q-page-container>
       <!-- DIALOGS -->
@@ -55,6 +52,8 @@
       <!-- PAGE VIEW -->
       <router-view />
     </q-page-container>
+
+    <u-dynamic-footer />
   </q-layout>
 </template>
 

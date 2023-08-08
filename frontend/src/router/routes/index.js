@@ -3,6 +3,7 @@ import site from './site'
 import canvas from './canvas'
 import circles from './circles'
 import org from './org'
+import features from './features'
 import debug from './debug'
 import catchall from './catchall'
 
@@ -13,6 +14,7 @@ const routes = [
   ...canvas,
   ...circles,
   ...org,
+  ...features,
   ...debug,
   ...catchall // Keep catchall last
 ]

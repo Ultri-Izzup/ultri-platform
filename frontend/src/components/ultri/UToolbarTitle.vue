@@ -19,7 +19,7 @@
         }}</router-link></span>
         <span v-else>
           <router-link :to="{ name: 'home' }" class="navbar-brand-link">Ultri</router-link>
-          {{ $t('canvas.'+canvasName+'.name') }}
+         {{ $t('canvas.' + canvasTitle + '.name') }}
         </span>
         </span
       >
@@ -28,6 +28,7 @@
 </template>
 
 <script setup>
+import { computed } from "vue";
 import { useRoute } from "vue-router";
 
 import { useColorStore } from "../../stores/color";
@@ -36,7 +37,9 @@ import { useOrgStore } from "../../stores/org";
 
 const route = useRoute();
 
-const canvasName = route.params.canvasName;
+const canvasTitle = computed(() => {
+  return route.params.canvasName;
+})
 
 // Stores
 const colorStore = useColorStore();

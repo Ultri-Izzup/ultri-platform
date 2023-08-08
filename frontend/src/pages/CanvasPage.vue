@@ -1,334 +1,175 @@
 <template>
-  <q-page class="flex justify-center outer-container">
-    <!-- THIS DIV IS VISIBLE ON A X-SMALL SCREEN (class=xs)-->
-    <div class="xs row full-width">
-      <div class="row full-width" style="height: 11%">
-        <div class="col key-partners q-ma-xs">
-          <div class="infobox fit q-pa-xs">X-SMALL Key Partners</div>
-        </div>
-      </div>
-      <div class="row full-width" style="height: 11%">
-        <div class="row full-width">
-          <div class="col key-activities q-ma-xs">
-            <div class="infobox fit q-pa-xs">Key Activities</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row full-width" style="height: 11%">
-        <div class="col key-resources q-ma-xs">
-          <div class="infobox fit q-pa-xs">Key Resources</div>
-        </div>
-      </div>
-
-      <div class="row full-width" style="height: 11%">
-        <div class="row full-width">
-          <div class="col value-propositions q-ma-xs">
-            <div class="infobox fit q-pa-xs">Value Propositions</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row full-width" style="height: 11%">
-        <div class="row full-width">
-          <div class="col customer-relationships q-ma-xs">
-            <div class="infobox fit q-pa-xs">Customer Relationships</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row full-width" style="height: 11%">
-        <div class="row full-width">
-          <div class="row channels full-width key-resources q-ma-xs">
-            <div class="infobox fit q-pa-xs">Channels</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row full-width" style="height: 11%">
-        <div class="row full-width">
-          <div class="col customer-segments q-ma-xs">
-            <div class="infobox fit q-pa-xs">Customer Segments</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row full-width" style="height: 11%">
-        <div class="row full-width">
-          <div class="col cost-structure q-ma-xs">
-            <div class="infobox fit q-pa-xs">Cost Structure</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row full-width" style="height: 12%">
-        <div class="row full-width">
-          <div class="col revenue-stream q-ma-xs">
-            <div class="infobox fit q-pa-xs">Revenue Stream</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- THIS DIV IS VISIBLE ON A MEDIUM SCREEN (class=md)-->
-    <div class="gt-xs lt-lg row full-width">
-      <div class="row full-width">
-        <div class="row full-width key-activities" style="height: 33%">
-          <div class="row full-width">
-            <div class="col key-partners q-ma-sm">
-              <div class="infobox fit q-pa-sm">MEDIUM Key Partners</div>
-            </div>
-            <div class="col fit">
-              <div class="row fit">
-                <div class="row full-width key-activities">
-                  <div class="q-pa-sm fit">
-                    <div class="infobox fit q-pa-sm">Key Activities</div>
-                  </div>
-                </div>
-                <div class="row full-width key-resources">
-                  <div class="q-pa-sm fit">
-                    <div class="infobox fit q-pa-sm">Key Resources</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row full-width key-resources" style="height: 14%">
-          <div class="col value-propositions q-ma-sm">
-            <div class="infobox fit q-pa-sm">Value Propositions</div>
-          </div>
-        </div>
-        <div class="row full-width key-resources" style="height: 33%">
-          <div class="col fit">
-            <div class="row fit">
-              <div class="row customer-relationships full-width key-activities">
-                <div class="q-pa-sm fit">
-                  <div class="infobox fit q-pa-sm">Customer Relationships</div>
-                </div>
-              </div>
-              <div class="row channels full-width key-resources">
-                <div class="q-pa-sm fit">
-                  <div class="infobox fit q-pa-sm">Channels</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col customer-segments q-ma-sm">
-            <div class="infobox fit q-pa-sm">Customer Segments</div>
-          </div>
-        </div>
-        <div class="row full-width key-resources" style="height: 20%">
-          <div class="row full-width">
-            <div class="col cost-structure q-ma-sm">
-              <div class="infobox fit q-pa-sm">Cost Structure</div>
-            </div>
-            <div class="col revenue-stream q-ma-sm">
-              <div class="infobox fit q-pa-sm">Revenue Stream</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- THIS DIV IS VISIBLE ON A SCREEN GREATER THAN MEDIUM (class=sm)-->
-    <div class="gt-md row full-width">
-      <div class="row full-width">
-        <div class="row full-width key-activities" style="height: 80%">
-          <div class="row full-width">
-            <div class="col key-partners q-ma-sm">
-              <div class="infobox fit">
-                <div class="col">
-                  <div class="row box-head justify-center q-pa-xs text-bold text-h6">
-                    <q-space />Key Partners<q-space /><q-icon name="mdi-plus-circle-outline" size="sm" class="q-mr-md" @click="showEntryDialog('partners')"></q-icon>
-                  </div>
-                  <div class="row box-body q-pa-sm">
-                    <ol type="A">
-                      <li v-for="partner in partners"  :key="partner.uid" @click="showEditDialog('partner', partner.uid)">
-                        {{ partner.txt }}
-                      </li>
-
-                    </ol>
-
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col fit">
-              <div class="row fit">
-                <div class="row full-width key-activities q-pa-sm">
-                  <div class="infobox fit q-pa-sm">Key Activities</div>
-                </div>
-                <div class="row full-width key-resources q-pa-sm">
-                  <div class="infobox fit q-pa-sm">Key Resources</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col value-propositions q-ma-sm">
-              <div class="infobox fit q-pa-sm">Value Propositions</div>
-            </div>
-
-            <div class="col fit">
-              <div class="row fit">
-                <div
-                  class="row customer-relationships full-width key-activities q-pa-sm"
-                >
-                  <div class="infobox fit q-pa-sm">Customer Relationships</div>
-                </div>
-
-                <div class="row channels full-width key-resources q-pa-sm">
-                  <div class="infobox fit q-pa-sm">Channels</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col customer-segments q-ma-sm">
-              <div class="infobox fit q-pa-sm">Customer Segments</div>
-            </div>
-          </div>
-        </div>
-        <div class="row full-width key-resources" style="height: 20%">
-          <div class="row full-width">
-            <div class="col cost-structure q-ma-sm">
-              <div class="infobox fit q-pa-sm">Cost Structure</div>
-            </div>
-            <div class="col revenue-stream q-ma-sm">
-              <div class="infobox fit q-pa-sm">Revenue Stream</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <q-dialog v-model="newEntryDialog" persistent>
-      <q-card style="min-width: 350px">
-        <q-card-section class="text-h6">Add {{newEntryType}} value</q-card-section>
-
-        <q-card-section class="q-pt-none">
-          <q-input type="textarea" dense v-model="newEntryTxt" autofocus @keyup.enter="prompt = false"></q-input>
-        </q-card-section>
-
-        <q-card-actions align="right" class="text-primary">
-          <q-btn flat label="Cancel" v-close-popup></q-btn>
-          <q-btn flat label="Add" @click="addEntry" v-close-popup></q-btn>
-        </q-card-actions>
-      </q-card>
-    </q-dialog>
-    <q-dialog v-model="editEntryDialog" persistent>
-      <q-card style="min-width: 350px">
-        <q-card-section class="text-h6">Edit {{editEntryType}} value</q-card-section>
-
-        <q-card-section class="q-pt-none">
-          <q-input type="textarea" dense v-model="editEntryTxt" autofocus @keyup.enter="prompt = false"></q-input>
-        </q-card-section>
-
-        <q-card-actions align="right" class="text-primary">
-          <q-btn flat label="Delete"  @click="deleteEntry" v-close-popup></q-btn>
-          <q-space />
-          <q-btn flat label="Cancel" v-close-popup></q-btn>
-          <q-btn flat label="Update" @click="updateEntry" v-close-popup></q-btn>
-        </q-card-actions>
-      </q-card>
-    </q-dialog>
-  </q-page>
+  <div>
+    <CanvasList v-if="!canvasName"></CanvasList>
+    <component :is="currentComponent" />
+    <q-page-sticky
+      :position="Screen.gt.sm ? 'bottom-right' : 'bottom'"
+      :offset="fabPos"
+      class="ontop"
+    >
+      <q-fab
+        v-if="canvasName"
+        icon="mdi-file-arrow-up-down-outline"
+        direction="up"
+        color="accent"
+        :disable="draggingFab"
+        v-touch-pan.prevent.mouse="moveFab"
+        class="ontop"
+      >
+        <q-fab-action
+          @click="onDownloadClick()"
+          color="primary"
+          icon="mdi-download"
+          :disable="draggingFab"
+          class="ontop"
+        ></q-fab-action>
+        <q-fab-action
+          @click="onUploadClick"
+          color="primary"
+          icon="mdi-upload"
+          :disable="draggingFab"
+          class="ontop"
+        ></q-fab-action>
+        <q-fab-action
+          @click="onDeleteClick()"
+          color="secondary"
+          icon="mdi-delete"
+          :disable="draggingFab"
+          class="ontop"
+        ></q-fab-action>
+      </q-fab>
+    </q-page-sticky>
+    <a id="downloadAnchorElem" style="display: none"></a>
+    <UploadCanvasDialog v-model="displayUpload"></UploadCanvasDialog>
+  </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
-import { nanoid } from 'nanoid'
+// Import major 3rd party modules, in rough order of precedence
+import { ref, computed, watch, isProxy, toRaw } from "vue";
+import { useRoute } from "vue-router";
 
-const partners = ref([]);
-const activities = ref([]);
-const resources = ref([]);
-const valueProps = ref([]);
-const custRelations = ref([]);
-const channels = ref([]);
-const custSegments = ref([]);
-const costs = ref([]);
-const revenue = ref([]);
+// Import stores
+import { useCanvasStore } from "../stores/canvas";
 
-const newEntryDialog = ref(false);
-const newEntryType = ref(false);
-const newEntryTxt = ref(null);
+import { Screen } from "quasar";
 
-const editEntryDialog = ref(false);
-const editEntryType = ref(false);
-const editEntryTxt = ref(null);
-const editEntryUid = ref(null);
+// Import the individual canvas SFC module
+import BusinessCanvas from "../components/canvas/BusinessCanvas.vue";
+import CoopCanvas from "../components/canvas/CoopCanvas.vue";
+import S3OrganizationCanvas from "../components/canvas/S3OrganizationCanvas.vue";
+import S3DelegationCanvas from "../components/canvas/S3DelegationCanvas.vue";
+import S3TeamCanvas from "../components/canvas/S3TeamCanvas.vue";
+import LeanCanvas from "../components/canvas/LeanCanvas.vue";
+import CanvasList from "../components/canvas/CanvasList.vue";
+import UploadCanvasDialog from "../components/canvas/dialog/UploadCanvasDialog.vue";
 
-const showEntryDialog = (box) => {
-  console.log(box)
-  newEntryType.value = box;
-  newEntryDialog.value = true;
-}
+// Define a mapping of canvas names to their respective component name
+const canvases = {
+  business: BusinessCanvas,
+  coop: CoopCanvas,
+  "s3-organization": S3OrganizationCanvas,
+  "s3-delegation": S3DelegationCanvas,
+  "s3-team": S3TeamCanvas,
+  lean: LeanCanvas,
+};
 
-const showEditDialog = (boxType, uid) => {
+// Instantiate our stores early so they are available
+const canvasStore = useCanvasStore();
 
-  const editObj = partners.value.filter((obj) => obj.uid == uid);
-  console.log(editObj[0].txt)
-  editEntryTxt.value = editObj[0].txt;
-  editEntryType.value = boxType;
-  editEntryUid.value = editObj[0].uid;
-  editEntryDialog.value = true;
-}
+// Create a route instance
+const route = useRoute();
 
-const addEntry = () => {
-  partners.value.push({ uid: nanoid(), txt: newEntryTxt.value })
-  newEntryTxt.value = null;
-}
+// Create a ref for the canvasName
+const canvasName = ref();
 
-const updateEntry = () => {
-  // We really replace the object
-  partners.value = partners.value.filter((obj) => obj.uid !== editEntryUid.value);
-  partners.value.push({ uid: nanoid(), txt: editEntryTxt.value })
-  editEntryTxt.value = null;
-  editEntryType.value = null;
-  editEntryUid.value = null;
-  editEntryDialog.value = false;
-}
+// Watch route and update canvas name as needed
+watch(
+  () => route.params.canvasName,
+  () => {
+    if (route.params.canvasName) {
+      canvasName.value = route.params.canvasName;
+    } else {
+      canvasName.value = null;
+    }
+  },
+  { immediate: true } // Makes it take effect on first load
+);
 
-const deleteEntry = () => {
-  // We really replace the object
-  partners.value = partners.value.filter((obj) => obj.uid !== editEntryUid.value);
-  editEntryTxt.value = null;
-  editEntryType.value = null;
-  editEntryUid.value = null;
-  editEntryDialog.value = false;
-}
+// Use the current canvasName to find the mapped component
+const currentComponent = computed(() => canvases[canvasName.value]);
 
-const edit = (boxType, uid) => {
+// FAB - Floating Action Button to save/download
+const fabPos = ref([18, 18]);
+const draggingFab = ref(false);
 
-  console.log(boxType, uid);
-  editEntryType.value = boxType;
-  editEntryUid.value = uid;
-  editEntryDialog.value = true;
-  editEntryTxt.value = activities.value;
+const displayUpload = ref(false);
 
-}
+const onUploadClick = () => {
+  console.log("Upload Data for " + canvasName.value);
+  // Display dialog
+  displayUpload.value = true;
+};
+const onDeleteClick = () => {
+  console.log("Delete All Data for " + canvasName.value);
+  canvasStore.clearCanvas(canvasName.value);
+};
+const onDownloadClick = () => {
+  console.log("Download Data for " + canvasName.value);
+
+  // Get the canvas sections one at a time
+  const canvasProps = Object.entries(canvasStore[canvasName.value]);
+
+  // Define an object to hold our ouput
+  const outObj = { canvas: {} };
+
+  outObj["canvas"][canvasName.value] = {};
+
+  canvasProps.forEach((section) => {
+    let outVal = [];
+    console.log(section);
+    // The first element is the section name
+    const sectionName = section[0];
+
+    // The second element is the data
+    const sectionData = section[1];
+
+    let rawData;
+
+    if (isProxy(sectionData)) {
+      rawData = toRaw(sectionData);
+      if (rawData instanceof Map) {
+        let itemArray = [];
+        console.log("Converting Map to array", rawData);
+        rawData.forEach((item) => {
+          console.log(item);
+          itemArray.push(item);
+        });
+        outVal = itemArray;
+      }
+    }
+
+    outObj["canvas"][canvasName.value][sectionName] = outVal;
+  });
+
+  var dataStr =
+    "data:text/json;charset=utf-8," +
+    encodeURIComponent(JSON.stringify(outObj, 0, 2));
+  var dlAnchorElem = document.getElementById("downloadAnchorElem");
+  dlAnchorElem.setAttribute("href", dataStr);
+  dlAnchorElem.setAttribute("download", canvasName.value + "-canvas.json");
+  dlAnchorElem.click();
+
+  console.log(outObj);
+};
+const moveFab = (ev) => {
+  draggingFab.value = ev.isFirst !== true && ev.isFinal !== true;
+  fabPos.value = [fabPos.value[0] - ev.delta.x, fabPos.value[1] - ev.delta.y];
+};
 </script>
 
 <style lang="scss">
-.box-head {
-  background-color: $primary;
-  border-color: $primary;
-  border-top-left-radius: 0.5em;
-  border-top-right-radius: 0.5em;
-  color: white;
-}
-.infobox {
-  border: solid;
-  border-color: lightgrey;
-  border-radius: 1em;
-}
-.outer-container {
-  border-style: double;
-}
-.outer-card-container {
-  border-style: dotted;
-}
-.card-section-container {
-  border-style: dashed;
-}
-.canvas-container {
-  border-style: solid;
-  background-color: white;
+.ontop {
+  z-index: 3;
 }
 </style>

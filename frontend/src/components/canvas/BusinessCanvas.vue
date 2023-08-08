@@ -1,86 +1,145 @@
 <template>
-  <q-page class="row fit canvas-container">
-    <div class="col fit xs">
-      <div class="row fit auto-grow key-partners">XS Key Partners</div>
-      <div class="row key-activities">Key Activities</div>
-      <div class="row key-resources">Key Resources</div>
-      <div class="row value-propositions">Value Propositions</div>
-      <div class="row customer-relationships">
-        Customer Relationships
-      </div>
-      <div class="row channels">Channels</div>
-      <div class="row customer-segments">Customer Segments</div>
-      <div class="row cost-structure">Cost Structure</div>
-      <div class="row revenue-stream fit">Revenue Stream</div>
-    </div>
-    <div class="row fit gt-xs lt-lg">
-      <div class="col-6 key-partners">SM&MD Key Partners</div>
-      <div class="col-2 key-activities">Key Activities</div>
-      <div class="col-2 key-resources">Key Resources</div>
-      <div class="col-6 value-propositions">Value Propositions</div>
-      <div class="col-2 customer-relationships">
-        Customer Relationships
-      </div>
-      <div class="col-2  channels">Channels</div>
-      <div class="col-6  customer-segments">Customer Segments</div>
-      <div class="col-2 cost-structure">Cost Structure</div>
-      <div class="col-2 revenue-stream">Revenue Stream</div>
-    </div>
-    <div class="row fit gt-md">
-      <div class="col-2 key-partners">LG&XL Key Partners</div>
-      <div class="col-2 key-activities">Key Activities</div>
-      <div class="col-2 key-resources">Key Resources</div>
-      <div class="col-2 value-propositions">Value Propositions</div>
-      <div class="col-2 customer-relationships">
-        Customer Relationships
-      </div>
-      <div class="col-2  channels">Channels</div>
-      <div class="col-2  customer-segments">Customer Segments</div>
-      <div class="cost-structure">Cost Structure</div>
-      <div class="revenue-stream">Revenue Stream</div>
-    </div>
+  <q-page class="container q-pa-md">
+    <CanvasSection
+      v-for="info in canvasDef"
+      :info="info"
+      canvasName="business"
+      :key="info.id"
+    />
   </q-page>
 </template>
 
 <script setup>
+import { useI18n } from "vue-i18n";
+
+// Import canvas store
+import { useCanvasStore } from "../../stores/canvas";
+
+import CanvasSection from "./CanvasSection.vue";
+
+// Access canvas store
+const canvas = useCanvasStore();
+
+// Create i18n accessor as t
+const { t } = useI18n();
+
+// Define the canvas sections
+const canvasDef = [
+  {
+    title: t("canvas.business.partners.title"),
+    instructions: t("canvas.business.partners.instructions"),
+    class: "key-partners",
+    sectionKey: "partners",
+    id: 1,
+  },
+  {
+    title: t("canvas.business.activities.title", "Activities"),
+    instructions: t("canvas.business.activities.instructions"),
+    class: "key-activities",
+    sectionKey: "activities",
+    id: 2,
+  },
+  {
+    title: t("canvas.business.resources.title", "Resources"),
+    instructions: t("canvas.business.resources.instructions"),
+    class: "key-resources",
+    sectionKey: "resources",
+    id: 3,
+  },
+  {
+    title: t("canvas.business.valuProps.title", "Value Propositions"),
+    instructions: t("canvas.business.valueProps.instructions"),
+    class: "value-propositions",
+    sectionKey: "valueProps",
+    id: 4,
+  },
+  {
+    title: t("canvas.business.custRelations.title", "Customer Relations"),
+    instructions: t("canvas.business.custRelations.instructions"),
+    class: "customer-rel",
+    sectionKey: "custRelations",
+    id: 5,
+  },
+  {
+    title: t("canvas.business.channels.title", "Channels"),
+    instructions: t("canvas.business.channels.instructions"),
+    class: "channels",
+    sectionKey: "channels",
+    id: 6,
+  },
+  {
+    title: t("canvas.business.custSegments.title", "Customer Segments"),
+    instructions: t("canvas.business.custSegments.instructions"),
+    class: "customer-seg",
+    sectionKey: "custSegments",
+    id: 7,
+  },
+  {
+    title: t("canvas.business.costs.title", "Costs"),
+    instructions: t("canvas.business.costs.instructions"),
+    class: "cost-structure",
+    sectionKey: "costs",
+    id: 8,
+  },
+  {
+    title: t("canvas.business.revenue.title", "Revenue"),
+    instructions: t("canvas.business.revenue.instructions"),
+    class: "revenue",
+    sectionKey: "revenue",
+    id: 9,
+  },
+];
 </script>
 
-<style lang="scss">
-.canvas-container {
-  border-style: solid;
-  background-color: grey;
+<style scoped lang="scss">
+.container {
+  display: grid;
 }
 
-.key-resources {
-  color: black;
-  background-color: yellow;
-}
-.key-activities {
-  color: white;
-  background-color: blueviolet;
-}
-.value-propositions {
-  color: black;
-  background-color: aqua;
-}
-.customer-relationships {
-  color: black;
-  background-color: darkcyan;
-}
-.channels {
-  color: white;
-  background-color: orange;
-}
-.customer-segments {
-  color: black;
-  background-color: purple;
-}
-.cost-structure {
-  color: white;
-  background-color: red;
-}
-.revenue-stream {
-  color: white;
-  background-color: green;
+// Define the canvas section classes
+// @TODO - Add a link to a doc that explains how to create a new canvas and define the CSS.
+@media screen and (min-width: 1024px) {
+  .container {
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 10px;
+    height: 85vh;
+  }
+  .key-partners {
+    grid-column: 1/3;
+    grid-row: 1/5;
+  }
+  .key-activities {
+    grid-column: 3/5;
+    grid-row: 1/3;
+  }
+  .key-resources {
+    grid-column: 3/5;
+    grid-row: 3/5;
+  }
+  .value-propositions {
+    grid-column: 5/7;
+    grid-row: 1/5;
+  }
+  .customer-rel {
+    grid-column: 7/9;
+    grid-row: 1/3;
+  }
+  .channels {
+    grid-column: 7/9;
+    grid-row: 3/5;
+  }
+  .customer-seg {
+    grid-column: 9/11;
+    grid-row: 1/5;
+  }
+  .cost-structure {
+    grid-column: 1/6;
+    grid-row: 5/6;
+  }
+  .revenue {
+    grid-column: 6/11;
+    grid-row: 5/6;
+  }
 }
 </style>

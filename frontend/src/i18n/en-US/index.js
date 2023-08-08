@@ -1,8 +1,11 @@
 import account from './account';
 import apps from './apps';
 import auth from './auth';
+import canvas from './canvas';
+import circles from './circles';
+import controls from './controls';
 import homepage from './homepage';
-import homepageDrawer from './homepage-drawer';
+import homepageDrawer from './homepageDrawer';
 import member from './member';
 import nav from './nav';
 import notifications from './notifications';
@@ -14,6 +17,9 @@ export default {
   ...account,
   ...apps,
   ...auth,
+  ...canvas,
+  ...circles,
+  ...controls,
   ...homepage,
   ...homepageDrawer,
   ...member,

@@ -100,6 +100,17 @@
         </template>
       </q-calendar-month>
     </div>
+    <q-card flat>
+      <q-card-section>
+        <div class="justify-center text-center">
+        The meetings take place in our Discord and are open to all. You are welcome to attend.
+      </div>
+      </q-card-section>
+      <q-card-actions class="justify-center">
+        <q-btn label="Visit Discord" color="primary" href="https://discord.gg/jaJ3v6Zx"></q-btn>
+      </q-card-actions>
+    </q-card>
+
   </q-page>
 </template>
 
@@ -120,7 +131,7 @@ import {
 
 import { useMeta, useQuasar } from "quasar";
 
-import CalendarEventDialog from "../components/CalendarEventDialog.vue";
+import CalendarEventDialog from "../components/calendar/dialog/CalendarEventDialog.vue";
 
 const CURRENT_DAY = new Date();
 function getCurrentDay(day) {
@@ -148,7 +159,7 @@ export default defineComponent({
     QCalendarMonth,
   },
   setup(props, { emit }) {
-    emit("newTitle", "Ultri Co-op Events");
+    emit("newTitle", "Ultri Events");
 
     const $q = useQuasar();
 

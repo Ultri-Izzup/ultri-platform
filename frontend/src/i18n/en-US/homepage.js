@@ -1,11 +1,15 @@
 export default {
-  'homepage.heading1': 'Software',
-  'homepage.heading2': 'cooperatively',
-  'homepage.heading3': 'owned by the users',
-  'homepage.heading4': 'and developers',
-  'homepage.tagline': 'Just Own It!',
-  'homepage.button': 'Join the Discussion',
-  'homepage.signedIn.heading': 'Welcome',
-  'homepage.signedIn.tagline': 'Build in public underway',
-  'homepage.signedIn.button': 'Dashboard'
+  homepage: {
+    heading1: "The first free",
+    heading2: "canvas is now",
+    heading3: "available.",
+    heading4: "Check it out!",
+    tagline: "Just Own It!",
+    button: "Join the Discussion",
+    signedIn: {
+      heading: "Welcome",
+      tagline: "Build in public underway",
+      button: "Dashboard",
+    },
+  },
 };

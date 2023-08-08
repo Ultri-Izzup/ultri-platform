@@ -1,5 +1,7 @@
 export default {
-  'apps.title': 'Apps',
-  'apps.caption': 'The benefits of membership',
-  'apps.hint': 'Apps'
+  apps: {
+    title: "Apps",
+    caption: "The benefits of membership",
+    hint: "Apps",
+  },
 };

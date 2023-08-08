@@ -22,21 +22,17 @@
         </div>
         <!-- LARGER THAN XS -->
         <div class="gt-xs row full-width">
-          <q-space /><a href="https://coop.ultri.com" class="navbar-text-link"
-            >Co-op Info</a
-          >
-          <q-space /><a
-            href="https://www.opensociocracy.org"
-            class="navbar-text-link"
-            >OpenSociocracy</a
-          >
-          <q-space /><a
+          <div class="col q-py-sm text-caption">
+            {{ $t('canvas.'+canvasName+'.attribution', ' ')}}
+          </div>
+          <div class="text-body2 q-pr-md">
+            <a
             href="https://www.linkedin.com/company/ultri/"
             class="navbar-text-link"
             >LinkedIn</a
-          >
-          <q-space />
-          <div class="text-body2 q-pr-md">Copyright &copy; 2023 Ultri</div>
+          ><q-space></q-space>
+          &copy; 2023 Ultri</div>
+
         </div>
       </div>
     <!-- STANDARD FOOTER -->

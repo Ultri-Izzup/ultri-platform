@@ -69,18 +69,26 @@
         <UploadCirclesDialog v-model="displayUpload" />
       </div>
     </div>
+    <CirclesDialog
+        v-model="circlesStore.showCirclesDialog"
+      ></CirclesDialog>
+      <NewCircleDialog
+        v-model="circlesStore.showNewCircleDialog"
+      ></NewCircleDialog>
   </q-page>
 </template>
 
 <script setup>
 import { onMounted, computed, ref, watch } from "vue";
-
 import { arrayToTree } from "performant-array-to-tree";
 
 import { useCirclesStore } from "../stores/circles";
 import { useOrgStore } from "../stores/org";
 
 import { Screen } from "quasar";
+
+import CirclesDialog from "../components/circles/dialog/CirclesDialog.vue";
+import NewCircleDialog from "../components/circles/dialog/NewCircleDialog.vue";
 
 import UploadCirclesDialog from "../components/circles/dialog/UploadCirclesDialog.vue";
 

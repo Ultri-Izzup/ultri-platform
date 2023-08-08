@@ -1,32 +1,15 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header :class="colorStore.darkMode ? 'u-navbar-dark' : 'u-navbar-light'">
-      <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="mdi-menu"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
-        />
-        <u-toolbar-title />
-        <q-space></q-space>
-        <u-toolbar-controls />
-      </q-toolbar>
-    </q-header>
-
+    <u-header @toggleDrawer="toggleLeftDrawer()"></u-header>
     <!-- LEFT DRAWER -->
     <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
-      <HomepageDrawer v-if="route.meta.drawer == 'Homepage'"></HomepageDrawer>
-      <DefaultDrawer v-if="route.meta.drawer == 'Default'"></DefaultDrawer>
-      <LogbookDrawer v-if="route.meta.drawer == 'Logbook'"></LogbookDrawer>
-      <CanvasDrawer v-if="route.meta.drawer == 'Canvas'"></CanvasDrawer>
-      <DashboardDrawer
-        v-if="route.meta.drawer == 'Dashboard'"
-      ></DashboardDrawer>
-      <OrgDrawer v-if="route.meta.drawer == 'Org'"></OrgDrawer>
-      <CirclesDrawer v-if="route.meta.drawer == 'Circle'"></CirclesDrawer>
+      <HomepageDrawer v-if="route.meta.drawer == 'Homepage'" />
+      <DefaultDrawer v-if="route.meta.drawer == 'Default'" />
+      <LogbookDrawer v-if="route.meta.drawer == 'Logbook'" />
+      <CanvasDrawer v-if="route.meta.drawer == 'Canvas'" />
+      <OrgDrawer v-if="route.meta.drawer == 'Org'" />
+      <OrgCirclesDrawer v-if="route.meta.drawer == 'OrgCircle'" />
+      <CirclesDrawer v-if="route.meta.drawer == 'Circle'" />
     </q-drawer>
 
     <!-- PAGE -->
@@ -43,12 +26,6 @@
       <OrgMissionDialog
         v-model="orgStore.showOrgMissionDialog"
       ></OrgMissionDialog>
-      <CirclesDialog
-        v-model="circlesStore.showCirclesDialog"
-      ></CirclesDialog>
-      <NewCircleDialog
-        v-model="circlesStore.showNewCircleDialog"
-      ></NewCircleDialog>
       <!-- PAGE VIEW -->
       <router-view />
     </q-page-container>
@@ -70,9 +47,9 @@ import LogbookDrawer from "./drawers/LogbookDrawer.vue";
 import DefaultDrawer from "./drawers/DefaultDrawer.vue";
 import HomepageDrawer from "./drawers/HomepageDrawer.vue";
 import CanvasDrawer from "./drawers/CanvasDrawer.vue";
-import DashboardDrawer from "./drawers/DashboardDrawer.vue";
 import OrgDrawer from "./drawers/OrgDrawer.vue";
 import CirclesDrawer from "./drawers/CirclesDrawer.vue";
+import OrgCirclesDrawer from "./drawers/OrgCirclesDrawer.vue";
 
 import PasswordlessAuthDialog from "../components/auth/dialog/PasswordlessDialog.vue";
 import WelcomeDialog from "../components/auth/dialog/WelcomeDialog.vue";
@@ -80,13 +57,10 @@ import WelcomeDialog from "../components/auth/dialog/WelcomeDialog.vue";
 import OrgCreateDialog from "../components/org/dialog/OrgCreateDialog.vue";
 import OrgCreateLogbookEntryDialog from "../components/org/dialog/OrgCreateLogbookEntryDialog.vue";
 import OrgMissionDialog from "../components/org/dialog/OrgMissionDialog.vue";
-import CirclesDialog from "../components/circles/dialog/CirclesDialog.vue";
-import NewCircleDialog from "../components/circles/dialog/NewCircleDialog.vue";
+
 
 import UHeader from "../components/ultri/UHeader.vue";
-
-import UToolbarTitle from "../components/ultri/UToolbarTitle.vue";
-import UToolbarControls from "../components/ultri/UToolbarControls.vue";
+import UDynamicFooter from "../components/footer/UDynamicFooter.vue";
 
 const $q = useQuasar();
 
@@ -96,7 +70,6 @@ const route = useRoute();
 const authStore = useAuthStore();
 const colorStore = useColorStore();
 const orgStore = useOrgStore();
-const circlesStore = useCirclesStore();
 
 watch(
   () => colorStore.darkMode,

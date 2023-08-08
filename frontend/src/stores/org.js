@@ -44,15 +44,11 @@ export const useOrgStore = defineStore("org", () => {
   };
 
   const loadOrgs = async () => {
-    // POST an org
-
     const result = await api.get("/orgs");
 
-    const dbOrgs = result.data.orgs;
-    dbOrgs.forEach(item => {
+    result.data.orgs.forEach(item => {
       orgs.value.set(item.uid, item)
     })
-
   };
 
   const loadLogbookEntries = async (orgUid) => {

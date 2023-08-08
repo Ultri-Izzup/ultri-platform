@@ -3,6 +3,7 @@ export default {
     account: "Accounts",
     home: "Home",
     close: "Close",
+    canvas: "Free Canvas",
     calendar: "Calendar",
     benefits: "Benefits",
     communicate: "Communicate",
@@ -24,5 +25,6 @@ export default {
     "co-op": "Co-op",
     organizations: "Organizations",
     orgs: "Orgs",
+    joinTheDiscussion: "Join the Discussion"
   },
 };

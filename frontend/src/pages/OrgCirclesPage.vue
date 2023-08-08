@@ -1,145 +1,178 @@
 <template>
-  <div>
-    <h2>Organization Circles</h2>
-    <svg width="960" height="600" class="container-border"></svg>
-  </div>
+  <q-page>
+    <div class="text-h3 text-center justify-center row full-width">
+      {{ $t("circles.dashboard.title") }}
+    </div>
+    <div class="fit">
+      <div>
+        <div class="row" v-if="hasCircles">
+          <!-- <pre>{{ treeData }}</pre> -->
+          <div class="col-12">
+            <q-btn
+              :label="$t('circles.reset.button.text')"
+              color="primary"
+              @click="circlesStore.$reset()"
+            ></q-btn>
+            <q-tree
+              :nodes="treeData"
+              node-key="uid"
+              v-model:selected="selected"
+              default-expand-all
+            ></q-tree>
+          </div>
+        </div>
+        <div v-else>
+          <q-btn
+            :label="$t('circles.firstCircle.button.text')"
+            color="primary"
+            @click="circlesStore.initCircles()"
+          ></q-btn>
+        </div>
+
+        <q-page-sticky
+          :position="Screen.gt.sm ? 'bottom-right' : 'bottom'"
+          :offset="fabPos"
+          class="ontop"
+        >
+          <q-fab
+            icon="mdi-file-arrow-up-down-outline"
+            direction="up"
+            color="accent"
+            :disable="draggingFab"
+            v-touch-pan.prevent.mouse="moveFab"
+            class="ontop"
+          >
+            <q-fab-action
+              @click="onDownloadClick()"
+              color="primary"
+              icon="mdi-download"
+              :disable="draggingFab || circlesStore.orgCircles.length < 1"
+              class="ontop"
+            ></q-fab-action>
+            <q-fab-action
+              @click="onUploadClick"
+              color="primary"
+              icon="mdi-upload"
+              :disable="draggingFab"
+              class="ontop"
+            ></q-fab-action>
+            <q-fab-action
+              @click="onDeleteClick()"
+              color="secondary"
+              icon="mdi-delete"
+              :disable="draggingFab || circlesStore.orgCircles.length < 1"
+              class="ontop"
+            ></q-fab-action>
+          </q-fab>
+        </q-page-sticky>
+        <a id="downloadAnchorElem" style="display: none"></a>
+        <UploadCirclesDialog v-model="displayUpload" />
+      </div>
+    </div>
+    <CirclesDialog
+        v-model="circlesStore.showCirclesDialog"
+      ></CirclesDialog>
+      <NewCircleDialog
+        v-model="circlesStore.showNewCircleDialog"
+      ></NewCircleDialog>
+  </q-page>
 </template>
-<script>
-import * as d3 from 'd3'
-export default {
-  data () {
-    return {}
-  },
-  mounted () {
-    let marge = { top: 60, bottom: 60, left: 60, right: 60 }
-    let svg = d3.select('svg')
-    let width = svg.attr('width')
-    let height = svg.attr('height')
-    let g = svg.append('g')
-      .attr('transform', 'translate(' + marge.top + ',' + marge.left + ')')
 
-    // Circles Dataset
-    let circles = [
-      { 
-        id: 'top',
-        name: 'Top Level' 
-      },
-      { 
-        id: 'tech',
-        name: 'Tech' 
-      }
-    ]
-    // Side Dataset
-    let edges = [
-      { source: 0, target: 1, value: 1 },
+<script setup>
+import { onMounted, computed, ref, watch } from "vue";
+import { arrayToTree } from "performant-array-to-tree";
 
-  
-    ]
-    // Set a color scale
-    let colorScale = d3.scaleOrdinal()
-      .domain(d3.range(circles.length))
-      .range(d3.schemeCategory10)
-    // Create a new force guide diagram
-    let forceSimulation = d3.forceSimulation()
-      .force('link', d3.forceLink())
-      .force('charge', d3.forceManyBody())
-      .force('center', d3.forceCenter())
-    // Generate node data
-    forceSimulation.nodes(circles)
-      .on('tick', ticked)
-    // Generate side data
-    forceSimulation.force('link')
-      .links(edges)
-      .distance(function (d) { // side length
-        return d.value * 100
-      })
-    // Set drawing center location
-    forceSimulation.force('center')
-      .x(width / 2)
-      .y(height / 2)
+import { useCirclesStore } from "../stores/circles";
+import { useOrgStore } from "../stores/org";
 
-    // Draw side
-    let links = g.append('g')
-      .selectAll('line')
-      .data(edges)
-      .enter()
-      .append('line')
-      .attr('stroke', function (d, i) {
-        return colorScale(i)
-      })
-      .attr('stroke-width', 1)
-    // Text on side
-    let linksText = g.append('g')
-      .selectAll('text')
-      .data(edges)
-      .enter()
-      .append('text')
-      .text(function (d) {
-        return d.relation
-      })
-    // Create group
-    let gs = g.selectAll('.circleText')
-      .data(circles)
-      .enter()
-      .append('g')
-      .attr('transform', function (d) {
-        let cirX = d.x
-        let cirY = d.y
-        return 'translate(' + cirX + ',' + cirY + ')'
-      })
-      .call(d3.drag()
-        .on('start', started)
-        .on('drag', dragged)
-        .on('end', ended)
-      )
-    // Draw node
-    gs.append('circle')
-      .attr('r', 10)
-      .attr('fill', function (d, i) {
-        return colorScale(i)
-      })
-    // Draw text
-    gs.append('text')
-      .attr('x', -10)
-      .attr('y', -20)
-      .attr('dy', 10)
-      .text(function (d) {
-        return d.name
-      })
-    // ticked
-    function ticked () {
-      links
-        .attr('x1', function (d) { return d.source.x })
-        .attr('y1', function (d) { return d.source.y })
-        .attr('x2', function (d) { return d.target.x })
-        .attr('y2', function (d) { return d.target.y })
-      linksText
-        .attr('x', function (d) { return (d.source.x + d.target.x) / 2 })
-        .attr('y', function (d) { return (d.source.y + d.target.y) / 2 })
-      gs
-        .attr('transform', function (d) { return 'translate(' + d.x + ',' + d.y + ')' })
-    }
-    // drag
-    function started (d) {
-      if (!d3.event.active) {
-        forceSimulation.alphaTarget(0.8).restart() // Set the attenuation coefficient to simulate the node position movement process. The higher the value, the faster the movement. The value range is [0, 1] // 设置衰减系数，对节点位置移动过程的模拟，数值越高移动越快，数值范围[0, 1]
-      }
-      d.fx = d.x
-      d.fy = d.y
-    }
-    function dragged (d) {
-      d.fx = d3.event.x
-      d.fy = d3.event.y
-    }
-    function ended (d) {
-      if (!d3.event.active) {
-        forceSimulation.alphaTarget(0)
-      }
-      d.fx = null
-      d.fy = null
-    }
+import { Screen } from "quasar";
+
+import CirclesDialog from "../components/circles/dialog/CirclesDialog.vue";
+import NewCircleDialog from "../components/circles/dialog/NewCircleDialog.vue";
+
+import UploadCirclesDialog from "../components/circles/dialog/UploadCirclesDialog.vue";
+
+const orgStore = useOrgStore();
+const circlesStore = useCirclesStore();
+
+const selected = ref(null);
+
+const unselectNode = () => {
+  selected.value = null;
+};
+
+const hasCircles = computed(() => {
+  return circlesStore.orgCircles.length;
+});
+
+const treeData = computed(() => {
+  let tree = [];
+  tree = arrayToTree(circlesStore.orgCircles, {
+    id: "uid",
+    parentId: "parentCircle",
+    childrenField: "children",
+    dataField: null,
+  });
+
+  return tree;
+});
+
+watch(selected, () => {
+  const selectedState = selected.value ? "selected" : "unselected";
+  console.log("SELECTION CHANGED", selectedState, selected.value);
+  if (selectedState == "selected") {
+    circlesStore.currentCircleUid = selected.value;
+    circlesStore.triggerCircleDialog();
+  } else {
+    circlesStore.currentCircleUid = null;
   }
-}
+});
+
+// Load circle data for the org into the store
+//circlesStore.triggerCircleDialog();
+
+onMounted(() => {});
+
+// FAB - Floating Action Button to save/download
+const fabPos = ref([18, 18]);
+const draggingFab = ref(false);
+
+const displayUpload = ref(false);
+
+const onUploadClick = () => {
+  console.log("Upload Data for " + orgStore.currentOrgUid);
+  // Display dialog
+  displayUpload.value = true;
+};
+const onDeleteClick = () => {
+  console.log("Delete All Data for " + orgStore.currentOrgUid);
+  circlesStore.clear();
+};
+const onDownloadClick = () => {
+  console.log("Download Data for " + orgStore.currentOrgUid);
+
+  // Define an object to hold our ouput
+  const outObj = { circles: {} };
+
+  outObj.circles[orgStore.currentOrgUid] = circlesStore.orgCircles;
+
+  var dataStr =
+    "data:text/json;charset=utf-8," +
+    encodeURIComponent(JSON.stringify(outObj, 0, 2));
+  var dlAnchorElem = document.getElementById("downloadAnchorElem");
+  dlAnchorElem.setAttribute("href", dataStr);
+  dlAnchorElem.setAttribute(
+    "download",
+    "org-" + orgStore.currentOrgUid + "-circles.json"
+  );
+  dlAnchorElem.click();
+
+  console.log(outObj);
+};
+const moveFab = (ev) => {
+  draggingFab.value = ev.isFirst !== true && ev.isFinal !== true;
+  fabPos.value = [fabPos.value[0] - ev.delta.x, fabPos.value[1] - ev.delta.y];
+};
 </script>
-<style scoped>
-</style>
+
+<style lang="scss"></style>

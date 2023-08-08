@@ -35,7 +35,7 @@
       ></q-card
     >
     <q-card>
-      <q-card-section>Ultri Co-op</q-card-section>
+      <q-card-section>Ultri</q-card-section>
       <q-card-section>
         <ul>
           <li>Create Proposal</li>

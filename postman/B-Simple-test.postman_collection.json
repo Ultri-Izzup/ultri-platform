@@ -1,0 +1,2795 @@
+{
+	"info": {
+		"_postman_id": "348b601c-16f3-42f3-9070-b91154009ec6",
+		"name": "A-Simple-test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27760",
+		"_collection_link": "https://ultrinet.postman.co/workspace/Ultri-Izzup~ae1d2b1f-30a6-494e-9639-8bc256f90647/collection/27760-348b601c-16f3-42f3-9070-b91154009ec6?action=share&creator=27760&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Server Connectivity",
+			"item": [
+				{
+					"name": "API Server up",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"The root of the API server is available\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.root).to.eql(true);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiUri}}",
+							"host": [
+								"{{apiUri}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "API Health Check",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"The root of the API server is available\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.status).to.eql(\"up\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiUri}}/health",
+							"host": [
+								"{{apiUri}}"
+							],
+							"path": [
+								"health"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "API Postgres Health Check",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"The root of the API server is available\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.status).to.eql(\"OK\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiUri}}/health/postgres",
+							"host": [
+								"{{apiUri}}"
+							],
+							"path": [
+								"health",
+								"postgres"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "API Auth - Request Signup code",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"HTTP Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"var jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Returned status is OK\", function () {",
+									"    jsonData.status == \"OK\"",
+									"});",
+									"",
+									"// Set variables for deviceId and preAuthSessionId so we can use them when submitting the code",
+									"",
+									"pm.environment.set(\"deviceId_1\", jsonData.deviceId);",
+									"pm.environment.set(\"preAuthSessionId_1\", jsonData.preAuthSessionId);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"randoEmail\", pm.variables.replaceIn('{{$randomExampleEmail}}'));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "rid",
+								"value": "passwordless",
+								"type": "text"
+							},
+							{
+								"key": "st-auth-mode",
+								"value": "cookie",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"{{randoEmail}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{apiUri}}/auth/signinup/code",
+							"host": [
+								"{{apiUri}}"
+							],
+							"path": [
+								"auth",
+								"signinup",
+								"code"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "API Auth - Request Signup testuser@example.com",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"HTTP Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"var jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Returned status is OK\", function () {",
+									"    jsonData.status == \"OK\"",
+									"});",
+									"",
+									"// Set variables for deviceId and preAuthSessionId so we can use them when submitting the code",
+									"",
+									"pm.environment.set(\"deviceId_1\", jsonData.deviceId);",
+									"pm.environment.set(\"preAuthSessionId_1\", jsonData.preAuthSessionId);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"randoEmail\", pm.variables.replaceIn('{{$randomExampleEmail}}'));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "rid",
+								"value": "passwordless",
+								"type": "text"
+							},
+							{
+								"key": "st-auth-mode",
+								"value": "cookie",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"testuser@example.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{apiUri}}/auth/signinup/code",
+							"host": [
+								"{{apiUri}}"
+							],
+							"path": [
+								"auth",
+								"signinup",
+								"code"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "API Auth - Request Signup bwinkers@gmail.com",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"HTTP Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"var jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Returned status is OK\", function () {",
+									"    jsonData.status == \"OK\"",
+									"});",
+									"",
+									"// Set variables for deviceId and preAuthSessionId so we can use them when submitting the code",
+									"",
+									"pm.environment.set(\"deviceId_1\", jsonData.deviceId);",
+									"pm.environment.set(\"preAuthSessionId_1\", jsonData.preAuthSessionId);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"randoEmail\", pm.variables.replaceIn('{{$randomExampleEmail}}'));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "rid",
+								"value": "passwordless",
+								"type": "text"
+							},
+							{
+								"key": "st-auth-mode",
+								"value": "cookie",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"bwinkers@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{apiUri}}/auth/signinup/code",
+							"host": [
+								"{{apiUri}}"
+							],
+							"path": [
+								"auth",
+								"signinup",
+								"code"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "API Auth - Email Password Known User Signup",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"HTTP Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"var jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Returned status is OK\", function () {",
+									"    jsonData.status == \"OK\"",
+									"});",
+									"",
+									"// Set variables for deviceId and preAuthSessionId so we can use them when submitting the code",
+									"",
+									"pm.environment.set(\"deviceId_1\", jsonData.deviceId);",
+									"pm.environment.set(\"preAuthSessionId_1\", jsonData.preAuthSessionId);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"randoEmail\", pm.variables.replaceIn('{{$randomExampleEmail}}'));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "rid",
+								"value": "emailpassword",
+								"type": "text"
+							},
+							{
+								"key": "st-auth-mode",
+								"value": "cookie",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"formFields\": [\n        {\n            \"id\": \"email\",\n            \"value\": \"Gilbert_Kling@example.org\"\n        },\n        {\n            \"id\": \"password\",\n            \"value\": \"password123\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{apiUri}}/auth/signup",
+							"host": [
+								"{{apiUri}}"
+							],
+							"path": [
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "API Auth - Email Password Known User Signin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"HTTP Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"var jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Returned status is OK\", function () {",
+									"    jsonData.status == \"OK\"",
+									"});",
+									"",
+									"// Set variables for deviceId and preAuthSessionId so we can use them when submitting the code",
+									"",
+									"pm.environment.set(\"deviceId_1\", jsonData.deviceId);",
+									"pm.environment.set(\"preAuthSessionId_1\", jsonData.preAuthSessionId);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"randoEmail\", pm.variables.replaceIn('{{$randomExampleEmail}}'));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "rid",
+								"value": "emailpassword",
+								"type": "text"
+							},
+							{
+								"key": "st-auth-mode",
+								"value": "cookie",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"formFields\": [\n        {\n            \"id\": \"email\",\n            \"value\": \"Gilbert_Kling@example.org\"\n        },\n        {\n            \"id\": \"password\",\n            \"value\": \"password123\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{apiUri}}/auth/signin",
+							"host": [
+								"{{apiUri}}"
+							],
+							"path": [
+								"auth",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "API Auth - Email Password New Signup",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"HTTP Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"var jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Returned status is OK\", function () {",
+									"    jsonData.status == \"OK\"",
+									"});",
+									"",
+									"// Set variables for deviceId and preAuthSessionId so we can use them when submitting the code",
+									"",
+									"pm.environment.set(\"deviceId_1\", jsonData.deviceId);",
+									"pm.environment.set(\"preAuthSessionId_1\", jsonData.preAuthSessionId);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"randoEmail\", pm.variables.replaceIn('{{$randomExampleEmail}}'));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "rid",
+								"value": "emailpassword",
+								"type": "text"
+							},
+							{
+								"key": "st-auth-mode",
+								"value": "cookie",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"formFields\": [\n        {\n            \"id\": \"email\",\n            \"value\": \"{{randoEmail}}\"\n        },\n        {\n            \"id\": \"password\",\n            \"value\": \"password123\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{apiUri}}/auth/signup",
+							"host": [
+								"{{apiUri}}"
+							],
+							"path": [
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "API Auth - Submit OTP",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"HTTP Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"var jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Returned status is OK\", function () {",
+									"    jsonData.status == \"OK\"",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"randoEmail\", pm.variables.replaceIn('{{$randomExampleEmail}}'));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "rid",
+								"value": "passwordless",
+								"type": "text"
+							},
+							{
+								"key": "st-auth-mode",
+								"value": "cookie",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"deviceId\": \"{{deviceId_1}}\",\n    \"preAuthSessionId\": \"{{preAuthSessionId_1}}\",\n    \"userInputCode\": \"064729\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{apiUri}}/auth/signinup/code/consume",
+							"host": [
+								"{{apiUri}}"
+							],
+							"path": [
+								"auth",
+								"signinup",
+								"code",
+								"consume"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "API Auth - Refresh session",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"HTTP Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"var jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Returned status is OK\", function () {",
+									"    jsonData.status == \"OK\"",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"randoEmail\", pm.variables.replaceIn('{{$randomExampleEmail}}'));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "rid",
+								"value": "session",
+								"type": "text"
+							},
+							{
+								"key": "st-auth-mode",
+								"value": "cookie",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{apiUri}}/auth/session/refresh",
+							"host": [
+								"{{apiUri}}"
+							],
+							"path": [
+								"auth",
+								"session",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "BASIC FLOW",
+			"item": [
+				{
+					"name": "ORGANIZATIONS",
+					"item": [
+						{
+							"name": "Get Member Orgs",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const jsonData = pm.response.json();",
+											"",
+											"pm.test(\"HTTP Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"",
+											"const orgs = jsonData.orgs;",
+											"",
+											"pm.test(\"No orgs found yet, as expected\", function () {",
+											"    pm.expect(orgs.length).to.be.eq(0);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "rid",
+										"value": "passwordless",
+										"type": "text"
+									},
+									{
+										"key": "st-auth-mode",
+										"value": "cookie",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{apiUri}}/orgs",
+									"host": [
+										"{{apiUri}}"
+									],
+									"path": [
+										"orgs"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Get Member Orgs",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "rid",
+												"value": "passwordless",
+												"type": "text"
+											},
+											{
+												"key": "st-auth-mode",
+												"value": "cookie",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{apiUri}}/orgs",
+											"host": [
+												"{{apiUri}}"
+											],
+											"path": [
+												"orgs"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Server",
+											"value": "openresty/1.19.9.1"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 12 Jul 2023 20:57:15 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "11"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "vary",
+											"value": "Origin"
+										},
+										{
+											"key": "access-control-allow-origin",
+											"value": "https://localhost:9000"
+										},
+										{
+											"key": "access-control-allow-credentials",
+											"value": "true"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "SAMEORIGIN"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "1; mode=block"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										}
+									],
+									"cookie": [],
+									"body": null
+								},
+								{
+									"name": "Get Member Orgs",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "rid",
+												"value": "passwordless",
+												"type": "text"
+											},
+											{
+												"key": "st-auth-mode",
+												"value": "cookie",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{apiUri}}/orgs",
+											"host": [
+												"{{apiUri}}"
+											],
+											"path": [
+												"orgs"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Server",
+											"value": "openresty/1.19.9.1"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 12 Jul 2023 20:57:15 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "11"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "vary",
+											"value": "Origin"
+										},
+										{
+											"key": "access-control-allow-origin",
+											"value": "https://localhost:9000"
+										},
+										{
+											"key": "access-control-allow-credentials",
+											"value": "true"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "SAMEORIGIN"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "1; mode=block"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										}
+									],
+									"cookie": [],
+									"body": null
+								}
+							]
+						},
+						{
+							"name": "Create a Member Org",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const jsonData = pm.response.json();",
+											"",
+											"pm.environment.set(\"orgUid\",jsonData.uid);",
+											"pm.environment.set(\"logbookUid\", jsonData.logbookUid);",
+											"",
+											"pm.test(\"HTTP Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"",
+											"",
+											"pm.test(\"Response is valid shape\", function () {",
+											"    pm.expect(jsonData.orgUid).to.exist;",
+											"    pm.expect(jsonData.name).to.exist;",
+											"    pm.expect(jsonData.createdAt).to.exist;",
+											"    pm.expect(jsonData.logbookUid).to.exist;",
+											"});",
+											"",
+											"",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"randOrgName\", pm.variables.replaceIn('{{$randomCompanyName}}'));",
+											"pm.environment.set(\"randOrgBlurb\", pm.variables.replaceIn('{{$randomBs}}'));"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "rid",
+										"value": "passwordless",
+										"type": "text"
+									},
+									{
+										"key": "st-auth-mode",
+										"value": "cookie",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"{{randOrgName}}\",\n    \"note\": \"{{randOrgBlurb}}\"\n} ",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiUri}}/orgs",
+									"host": [
+										"{{apiUri}}"
+									],
+									"path": [
+										"orgs"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Check for New Org",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const jsonData = pm.response.json();",
+											"",
+											"const orgs = jsonData.orgs;",
+											"",
+											"pm.test(\"HTTP Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"No orgs found yet, as expected\", function () {",
+											"    pm.expect(orgs.length).to.be.gt(0);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "rid",
+										"value": "passwordless",
+										"type": "text"
+									},
+									{
+										"key": "st-auth-mode",
+										"value": "cookie",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{apiUri}}/orgs",
+									"host": [
+										"{{apiUri}}"
+									],
+									"path": [
+										"orgs"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create another Org",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const jsonData = pm.response.json();",
+											"",
+											"pm.environment.set(\"orgUid\",jsonData.uid);",
+											"pm.environment.set(\"logbookUid\", jsonData.logbookUid);",
+											"",
+											"pm.test(\"HTTP Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"",
+											"",
+											"pm.test(\"Response is valid shape\", function () {",
+											"    pm.expect(jsonData.orgUid).to.exist;",
+											"    pm.expect(jsonData.name).to.exist;",
+											"    pm.expect(jsonData.createdAt).to.exist;",
+											"    pm.expect(jsonData.logbookUid).to.exist;",
+											"});",
+											"",
+											"",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"randOrgName\", pm.variables.replaceIn('{{$randomCompanyName}}'));",
+											"pm.environment.set(\"randOrgBlurb\", pm.variables.replaceIn('{{$randomBs}}'));"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "rid",
+										"value": "passwordless",
+										"type": "text"
+									},
+									{
+										"key": "st-auth-mode",
+										"value": "cookie",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"{{randOrgName}}\",\n    \"note\": \"{{randOrgBlurb}}\"\n} ",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiUri}}/orgs",
+									"host": [
+										"{{apiUri}}"
+									],
+									"path": [
+										"orgs"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete an Org",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const jsonData = pm.response.json();",
+											"",
+											"",
+											"pm.test(\"HTTP Status code is 202\", function () {",
+											"    pm.response.to.have.status(202);",
+											"});",
+											"",
+											"",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"randOrgName\", pm.variables.replaceIn('{{$randomCompanyName}}'));",
+											"pm.environment.set(\"randOrgBlurb\", pm.variables.replaceIn('{{$randomBs}}'));"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "rid",
+										"value": "passwordless",
+										"type": "text"
+									},
+									{
+										"key": "st-auth-mode",
+										"value": "cookie",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiUri}}/orgs/{{orgUid}}",
+									"host": [
+										"{{apiUri}}"
+									],
+									"path": [
+										"orgs",
+										"{{orgUid}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create one more Org",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const jsonData = pm.response.json();",
+											"",
+											"pm.environment.set(\"orgUid\",jsonData.uid);",
+											"pm.environment.set(\"logbookUid\", jsonData.logbookUid);",
+											"",
+											"pm.test(\"HTTP Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"",
+											"",
+											"pm.test(\"Response is valid shape\", function () {",
+											"    pm.expect(jsonData.orgUid).to.exist;",
+											"    pm.expect(jsonData.name).to.exist;",
+											"    pm.expect(jsonData.createdAt).to.exist;",
+											"    pm.expect(jsonData.logbookUid).to.exist;",
+											"});",
+											"",
+											"",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"randOrgName\", pm.variables.replaceIn('{{$randomCompanyName}}'));",
+											"pm.environment.set(\"randOrgBlurb\", pm.variables.replaceIn('{{$randomBs}}'));"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "rid",
+										"value": "passwordless",
+										"type": "text"
+									},
+									{
+										"key": "st-auth-mode",
+										"value": "cookie",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"{{randOrgName}}\",\n    \"note\": \"{{randOrgBlurb}}\"\n} ",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiUri}}/orgs",
+									"host": [
+										"{{apiUri}}"
+									],
+									"path": [
+										"orgs"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "LOGBOOK ENTRY",
+					"item": [
+						{
+							"name": "Create a Logbook Note",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"HTTP Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"var entry = pm.response.json();",
+											"",
+											"",
+											"pm.test(\"Has proper fields\", function () {",
+											"    pm.expect(entry.logbookEntryUid).to.exist;",
+											"    pm.expect(entry.createdAt).to.exist;",
+											"});",
+											"",
+											"pm.environment.set(\"logbookEntryUid\", entry.logbookEntryUid);",
+											"pm.environment.set(\"logbookEntryNuggetUid\", entry.nuggetUid);"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "rid",
+										"value": "passwordless",
+										"type": "text"
+									},
+									{
+										"key": "st-auth-mode",
+										"value": "cookie",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"note\": \"This event with just a note for orgUid: {{orgUid}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiUri}}/orgs/{{orgUid}}/logbook/entries",
+									"host": [
+										"{{apiUri}}"
+									],
+									"path": [
+										"orgs",
+										"{{orgUid}}",
+										"logbook",
+										"entries"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Logbook Entries",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"HTTP Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Data has the correct shape\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.logbookEntryUid).to.exist;",
+											"     pm.expect(jsonData.createdAt).to.exist;",
+											"      pm.expect(jsonData.updatedAt).to.exist;",
+											"       pm.expect(jsonData.pubAt).to.exist;",
+											"        pm.expect(jsonData.unPubAt).to.exist;",
+											"         pm.expect(jsonData.publicTitle).to.exist;",
+											"          pm.expect(jsonData.internalName).to.exist;",
+											"           pm.expect(jsonData.blocks).to.exist;",
+											"            pm.expect(jsonData.nuggetType).to.exist;",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "rid",
+										"value": "passwordless",
+										"type": "text"
+									},
+									{
+										"key": "st-auth-mode",
+										"value": "cookie",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{apiUri}}/orgs/{{orgUid}}/logbook/entries",
+									"host": [
+										"{{apiUri}}"
+									],
+									"path": [
+										"orgs",
+										"{{orgUid}}",
+										"logbook",
+										"entries"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get a Logbook Entry",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"HTTP Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Data has the correct shape\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.logbookEntryUid).to.exist;",
+											"     pm.expect(jsonData.createdAt).to.exist;",
+											"      pm.expect(jsonData.updatedAt).to.exist;",
+											"       pm.expect(jsonData.pubAt).to.exist;",
+											"        pm.expect(jsonData.unPubAt).to.exist;",
+											"         pm.expect(jsonData.publicTitle).to.exist;",
+											"          pm.expect(jsonData.internalName).to.exist;",
+											"           pm.expect(jsonData.blocks).to.exist;",
+											"            pm.expect(jsonData.nuggetType).to.exist;",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "rid",
+										"value": "passwordless",
+										"type": "text"
+									},
+									{
+										"key": "st-auth-mode",
+										"value": "cookie",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{apiUri}}/orgs/{{orgUid}}/logbook/entries/{{logbookEntryUid}}",
+									"host": [
+										"{{apiUri}}"
+									],
+									"path": [
+										"orgs",
+										"{{orgUid}}",
+										"logbook",
+										"entries",
+										"{{logbookEntryUid}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a Logbook Nugget",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"HTTP Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"var entry = pm.response.json();",
+											"",
+											"",
+											"pm.test(\"Has proper fields\", function () {",
+											"    pm.expect(entry.logbookEntryUid).to.exist;",
+											"    pm.expect(entry.createdAt).to.exist;",
+											"});",
+											"",
+											"pm.environment.set(\"logbookEntryUid\", entry.logbookEntryUid);",
+											"pm.environment.set(\"logbookEntryNuggetUid\", entry.nuggetUid);"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "rid",
+										"value": "passwordless",
+										"type": "text"
+									},
+									{
+										"key": "st-auth-mode",
+										"value": "cookie",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"note\": \"This org event happened, and I have a nugget of info\",\n    \"nugget\": {\n        \"nuggetType\": \"proposal\",\n        \"pubAt\": \"2023-05-25\",\n        \"internalName\": \"Proposal to recover the parking lot with a lot.\",\n        \"publicTitle\": \"Prettier Parking Lot\",\n        \"blocks\": [\n            {\n                \"blockType\": \"standardProposal\",\n                \"data\": {\n\n                }\n            },\n            {\n                \"blockType\": \"slideDeck\",\n                \"data\": {\n                    \n                }\n            },\n            {\n                \"blockType\": \"spreadsheet\",\n                \"data\": {\n                    \n                }\n            }\n        ]\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiUri}}/orgs/{{orgUid}}/logbook/entries",
+									"host": [
+										"{{apiUri}}"
+									],
+									"path": [
+										"orgs",
+										"{{orgUid}}",
+										"logbook",
+										"entries"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update a Logbook Note",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"HTTP Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"var entry = pm.response.json();",
+											"",
+											"",
+											"pm.test(\"Has proper fields\", function () {",
+											"    pm.expect(entry.updatedAt).to.exist;",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "rid",
+										"value": "passwordless",
+										"type": "text"
+									},
+									{
+										"key": "st-auth-mode",
+										"value": "cookie",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"note\": \"Updating logbook note for orgUid: {{orgUid}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiUri}}/orgs/{{orgUid}}/logbook/entries/{{logbookEntryUid}}",
+									"host": [
+										"{{apiUri}}"
+									],
+									"path": [
+										"orgs",
+										"{{orgUid}}",
+										"logbook",
+										"entries",
+										"{{logbookEntryUid}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update a Logbook Nugget",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"HTTP Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"var entry = pm.response.json();",
+											"",
+											"pm.test(\"Has proper fields\", function () {",
+											"    pm.expect(entry.logbookEntryUid).to.exist;",
+											"    pm.expect(entry.createdAt).to.exist;",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "rid",
+										"value": "passwordless",
+										"type": "text"
+									},
+									{
+										"key": "st-auth-mode",
+										"value": "cookie",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"note\": \"Updated - This org event happened, and I have a nugget of info\",\n    \"nugget\": {\n        \"nuggetType\": \"proposal\",\n        \"pubAt\": \"2023-05-25\",\n        \"internalName\": \"Updated Proposal to recover the parking lot with a lot.\",\n        \"publicTitle\": \"A Much Prettier Parking Lot\",\n        \"blocks\": [\n            {\n                \"blockType\": \"standardProposal\",\n                \"data\": {\n                    \"is\": \"updated\"\n                }\n            },\n            {\n                \"blockType\": \"slideDeck\",\n                \"data\": {\n                    \"here\": \"as well\"\n                }\n            },\n            {\n                \"blockType\": \"spreadsheet\",\n                \"data\": {\n                    \n                }\n            }\n        ]\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiUri}}/orgs/{{orgUid}}/logbook/entries/{{logbookEntryUid}}",
+									"host": [
+										"{{apiUri}}"
+									],
+									"path": [
+										"orgs",
+										"{{orgUid}}",
+										"logbook",
+										"entries",
+										"{{logbookEntryUid}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update a Logbook Entry (ALL)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"HTTP Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "rid",
+										"value": "passwordless",
+										"type": "text"
+									},
+									{
+										"key": "st-auth-mode",
+										"value": "cookie",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"note\": \"This note was updated by 2patching\",\n    \"pubAt\": \"2023-09-25\",\n    \"unPubAt\": \"2023-09-25\",\n    \"internalName\": \"NEW2 Proposal to recover the parking lot.\",\n    \"publicTitle\": \"NEW2 Prettier Parking\",\n    \"blocks\": [\n        {\n            \"blockType\": \"standardProposal\",\n            \"data\": {\n                \"myData\": \"update all\"\n            }\n        },\n        {\n            \"blockType\": \"slideDeck\",\n            \"data\": {\n                \"myData\": \"all updated\"\n            }\n        },\n        {\n            \"blockType\": \"spreadsheet\",\n            \"data\": {\n                \"myData\": \"updated all\"\n            }\n        }\n    ]\n\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiUri}}/entries/{{logbookEntryUid}}",
+									"host": [
+										"{{apiUri}}"
+									],
+									"path": [
+										"entries",
+										"{{logbookEntryUid}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update a Logbook Entry (Blocks Only)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"HTTP Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "rid",
+										"value": "passwordless",
+										"type": "text"
+									},
+									{
+										"key": "st-auth-mode",
+										"value": "cookie",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"blocks\": [\n        {\n            \"blockType\": \"standardProposal\",\n            \"data\": {\n                \"myData\": \"xxxxxxxxxxxxxxxxxxxxxx\"\n            }\n        },\n        {\n            \"blockType\": \"slideDeck\",\n            \"data\": {\n                \"myData\": \"yyyyyyyyyyyyyyyyyy\"\n            }\n        },\n        {\n            \"blockType\": \"spreadsheet\",\n            \"data\": {\n                \"myData\": \"zzzzzzzzzzzzzzzzzzzz\"\n            }\n        }\n    ]\n\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiUri}}/entries/{{logbookEntryUid}}",
+									"host": [
+										"{{apiUri}}"
+									],
+									"path": [
+										"entries",
+										"{{logbookEntryUid}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update a Logbook Entry Note",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"HTTP Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "rid",
+										"value": "passwordless",
+										"type": "text"
+									},
+									{
+										"key": "st-auth-mode",
+										"value": "cookie",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"note\": \"This note was updated, but nothing else was\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiUri}}/entries/{{logbookEntryUid}}",
+									"host": [
+										"{{apiUri}}"
+									],
+									"path": [
+										"entries",
+										"{{logbookEntryUid}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "ENTRY COMMENTS",
+					"item": [
+						{
+							"name": "Get Comments for an entry",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"HTTP Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "rid",
+										"value": "passwordless",
+										"type": "text"
+									},
+									{
+										"key": "st-auth-mode",
+										"value": "cookie",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{apiUri}}/entries/{{logbookEntryUid}}/comments",
+									"host": [
+										"{{apiUri}}"
+									],
+									"path": [
+										"entries",
+										"{{logbookEntryUid}}",
+										"comments"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Comment for an entry",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"HTTP Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"",
+											"var jsonData = pm.response.json();",
+											"",
+											"pm.environment.set(\"commentUid\", jsonData.commentUid);",
+											"pm.environment.set(\"commentNuggetUid\", jsonData.commentUid);",
+											"pm.globals.get(\"variable_key\");",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "rid",
+										"value": "passwordless",
+										"type": "text"
+									},
+									{
+										"key": "st-auth-mode",
+										"value": "cookie",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"note\": \"This comment is real, and I have a nugget of info\",\n    \"nugget\": {\n        \"nuggetType\": \"proposal\",\n        \"pubAt\": \"2023-05-25\",\n        \"internalName\": \"This comment is major\",\n        \"publicTitle\": \"Stop paving parking lots\",\n        \"blocks\": [\n            {\n                \"blockType\": \"standardProposal\",\n                \"data\": {\n\n                }\n            },\n            {\n                \"blockType\": \"slideDeck\",\n                \"data\": {\n                    \n                }\n            },\n            {\n                \"blockType\": \"spreadsheet\",\n                \"data\": {\n                    \n                }\n            }\n        ]\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiUri}}/entries/{{logbookEntryUid}}/comments",
+									"host": [
+										"{{apiUri}}"
+									],
+									"path": [
+										"entries",
+										"{{logbookEntryUid}}",
+										"comments"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Comment - no nugget",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"HTTP Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"",
+											"var jsonData = pm.response.json();",
+											"",
+											"pm.environment.set(\"commentUid\", jsonData.commentUid);",
+											"pm.environment.set(\"commentNuggetUid\", jsonData.commentUid);",
+											"pm.globals.get(\"variable_key\");",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "rid",
+										"value": "passwordless",
+										"type": "text"
+									},
+									{
+										"key": "st-auth-mode",
+										"value": "cookie",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"note\": \"This comment is real, but has no nugget\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiUri}}/entries/{{logbookEntryUid}}/comments",
+									"host": [
+										"{{apiUri}}"
+									],
+									"path": [
+										"entries",
+										"{{logbookEntryUid}}",
+										"comments"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Comment",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"HTTP Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Data has the correct shape\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.commentUid).to.exist;",
+											"     pm.expect(jsonData.createdAt).to.exist;",
+											"      pm.expect(jsonData.updatedAt).to.exist;",
+											"       pm.expect(jsonData.pubAt).to.exist;",
+											"        pm.expect(jsonData.unPubAt).to.exist;",
+											"         pm.expect(jsonData.publicTitle).to.exist;",
+											"          pm.expect(jsonData.internalName).to.exist;",
+											"           pm.expect(jsonData.blocks).to.exist;",
+											"            pm.expect(jsonData.nuggetType).to.exist;",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "rid",
+										"value": "passwordless",
+										"type": "text"
+									},
+									{
+										"key": "st-auth-mode",
+										"value": "cookie",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{apiUri}}/comments/{{commentUid}}",
+									"host": [
+										"{{apiUri}}"
+									],
+									"path": [
+										"comments",
+										"{{commentUid}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update a Comment",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"HTTP Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "rid",
+										"value": "passwordless",
+										"type": "text"
+									},
+									{
+										"key": "st-auth-mode",
+										"value": "cookie",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"note\": \"This note was updated by 5patching\",\n    \"pubAt\": \"2024-09-05\",\n    \"unPubAt\": \"2024-09-05\",\n    \"internalName\": \"NEW5 Proposal to recover the parking lot.\",\n    \"publicTitle\": \"NEW5 Prettier Parking\",\n    \"blocks\": [\n        {\n            \"blockType\": \"standardProposal\",\n            \"data\": {\n                \"myData\": \"u5pdate all\"\n            }\n        },\n        {\n            \"blockType\": \"slideDeck\",\n            \"data\": {\n                \"myData\": \"5all updated\"\n            }\n        },\n        {\n            \"blockType\": \"spreadsheet\",\n            \"data\": {\n                \"myData\": \"5updated all\"\n            }\n        }\n    ]\n\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiUri}}/comments/{{commentUid}}",
+									"host": [
+										"{{apiUri}}"
+									],
+									"path": [
+										"comments",
+										"{{commentUid}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "ENTRY REACTIONS",
+					"item": [
+						{
+							"name": "Get Reactions for a entry",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"HTTP Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "rid",
+										"value": "passwordless",
+										"type": "text"
+									},
+									{
+										"key": "st-auth-mode",
+										"value": "cookie",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{apiUri}}/entries/{{logbookEntryUid}}/reactions",
+									"host": [
+										"{{apiUri}}"
+									],
+									"path": [
+										"entries",
+										"{{logbookEntryUid}}",
+										"reactions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create/Update Reaction to a entry",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"HTTP Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "rid",
+										"value": "passwordless",
+										"type": "text"
+									},
+									{
+										"key": "st-auth-mode",
+										"value": "cookie",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"reactions\": [\"consent\",\"like\"]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiUri}}/entries/{{logbookEntryUid}}/reactions",
+									"host": [
+										"{{apiUri}}"
+									],
+									"path": [
+										"entries",
+										"{{logbookEntryUid}}",
+										"reactions"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "REPLIES TO COMMENTS",
+					"item": [
+						{
+							"name": "Get Replies for a Comment",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"HTTP Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "rid",
+										"value": "passwordless",
+										"type": "text"
+									},
+									{
+										"key": "st-auth-mode",
+										"value": "cookie",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{apiUri}}/reply/comment/{{commentUid}}",
+									"host": [
+										"{{apiUri}}"
+									],
+									"path": [
+										"reply",
+										"comment",
+										"{{commentUid}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Reply to a Comment",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"HTTP Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "rid",
+										"value": "passwordless",
+										"type": "text"
+									},
+									{
+										"key": "st-auth-mode",
+										"value": "cookie",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"reply\": \"I know you are, but what am I?\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiUri}}/reply/comment/{{commentUid}}",
+									"host": [
+										"{{apiUri}}"
+									],
+									"path": [
+										"reply",
+										"comment",
+										"{{commentUid}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Reply to a Comment",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"HTTP Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "rid",
+										"value": "passwordless",
+										"type": "text"
+									},
+									{
+										"key": "st-auth-mode",
+										"value": "cookie",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"reply\": \"I second the proposal\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiUri}}/nugget/{{nuggetUid}}",
+									"host": [
+										"{{apiUri}}"
+									],
+									"path": [
+										"nugget",
+										"{{nuggetUid}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "ORG DEFINITION",
+					"item": [
+						{
+							"name": "Update Mission Statement",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const jsonData = pm.response.json();",
+											"",
+											"pm.environment.set(\"orgUid\",jsonData.uid);",
+											"pm.environment.set(\"logbookUid\", jsonData.logbookUid);",
+											"",
+											"pm.test(\"HTTP Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"",
+											"",
+											"pm.test(\"Response is valid shape\", function () {",
+											"    pm.expect(jsonData.orgUid).to.exist;",
+											"    pm.expect(jsonData.name).to.exist;",
+											"    pm.expect(jsonData.createdAt).to.exist;",
+											"    pm.expect(jsonData.logbookUid).to.exist;",
+											"});",
+											"",
+											"",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"randOrgName\", pm.variables.replaceIn('{{$randomCompanyName}}'));",
+											"pm.environment.set(\"randOrgBlurb\", pm.variables.replaceIn('{{$randomBs}}'));"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "rid",
+										"value": "passwordless",
+										"type": "text"
+									},
+									{
+										"key": "st-auth-mode",
+										"value": "cookie",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"mission\": \"Make a better world\"\n} ",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiUri}}/orgs/{{orgUid}}/mission",
+									"host": [
+										"{{apiUri}}"
+									],
+									"path": [
+										"orgs",
+										"{{orgUid}}",
+										"mission"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "CIRCLES",
+					"item": [
+						{
+							"name": "Get Org Circles",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const jsonData = pm.response.json();",
+											"",
+											"pm.test(\"HTTP Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"",
+											"const orgs = jsonData.orgs;",
+											"",
+											"pm.test(\"No orgs found yet, as expected\", function () {",
+											"    pm.expect(orgs.length).to.be.eq(0);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "rid",
+										"value": "passwordless",
+										"type": "text"
+									},
+									{
+										"key": "st-auth-mode",
+										"value": "cookie",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{apiUri}}/orgs",
+									"host": [
+										"{{apiUri}}"
+									],
+									"path": [
+										"orgs"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Create a Logbook note",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"HTTP Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "rid",
+								"value": "passwordless",
+								"type": "text"
+							},
+							{
+								"key": "st-auth-mode",
+								"value": "cookie",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"note\": \"This org event happened\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{apiUri}}/logbooks/{{logbookUid}}/entries",
+							"host": [
+								"{{apiUri}}"
+							],
+							"path": [
+								"logbooks",
+								"{{logbookUid}}",
+								"entries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create an Account Org Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.environment.set(\"orgUid\",jsonData.uid);",
+									"pm.environment.set(\"logbookUid\", jsonData.logbookUid);",
+									"",
+									"pm.test(\"HTTP Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"",
+									"pm.test(\"Response is valid shape\", function () {",
+									"    pm.expect(jsonData.orgUid).to.exist;",
+									"    pm.expect(jsonData.name).to.exist;",
+									"    pm.expect(jsonData.createdAt).to.exist;",
+									"    pm.expect(jsonData.logbookUid).to.exist;",
+									"});",
+									"",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"randOrgName\", pm.variables.replaceIn('{{$randomCompanyName}}'));",
+									"pm.environment.set(\"randOrgBlurb\", pm.variables.replaceIn('{{$randomBs}}'));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "rid",
+								"value": "passwordless",
+								"type": "text"
+							},
+							{
+								"key": "st-auth-mode",
+								"value": "cookie",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"{{randOrgName}}\",\n    \"note\": \"{{randOrgBlurb}}\"\n} ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{apiUri}}/orgs",
+							"host": [
+								"{{apiUri}}"
+							],
+							"path": [
+								"orgs"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Websockets",
+			"item": []
+		}
+	]
+}

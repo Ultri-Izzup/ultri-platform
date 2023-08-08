@@ -1,29 +1,39 @@
 <template>
-  <q-page class="flex row fit justify-center">
-    <q-card class="q-pa-xl" flat>
-      <q-card-section>
-        <div class="text-h3">Organization Dashboard</div>
-      </q-card-section>
-      <q-card-section>
-        <div class="text-h5">
-          <ul>
-            <li>Upcoming events and decisions</li>
-            <li>Recent events and decisions</li>
-            <li>Metered service free limit used</li>
-            <li>Metered service free limit remaining</li>
-            <li>Metered service usage fees for month</li>
-            <li>Org metrics</li>
-            <li>Org tasks alerts and notifications</li>
-          </ul>
-        </div>
-      </q-card-section>
-    </q-card>
-
+  <q-page class="row items-center justify-evenly" v-if="!auth.isSignedIn">
+    <div class="text-h1 full-width text-center">
+      {{ $t("homepage.heading") }}
+    </div>
+    <div class="text-h2 full-width text-center">
+      {{ $t("homepage.tagline") }}
+    </div>
+    <div class="full-width text-center">
+      <q-btn
+        size="xl"
+        :label="$t('homepage.button')"
+        color="primary"
+        @click="triggerSignInDialog"
+      ></q-btn>
+    </div>
+  </q-page>
+  <q-page v-else class="row items-center justify-evenly">
+    <div class="text-h1 full-width text-center">
+      {{ $t("homepage.signedIn.heading") }}
+    </div>
+    <div class="text-h2 full-width text-center">
+      {{ $t("homepage.signedIn.tagline") }}
+    </div>
   </q-page>
 </template>
 
 <script setup>
-</script>
+import VueMarkdown from "vue-markdown-render";
 
-<style lang="scss">
-</style>
+import { useAuthStore } from "../stores/auth";
+const auth = useAuthStore();
+
+const triggerSignInDialog = async () => {
+  auth.setTargetUrl("/member");
+  auth.setSignInRequired(true);
+  console.log(auth.targetUrl);
+};
+</script>

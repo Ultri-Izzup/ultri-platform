@@ -7,7 +7,7 @@
     -->
     <q-toolbar-title>
       <span class="text-bold"
-        ><router-link :to="{ name: 'home' }" class="navbar-brand-link">{{
+        ><span v-if="route.name != 'canvasPage'"><router-link :to="{ name: 'home' }" class="navbar-brand-link">{{
           orgStore.currentOrgUid &&
           authStore.isSignedIn &&
           orgStore.orgs.get(orgStore.currentOrgUid) &&
@@ -16,7 +16,12 @@
           route.params.orgUid == "Logbook"
             ? orgStore.orgs.get(orgStore.currentOrgUid).name
             : "Ultri"
-        }}</router-link></span
+        }}</router-link></span>
+        <span v-else>
+          <router-link :to="{ name: 'home' }" class="navbar-brand-link">Ultri</router-link>
+          {{ $t('canvas.'+canvasName+'.name') }}
+        </span>
+        </span
       >
     </q-toolbar-title>
   </div>

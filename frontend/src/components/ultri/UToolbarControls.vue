@@ -1,6 +1,7 @@
 <template>
   <div>
     <div>
+      <span v-if="route.name != 'canvasPage'">
       <span class="q-pr-lg">
         <router-link to="/canvas" class="navbar-text-link" color="primary">{{
           $t("nav.canvas")
@@ -16,7 +17,7 @@
           $t("nav.calendar")
         }}</router-link>
       </span>
-
+      </span>
       <q-toggle
         v-model="colorStore.darkMode"
         icon="mdi-theme-light-dark"
@@ -41,9 +42,12 @@
 </template>
 
 <script setup>
+import { useRoute } from "vue-router";
 import { useColorStore } from "../../stores/color";
 import { useAuthStore } from "../../stores/auth";
 import { useFeatureStore } from "../../stores/feature";
+
+const route = useRoute();
 
 // Stores
 const colorStore = useColorStore();

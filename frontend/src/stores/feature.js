@@ -11,11 +11,11 @@ const boolFeatures = {
 
 export const useFeatureStore = defineStore("feature", {
   state: () => ({
-    authEnabled: useStorage("authEnabled", false),
-    pricingEnabled: useStorage("pricingEnabled", false),
-    sociocracyOnly: useStorage("sociocracyOnly", false),
-    memberDashboard: useStorage("memberDashboard", false),
-    disabledCanvas: ["team", "lean", "coop"],
+    authEnabled: useStorage('authEnabled', false),
+    pricingEnabled: useStorage('pricingEnabled', false),
+    sociocracyOnly: useStorage('sociocracyOnly', false),
+    memberDashboard: useStorage('memberDashboard', false),
+    disabledCanvas: useStorage('disabledCanvas', [ 'delegation', 'team', 'organization', 'lean', 'coop'])
   }),
 
   getters: {
@@ -34,5 +34,9 @@ export const useFeatureStore = defineStore("feature", {
     canvasDisabled(canvas) {
       return this.disabledCanvas.includes(canvas);
     },
-  },
+    setDisabledCanvas(canvasArray) {
+      this.disabledCanvas = canvasArray;
+    }
+  }
+
 });

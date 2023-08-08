@@ -43,7 +43,7 @@
               >{{ $t("nav.canvas") }}</router-link
             >
           </span>
-          <span class="q-pr-lg" v-if="featureStore.enabled('auth')">
+          <span class="q-pr-lg" v-if="featureStore.enabled('pricing')">
             <router-link
               to="/pricing"
               class="navbar-text-link"
@@ -100,7 +100,7 @@
         v-if="route.meta.drawer == 'Dashboard'"
       ></DashboardDrawer>
       <OrgDrawer v-if="route.meta.drawer == 'Org'"></OrgDrawer>
-      <CircleDrawer v-if="route.meta.drawer == 'Circle'"></CircleDrawer>
+      <CirclesDrawer v-if="route.meta.drawer == 'Circle'"></CirclesDrawer>
     </q-drawer>
 
     <u-dynamic-footer></u-dynamic-footer>
@@ -120,6 +120,12 @@
       <OrgMissionDialog
         v-model="orgStore.showOrgMissionDialog"
       ></OrgMissionDialog>
+      <CirclesDialog
+        v-model="circlesStore.showCirclesDialog"
+      ></CirclesDialog>
+      <NewCircleDialog
+        v-model="circlesStore.showNewCircleDialog"
+      ></NewCircleDialog>
       <!-- PAGE VIEW -->
       <router-view />
     </q-page-container>
@@ -134,6 +140,7 @@ import { useAuthStore } from "../stores/auth";
 import { useOrgStore } from "../stores/org";
 import { useColorStore } from "../stores/color";
 import { useFeatureStore } from "../stores/feature";
+import { useCirclesStore } from "../stores/circles";
 
 import NotificationsButton from "../components/ultri/button/NotificationsButton.vue";
 import MemberButton from "../components/ultri/button/MemberButton.vue";
@@ -144,7 +151,7 @@ import HomepageDrawer from "./drawers/HomepageDrawer.vue";
 import CanvasDrawer from "./drawers/CanvasDrawer.vue";
 import DashboardDrawer from "./drawers/DashboardDrawer.vue";
 import OrgDrawer from "./drawers/OrgDrawer.vue";
-import CircleDrawer from "./drawers/CircleDrawer.vue";
+import CirclesDrawer from "./drawers/CirclesDrawer.vue";
 
 import PasswordlessAuthDialog from "../components/auth/dialog/PasswordlessDialog.vue";
 import WelcomeDialog from "../components/auth/dialog/WelcomeDialog.vue";
@@ -152,6 +159,8 @@ import WelcomeDialog from "../components/auth/dialog/WelcomeDialog.vue";
 import OrgCreateDialog from "../components/org/dialog/OrgCreateDialog.vue";
 import OrgCreateLogbookEntryDialog from "../components/org/dialog/OrgCreateLogbookEntryDialog.vue";
 import OrgMissionDialog from "../components/org/dialog/OrgMissionDialog.vue";
+import CirclesDialog from "../components/circles/dialog/CirclesDialog.vue";
+import NewCircleDialog from "../components/circles/dialog/NewCircleDialog.vue";
 
 import UDynamicFooter from "../components/footer/UDynamicFooter.vue";
 
@@ -164,6 +173,7 @@ const authStore = useAuthStore();
 const colorStore = useColorStore();
 const orgStore = useOrgStore();
 const featureStore = useFeatureStore();
+const circlesStore = useCirclesStore();
 
 watch(
   () => colorStore.darkMode,

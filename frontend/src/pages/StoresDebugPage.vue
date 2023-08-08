@@ -17,6 +17,8 @@
     <vue-json-pretty :data="canvas.$state" />
     Websockets:
     <vue-json-pretty :data="socket.$state" />
+    Circles:
+    <vue-json-pretty :data="circles.$state" />
   </div>
 </template>
 
@@ -30,12 +32,15 @@ import { useNuggetStore } from "../stores/nugget";
 import { useColorStore } from "../stores/color";
 import { useCanvasStore } from "../stores/canvas";
 import { useSocketStore } from "../stores/socket";
+import { useCirclesStore } from "../stores/circles";
+
 const auth = useAuthStore();
 const org = useOrgStore();
 const nugget = useNuggetStore();
 const color = useColorStore();
 const canvas = useCanvasStore();
 const socket = useSocketStore();
+const circles = useCirclesStore();
 
 const clearStores = () => {
   console.log("Clearing stores")
@@ -43,7 +48,8 @@ const clearStores = () => {
   org.$reset();
   nugget.reset();
   color.reset();
-  canvas.reset();
+  canvas.$reset();
   socket.$reset();
+  circles.$reset();
 };
 </script>

@@ -10,5 +10,7 @@ export default {
     update: "Update",
     up: "Up",
     down: "Down",
+    open: "Open",
+    close: "Close"
   },
 };

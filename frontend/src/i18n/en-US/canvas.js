@@ -7,6 +7,7 @@ export default {
       upload: "Upload the export later to update your data",
       soon: "Save to your Ultri Organization (coming soon)",
     },
+    comingSoon: 'coming soon...',
     callForAdditions:
       "If you know of other canvas you would like converted, contact us, we will try our best to accomodate you.",
     business: {

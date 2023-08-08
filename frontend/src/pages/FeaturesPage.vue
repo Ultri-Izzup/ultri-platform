@@ -29,12 +29,8 @@ const selectedCanvas = ref(null);
 
 // Set canvas enabled in this session
 const enableCanvas = () => {
-  // index of canvas name in array
-  console.log(ufs.disabledCanvas);
   const stillDisabled = ufs.disabledCanvas.filter((canvas) =>  canvas != selectedCanvas.value)
-  console.log('REAMISN', stillDisabled)
   ufs.disabledCanvas = stillDisabled;
-  console.log(ufs.disabledCanvas);
 }
 
 const clearStores = () => {

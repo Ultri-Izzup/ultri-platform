@@ -12,6 +12,7 @@ export default {
       "If you know of other canvas you would like converted, contact us, we will try our best to accomodate you.",
     business: {
       name: "Business Model Canvas",
+      title: "Business Model",
       attribution: "Business Model Canvas by Alexander Osterwalder from Strategyzer.com. The business model canvas itself is licensed under the CC BY SA 3.0.",
       description: "Develop new business models or document existing ones",
       partners: {
@@ -74,7 +75,7 @@ export default {
       delegation: {
         name: "Delegation Canvas",
         description:
-          "Define the domain or boundaries of a circle or group (soon).",
+          "Define the domain or boundaries of a circle or group (coming Friday Aug 11).",
         purpose: {
           title: "Purpose",
           instructions:

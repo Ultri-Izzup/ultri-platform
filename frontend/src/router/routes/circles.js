@@ -1,6 +1,6 @@
 const routes = [
   {
-    path: "/org/circles",
+    path: "/circles",
     meta: {
       drawer: "Circle"
     },

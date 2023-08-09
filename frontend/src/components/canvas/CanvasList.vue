@@ -4,7 +4,7 @@
       <div class="col-7 q-pa-md">
         <q-card class="q-pa-md">
           <q-card-section>
-            <p class="text-h5">{{ $t("canvas.description") }}</p>
+            <p class="text-h5">{{ $t("canvas.description") }} </p>
             <ul>
               <li><p class="text-h6">{{ $t("canvas.features.download") }}</p></li>
               <li><p class="text-h6">{{ $t("canvas.features.upload") }}</p></li>
@@ -20,7 +20,11 @@
       <div class="col-6 q-pa-md">
         <q-card class="q-pa-md">
           <q-card-section>
-            <p class="text-h6">{{ $t("canvas.business.description") }}</p>
+            <p class="text-h6">{{ $t("canvas.business.description") }}<span class="text-italic text-orange q-pl-md"
+              ><q-icon name="mdi-star" color="orange" />{{
+                $t("canvas.active")
+              }}</span
+            ></p>
           </q-card-section>
           <q-card-actions class="justify-center">
             <q-btn
@@ -36,7 +40,11 @@
       <div class="col-6 q-pa-md">
         <q-card class="q-pa-md">
           <q-card-section>
-            <p class="text-h6">{{ $t("canvas.s3.organization.description") }}</p>
+            <p class="text-h6">{{ $t("canvas.s3.organization.description") }}<span class="text-italic text-orange q-pl-md"
+              ><q-icon name="mdi-star" color="orange" />{{
+                $t("canvas.active")
+              }}</span
+            ></p>
           </q-card-section>
           <q-card-actions class="justify-center">
             <q-btn
@@ -52,7 +60,11 @@
       <div class="col-6 q-pa-md">
         <q-card class="q-pa-md">
           <q-card-section>
-            <p class="text-h6">{{ $t("canvas.s3.delegation.description") }}</p>
+            <p class="text-h6">{{ $t("canvas.s3.delegation.description") }}<span class="text-italic text-orange q-pl-md"
+              ><q-icon name="mdi-star" color="orange" />{{
+                $t("canvas.active")
+              }}</span
+            ></p>
           </q-card-section>
           <q-card-actions class="justify-center">
             <q-btn

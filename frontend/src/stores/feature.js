@@ -15,7 +15,7 @@ export const useFeatureStore = defineStore("feature", {
     pricingEnabled: useStorage('pricingEnabled', false),
     sociocracyOnly: useStorage('sociocracyOnly', false),
     memberDashboard: useStorage('memberDashboard', false),
-    disabledCanvas: useStorage('disabledCanvas', [ , 's3team', 'lean', 'coop'])
+    disabledCanvas: useStorage('disabledCanvas', [ 's3team', 'lean', 'coop'])
   }),
 
   getters: {

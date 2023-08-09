@@ -22,11 +22,11 @@ export const useCanvasStore = defineStore("canvas", {
 
     // Define top level props for coop ownership canvas.
     coop: useStorage("coop", {
-      // Create new maps for each canvgas section
+      // Create new maps for each canvas section
     }),
 
     // Define top level props for one of the S3 canvas.
-    delegation: useStorage("delegation", {
+    s3delegation: useStorage("s3delegation", {
       purpose: new Map(),
       responsibilities: new Map(),
       dependencies: new Map(),
@@ -38,9 +38,9 @@ export const useCanvasStore = defineStore("canvas", {
       delegator: new Map(),
       metrics: new Map(),
       monitoring: new Map(),
-      // Create new maps for each canvgas section
+      // Create new maps for each canvas section
     }),
-    organization: useStorage("organization", {
+    s3organization: useStorage("s3organization", {
       drivers: new Map(),
       deliverables: new Map(),
       customer: new Map(),
@@ -54,7 +54,7 @@ export const useCanvasStore = defineStore("canvas", {
       metrics: new Map(),
       cost: new Map(),
       revenue: new Map(),
-      // Create new maps for each canvgas section
+      // Create new maps for each canvas section
     }),
   }),
   getters: {},
@@ -65,12 +65,12 @@ export const useCanvasStore = defineStore("canvas", {
           this.resetBusiness();
           break;
         }
-        case "delegation": {
-          this.resetDelegation();
+        case "s3delegation": {
+          this.resetS3Delegation();
           break;
         }
-        case "organization": {
-          this.resetOrganization();
+        case "s3organization": {
+          this.resetS3Organization();
           break;
         }
       }
@@ -81,7 +81,7 @@ export const useCanvasStore = defineStore("canvas", {
     $reset() {
       this.resetBusiness();
       this.coop = new Map();
-      this.resetDelegation();
+      this.resetsS3Delegation();
     },
     resetBusiness() {
       this.business = {
@@ -96,8 +96,8 @@ export const useCanvasStore = defineStore("canvas", {
         revenue: new Map(),
       };
     },
-    resetDelegation() {
-      this.delegation = {
+    resetS3Delegation() {
+      this.s3delegation = {
         purpose: new Map(),
         responsibilities: new Map(),
         dependencies: new Map(),
@@ -111,8 +111,8 @@ export const useCanvasStore = defineStore("canvas", {
         monitoring: new Map(),
       };
     },
-    resetOrganization() {
-      this.organization = {
+    resetS3Organization() {
+      this.s3organization = {
         drivers: new Map(),
         deliverables: new Map(),
         customer: new Map(),

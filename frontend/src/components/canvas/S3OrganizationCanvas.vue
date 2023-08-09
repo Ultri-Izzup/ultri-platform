@@ -3,7 +3,7 @@
     <CanvasSection
       v-for="info in canvasDef"
       :info="info"
-      canvasName="organization"
+      canvasName="s3organization"
       :key="info.id"
     />
   </q-page>

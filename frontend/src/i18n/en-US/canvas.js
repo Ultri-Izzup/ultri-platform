@@ -71,17 +71,14 @@ export default {
       description:
         "Brainstorm new business models or analyze existing ones (soon).",
     },
-    "s3-organization": {
+    s3organization: {
       name: "S3 Organization Canvas",
-      attribution: " "
     },
-    "s3-team": {
+    s3team: {
       name: "S3 Team Canvas",
-      attribution: " "
     },
-    "s3-delegation": {
+    s3delegation: {
       name: "S3 Delegation Canvas",
-      attribution: " "
     },
     s3: {
       name: "S3 Canvas",

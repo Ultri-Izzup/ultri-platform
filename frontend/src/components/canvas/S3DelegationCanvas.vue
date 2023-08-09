@@ -11,7 +11,7 @@
       <CanvasSection
         v-for="info in canvasDef"
         :info="info"
-        canvasName="delegation"
+        canvasName="s3delegation"
         :key="info.id"
       />
   </q-page>

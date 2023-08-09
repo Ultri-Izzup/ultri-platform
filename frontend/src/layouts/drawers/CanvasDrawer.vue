@@ -34,7 +34,7 @@
       <q-item
         clickable
         v-ripple
-        :to="{ name: toRoute, params: { canvasName: 's3-organization' } }"
+        :to="{ name: toRoute, params: { canvasName: 's3organization' } }"
       >
         <q-item-section>
           <q-item-label class="text-bold"
@@ -52,7 +52,7 @@
       <q-item
         clickable
         v-ripple
-        :to="{ name: toRoute, params: { canvasName: 's3-delegation' } }"
+        :to="{ name: toRoute, params: { canvasName: 's3delegation' } }"
       >
         <q-item-section>
           <q-item-label class="text-bold"
@@ -70,7 +70,7 @@
       <q-item
         clickable
         v-ripple
-        :to="{ name: toRoute, params: { canvasName: 's3-team' } }"
+        :to="{ name: toRoute, params: { canvasName: 's3team' } }"
       >
         <q-item-section>
           <q-item-label class="text-bold">{{

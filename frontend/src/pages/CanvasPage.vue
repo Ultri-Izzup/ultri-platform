@@ -68,9 +68,9 @@ import UploadCanvasDialog from "../components/canvas/dialog/UploadCanvasDialog.v
 const canvases = {
   business: BusinessCanvas,
   coop: CoopCanvas,
-  "s3-organization": S3OrganizationCanvas,
-  "s3-delegation": S3DelegationCanvas,
-  "s3-team": S3TeamCanvas,
+  s3organization: S3OrganizationCanvas,
+  s3delegation: S3DelegationCanvas,
+  s3team: S3TeamCanvas,
   lean: LeanCanvas,
 };
 

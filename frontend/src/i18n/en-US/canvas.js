@@ -1,5 +1,6 @@
 export default {
   canvas: {
+    active: "Released",
     description:
       "Some of the best startup canvas ideas, in a free online version.",
     features: {
@@ -14,7 +15,7 @@ export default {
       name: "Business Model Canvas",
       title: "Business Model",
       attribution: "Business Model Canvas by Alexander Osterwalder from Strategyzer.com. The business model canvas itself is licensed under the CC BY SA 3.0.",
-      description: "Develop new business models or document existing ones",
+      description: "Develop new business models or document existing ones.",
       partners: {
         title: "Key Partners",
         instructions:
@@ -66,16 +67,28 @@ export default {
       description: "Understand and refine your co-op ownership plans (soon).",
     },
     lean: {
-      name: "Lean Canvas",
+      name: "Lean Startup Canvas",
       description:
         "Brainstorm new business models or analyze existing ones (soon).",
+    },
+    "s3-organization": {
+      name: "S3 Organization Canvas",
+      attribution: " "
+    },
+    "s3-team": {
+      name: "S3 Team Canvas",
+      attribution: " "
+    },
+    "s3-delegation": {
+      name: "S3 Delegation Canvas",
+      attribution: " "
     },
     s3: {
       name: "S3 Canvas",
       delegation: {
-        name: "Delegation Canvas",
+        name: "S3 Delegation Canvas",
         description:
-          "Define the domain or boundaries of a circle or group (coming Friday Aug 11).",
+          "Define the domain or boundaries of a circle or group.",
         purpose: {
           title: "Purpose",
           instructions:
@@ -133,8 +146,8 @@ export default {
         },
       },
       organization: {
-        name: "Organization Canvas",
-        description: "Understand an organizations business model (soon).",
+        name: "S3 Organization Canvas",
+        description: "Understand an organizations business model.",
         drivers: {
           title: "Key Drivers",
           instructions:
@@ -197,7 +210,7 @@ export default {
         },
       },
       team: {
-        name: "Team Canvas",
+        name: "S3 Team Canvas",
         description:
           "Define the organization with an inward perspective (soon).",
       },

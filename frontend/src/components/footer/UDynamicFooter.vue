@@ -7,9 +7,7 @@
       <div v-if="route.name == 'canvasPage'" class="row full-width">
         <!-- XS SCREEN -->
         <div class="xs row full-width">
-          <div class="col q-py-sm text-caption">
-            {{ $t('canvas.'+canvasName+'.attribution', ' ')}}
-          </div>
+          <CanvasAttribution class="col-10"/>
           <div class="col-2 q-py-sm text-right justify-right">
             <q-space /><a
               href="https://www.linkedin.com/company/ultri/"
@@ -23,7 +21,7 @@
         <!-- LARGER THAN XS -->
         <div class="gt-xs row full-width">
           <div class="col q-py-sm text-caption">
-            {{ $t('canvas.'+canvasName+'.attribution', ' ')}}
+            <CanvasAttribution class="col-10"/>
           </div>
           <div class="text-body2 q-pr-md">
             <a
@@ -87,6 +85,8 @@
 import { useRoute } from "vue-router";
 
 import { useColorStore } from "../../stores/color";
+
+import CanvasAttribution from "../canvas/CanvasAttribution.vue";
 
 const route = useRoute();
 

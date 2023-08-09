@@ -50,7 +50,7 @@
           </q-card-section>
           <q-card-actions class="justify-center">
             <q-btn
-              :to="{ name: toRoute, params: { canvasName: 's3-organization' } }"
+              :to="{ name: toRoute, params: { canvasName: 's3organization' } }"
               color="primary"
               >{{ $t("canvas.s3.organization.name") }}</q-btn
             >
@@ -71,7 +71,7 @@
           </q-card-section>
           <q-card-actions class="justify-center">
             <q-btn
-              :to="{ name: toRoute, params: { canvasName: 's3-delegation' } }"
+              :to="{ name: toRoute, params: { canvasName: 's3delegation' } }"
               color="primary"
               >{{ $t("canvas.s3.delegation.name") }}</q-btn
             >
@@ -87,7 +87,7 @@
           </q-card-section>
           <q-card-actions class="justify-center">
             <q-btn
-              :to="{ name: toRoute, params: { canvasName: 's3-team' } }"
+              :to="{ name: toRoute, params: { canvasName: 's3team' } }"
               color="primary"
               >{{ $t("canvas.s3.team.name") }}</q-btn
             >

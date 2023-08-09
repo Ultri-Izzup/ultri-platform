@@ -41,7 +41,6 @@ import { useQuasar } from "quasar";
 import { useAuthStore } from "../stores/auth";
 import { useOrgStore } from "../stores/org";
 import { useColorStore } from "../stores/color";
-import { useCirclesStore } from "../stores/circles";
 
 import LogbookDrawer from "./drawers/LogbookDrawer.vue";
 import DefaultDrawer from "./drawers/DefaultDrawer.vue";

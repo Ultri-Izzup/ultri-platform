@@ -101,7 +101,7 @@ const props = defineProps({
 
 const currentItem = ref();
 
-console.log("INFO", props.info);
+// console.log("INFO", props.info);
 
 const id = ref("");
 const add = ref(true);

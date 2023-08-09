@@ -47,6 +47,9 @@ import { useColorStore } from "../../stores/color";
 import { useAuthStore } from "../../stores/auth";
 import { useFeatureStore } from "../../stores/feature";
 
+import MemberButton from "./button/MemberButton.vue"
+import NotificationsButton from "./button/NotificationsButton.vue"
+
 const route = useRoute();
 
 // Stores

@@ -34,7 +34,7 @@ const currentItem = ref();
 
 const expanded = ref(false);
 
-console.log("INFO", props.info);
+// console.log("INFO", props.info);
 
 const id = ref("");
 const add = ref(true);

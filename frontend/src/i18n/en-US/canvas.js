@@ -65,6 +65,51 @@ export default {
     coop: {
       name: "Co-op Ownership Canvas",
       description: "Understand and refine your co-op ownership plans (soon).",
+      purpose: {
+        title: "1. Purpose",
+        instructions:
+          "What does your project hope to achieve? Why does it exist?",
+      },
+      stakeholders: {
+        title: "2. Stakeholders",
+        instructions:
+          "Who are your member owners, those with long-term interests?",
+      },
+      nonOwnerStakeholders: {
+        title: "Non-owner Stakeholders",
+        instructions:
+          "Who are your non-owner stakeholders?",
+      },
+      benefits: {
+        title: "3. Benefits",
+        instructions:
+          "What benefits do your member-owners get?",
+      },
+      responsibilities: {
+        title: "4. Responsibilities",
+        instructions:
+          "What financial and non-financial (e.g., labor) inputs are required for member-owners?",
+      },
+      guidance: {
+        title: "5. Guidance",
+        instructions:
+          "Who are your advisors, and which stakeholder groups do they represent? If you have a board of directors, how many board seats go to each stakeholder group?",
+      },
+      governance: {
+        title: "6. Governance Rights",
+        instructions:
+          "Which key decisons are made, through which process, and by which stakeholders?",
+      },
+      financial: {
+        title: "7. Financial Rights",
+        instructions:
+          "What determines if/how you distribute surplus profits (dividends) to member-owners?",
+      },
+      investment: {
+        title: "8. Investment",
+        instructions:
+          "How much money do you need to be viable over te next year? How much can you raise from member-owners vs. other sources?",
+      }
     },
     lean: {
       name: "Lean Startup Canvas",

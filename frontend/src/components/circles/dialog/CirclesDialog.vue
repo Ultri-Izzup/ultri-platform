@@ -11,28 +11,19 @@
           </q-btn>
         </q-bar>
         <q-card-section>
-          <div class="row">
-            <div class="col-4">
-              {{ $t("circles.dialog.name") }}
-            </div>
-            <q-input v-model="currentData.label"></q-input>
+          <div class="row q-pb-md">
+            <q-input v-model="currentData.label" :label="$t('circles.circleName')" class="full-width"></q-input>
 
           </div>
-          <div class="row">
-            <div class="col-4">
-              {{ $t("circles.dialog.uid") }}
-            </div>
-            <div class="col-8">
-              {{circlesStore.current('uid') }}
+          <div class="row q-pb-md">
+            <div class="col text-grey-7">
+              ID: {{circlesStore.current('uid') }}
             </div>
           </div>
 
           <div class="row">
-            <div class="col-4">
-              {{ $t("circles.dialog.parentCircle") }}
-            </div>
-              <div class="col-8">
-              <q-select filled v-model="currentData.parentCircle" map-options emit-value :options="circlesStore.circleSelections" label="Circles"></q-select>
+              <div class="col">
+              <q-select filled v-model="currentData.parentCircle" map-options emit-value :options="circlesStore.circleSelections" :label="$t('circles.parentCircle')"></q-select>
             </div>
           </div>
         </q-card-section>
@@ -98,7 +89,7 @@ const deleteCircle = () => {
 
 const addChild = () => {
   console.log('Adding child to: ' + circlesStore.currentCircleUid)
-  circlesStore.triggerNewCircleDialog();
+  circlesStore.triggerChildCircleDialog();
 }
 
 

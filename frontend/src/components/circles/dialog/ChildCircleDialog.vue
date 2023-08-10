@@ -11,17 +11,12 @@
           </q-btn>
         </q-bar>
         <q-card-section>
-          <div class="row q-pb-md">
-            <q-input v-model="newCircleName" class="full-width" :label="$t('circles.circleName')"></q-input>
-          </div>
-          <div class="row">
-              <div class="col">
-              <q-select filled v-model="newCircleParent" map-options emit-value :options="circlesStore.circleSelections" :label="$t('circles.parentCircle')"></q-select>
-            </div>
+          <div class="row full-width">
+            <q-input v-model="newCircleName" :label="$t('circles.circleName')" class="full-width"></q-input>
           </div>
         </q-card-section>
         <q-card-actions class="justify-center">
-          <q-btn :label="$t('circles.dialog.childCircle.saveChild')" color="primary" @click="saveNewChild()"></q-btn>
+          <q-btn :label="$t('circles.dialog.childCircle.saveChild')" color="primary" @click="saveChild()"></q-btn>
           <q-btn :label="$t('circles.dialog.cancel')" color="primary" @click="onDialogOK();"></q-btn>
         </q-card-actions>
       </q-form>
@@ -37,7 +32,6 @@ import { useCirclesStore } from "../../../stores/circles";
 const circlesStore = useCirclesStore();
 
 const newCircleName = ref(null)
-const newCircleParent = ref(null)
 
 const reset = () => {};
 
@@ -88,18 +82,7 @@ const saveChild = () => {
   newCircleName.value = null;
 
   onDialogOK();
-}
 
-const saveNewChild = () => {
-  console.log('Saving nw child, ' + newCircleName.value + ' for: ' + newCircleParent.value)
-
-  const newCircleObj = { label: newCircleName.value, parentCircle: newCircleParent.value }
-
-  circlesStore.addChild(newCircleObj);
-
-  newCircleName.value = null;
-
-  onDialogOK();
 }
 
 const onSave = async () => {

@@ -14,6 +14,7 @@ export const useCirclesStore = defineStore("circles", () => {
   const fetching = ref(false);
   const showCirclesDialog = ref(false);
   const showNewCircleDialog = ref(false);
+  const showChildCircleDialog = ref(false);
 
   const formMode = ref('edit');
 
@@ -34,6 +35,11 @@ export const useCirclesStore = defineStore("circles", () => {
   const triggerNewCircleDialog = () => {
     console.log('triggeredNew')
     showNewCircleDialog.value = true;
+  };
+
+  const triggerChildCircleDialog = () => {
+    console.log('triggeredChild')
+    showChildCircleDialog.value = true;
   };
 
   const validateCircleName = (orgName) => {
@@ -123,6 +129,7 @@ export const useCirclesStore = defineStore("circles", () => {
     fetching.value = false;
     showCirclesDialog.value = false;
     showNewCircleDialog.value = false;
+    newCircleParent.value = null;
   };
 
   return {
@@ -132,6 +139,7 @@ export const useCirclesStore = defineStore("circles", () => {
     fetching,
     showCirclesDialog,
     showNewCircleDialog,
+    showChildCircleDialog,
     circleSelections,
     formMode,
     clear,
@@ -143,6 +151,7 @@ export const useCirclesStore = defineStore("circles", () => {
     setCurrentCircle,
     triggerCircleDialog,
     triggerNewCircleDialog,
+    triggerChildCircleDialog,
     validateCircleName,
     $reset
   };

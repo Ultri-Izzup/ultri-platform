@@ -1,34 +1,20 @@
 <template>
   <q-page>
-    <div class="text-h3 text-center justify-center row full-width">
+    <div class="text-h3 text-center justify-center row full-width q-pb-md">
       {{ $t("circles.dashboard.title") }}
     </div>
+
+    <div class="row full-width">
+      <div class="col-4 q-pl-md q-pr-sm">
+        <CircleMembersEditor />
+      </div>
+      <div class="col-8 q-pr-md q-pl-sm">
+        <CirclesEditor />
+      </div>
+    </div>
+
     <div class="fit">
       <div>
-        <div class="row" v-if="hasCircles">
-          <!-- <pre>{{ treeData }}</pre> -->
-          <div class="col-12">
-            <q-btn
-              :label="$t('circles.reset.button.text')"
-              color="primary"
-              @click="circlesStore.$reset()"
-            ></q-btn>
-            <q-tree
-              :nodes="treeData"
-              node-key="uid"
-              v-model:selected="selected"
-              default-expand-all
-            ></q-tree>
-          </div>
-        </div>
-        <div v-else>
-          <q-btn
-            :label="$t('circles.firstCircle.button.text')"
-            color="primary"
-            @click="circlesStore.initCircles()"
-          ></q-btn>
-        </div>
-
         <q-page-sticky
           :position="Screen.gt.sm ? 'bottom-right' : 'bottom'"
           :offset="fabPos"
@@ -46,7 +32,7 @@
               @click="onDownloadClick()"
               color="primary"
               icon="mdi-download"
-              :disable="draggingFab || circlesStore.orgCircles.length < 1"
+              :disable="draggingFab || circlesStore.hasCircles"
               class="ontop"
             ></q-fab-action>
             <q-fab-action
@@ -55,12 +41,13 @@
               icon="mdi-upload"
               :disable="draggingFab"
               class="ontop"
-            ></q-fab-action>
+            >
+            </q-fab-action>
             <q-fab-action
               @click="onDeleteClick()"
               color="secondary"
               icon="mdi-delete"
-              :disable="draggingFab || circlesStore.orgCircles.length < 1"
+              :disable="draggingFab || circlesStore.hasCircles"
               class="ontop"
             ></q-fab-action>
           </q-fab>
@@ -69,12 +56,13 @@
         <UploadCirclesDialog v-model="displayUpload" />
       </div>
     </div>
-    <CirclesDialog
-        v-model="circlesStore.showCirclesDialog"
-      ></CirclesDialog>
-      <NewCircleDialog
-        v-model="circlesStore.showNewCircleDialog"
-      ></NewCircleDialog>
+    <CirclesDialog v-model="circlesStore.showCirclesDialog"></CirclesDialog>
+    <NewCircleDialog
+      v-model="circlesStore.showNewCircleDialog"
+    ></NewCircleDialog>
+    <ChildCircleDialog
+      v-model="circlesStore.showChildCircleDialog"
+    ></ChildCircleDialog>
   </q-page>
 </template>
 
@@ -83,55 +71,22 @@ import { onMounted, computed, ref, watch } from "vue";
 import { arrayToTree } from "performant-array-to-tree";
 
 import { useCirclesStore } from "../stores/circles";
+import { useCircleMembersStore } from "../stores/circleMembers";
 import { useOrgStore } from "../stores/org";
 
 import { Screen } from "quasar";
 
 import CirclesDialog from "../components/circles/dialog/CirclesDialog.vue";
 import NewCircleDialog from "../components/circles/dialog/NewCircleDialog.vue";
-
+import ChildCircleDialog from "../components/circles/dialog/ChildCircleDialog.vue";
 import UploadCirclesDialog from "../components/circles/dialog/UploadCirclesDialog.vue";
+
+import CirclesEditor from "../components/circles/CirclesEditor.vue";
+import CircleMembersEditor from "../components/circles/CircleMembersEditor.vue";
 
 const orgStore = useOrgStore();
 const circlesStore = useCirclesStore();
-
-const selected = ref(null);
-
-const unselectNode = () => {
-  selected.value = null;
-};
-
-const hasCircles = computed(() => {
-  return circlesStore.orgCircles.length;
-});
-
-const treeData = computed(() => {
-  let tree = [];
-  tree = arrayToTree(circlesStore.orgCircles, {
-    id: "uid",
-    parentId: "parentCircle",
-    childrenField: "children",
-    dataField: null,
-  });
-
-  return tree;
-});
-
-watch(selected, () => {
-  const selectedState = selected.value ? "selected" : "unselected";
-  console.log("SELECTION CHANGED", selectedState, selected.value);
-  if (selectedState == "selected") {
-    circlesStore.currentCircleUid = selected.value;
-    circlesStore.triggerCircleDialog();
-  } else {
-    circlesStore.currentCircleUid = null;
-  }
-});
-
-// Load circle data for the org into the store
-//circlesStore.triggerCircleDialog();
-
-onMounted(() => {});
+const circleMembersStore = useCircleMembersStore();
 
 // FAB - Floating Action Button to save/download
 const fabPos = ref([18, 18]);
@@ -154,7 +109,7 @@ const onDownloadClick = () => {
   // Define an object to hold our ouput
   const outObj = { circles: {} };
 
-  outObj.circles[orgStore.currentOrgUid] = circlesStore.orgCircles;
+  outObj.circles = circlesStore.orgCircles;
 
   var dataStr =
     "data:text/json;charset=utf-8," +
@@ -163,7 +118,7 @@ const onDownloadClick = () => {
   dlAnchorElem.setAttribute("href", dataStr);
   dlAnchorElem.setAttribute(
     "download",
-    "org-" + orgStore.currentOrgUid + "-circles.json"
+    "OpenSociocracy-circles.json"
   );
   dlAnchorElem.click();
 

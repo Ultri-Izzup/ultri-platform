@@ -99,6 +99,11 @@
         <q-card class="q-pa-md">
           <q-card-section>
             <p class="text-h6">{{ $t("canvas.coop.description") }}</p>
+            <span class="text-italic text-orange q-pl-md"
+              ><q-icon name="mdi-star" color="orange" />{{
+                $t("canvas.active")
+              }}</span
+            >
           </q-card-section>
           <q-card-actions class="justify-center">
             <q-btn

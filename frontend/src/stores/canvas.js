@@ -17,12 +17,21 @@ export const useCanvasStore = defineStore("canvas", {
       channels: new Map(),
       custSegments: new Map(),
       costs: new Map(),
-      revenue: new Map(),
+      revenue: new Map()
     }),
 
     // Define top level props for coop ownership canvas.
     coop: useStorage("coop", {
       // Create new maps for each canvas section
+      purpose: new Map(),
+      stakeholders: new Map(),
+      nonOwnerStakeholders: new Map(),
+      benefits: new Map(),
+      responsibilities: new Map(),
+      governance: new Map(),
+      financial: new Map(),
+      guidance: new Map(),
+      investment: new Map()
     }),
 
     // Define top level props for one of the S3 canvas.
@@ -37,7 +46,7 @@ export const useCanvasStore = defineStore("canvas", {
       resources: new Map(),
       delegator: new Map(),
       metrics: new Map(),
-      monitoring: new Map(),
+      monitoring: new Map()
       // Create new maps for each canvas section
     }),
     s3organization: useStorage("s3organization", {
@@ -53,9 +62,9 @@ export const useCanvasStore = defineStore("canvas", {
       values: new Map(),
       metrics: new Map(),
       cost: new Map(),
-      revenue: new Map(),
+      revenue: new Map()
       // Create new maps for each canvas section
-    }),
+    })
   }),
   getters: {},
   actions: {
@@ -73,6 +82,10 @@ export const useCanvasStore = defineStore("canvas", {
           this.resetS3Organization();
           break;
         }
+        case "coop": {
+          this.resetCoop();
+          break;
+        }
       }
     },
     setCanvasData(canvas, section, data) {
@@ -80,8 +93,9 @@ export const useCanvasStore = defineStore("canvas", {
     },
     $reset() {
       this.resetBusiness();
-      this.coop = new Map();
+      this.resetS3Organization();
       this.resetsS3Delegation();
+      this.resetCoop();
     },
     resetBusiness() {
       this.business = {
@@ -93,7 +107,7 @@ export const useCanvasStore = defineStore("canvas", {
         channels: new Map(),
         custSegments: new Map(),
         costs: new Map(),
-        revenue: new Map(),
+        revenue: new Map()
       };
     },
     resetS3Delegation() {
@@ -108,7 +122,7 @@ export const useCanvasStore = defineStore("canvas", {
         resources: new Map(),
         delegator: new Map(),
         metrics: new Map(),
-        monitoring: new Map(),
+        monitoring: new Map()
       };
     },
     resetS3Organization() {
@@ -125,8 +139,21 @@ export const useCanvasStore = defineStore("canvas", {
         values: new Map(),
         metrics: new Map(),
         cost: new Map(),
-        revenue: new Map(),
+        revenue: new Map()
       };
     },
-  },
+    resetCoop() {
+      this.coop = {
+        purpose: new Map(),
+        stakeholders: new Map(),
+        nonOwnerStakeholders: new Map(),
+        benefits: new Map(),
+        responsibilities: new Map(),
+        governance: new Map(),
+        financial: new Map(),
+        guidance: new Map(),
+        investment: new Map()
+      };
+    }
+  }
 });

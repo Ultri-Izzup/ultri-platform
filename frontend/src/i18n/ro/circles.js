@@ -1,18 +1,11 @@
 export default {
   circles: {
-    circles: 'Circles',
-    addCircle: 'Add circle',
-    circleMembers: 'Members',
-    addMember: 'Add member',
-    parentCircle: "Parent circle",
-    circleName: "Circle name",
-    circleMember: 'Circle Member',
     dashboard: {
-      title: 'OpenSociocracy Circles'
+      title: 'Circles'
     },
     firstCircle: {
       button: {
-        text: 'Default Circles'
+        text: 'Start Building'
       }
     },
     reset: {
@@ -24,7 +17,7 @@ export default {
       editor: {
         title: 'Circle Editor'
       },
-      childCircle: {
+      newCircle: {
         title: 'Add child circle',
         saveChild: 'Save child'
       },

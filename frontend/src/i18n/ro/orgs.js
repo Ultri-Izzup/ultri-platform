@@ -6,7 +6,7 @@ export default {
       currentOrganization: "Current Organization",
       currentOrganizations: "Organizations",
       circlesCaption: "Circles and their domains",
-      circlesLabel: "Circles",
+      circlesLabel: "Circles / Groups",
       canvasesCaption: "Perspective on organization",
       canvasesLabel: "Business Model Canvas",
       okrCaption: "Address drivers",

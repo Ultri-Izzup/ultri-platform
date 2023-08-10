@@ -17,8 +17,8 @@
         </q-card>
       </q-expansion-item>
       -->
-      <!--
-      <q-item clickable>
+
+      <q-item clickable v-if="ufs.enabled('i18n')">
         <q-item-section avatar>
           <q-icon name="mdi-web" color="primary" />
         </q-item-section>
@@ -36,7 +36,7 @@
           />
         </q-item-section>
       </q-item>
-      -->
+
       <!--
       <q-item clickable v-close-popup @click="colorStore.toggleDarkMode()">
         <q-item-section avatar>
@@ -126,6 +126,7 @@ const { locale } = useI18n({ useScope: "global" });
 const locales = [
   { value: "en-US", label: "English" },
   { value: "es", label: "Español" },
+  { value: "ro", label: "Romanian" },
 ];
 
 const triggerSignInDialog = async () => {

@@ -14,6 +14,8 @@ export const useCirclesStore = defineStore("circles", () => {
   const fetching = ref(false);
   const showCirclesDialog = ref(false);
   const showNewCircleDialog = ref(false);
+  const showChildCircleDialog = ref(false);
+  const showNewCircleMemberDialog = ref(false);
 
   const formMode = ref('edit');
 
@@ -21,6 +23,10 @@ export const useCirclesStore = defineStore("circles", () => {
   const circleSelections =  computed(() => {
     return orgCircles.value.map(circle => ({ value: circle.uid, label: circle.label}));
   })
+
+  const hasCircles = computed(() => {
+    return orgCircles.value.length;
+  });
 
   const setCurrentCircle = (uid) => {
     currentCircleUid.value = uid;
@@ -34,6 +40,16 @@ export const useCirclesStore = defineStore("circles", () => {
   const triggerNewCircleDialog = () => {
     console.log('triggeredNew')
     showNewCircleDialog.value = true;
+  };
+
+  const triggerChildCircleDialog = () => {
+    console.log('triggeredChild')
+    showChildCircleDialog.value = true;
+  };
+
+  const triggerNewCircleMemberDialog = () => {
+    console.log('triggeredNew')
+    showNewCircleMemberDialog.value = true;
   };
 
   const validateCircleName = (orgName) => {
@@ -123,6 +139,7 @@ export const useCirclesStore = defineStore("circles", () => {
     fetching.value = false;
     showCirclesDialog.value = false;
     showNewCircleDialog.value = false;
+    //newCircleParent.value = null;
   };
 
   return {
@@ -132,8 +149,11 @@ export const useCirclesStore = defineStore("circles", () => {
     fetching,
     showCirclesDialog,
     showNewCircleDialog,
+    showChildCircleDialog,
+    showNewCircleMemberDialog,
     circleSelections,
     formMode,
+    hasCircles,
     clear,
     addChild,
     deleteCurrent,
@@ -143,6 +163,8 @@ export const useCirclesStore = defineStore("circles", () => {
     setCurrentCircle,
     triggerCircleDialog,
     triggerNewCircleDialog,
+    triggerChildCircleDialog,
+    triggerNewCircleMemberDialog,
     validateCircleName,
     $reset
   };

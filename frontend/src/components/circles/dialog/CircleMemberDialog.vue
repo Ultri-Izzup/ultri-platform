@@ -4,7 +4,7 @@
       <q-form @submit="onSubmit" @reset="onReset">
         <!-- Toolbar -->
         <q-bar class="dialog-qbar">
-          {{ $t("circles.dialog.childCircle.title") }}
+          {{ $t("circles.circleMember") }}
           <q-space></q-space>
           <q-btn dense flat icon="mdi-close" v-close-popup @click="reset">
             <q-tooltip>{{ $t("nav.close") }} </q-tooltip>
@@ -12,7 +12,7 @@
         </q-bar>
         <q-card-section>
           <div class="row q-pb-md">
-            <q-input v-model="newCircleName" class="full-width" :label="$t('circles.circleName')"></q-input>
+            <q-input v-model="memberName" class="full-width" :label="$t('circles.circleName')"></q-input>
           </div>
           <div class="row">
               <div class="col">

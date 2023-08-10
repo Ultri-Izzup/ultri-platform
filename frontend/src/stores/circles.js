@@ -15,6 +15,7 @@ export const useCirclesStore = defineStore("circles", () => {
   const showCirclesDialog = ref(false);
   const showNewCircleDialog = ref(false);
   const showChildCircleDialog = ref(false);
+  const showNewCircleMemberDialog = ref(false);
 
   const formMode = ref('edit');
 
@@ -44,6 +45,11 @@ export const useCirclesStore = defineStore("circles", () => {
   const triggerChildCircleDialog = () => {
     console.log('triggeredChild')
     showChildCircleDialog.value = true;
+  };
+
+  const triggerNewCircleMemberDialog = () => {
+    console.log('triggeredNew')
+    showNewCircleMemberDialog.value = true;
   };
 
   const validateCircleName = (orgName) => {
@@ -144,6 +150,7 @@ export const useCirclesStore = defineStore("circles", () => {
     showCirclesDialog,
     showNewCircleDialog,
     showChildCircleDialog,
+    showNewCircleMemberDialog,
     circleSelections,
     formMode,
     hasCircles,
@@ -157,6 +164,7 @@ export const useCirclesStore = defineStore("circles", () => {
     triggerCircleDialog,
     triggerNewCircleDialog,
     triggerChildCircleDialog,
+    triggerNewCircleMemberDialog,
     validateCircleName,
     $reset
   };

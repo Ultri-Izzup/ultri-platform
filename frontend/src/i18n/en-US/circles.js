@@ -1,7 +1,12 @@
 export default {
   circles: {
+    circles: 'Circles',
+    addCircle: 'Add circle',
+    circleMembers: 'Members',
+    addMember: 'Add member',
     parentCircle: "Parent circle",
     circleName: "Circle name",
+    circleMember: 'Circle Member',
     dashboard: {
       title: 'OpenSociocracy Circles'
     },

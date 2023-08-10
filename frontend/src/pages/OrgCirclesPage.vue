@@ -32,7 +32,7 @@
               @click="onDownloadClick()"
               color="primary"
               icon="mdi-download"
-              :disable="draggingFab || circlesStore.orgCircles.length < 1"
+              :disable="draggingFab || circlesStore.hasCircles"
               class="ontop"
             ></q-fab-action>
             <q-fab-action
@@ -47,7 +47,7 @@
               @click="onDeleteClick()"
               color="secondary"
               icon="mdi-delete"
-              :disable="draggingFab || circlesStore.orgCircles.length < 1"
+              :disable="draggingFab || circlesStore.hasCircles"
               class="ontop"
             ></q-fab-action>
           </q-fab>

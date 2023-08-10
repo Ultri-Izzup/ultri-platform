@@ -2,7 +2,7 @@
   <div class="col">
     <q-card>
         <q-toolbar :class="colorStore.darkMode ? 'bg-grey-9' : ' bg-primary ' + ' text-white '">
-          <q-toolbar-title>Circles</q-toolbar-title>
+          <q-toolbar-title>{{ $t("circles.circles") }}</q-toolbar-title>
           <q-btn
             @click="circlesStore.triggerNewCircleDialog()"
             dense

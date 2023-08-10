@@ -68,6 +68,11 @@ export const useCircleMembersStore = defineStore("circleMembers", () => {
     orgs.value.delete(uid);
   };
 
+  const triggerNewCircleMemberDialog = () => {
+    console.log('triggeredNewCircleMember')
+    showNewCircleMemberDialog.value = true;
+  };
+
   const $reset = () => {
     console.log(
     'RESET MEMBERS'
@@ -87,9 +92,11 @@ export const useCircleMembersStore = defineStore("circleMembers", () => {
     currentInviteUid,
     fetching,
     showNewCircleMemberDialog,
+    showNewCircleMemberDialog,
     setCurrentMember,
     setCurrentInvite,
     triggerMemberInviteDialog,
+    triggerNewCircleMemberDialog,
     validateName,
     loadMembers,
     loadInvites,

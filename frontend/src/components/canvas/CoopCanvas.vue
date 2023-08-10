@@ -8,8 +8,6 @@
     />
   </q-page>
 </template>
-<<<<<<< Updated upstream
-=======
 <script setup>
 import CanvasSection from "./CanvasSection.vue";
 import { useI18n } from "vue-i18n";
@@ -129,4 +127,3 @@ const canvasDef = [
   }
 }
 </style>
->>>>>>> Stashed changes

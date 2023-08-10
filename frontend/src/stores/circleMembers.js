@@ -5,7 +5,7 @@ import { api } from "boot/axios";
 
 
 export const useCircleMembersStore = defineStore("circleMembers", () => {
-  const members = ref(useStorage("members", []));
+  const members = ref(useStorage("members", [{uid: "1234", name:"Brian", email:"brian@example.com"}]));
   const currentMemberUid = ref(useStorage("currentMemberUid", null));
   const invites = ref(useStorage("invites", []));
   const currentInviteUid = ref(useStorage("currentInviteUid", null));

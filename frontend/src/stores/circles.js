@@ -23,6 +23,10 @@ export const useCirclesStore = defineStore("circles", () => {
     return orgCircles.value.map(circle => ({ value: circle.uid, label: circle.label}));
   })
 
+  const hasCircles = computed(() => {
+    return orgCircles.value.length;
+  });
+
   const setCurrentCircle = (uid) => {
     currentCircleUid.value = uid;
   };
@@ -142,6 +146,7 @@ export const useCirclesStore = defineStore("circles", () => {
     showChildCircleDialog,
     circleSelections,
     formMode,
+    hasCircles,
     clear,
     addChild,
     deleteCurrent,

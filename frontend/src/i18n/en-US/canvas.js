@@ -64,7 +64,7 @@ export default {
     },
     coop: {
       name: "Co-op Ownership Canvas",
-      description: "Understand and refine your co-op ownership plans (soon).",
+      description: "Understand and refine your co-op ownership plans.",
       purpose: {
         title: "1. Purpose",
         instructions:

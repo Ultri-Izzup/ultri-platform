@@ -88,7 +88,11 @@
         <q-item-section>
           <q-item-label class="text-bold">{{
             $t("canvas.coop.name")
-          }}</q-item-label>
+          }} <span class="text-italic text-orange q-pl-md"
+              ><q-icon name="mdi-star" color="orange" />{{
+                $t("canvas.active")
+              }}</span
+            ></q-item-label>
         </q-item-section>
       </q-item>
       <q-separator></q-separator>

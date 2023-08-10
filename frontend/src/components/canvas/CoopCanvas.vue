@@ -1,11 +1,12 @@
 <template>
-  <q-page class="flex flex-center"
-    ><q-card
-      ><q-card-section class="q-pa-xl"
-        ><div class="text-h2"> Co-op Ownership Canvas</div><div class="text-h2">coming soon...</div></q-card-section
-      ></q-card
-    ></q-page
-  >
+<q-page class="container q-pa-md">
+    <CanvasSection
+      v-for="info in canvasDef"
+      :info="info"
+      canvasName="coop"
+      :key="info.id"
+    />
+  </q-page>
 </template>
 <script setup>
 import CanvasSection from "./CanvasSection.vue";

@@ -133,7 +133,7 @@ export const useCirclesStore = defineStore("circles", () => {
     fetching.value = false;
     showCirclesDialog.value = false;
     showNewCircleDialog.value = false;
-    newCircleParent.value = null;
+    //newCircleParent.value = null;
   };
 
   return {

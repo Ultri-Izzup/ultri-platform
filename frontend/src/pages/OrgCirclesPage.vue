@@ -108,7 +108,7 @@ const onDownloadClick = () => {
   // Define an object to hold our ouput
   const outObj = { circles: {} };
 
-  outObj.circles[orgStore.currentOrgUid] = circlesStore.orgCircles;
+  outObj.circles = circlesStore.orgCircles;
 
   var dataStr =
     "data:text/json;charset=utf-8," +
@@ -117,7 +117,7 @@ const onDownloadClick = () => {
   dlAnchorElem.setAttribute("href", dataStr);
   dlAnchorElem.setAttribute(
     "download",
-    "org-" + orgStore.currentOrgUid + "-circles.json"
+    "OpenSociocracy-Circles.json"
   );
   dlAnchorElem.click();
 

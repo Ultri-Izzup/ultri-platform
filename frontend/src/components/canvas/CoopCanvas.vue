@@ -1,5 +1,5 @@
 <template>
-<q-page class="container q-pa-md">
+  <q-page class="container q-pa-md">
     <CanvasSection
       v-for="info in canvasDef"
       :info="info"
@@ -22,7 +22,7 @@ const canvasDef = [
   },
   {
     title: t("canvas.coop.stakeholders.title"),
-    instructions: t("canvas.s3.coop.stakeholders.instructions"),
+    instructions: t("canvas.coop.stakeholders.instructions"),
     class: "stakeholders",
     sectionKey: "stakeholders",
     id: 2,
@@ -37,7 +37,7 @@ const canvasDef = [
   {
     title: t("canvas.coop.benefits.title"),
     instructions: t("canvas.coop.benefits.instructions"),
-    class: "benfits",
+    class: "benefits",
     sectionKey: "benefits",
     id: 4,
   },
@@ -78,3 +78,52 @@ const canvasDef = [
   },
 ];
 </script>
+<style scoped>
+.container {
+  display: grid;
+}
+@media screen and (min-width: 864px) {
+  .container {
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    height: 90vh;
+    gap: 10px;
+  }
+  .purpose {
+    grid-column: 1/6;
+    grid-row: 1/2;
+  }
+  .stakeholders {
+    grid-column: 1/2;
+    grid-row: 2/4;
+  }
+  .nonOwnerStakeholders {
+    grid-column: 1/2;
+    grid-row: 4/6;
+  }
+  .benefits {
+    grid-column: 2/3;
+    grid-row: 2/6;
+  }
+  .responsibilities {
+    grid-column: 3/4;
+    grid-row: 2/6;
+  }
+  .guidance {
+    grid-row: 2/6;
+    grid-column: 4/5;
+  }
+  .governance {
+    grid-row: 2/6;
+    grid-column: 5/6;
+  }
+  .financial {
+    grid-column: 1/3;
+    grid-row: 6/7;
+  }
+  .investment {
+    grid-column: 3/6;
+    grid-row: 6/7;
+  }
+}
+</style>

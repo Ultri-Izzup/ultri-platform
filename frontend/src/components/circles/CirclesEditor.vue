@@ -1,5 +1,5 @@
 <template>
-  <div class="col q-px-md">
+  <div class="col">
     <q-card>
         <q-toolbar :class="colorStore.darkMode ? 'bg-grey-9' : ' bg-primary ' + ' text-white '">
           <q-toolbar-title>Circles</q-toolbar-title>

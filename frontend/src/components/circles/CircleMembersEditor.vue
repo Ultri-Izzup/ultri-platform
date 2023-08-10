@@ -1,21 +1,32 @@
 <template>
-    <div class="row">
-      <!-- <pre>{{ treeData }}</pre> -->
-      <!-- {{ circleMembersStore.members }} -->
-      <div class="row full-width">
-        <div>
-          <q-toolbar
-          :class="colorStore.darkMode ? 'bg-dark' : 'bg-primary text-white'"
-        >
-          <q-toolbar-title>Members</q-toolbar-title>
+  <div class="col">
+    <q-card>
+        <q-toolbar :class="colorStore.darkMode ? 'bg-grey-9' : ' bg-primary ' + ' text-white '">
+          <q-toolbar-title>Circles</q-toolbar-title>
           <q-btn
+            @click="circlesStore.triggerNewCircleDialog()"
             dense
             icon="mdi-plus"
-            :class="colorStore.darkMode ? 'bg-grey-9' : 'bg-white text-primary'"
+            :class="colorStore.darkMode ? 'bg-dark' : 'bg-white text-primary'"
           />
         </q-toolbar>
-      </div>
-    </div>
+        <q-card-section v-if="circlesStore.hasCircles">
+          <q-tree
+            :nodes="treeData"
+            node-key="uid"
+            v-model:selected="selected"
+            default-expand-all
+          ></q-tree>
+        </q-card-section>
+        <q-card-section v-else class="text-center justify-center">
+          <q-btn
+            :label="$t('circles.firstCircle.button.text')"
+            color="primary"
+            @click="circlesStore.initCircles()"
+          >
+          </q-btn>
+        </q-card-section>
+    </q-card>
 
     <CirclesDialog v-model="circlesStore.showCirclesDialog"></CirclesDialog>
     <NewCircleDialog
@@ -24,40 +35,31 @@
     <ChildCircleDialog
       v-model="circlesStore.showChildCircleDialog"
     ></ChildCircleDialog>
-  </q-page>
+  </div>
 </template>
 
 <script setup>
-import { onMounted, computed, ref, watch } from "vue";
+import { computed, ref, watch } from "vue";
 import { arrayToTree } from "performant-array-to-tree";
 
-import { useCirclesStore } from "../stores/circles";
-import { useCircleMembersStore } from "../stores/circleMembers";
-import { useOrgStore } from "../stores/org";
-import { useColorStore } from "../stores/color";
+import { useCirclesStore } from "../../stores/circles";
+import { useColorStore } from "../../stores/color";
 
 import { Screen } from "quasar";
 
-import CirclesDialog from "../components/circles/dialog/CirclesDialog.vue";
-import NewCircleDialog from "../components/circles/dialog/NewCircleDialog.vue";
-import ChildCircleDialog from "../components/circles/dialog/ChildCircleDialog.vue";
+import CirclesDialog from "./dialog/CirclesDialog.vue";
+import NewCircleDialog from "./dialog/NewCircleDialog.vue";
+import ChildCircleDialog from "./dialog/ChildCircleDialog.vue";
+import UploadCirclesDialog from "./dialog/UploadCirclesDialog.vue";
 
-import UploadCirclesDialog from "../components/circles/dialog/UploadCirclesDialog.vue";
-
-const orgStore = useOrgStore();
 const circlesStore = useCirclesStore();
 const colorStore = useColorStore();
-const circleMembersStore = useCircleMembersStore();
 
 const selected = ref(null);
 
 const unselectNode = () => {
   selected.value = null;
 };
-
-const hasCircles = computed(() => {
-  return circlesStore.orgCircles.length;
-});
 
 const treeData = computed(() => {
   let tree = [];
@@ -71,7 +73,16 @@ const treeData = computed(() => {
   return tree;
 });
 
-``;
+watch(selected, () => {
+  const selectedState = selected.value ? "selected" : "unselected";
+  console.log("SELECTION CHANGED", selectedState, selected.value);
+  if (selectedState == "selected") {
+    circlesStore.currentCircleUid = selected.value;
+    circlesStore.triggerCircleDialog();
+  } else {
+    circlesStore.currentCircleUid = null;
+  }
+});
 </script>
 
 <style lang="scss"></style>

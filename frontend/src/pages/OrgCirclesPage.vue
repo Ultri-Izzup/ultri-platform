@@ -5,10 +5,10 @@
     </div>
 
     <div class="row full-width">
-      <div class="col-4">
+      <div class="col-4 q-pl-md q-pr-sm">
         <CircleMembersEditor />
       </div>
-      <div class="col-8">
+      <div class="col-8 q-pr-md q-pl-sm">
         <CirclesEditor />
       </div>
     </div>
@@ -82,6 +82,7 @@ import ChildCircleDialog from "../components/circles/dialog/ChildCircleDialog.vu
 import UploadCirclesDialog from "../components/circles/dialog/UploadCirclesDialog.vue";
 
 import CirclesEditor from "../components/circles/CirclesEditor.vue";
+import CircleMembersEditor from "../components/circles/CircleMembersEditor.vue";
 
 const orgStore = useOrgStore();
 const circlesStore = useCirclesStore();
@@ -117,7 +118,7 @@ const onDownloadClick = () => {
   dlAnchorElem.setAttribute("href", dataStr);
   dlAnchorElem.setAttribute(
     "download",
-    "OpenSociocracy-Circles.json"
+    "OpenSociocracy-circles.json"
   );
   dlAnchorElem.click();
 

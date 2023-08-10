@@ -22,7 +22,7 @@ const canvasDef = [
   },
   {
     title: t("canvas.coop.stakeholders.title"),
-    instructions: t("canvas.s3.coop.stakeholders.instructions"),
+    instructions: t("canvas.coop.stakeholders.instructions"),
     class: "stakeholders",
     sectionKey: "stakeholders",
     id: 2,

@@ -1,6 +1,7 @@
 <template>
   <div class="col">
     <q-card>
+      {{circleMembersStore.members}}
         <q-toolbar :class="colorStore.darkMode ? 'bg-grey-9' : ' bg-primary ' + ' text-white '">
           <q-toolbar-title>{{ $t("circles.circleMembers") }}</q-toolbar-title>
           <q-btn
@@ -9,27 +10,30 @@
             dense
             :icon="showContent ? 'mdi-chevron-up' : 'mdi-chevron-down'"
             :class="colorStore.darkMode ? 'bg-dark q-mr-sm' : 'bg-white text-primary q-mr-sm'"
+            size="sm"
           />
           <q-btn
             @click="circleMembersStore.triggerNewCircleMemberDialog()"
             dense
             icon="mdi-plus"
             :class="colorStore.darkMode ? 'bg-dark' : 'bg-white text-primary'"
+            size="sm"
           />
         </q-toolbar>
         <q-card-section v-if="circleMembersStore.hasMembers && (showContent || Screen.gt.sm) ">
           <q-list>
-
-            <q-item v-for="member in circleMembersStore.members" :key="member.uid">
+            <q-separator />
+            <div v-for="member in circleMembersStore.members" :key="member.uid">
+            <q-item>
               <q-item-section class="overflow-hidden">
                 <div class="row">
-                <q-item-label>{{ member.name }}</q-item-label> <q-space /><q-btn @click="circleMembersStore.deleteMember(member.uid)" icon="mdi-delete" flat size="sm" class="q-px-xs" />
+                <q-item-label contenteditable="true">{{ member.name }}</q-item-label> <q-space /><q-btn @click="circleMembersStore.deleteMember(member.uid)" icon="mdi-delete" flat size="sm" class="q-px-xs" />
                 </div>
-                <div class="row">
                 <q-item-label caption>{{ member.email }}</q-item-label>
-                </div>
               </q-item-section>
             </q-item>
+            <q-separator />
+          </div>
           </q-list>
         </q-card-section>
         <q-card-section v-if="!circleMembersStore.hasMembers" class="text-center justify-center">

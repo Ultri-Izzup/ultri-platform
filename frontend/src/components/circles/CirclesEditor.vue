@@ -9,12 +9,14 @@
             dense
             :icon="showContent ? 'mdi-chevron-up' : 'mdi-chevron-down'"
             :class="colorStore.darkMode ? 'bg-dark q-mr-sm' : 'bg-white text-primary q-mr-sm'"
+            size="sm"
           />
           <q-btn
             @click="circlesStore.triggerNewCircleDialog()"
             dense
             icon="mdi-plus"
             :class="colorStore.darkMode ? 'bg-dark' : 'bg-white text-primary'"
+            size="sm"
           />
         </q-toolbar>
         <q-card-section v-if="circlesStore.hasCircles &&  (showContent || Screen.gt.sm)">

@@ -19,10 +19,15 @@
         </q-toolbar>
         <q-card-section v-if="circleMembersStore.hasMembers && (showContent || Screen.gt.sm) ">
           <q-list>
-            <q-item clickable v-ripple v-for="member in circleMembersStore.members" :key="member.uid">
+
+            <q-item v-for="member in circleMembersStore.members" :key="member.uid">
               <q-item-section class="overflow-hidden">
-                <q-item-label>{{ member.name }}</q-item-label>
+                <div class="row">
+                <q-item-label>{{ member.name }}</q-item-label> <q-space /><q-btn icon="mdi-delete" flat size="sm" class="q-pa-xs q-ma-xs" />
+                </div>
+                <div class="row">
                 <q-item-label caption>{{ member.email }}</q-item-label>
+                </div>
               </q-item-section>
             </q-item>
           </q-list>

@@ -15,11 +15,11 @@
             <q-input v-model="currentData.label" :label="$t('circles.circleName')" class="full-width"></q-input>
 
           </div>
-          <div class="row q-pb-md">
+          <!-- <div class="row q-pb-md">
             <div class="col text-grey-7">
               ID: {{circlesStore.current('uid') }}
             </div>
-          </div>
+          </div> -->
 
           <div class="row">
               <div class="col">

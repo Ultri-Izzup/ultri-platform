@@ -5,10 +5,10 @@
     </div>
 
     <div class="row full-width">
-      <div class="col-4 q-pl-md q-pr-sm">
+      <div :class="Screen.lt.md ? ' col-12 q-px-md q-pb-md' : ' col-4 q-pl-md q-pr-sm'">
         <CircleMembersEditor />
       </div>
-      <div class="col-8 q-pr-md q-pl-sm">
+      <div :class="Screen.lt.md ? ' col-12 q-px-md q-pb-md' : ' col-8 q-pr-md q-pl-sm'">
         <CirclesEditor />
       </div>
     </div>
@@ -67,8 +67,7 @@
 </template>
 
 <script setup>
-import { onMounted, computed, ref, watch } from "vue";
-import { arrayToTree } from "performant-array-to-tree";
+import { ref } from "vue";
 
 import { useCirclesStore } from "../stores/circles";
 import { useCircleMembersStore } from "../stores/circleMembers";

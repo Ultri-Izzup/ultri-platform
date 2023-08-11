@@ -4,13 +4,20 @@
         <q-toolbar :class="colorStore.darkMode ? 'bg-grey-9' : ' bg-primary ' + ' text-white '">
           <q-toolbar-title>{{ $t("circles.circles") }}</q-toolbar-title>
           <q-btn
+            v-if="Screen.lt.md"
+            @click="showContent = !showContent"
+            dense
+            :icon="showContent ? 'mdi-chevron-up' : 'mdi-chevron-down'"
+            :class="colorStore.darkMode ? 'bg-dark q-mr-sm' : 'bg-white text-primary q-mr-sm'"
+          />
+          <q-btn
             @click="circlesStore.triggerNewCircleDialog()"
             dense
             icon="mdi-plus"
             :class="colorStore.darkMode ? 'bg-dark' : 'bg-white text-primary'"
           />
         </q-toolbar>
-        <q-card-section v-if="circlesStore.hasCircles">
+        <q-card-section v-if="circlesStore.hasCircles &&  (showContent || Screen.gt.sm)">
           <q-tree
             :nodes="treeData"
             node-key="uid"
@@ -18,7 +25,7 @@
             default-expand-all
           ></q-tree>
         </q-card-section>
-        <q-card-section v-else class="text-center justify-center">
+        <q-card-section v-if="!circlesStore.hasCircles" class="text-center justify-center">
           <q-btn
             :label="$t('circles.firstCircle.button.text')"
             color="primary"
@@ -54,6 +61,8 @@ import UploadCirclesDialog from "./dialog/UploadCirclesDialog.vue";
 
 const circlesStore = useCirclesStore();
 const colorStore = useColorStore();
+
+const showContent = ref(true);
 
 const selected = ref(null);
 

@@ -12,16 +12,14 @@
         </q-bar>
         <q-card-section>
           <div class="row q-pb-md">
-            <q-input v-model="memberName" class="full-width" :label="$t('circles.circleName')"></q-input>
+            <q-input v-model="memberName" class="full-width" :label="$t('circles.dialog.member.name')"></q-input>
           </div>
-          <div class="row">
-              <div class="col">
-              <q-select filled v-model="newCircleParent" map-options emit-value :options="circlesStore.circleSelections" :label="$t('circles.parentCircle')"></q-select>
-            </div>
+          <div class="row q-pb-md">
+            <q-input v-model="memberEmail" class="full-width" :label="$t('circles.dialog.member.email')"></q-input>
           </div>
         </q-card-section>
         <q-card-actions class="justify-center">
-          <q-btn :label="$t('circles.dialog.childCircle.saveChild')" color="primary" @click="saveNewChild()"></q-btn>
+          <q-btn :label="$t('circles.dialog.member.saveMember')" color="primary" @click="saveCircleMember()"></q-btn>
           <q-btn :label="$t('circles.dialog.cancel')" color="primary" @click="onDialogOK();"></q-btn>
         </q-card-actions>
       </q-form>
@@ -36,8 +34,8 @@ import { useCirclesStore } from "../../../stores/circles";
 
 const circlesStore = useCirclesStore();
 
-const newCircleName = ref(null)
-const newCircleParent = ref(null)
+const memberName = ref(null)
+const memberEmail = ref(null)
 
 const reset = () => {};
 

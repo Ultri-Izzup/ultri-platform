@@ -4,17 +4,30 @@
         <q-toolbar :class="colorStore.darkMode ? 'bg-grey-9' : ' bg-primary ' + ' text-white '">
           <q-toolbar-title>{{ $t("circles.circleMembers") }}</q-toolbar-title>
           <q-btn
+            v-if="Screen.lt.md"
+            @click="showContent = !showContent"
+            dense
+            :icon="showContent ? 'mdi-chevron-up' : 'mdi-chevron-down'"
+            :class="colorStore.darkMode ? 'bg-dark q-mr-sm' : 'bg-white text-primary q-mr-sm'"
+          />
+          <q-btn
             @click="circleMembersStore.triggerNewCircleMemberDialog()"
             dense
             icon="mdi-plus"
             :class="colorStore.darkMode ? 'bg-dark' : 'bg-white text-primary'"
           />
         </q-toolbar>
-        <q-card-section v-if="circleMembersStore.hasCircleMembers">
-
-          Display Member {{ circleMembersStore.members}}
+        <q-card-section v-if="circleMembersStore.hasMembers && (showContent || Screen.gt.sm) ">
+          <q-list>
+            <q-item clickable v-ripple v-for="member in circleMembersStore.members" :key="member.uid">
+              <q-item-section class="overflow-hidden">
+                <q-item-label>{{ member.name }}</q-item-label>
+                <q-item-label caption>{{ member.email }}</q-item-label>
+              </q-item-section>
+            </q-item>
+          </q-list>
         </q-card-section>
-        <q-card-section v-else class="text-center justify-center">
+        <q-card-section v-if="!circleMembersStore.hasMembers" class="text-center justify-center">
           <q-btn
             :label="$t('circles.addMember')"
             color="primary"
@@ -29,15 +42,18 @@
 </template>
 
 <script setup>
-
+import { ref } from "vue";
 import { useCircleMembersStore } from "../../stores/circleMembers";
 import { useColorStore } from "../../stores/color";
 
+import { Screen } from "quasar";
 
 import CircleMemberDialog from "./dialog/CircleMemberDialog.vue";
 
 const circleMembersStore = useCircleMembersStore();
 const colorStore = useColorStore();
+
+const showContent = ref(true);
 
 
 </script>

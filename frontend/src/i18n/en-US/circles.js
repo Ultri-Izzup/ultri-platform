@@ -28,6 +28,11 @@ export default {
         title: 'Add child circle',
         saveChild: 'Save child'
       },
+      member: {
+        name: 'Name',
+        email: 'Email',
+        saveMember: "Save Member"
+      },
       parentCircle: "Parent Circle",
       name: "Name",
       uid: "ID",

@@ -1,16 +1,20 @@
 import { defineStore, storeToRefs  } from "pinia";
 import { useStorage } from "@vueuse/core";
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { api } from "boot/axios";
 
 
 export const useCircleMembersStore = defineStore("circleMembers", () => {
   const members = ref(useStorage("members", [{uid: "1234", name:"Brian", email:"brian@example.com"}]));
   const currentMemberUid = ref(useStorage("currentMemberUid", null));
+  const currentMemberEmail = ref(useStorage("currentMemberEmail", null));
+  const currentMemberName = ref(useStorage("currentMemberName", null));
   const invites = ref(useStorage("invites", []));
   const currentInviteUid = ref(useStorage("currentInviteUid", null));
   const fetching = ref(false);
   const showNewCircleMemberDialog = ref(false);
+
+  const hasMembers = computed(() => members.value.length > 0)
 
   const setCurrentMember = (uid) => {
     currentMemberUid.value = uid;
@@ -93,6 +97,7 @@ export const useCircleMembersStore = defineStore("circleMembers", () => {
     fetching,
     showNewCircleMemberDialog,
     showNewCircleMemberDialog,
+    hasMembers,
     setCurrentMember,
     setCurrentInvite,
     triggerMemberInviteDialog,

@@ -23,7 +23,7 @@
             <q-item v-for="member in circleMembersStore.members" :key="member.uid">
               <q-item-section class="overflow-hidden">
                 <div class="row">
-                <q-item-label>{{ member.name }}</q-item-label> <q-space /><q-btn icon="mdi-delete" flat size="sm" class="q-pa-xs q-ma-xs" />
+                <q-item-label>{{ member.name }}</q-item-label> <q-space /><q-btn @click="circleMembersStore.deleteMember(member.uid)" icon="mdi-delete" flat size="sm" class="q-px-xs" />
                 </div>
                 <div class="row">
                 <q-item-label caption>{{ member.email }}</q-item-label>

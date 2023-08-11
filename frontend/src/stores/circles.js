@@ -25,7 +25,7 @@ export const useCirclesStore = defineStore("circles", () => {
   })
 
   const hasCircles = computed(() => {
-    return orgCircles.value.length;
+    return orgCircles.value.length > 0 ? true : false;
   });
 
   const setCurrentCircle = (uid) => {

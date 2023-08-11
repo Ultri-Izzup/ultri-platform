@@ -1,7 +1,7 @@
 <template>
   <q-dialog ref="dialogRef" persistent>
     <q-card class="q-dialog-plugin">
-      <q-form @submit="onSubmit" @reset="onReset">
+      <q-form @submit="onSubmit" @reset="reset">
         <!-- Toolbar -->
         <q-bar class="dialog-qbar">
           {{ $t("circles.circleMember") }}
@@ -20,7 +20,7 @@
         </q-card-section>
         <q-card-actions class="justify-center">
           <q-btn :label="$t('circles.dialog.member.saveMember')" color="primary" @click="saveCircleMember()"></q-btn>
-          <q-btn :label="$t('circles.dialog.cancel')" color="primary" @click="onDialogOK();"></q-btn>
+          <q-btn :label="$t('circles.dialog.cancel')" color="primary" v-close-popup @click="reset"></q-btn>
         </q-card-actions>
       </q-form>
     </q-card>
@@ -30,14 +30,19 @@
 <script setup>
 import { ref, computed, watch, unref } from "vue";
 import { useDialogPluginComponent } from "quasar";
-import { useCirclesStore } from "../../../stores/circles";
+import { useCircleMembersStore } from "../../../stores/circleMembers";
 
-const circlesStore = useCirclesStore();
+const circleMembersStore = useCircleMembersStore();
 
 const memberName = ref(null)
 const memberEmail = ref(null)
+const memberUid = ref(null)
 
-const reset = () => {};
+const reset = () => {
+  memberUid.value = null;
+  memberName.value = null;
+  memberEmail.value = null;
+};
 
 const currentData = computed(() => {
   return circlesStore.current();
@@ -76,37 +81,20 @@ const onOKClick = () => {
 };
 
 
-const saveChild = () => {
-  console.log('Saving child, ' + newCircleName.value + ' for: ' + circlesStore.currentCircleUid)
+const saveCircleMember = async () => {
+  console.log('Saving circle member')
 
-  const newCircleObj = { label: newCircleName.value, parentCircle: circlesStore.currentCircleUid }
+  const memberObj = {
+    name: unref(memberName),
+    email: unref(memberEmail),
+    uid: unref(memberUid)
+  }
+  await circleMembersStore.setMember(memberObj)
 
-  circlesStore.addChild(newCircleObj);
-
-  newCircleName.value = null;
-
+  reset();
   onDialogOK();
 }
 
-const saveNewChild = () => {
-  console.log('Saving nw child, ' + newCircleName.value + ' for: ' + newCircleParent.value)
-
-  const newCircleObj = { label: newCircleName.value, parentCircle: newCircleParent.value }
-
-  circlesStore.addChild(newCircleObj);
-
-  newCircleName.value = null;
-
-  onDialogOK();
-}
-
-const onSave = async () => {
-  submitted.value = true;
-};
-
-const onReset = () => {
-  currentData.value = []
-};
 </script>
 
 <style scoped lang="scss"></style>

@@ -2,6 +2,7 @@ import { defineStore, storeToRefs  } from "pinia";
 import { useStorage } from "@vueuse/core";
 import { ref, computed } from "vue";
 import { api } from "boot/axios";
+import { v4 as uuidv4 } from "uuid";
 
 
 export const useCircleMembersStore = defineStore("circleMembers", () => {
@@ -66,10 +67,25 @@ export const useCircleMembersStore = defineStore("circleMembers", () => {
     return result.data;
   };
 
-  const deleteMember = async (orgUid, memberUid) => {
-    const result = await api.delete("/orgs/" + orgUid + "/member/" + memberUid);
+  const deleteMember = async (memberUid) => {
+    //const result = await api.delete("/orgs/" + orgUid + "/member/" + memberUid);
 
-    orgs.value.delete(uid);
+    members.value.splice(members.value.findIndex(item => item.uid === memberUid), 1)
+
+  };
+
+  const setMember = async (memberObj) => {
+    //const result = await api.delete("/orgs/" + orgUid + "/member/" + memberUid);
+    console.log('EMAIL', memberObj.email)
+    if(memberObj.uid) {
+      console.log('update')
+    } else {
+      memberObj.uid = uuidv4()
+      console.log('add')
+    }
+
+    members.value.push(memberObj)
+
   };
 
   const triggerNewCircleMemberDialog = () => {
@@ -98,6 +114,7 @@ export const useCircleMembersStore = defineStore("circleMembers", () => {
     showNewCircleMemberDialog,
     showNewCircleMemberDialog,
     hasMembers,
+    setMember,
     setCurrentMember,
     setCurrentInvite,
     triggerMemberInviteDialog,

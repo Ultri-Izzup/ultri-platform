@@ -125,6 +125,7 @@ export const useCircleMembersStore = defineStore("circleMembers", () => {
     inviteMember,
     cancelInvite,
     updateMember,
-    deleteMember
+    deleteMember,
+    $reset
   };
 });

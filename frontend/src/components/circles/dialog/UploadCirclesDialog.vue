@@ -10,6 +10,7 @@
         ></q-file>
         <q-card-actions class="justify-center">
           <q-btn @click="performUpload" label="Upload" color="primary"></q-btn>
+          <q-btn @click="onDialogOK()" label="Cancel" color="primary"></q-btn>
         </q-card-actions>
       </q-card-section>
     </q-card>
@@ -21,7 +22,7 @@ import { ref } from "vue";
 import { useDialogPluginComponent } from 'quasar';
 
 import { useCirclesStore } from "../../../stores/circles";
-import { emit } from "process";
+import { useCircleMembersStore } from "../../../stores/circleMembers";
 
 defineEmits([
   // REQUIRED; need to specify some events that your
@@ -48,6 +49,7 @@ const onOKClick = () => {
 };
 
 const circlesStore = useCirclesStore();
+const circleMembersStore = useCircleMembersStore();
 
 const selectedFile = ref(null);
 
@@ -66,7 +68,9 @@ const performUpload = async () => {
 
   circlesStore.orgCircles = circlesData.circles;
 
-    onDialogOK();
+  circleMembersStore.members = circlesData.members;
+
+  onDialogOK();
 
 };
 </script>

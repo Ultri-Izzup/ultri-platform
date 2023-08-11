@@ -104,6 +104,10 @@ import CircleMemberDialog from "./dialog/CircleMemberDialog.vue";
 
 const isEditable = ref(true);
 
+const enterPressed = () => {
+
+}
+
 const circleMembersStore = useCircleMembersStore();
 const colorStore = useColorStore();
 

@@ -32,7 +32,7 @@
               @click="onDownloadClick()"
               color="primary"
               icon="mdi-download"
-              :disable="draggingFab || circlesStore.hasCircles"
+              :disable="draggingFab"
               class="ontop"
             ></q-fab-action>
             <q-fab-action
@@ -47,7 +47,7 @@
               @click="onDeleteClick()"
               color="secondary"
               icon="mdi-delete"
-              :disable="draggingFab || circlesStore.hasCircles"
+              :disable="draggingFab"
               class="ontop"
             ></q-fab-action>
           </q-fab>
@@ -100,15 +100,18 @@ const onUploadClick = () => {
 };
 const onDeleteClick = () => {
   console.log("Delete All Data for " + orgStore.currentOrgUid);
-  circlesStore.clear();
+  circlesStore.$reset();
+  circleMembersStore.$reset();
 };
 const onDownloadClick = () => {
   console.log("Download Data for " + orgStore.currentOrgUid);
 
   // Define an object to hold our ouput
-  const outObj = { circles: {} };
+  const outObj = { circles: [], members: [] };
 
   outObj.circles = circlesStore.orgCircles;
+
+  outObj.members = circleMembersStore.members;
 
   var dataStr =
     "data:text/json;charset=utf-8," +

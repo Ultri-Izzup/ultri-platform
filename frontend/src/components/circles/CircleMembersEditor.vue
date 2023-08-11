@@ -1,7 +1,6 @@
 <template>
   <div class="col">
     <q-card>
-      {{circleMembersStore.members}}
         <q-toolbar :class="colorStore.darkMode ? 'bg-grey-9' : ' bg-primary ' + ' text-white '">
           <q-toolbar-title>{{ $t("circles.circleMembers") }}</q-toolbar-title>
           <q-btn
@@ -27,9 +26,14 @@
             <q-item>
               <q-item-section class="overflow-hidden">
                 <div class="row">
-                <q-item-label contenteditable="true">{{ member.name }}</q-item-label> <q-space /><q-btn @click="circleMembersStore.deleteMember(member.uid)" icon="mdi-delete" flat size="sm" class="q-px-xs" />
+
+                <q-item-label>
+                  <contenteditable tag="div" :contenteditable="true" v-model="member.name" :no-nl="true" :no-html="true" @returned="enterPressed" />
+                  </q-item-label> <q-space /><q-btn @click="circleMembersStore.deleteMember(member.uid)" icon="mdi-delete" flat size="sm" class="q-px-xs" />
                 </div>
-                <q-item-label caption>{{ member.email }}</q-item-label>
+                <q-item-label caption>
+                  <contenteditable tag="div" :contenteditable="true" v-model="member.email" :no-nl="true" :no-html="true" @returned="enterPressed" />
+                </q-item-label>
               </q-item-section>
             </q-item>
             <q-separator />
@@ -54,10 +58,13 @@
 import { ref } from "vue";
 import { useCircleMembersStore } from "../../stores/circleMembers";
 import { useColorStore } from "../../stores/color";
+import contenteditable from 'vue-contenteditable'; // Not needed it registered globally
 
 import { Screen } from "quasar";
 
 import CircleMemberDialog from "./dialog/CircleMemberDialog.vue";
+
+const isEditable = ref(true);
 
 const circleMembersStore = useCircleMembersStore();
 const colorStore = useColorStore();

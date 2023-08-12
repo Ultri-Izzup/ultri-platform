@@ -77,7 +77,7 @@ const saveChild = () => {
 
   const newCircleObj = { label: newCircleName.value, parentCircle: circlesStore.currentCircleUid }
 
-  circlesStore.addChild(newCircleObj);
+  circlesStore.addCircle(newCircleObj);
 
   newCircleName.value = null;
 

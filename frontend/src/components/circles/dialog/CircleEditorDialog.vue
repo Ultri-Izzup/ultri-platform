@@ -4,28 +4,50 @@
       <q-form @submit="onSubmit" @reset="onReset">
         <!-- Toolbar -->
         <q-bar class="dialog-qbar">
-          {{ $t("circles.dialog.childCircle.title") }}
+          {{ $t("circles.dialog.editor.title") }}
           <q-space></q-space>
           <q-btn dense flat icon="mdi-close" v-close-popup @click="reset">
             <q-tooltip>{{ $t("nav.close") }} </q-tooltip>
           </q-btn>
         </q-bar>
+        {{currentData}}
         <q-card-section>
           <div class="row q-pb-md">
-            <q-input v-model="newCircleName" class="full-width" :label="$t('circles.circleName')"></q-input>
+            <q-input v-model="currentData.label" :label="$t('circles.circleName')" class="full-width"></q-input>
+
           </div>
-          <div class="row">
+          <!-- <div class="row q-pb-md">
+            <div class="col text-grey-7">
+              ID: {{circlesStore.current('uid') }}
+            </div>
+          </div> -->
+
+          <div class="row  q-pb-md">
               <div class="col">
-              <q-select filled v-model="newCircleParent" map-options emit-value :options="circlesStore.circleSelections" :label="$t('circles.parentCircle')"></q-select>
+              <q-select filled v-model="currentData.parentCircle" map-options emit-value :options="circlesStore.circleSelections" :label="$t('circles.parentCircle')"></q-select>
             </div>
           </div>
+          <div class="row  q-pb-md">
+              <div class="col q-pr-xs">
+              <q-select filled v-model="currentData.leaderUid" map-options emit-value :options="circleMembersStore.memberSelections" :label="$t('circles.roles.leader')"></q-select>
+            </div>
+            <div class="col-2 q-pa-sm">
+              <q-btn icon="mdi-plus" clickable @click="addMemberAs('leader')"></q-btn>
+            </div>
+          </div>
+
         </q-card-section>
         <q-card-actions class="justify-center">
-          <q-btn :label="$t('circles.dialog.childCircle.saveChild')" color="primary" @click="saveNewChild()"></q-btn>
-          <q-btn :label="$t('circles.dialog.cancel')" color="primary" @click="onDialogOK();"></q-btn>
+          <q-btn :label="$t('circles.dialog.delete')" color="primary" @click="deleteCircle()"></q-btn>
+          <q-space></q-space>
+          <q-btn :label="$t('circles.dialog.addChild')" color="primary" @click="addChild()"></q-btn>
+          <q-btn :label="$t('controls.close')" color="primary" @click="onDialogOK();"></q-btn>
         </q-card-actions>
       </q-form>
     </q-card>
+    <AssignedMemberDialog
+      v-model="circleMembersStore.showAssignedMemberDialog"
+    ></AssignedMemberDialog>
   </q-dialog>
 </template>
 
@@ -33,11 +55,12 @@
 import { ref, computed, watch, unref } from "vue";
 import { useDialogPluginComponent } from "quasar";
 import { useCirclesStore } from "../../../stores/circles";
+import { useCircleMembersStore } from "../../../stores/circleMembers";
+
+import AssignedMemberDialog from "./AssignedMemberDialog.vue";
 
 const circlesStore = useCirclesStore();
-
-const newCircleName = ref(null)
-const newCircleParent = ref(null)
+const circleMembersStore = useCircleMembersStore();
 
 const reset = () => {};
 
@@ -77,30 +100,16 @@ const onOKClick = () => {
   // ...and it will also hide the dialog automatically
 };
 
-
-const saveChild = () => {
-  console.log('Saving child, ' + newCircleName.value + ' for: ' + circlesStore.currentCircleUid)
-
-  const newCircleObj = { label: newCircleName.value, parentCircle: circlesStore.currentCircleUid }
-
-  circlesStore.addCircle(newCircleObj);
-
-  newCircleName.value = null;
-
+const deleteCircle = () => {
+  circlesStore.deleteCurrent();
   onDialogOK();
 }
 
-const saveNewChild = () => {
-  console.log('Saving nw child, ' + newCircleName.value + ' for: ' + newCircleParent.value)
-
-  const newCircleObj = { label: newCircleName.value, parentCircle: newCircleParent.value }
-
-  circlesStore.addCircle(newCircleObj);
-
-  newCircleName.value = null;
-
-  onDialogOK();
+const addChild = () => {
+  console.log('Adding child to: ' + circlesStore.currentCircleUid)
+  circlesStore.triggerChildCircleDialog();
 }
+
 
 const onSave = async () => {
   submitted.value = true;
@@ -109,6 +118,14 @@ const onSave = async () => {
 const onReset = () => {
   currentData.value = []
 };
+
+const addMemberAs = async (role) => {
+
+  circleMembersStore.triggerAssignedMemberDialog();
+
+    //console.log(circleMembersStore.currentMemberUid);
+    //circlesStore.setCircleRole(unref(circlesStore.currentCircleUid), role , unref(circleMembersStore.currentMemberUid));
+}
 </script>
 
 <style scoped lang="scss"></style>

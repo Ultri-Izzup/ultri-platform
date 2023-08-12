@@ -14,8 +14,14 @@ export const useCircleMembersStore = defineStore("circleMembers", () => {
   const currentInviteUid = ref(useStorage("currentInviteUid", null));
   const fetching = ref(false);
   const showNewCircleMemberDialog = ref(false);
+  const showAssignedMemberDialog = ref(false);
 
-  const hasMembers = computed(() => members.value.length > 0)
+  const hasMembers = computed(() => members.value.length > 0);
+
+  // Provide data formatted for a q-select componet
+  const memberSelections =  computed(() => {
+    return members.value.map(member => ({ value: member.uid, label: member.name}));
+  })
 
   const setCurrentMember = (uid) => {
     currentMemberUid.value = uid;
@@ -26,7 +32,7 @@ export const useCircleMembersStore = defineStore("circleMembers", () => {
   };
 
   const triggerMemberInviteDialog = () => {
-    showNewCircleMemberDialog.value = true;
+
   };
 
   const validateName = (name) => {
@@ -76,7 +82,7 @@ export const useCircleMembersStore = defineStore("circleMembers", () => {
 
   const setMember = async (memberObj) => {
     //const result = await api.delete("/orgs/" + orgUid + "/member/" + memberUid);
-    console.log('EMAIL', memberObj.email)
+
     if(memberObj.uid) {
       console.log('update')
     } else {
@@ -84,13 +90,19 @@ export const useCircleMembersStore = defineStore("circleMembers", () => {
       console.log('add')
     }
 
-    members.value.push(memberObj)
+    members.value.push(memberObj);
 
+    return memberObj.uid;
   };
 
   const triggerNewCircleMemberDialog = () => {
     console.log('triggeredNewCircleMember')
     showNewCircleMemberDialog.value = true;
+  };
+
+  const triggerAssignedMemberDialog = () => {
+    console.log('triggeredNewAssignedCircleMember')
+    showAssignedMemberDialog.value = true;
   };
 
   const $reset = () => {
@@ -103,6 +115,7 @@ export const useCircleMembersStore = defineStore("circleMembers", () => {
     currentInviteUid.value = null;
     fetching.value = false;
     showNewCircleMemberDialog.value = false;
+    showAssignedMemberDialog.value = false;
   }
 
   return {
@@ -112,13 +125,15 @@ export const useCircleMembersStore = defineStore("circleMembers", () => {
     currentInviteUid,
     fetching,
     showNewCircleMemberDialog,
-    showNewCircleMemberDialog,
+    showAssignedMemberDialog,
     hasMembers,
+    memberSelections,
     setMember,
     setCurrentMember,
     setCurrentInvite,
     triggerMemberInviteDialog,
     triggerNewCircleMemberDialog,
+    triggerAssignedMemberDialog,
     validateName,
     loadMembers,
     loadInvites,

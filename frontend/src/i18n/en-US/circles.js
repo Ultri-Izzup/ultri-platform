@@ -1,5 +1,11 @@
 export default {
   circles: {
+    roles: {
+      leader: 'Leader',
+      delegate: 'Delegate',
+      secretary: 'Record Keeper',
+      facilitator: 'Facilitator'
+    },
     circles: 'Circles',
     addCircle: 'Add circle',
     circleMembers: 'Members',

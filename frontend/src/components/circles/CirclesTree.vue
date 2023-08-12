@@ -37,7 +37,7 @@
         </q-card-section>
     </q-card>
 
-    <CirclesDialog v-model="circlesStore.showCirclesDialog"></CirclesDialog>
+    <CircleEditorDialog v-model="circlesStore.showCircleEditorDialog"></CircleEditorDialog>
     <NewCircleDialog
       v-model="circlesStore.showNewCircleDialog"
     ></NewCircleDialog>
@@ -52,16 +52,17 @@ import { computed, ref, watch } from "vue";
 import { arrayToTree } from "performant-array-to-tree";
 
 import { useCirclesStore } from "../../stores/circles";
+// import { useCircleMembersStore } from "../../stores/circleMembers";
 import { useColorStore } from "../../stores/color";
 
 import { Screen } from "quasar";
 
-import CirclesDialog from "./dialog/CirclesDialog.vue";
+import CircleEditorDialog from "./dialog/CircleEditorDialog.vue";
 import NewCircleDialog from "./dialog/NewCircleDialog.vue";
 import ChildCircleDialog from "./dialog/ChildCircleDialog.vue";
-import UploadCirclesDialog from "./dialog/UploadCirclesDialog.vue";
 
 const circlesStore = useCirclesStore();
+//const circleMembersStore = useCircleMembersStore();
 const colorStore = useColorStore();
 
 const showContent = ref(true);
@@ -89,7 +90,7 @@ watch(selected, () => {
   console.log("SELECTION CHANGED", selectedState, selected.value);
   if (selectedState == "selected") {
     circlesStore.currentCircleUid = selected.value;
-    circlesStore.triggerCircleDialog();
+    circlesStore.triggerCircleEditorDialog();
   } else {
     circlesStore.currentCircleUid = null;
   }
@@ -97,3 +98,4 @@ watch(selected, () => {
 </script>
 
 <style lang="scss"></style>
+

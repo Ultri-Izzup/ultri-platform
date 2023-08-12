@@ -89,10 +89,12 @@ const saveCircleMember = async () => {
     email: unref(memberEmail),
     uid: unref(memberUid)
   }
-  await circleMembersStore.setMember(memberObj)
+  const currentUid = await circleMembersStore.setMember(memberObj);
+
+  circleMembersStore.currentMemberUid = currentUid
 
   reset();
-  onDialogOK();
+  onDialogOK({ member: memberObj });
 }
 
 </script>

@@ -12,14 +12,14 @@ export const useCirclesStore = defineStore("circles", () => {
   const currentCircleUid = ref(useStorage("currentCircleUid", null));
   const topCircleUid = ref(useStorage("topCircleUid", null));
   const fetching = ref(false);
-  const showCirclesDialog = ref(false);
+  const showCircleEditorDialog = ref(false);
   const showNewCircleDialog = ref(false);
   const showChildCircleDialog = ref(false);
   const showNewCircleMemberDialog = ref(false);
 
   const formMode = ref('edit');
 
-  // Provide a q-select proper data to select from all circles
+  // Provide data formatted for a q-select componet
   const circleSelections =  computed(() => {
     return orgCircles.value.map(circle => ({ value: circle.uid, label: circle.label}));
   })
@@ -32,9 +32,9 @@ export const useCirclesStore = defineStore("circles", () => {
     currentCircleUid.value = uid;
   };
 
-  const triggerCircleDialog = () => {
+  const triggerCircleEditorDialog = () => {
     console.log('triggered')
-    showCirclesDialog.value = true;
+    showCircleEditorDialog.value = true;
   };
 
   const triggerNewCircleDialog = () => {
@@ -76,11 +76,15 @@ export const useCirclesStore = defineStore("circles", () => {
     console.log(circleData);
   };
 
-  const addChild = (data) => {
+  const addCircle = (data) => {
 
-    data.uid = uuidv4();
+    const uid = uuidv4();
+
+    data.uid = uid;
 
     orgCircles.value.push(data)
+
+    return uid;
 
   }
 
@@ -88,15 +92,10 @@ export const useCirclesStore = defineStore("circles", () => {
 
     orgCircles.value.splice(orgCircles.value.findIndex(item => item.uid === currentCircleUid.value), 1)
 
-    //console.log(circleData);
   };
 
   const current = (propName) => {
-    console.log(propName)
-    console.log(currentCircleUid.value)
-
     const found = orgCircles.value.find((element) => element.uid == currentCircleUid.value);
-    console.log(found)
 
     if(propName) {
       return found[propName]
@@ -131,13 +130,27 @@ export const useCirclesStore = defineStore("circles", () => {
 
   }
 
+  const setCircleRole = async (circleUid, role, memberUid) => {
+    // Get the current data
+    const ix = orgCircles.value.findIndex((element) => element.uid == circleUid);
+    console.log(ix)
+    const data = orgCircles.value[ix];
+    console.log(data)
+
+    // Set role to memberUid
+    data[role + 'Uid'] = memberUid;
+
+    // Update array with new data
+    orgCircles.value[ix] = data;
+  }
+
   const $reset = () => {
     console.log("RESET CIRCLES");
     orgCircles.value = [];
     currentCircleUid.value = null;
     topCircleUid.value = null;
     fetching.value = false;
-    showCirclesDialog.value = false;
+    showCircleEditorDialog.value = false;
     showNewCircleDialog.value = false;
     //newCircleParent.value = null;
   };
@@ -147,21 +160,22 @@ export const useCirclesStore = defineStore("circles", () => {
     currentCircleUid,
     topCircleUid,
     fetching,
-    showCirclesDialog,
+    showCircleEditorDialog,
     showNewCircleDialog,
     showChildCircleDialog,
     showNewCircleMemberDialog,
     circleSelections,
     formMode,
     hasCircles,
+    setCircleRole,
     clear,
-    addChild,
+    addCircle,
     deleteCurrent,
     current,
     initCircles,
     loadCircles,
     setCurrentCircle,
-    triggerCircleDialog,
+    triggerCircleEditorDialog,
     triggerNewCircleDialog,
     triggerChildCircleDialog,
     triggerNewCircleMemberDialog,

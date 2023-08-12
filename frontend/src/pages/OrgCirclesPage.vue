@@ -6,10 +6,10 @@
 
     <div class="row full-width">
       <div :class="Screen.lt.md ? ' col-12 q-px-md q-pb-md' : ' col-4 q-pl-md q-pr-sm'">
-        <CircleMembersEditor />
+        <CircleMembersList />
       </div>
       <div :class="Screen.lt.md ? ' col-12 q-px-md q-pb-md' : ' col-8 q-pr-md q-pl-sm'">
-        <CirclesEditor />
+        <CirclesTree />
       </div>
     </div>
 
@@ -56,13 +56,6 @@
         <UploadCirclesDialog v-model="displayUpload" />
       </div>
     </div>
-    <CirclesDialog v-model="circlesStore.showCirclesDialog"></CirclesDialog>
-    <NewCircleDialog
-      v-model="circlesStore.showNewCircleDialog"
-    ></NewCircleDialog>
-    <ChildCircleDialog
-      v-model="circlesStore.showChildCircleDialog"
-    ></ChildCircleDialog>
   </q-page>
 </template>
 
@@ -75,13 +68,10 @@ import { useOrgStore } from "../stores/org";
 
 import { Screen } from "quasar";
 
-import CirclesDialog from "../components/circles/dialog/CirclesDialog.vue";
-import NewCircleDialog from "../components/circles/dialog/NewCircleDialog.vue";
-import ChildCircleDialog from "../components/circles/dialog/ChildCircleDialog.vue";
 import UploadCirclesDialog from "../components/circles/dialog/UploadCirclesDialog.vue";
 
-import CirclesEditor from "../components/circles/CirclesEditor.vue";
-import CircleMembersEditor from "../components/circles/CircleMembersEditor.vue";
+import CirclesTree from "../components/circles/CirclesTree.vue";
+import CircleMembersList from "../components/circles/CircleMembersList.vue";
 
 const orgStore = useOrgStore();
 const circlesStore = useCirclesStore();

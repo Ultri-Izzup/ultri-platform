@@ -18,9 +18,13 @@ export const useCircleMembersStore = defineStore("circleMembers", () => {
 
   const hasMembers = computed(() => members.value.length > 0);
 
-  // Provide data formatted for a q-select componet
+  // Provide data formatted for a q-select component
   const memberSelections =  computed(() => {
-    return members.value.map(member => ({ value: member.uid, label: member.name}));
+    return members.value.map(member => ({ value: member.uid, label: member.name})).sort((a,b) => (a.label > b.label) ? 1 : -1);
+  })
+
+  const sortMembers =  computed(() => {
+    return members.value.sort((a,b) => (a.name > b.name) ? 1 : -1);
   })
 
   const setCurrentMember = (uid) => {
@@ -128,6 +132,7 @@ export const useCircleMembersStore = defineStore("circleMembers", () => {
     showAssignedMemberDialog,
     hasMembers,
     memberSelections,
+    sortMembers,
     setMember,
     setCurrentMember,
     setCurrentInvite,

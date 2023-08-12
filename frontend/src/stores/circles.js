@@ -21,7 +21,7 @@ export const useCirclesStore = defineStore("circles", () => {
 
   // Provide data formatted for a q-select componet
   const circleSelections =  computed(() => {
-    return orgCircles.value.map(circle => ({ value: circle.uid, label: circle.label}));
+    return orgCircles.value.map(circle => ({ value: circle.uid, label: circle.label})).sort((a,b) => (a.label > b.label) ? 1 : -1);
   })
 
   const hasCircles = computed(() => {
@@ -144,6 +144,14 @@ export const useCirclesStore = defineStore("circles", () => {
     orgCircles.value[ix] = data;
   }
 
+  const deleteMembers = (membersArr) => {
+    orgCircles.value.forEach(circle => {
+      if(membersArr.includes(circle.leaderUid)) {
+        circle.leaderUid = null;
+      }
+    })
+  }
+
   const $reset = () => {
     console.log("RESET CIRCLES");
     orgCircles.value = [];
@@ -167,6 +175,7 @@ export const useCirclesStore = defineStore("circles", () => {
     circleSelections,
     formMode,
     hasCircles,
+    deleteMembers,
     setCircleRole,
     clear,
     addCircle,

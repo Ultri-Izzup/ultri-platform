@@ -33,7 +33,7 @@
       >
         <q-list>
           <q-separator />
-          <div v-for="member in circleMembersStore.members" :key="member.uid">
+          <div v-for="member in circleMembersStore.sortMembers" :key="member.uid">
             <q-item>
               <q-item-section class="overflow-hidden">
                 <div class="row">
@@ -61,7 +61,7 @@
               </q-item-section>
               <q-item-section side >
                 <q-btn
-                    @click="circleMembersStore.deleteMember(member.uid)"
+                    @click="deleteMember(member.uid)"
                     icon="mdi-delete"
                     flat
                     size="sm"
@@ -95,6 +95,7 @@
 <script setup>
 import { ref } from "vue";
 import { useCircleMembersStore } from "../../stores/circleMembers";
+import { useCirclesStore } from "../../stores/circles";
 import { useColorStore } from "../../stores/color";
 import contenteditable from "vue-contenteditable"; // Not needed it registered globally
 
@@ -102,16 +103,19 @@ import { Screen } from "quasar";
 
 import CircleMemberDialog from "./dialog/CircleMemberDialog.vue";
 
-const isEditable = ref(true);
-
 const enterPressed = () => {
 
 }
-
 const circleMembersStore = useCircleMembersStore();
+const circlesStore = useCirclesStore();
 const colorStore = useColorStore();
 
 const showContent = ref(true);
+
+const deleteMember = (memberUid) => {
+  circleMembersStore.deleteMember(memberUid);
+  circlesStore.deleteMembers([memberUid]);
+}
 </script>
 
 <style lang="scss"></style>

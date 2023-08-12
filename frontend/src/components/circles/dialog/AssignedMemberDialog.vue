@@ -4,7 +4,7 @@
       <q-form @submit="onSubmit" @reset="reset">
         <!-- Toolbar -->
         <q-bar class="dialog-qbar">
-          {{ $t("circles.circleMember") }}
+          {{ $t("circles.assignCircleMember") }}
           <q-space></q-space>
           <q-btn dense flat icon="mdi-close" v-close-popup @click="reset">
             <q-tooltip>{{ $t("nav.close") }} </q-tooltip>
@@ -97,11 +97,9 @@ const saveCircleMember = async () => {
   }
   const newMemberUid = await circleMembersStore.setMember(memberObj);
 
-  console.log(newMemberUid)
+  console.log(newMemberUid, props.role)
 
-  //circlesStore.setCircleRole()
-
-
+  circlesStore.setCircleRole(circlesStore.currentCircleUid, props.role, newMemberUid)
 
   reset();
   onDialogOK({ member: memberObj });

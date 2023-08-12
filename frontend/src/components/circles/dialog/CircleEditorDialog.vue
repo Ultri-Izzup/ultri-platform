@@ -1,19 +1,18 @@
 <template>
   <q-dialog ref="dialogRef" persistent>
     <q-card class="q-dialog-plugin">
-      <q-form @submit="onSubmit" @reset="onReset">
+      <q-form>
         <!-- Toolbar -->
         <q-bar class="dialog-qbar">
           {{ $t("circles.dialog.editor.title") }}
           <q-space></q-space>
-          <q-btn dense flat icon="mdi-close" v-close-popup @click="reset">
+          <q-btn dense flat icon="mdi-close" v-close-popup @click="closeDialog()">
             <q-tooltip>{{ $t("nav.close") }} </q-tooltip>
           </q-btn>
         </q-bar>
-        {{currentData}}
         <q-card-section>
           <div class="row q-pb-md">
-            <q-input v-model="currentData.label" :label="$t('circles.circleName')" class="full-width"></q-input>
+            <q-input  v-model="currentData.label" :label="$t('circles.circleName')" class="full-width"></q-input>
 
           </div>
           <!-- <div class="row q-pb-md">
@@ -24,12 +23,12 @@
 
           <div class="row  q-pb-md">
               <div class="col">
-              <q-select filled v-model="currentData.parentCircle" map-options emit-value :options="circlesStore.circleSelections" :label="$t('circles.parentCircle')"></q-select>
+              <q-select  v-model="currentData.parentCircle" map-options emit-value :options="circlesStore.circleSelections" :label="$t('circles.parentCircle')"></q-select>
             </div>
           </div>
           <div class="row  q-pb-md">
               <div class="col q-pr-xs">
-              <q-select filled v-model="currentData.leaderUid" map-options emit-value :options="circleMembersStore.memberSelections" :label="$t('circles.roles.leader')"></q-select>
+              <q-select v-model="currentData.leaderUid" map-options emit-value :options="circleMembersStore.memberSelections" :label="$t('circles.roles.leader')"></q-select>
             </div>
             <div class="col-2 q-pa-sm">
               <q-btn icon="mdi-plus" clickable @click="addMemberAs('leader')"></q-btn>
@@ -41,12 +40,12 @@
           <q-btn :label="$t('circles.dialog.delete')" color="primary" @click="deleteCircle()"></q-btn>
           <q-space></q-space>
           <q-btn :label="$t('circles.dialog.addChild')" color="primary" @click="addChild()"></q-btn>
-          <q-btn :label="$t('controls.close')" color="primary" @click="onDialogOK();"></q-btn>
+          <q-btn :label="$t('controls.close')" color="primary" @click="closeDialog()"></q-btn>
         </q-card-actions>
       </q-form>
     </q-card>
     <AssignedMemberDialog
-      v-model="circleMembersStore.showAssignedMemberDialog"
+      v-model="circleMembersStore.showAssignedMemberDialog" :role="currentRole"
     ></AssignedMemberDialog>
   </q-dialog>
 </template>
@@ -64,6 +63,8 @@ const circleMembersStore = useCircleMembersStore();
 
 const reset = () => {};
 
+const currentRole = ref();
+
 const currentData = computed(() => {
   return circlesStore.current();
 })
@@ -74,31 +75,16 @@ const currentData = computed(() => {
 //   currentData.value = circlesStore.current();
 // });
 
-defineEmits([
+const emit = defineEmits([
   // REQUIRED; need to specify some events that your
   // component will emit through useDialogPluginComponent()
-  //...useDialogPluginComponent.emits,
-  "ok",
+  ...useDialogPluginComponent.emits,
+  "closing",
 ]);
 
 const onSubmit = async () => {};
 
-const { dialogRef, onDialogOK } = useDialogPluginComponent();
-// dialogRef      - Vue ref to be applied to QDialog
-// onDialogHide   - Function to be used as handler for @hide on QDialog
-// onDialogOK     - Function to call to settle dialog with "ok" outcome
-//                    example: onDialogOK() - no payload
-//                    example: onDialogOK({ /*...*/ }) - with payload
-// onDialogCancel - Function to call to settle dialog with "cancel" outcome
-
-const onOKClick = () => {
-  // on OK, it is REQUIRED to
-  // call onDialogOK (with optional payload)
-  onDialogOK();
-  //primary.value = editPrimary.value;
-  // or with payload: onDialogOK({ ... })
-  // ...and it will also hide the dialog automatically
-};
+const { dialogRef, onDialogOK, onDialogCancel, onDialogHide } = useDialogPluginComponent();
 
 const deleteCircle = () => {
   circlesStore.deleteCurrent();
@@ -108,6 +94,12 @@ const deleteCircle = () => {
 const addChild = () => {
   console.log('Adding child to: ' + circlesStore.currentCircleUid)
   circlesStore.triggerChildCircleDialog();
+}
+
+const closeDialog = () => {
+  emit('closing', true);
+  reset();
+  onDialogCancel();
 }
 
 
@@ -121,7 +113,10 @@ const onReset = () => {
 
 const addMemberAs = async (role) => {
 
+  currentRole.value = role;
+
   circleMembersStore.triggerAssignedMemberDialog();
+
 
     //console.log(circleMembersStore.currentMemberUid);
     //circlesStore.setCircleRole(unref(circlesStore.currentCircleUid), role , unref(circleMembersStore.currentMemberUid));

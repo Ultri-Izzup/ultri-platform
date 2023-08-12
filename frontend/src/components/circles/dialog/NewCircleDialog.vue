@@ -16,7 +16,7 @@
           </div>
           <div class="row">
               <div class="col">
-              <q-select filled v-model="newCircleParent" map-options emit-value :options="circlesStore.circleSelections" :label="$t('circles.parentCircle')"></q-select>
+              <q-select v-model="newCircleParent" map-options emit-value :options="circlesStore.circleSelections" :label="$t('circles.parentCircle')"></q-select>
             </div>
           </div>
         </q-card-section>

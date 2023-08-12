@@ -13,6 +13,7 @@ export default {
     parentCircle: "Parent circle",
     circleName: "Circle name",
     circleMember: 'Circle Member',
+    assignCircleMember: 'Assign Circle Member',
     dashboard: {
       title: 'OpenSociocracy Circles'
     },

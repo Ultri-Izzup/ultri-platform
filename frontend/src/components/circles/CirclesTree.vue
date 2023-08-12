@@ -37,13 +37,13 @@
         </q-card-section>
     </q-card>
 
-    <CircleEditorDialog v-model="circlesStore.showCircleEditorDialog"></CircleEditorDialog>
+    <CircleEditorDialog v-model="circlesStore.showCircleEditorDialog" @closing="handleClose()" />
     <NewCircleDialog
       v-model="circlesStore.showNewCircleDialog"
-    ></NewCircleDialog>
+    />
     <ChildCircleDialog
       v-model="circlesStore.showChildCircleDialog"
-    ></ChildCircleDialog>
+    />
   </div>
 </template>
 
@@ -73,6 +73,11 @@ const unselectNode = () => {
   selected.value = null;
 };
 
+const handleClose = () => {
+  console.log('handling emitted close event')
+  unselectNode();
+}
+
 const treeData = computed(() => {
   let tree = [];
   tree = arrayToTree(circlesStore.orgCircles, {
@@ -84,6 +89,7 @@ const treeData = computed(() => {
 
   return tree;
 });
+
 
 watch(selected, () => {
   const selectedState = selected.value ? "selected" : "unselected";

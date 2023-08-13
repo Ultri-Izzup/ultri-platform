@@ -21,7 +21,7 @@
             </div>
           </div> -->
 
-          <div class="row  q-pb-md">
+          <div v-if="currentData.parentCircle" class="row  q-pb-md">
               <div class="col">
               <q-select  v-model="currentData.parentCircle" map-options emit-value :options="circlesStore.circleSelections" :label="$t('circles.parentCircle')"></q-select>
             </div>
@@ -34,10 +34,34 @@
               <q-btn icon="mdi-plus" clickable @click="addMemberAs('leader')"></q-btn>
             </div>
           </div>
+          <div class="row  q-pb-md">
+              <div class="col q-pr-xs">
+              <q-select v-model="currentData.delegateUid" map-options emit-value :options="circleMembersStore.memberSelections" :label="$t('circles.roles.delegate')"></q-select>
+            </div>
+            <div class="col-2 q-pa-sm">
+              <q-btn icon="mdi-plus" clickable @click="addMemberAs('delegate')"></q-btn>
+            </div>
+          </div>
+          <div class="row  q-pb-md">
+              <div class="col q-pr-xs">
+              <q-select v-model="currentData.secretaryUid" map-options emit-value :options="circleMembersStore.memberSelections" :label="$t('circles.roles.secretary')"></q-select>
+            </div>
+            <div class="col-2 q-pa-sm">
+              <q-btn icon="mdi-plus" clickable @click="addMemberAs('secretary')"></q-btn>
+            </div>
+          </div>
+          <div class="row  q-pb-md">
+              <div class="col q-pr-xs">
+              <q-select v-model="currentData.facilitatorUid" map-options emit-value :options="circleMembersStore.memberSelections" :label="$t('circles.roles.facilitator')"></q-select>
+            </div>
+            <div class="col-2 q-pa-sm">
+              <q-btn icon="mdi-plus" clickable @click="addMemberAs('facilitator')"></q-btn>
+            </div>
+          </div>
 
         </q-card-section>
         <q-card-actions class="justify-center">
-          <q-btn :label="$t('circles.dialog.delete')" color="primary" @click="deleteCircle()"></q-btn>
+          <q-btn v-if="currentData.parentCircle" :label="$t('circles.dialog.delete')" color="primary" @click="deleteCircle()"></q-btn>
           <q-space></q-space>
           <q-btn :label="$t('circles.dialog.addChild')" color="primary" @click="addChild()"></q-btn>
           <q-btn :label="$t('controls.close')" color="primary" @click="closeDialog()"></q-btn>

@@ -19,10 +19,39 @@ export const useCirclesStore = defineStore("circles", () => {
 
   const formMode = ref('edit');
 
-  // Provide data formatted for a q-select componet
+  // Provide data formatted for a q-select component
   const circleSelections =  computed(() => {
     return orgCircles.value.map(circle => ({ value: circle.uid, label: circle.label})).sort((a,b) => (a.label > b.label) ? 1 : -1);
   })
+
+  // Provide edges of orgCircles for D3
+  const orgCircleEdges2 =  computed(() => {
+    return orgCircles.value.filter((c) => c.parentCircle  !== null ).map(circle => ({ source: circle.parentCircle, target: circle.uid, relation: 'child', relation: 'parent', value: 1}));
+  });
+
+  const orgCircleEdges =  computed(() => {
+
+    var edges = [];
+    orgCircles.value.filter((c) => c.parentCircle  !== null ).forEach(function(e) {
+        var sourceNode = orgCircles.value.findIndex(function(n) {
+            return n.uid === e.parentCircle;
+             }),
+            targetNode = orgCircles.value.findIndex(function(n) {
+                return n.uid === e.uid;
+            });
+
+        edges.push({
+            source: sourceNode,
+            target: targetNode,
+            value: 1
+        });
+    });
+
+    console.log('EDGES', edges)
+
+    return edges;
+
+  });
 
   const hasCircles = computed(() => {
     return orgCircles.value.length > 0 ? true : false;
@@ -175,6 +204,7 @@ export const useCirclesStore = defineStore("circles", () => {
     circleSelections,
     formMode,
     hasCircles,
+    orgCircleEdges,
     deleteMembers,
     setCircleRole,
     clear,

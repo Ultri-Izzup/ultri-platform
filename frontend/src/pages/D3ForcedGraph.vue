@@ -1,26 +1,14 @@
 <template>
-  <q-dialog ref="dialogRef" persistent>
-    <q-card class="q-dialog-plugin">
-      <q-bar class="dialog-qbar">
-          {{ $t("circles.graph.d3Forced.title") }}
-          <q-space></q-space>
-          <q-btn dense flat icon="mdi-close" v-close-popup>
-            <q-tooltip>{{ $t("nav.close") }} </q-tooltip>
-          </q-btn>
-        </q-bar>
-
-        <svg width="960" height="600" class="container-border"></svg>
-
-
-    </q-card>
-  </q-dialog>
+  <div>
+    <h2>OpenSociocracy Circles</h2>
+    <svg width="960" height="600" class="container-border"></svg>
+  </div>
 </template>
-
 <script setup>
 import { onMounted } from "vue";
 import * as d3 from 'd3';
 
-import { useCirclesStore } from "../../stores/circles";
+import { useCirclesStore } from "../stores/circles";
 
 const circlesStore = useCirclesStore();
 

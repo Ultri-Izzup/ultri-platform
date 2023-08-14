@@ -7,6 +7,9 @@ export default {
       facilitator: 'Facilitator'
     },
     circles: 'Circles',
+    circle: {
+      label: 'Circle',
+    },
     addCircle: 'Add circle',
     circleMembers: 'Members',
     addMember: 'Add member',
@@ -15,7 +18,17 @@ export default {
     circleMember: 'Circle Member',
     assignCircleMember: 'Assign Circle Member',
     dashboard: {
-      title: 'OpenSociocracy Circles'
+      title: 'OpenSociocracy Circles',
+      label: 'Circles Dashboard',
+      caption: 'Define Circles and Members',
+    },
+    diagram: {
+      label: 'Circles Diagram',
+      caption: 'Visualize circle relationships',
+    },
+    orgChart: {
+      label: 'Organization Chart',
+      caption: 'Top down organizational chart',
     },
     firstCircle: {
       button: {
@@ -46,6 +59,9 @@ export default {
       delete: "Delete",
       addChild: "Add Child",
       cancel: "Cancel"
+    },
+    drawer: {
+      label: 'Circles / Members'
     }
   },
 };

@@ -26,6 +26,15 @@ export const useCircleMembersStore = defineStore("circleMembers", () => {
   const sortMembers =  computed(() => {
     return members.value.sort((a,b) => (a.name > b.name) ? 1 : -1);
   })
+  const membersMap =  computed(() => {
+    const newMap = new  Map();
+
+    members.value.forEach((member) => {
+      newMap.set(member.uid, member)
+    });
+
+    return newMap;
+  })
 
   const setCurrentMember = (uid) => {
     currentMemberUid.value = uid;
@@ -133,6 +142,7 @@ export const useCircleMembersStore = defineStore("circleMembers", () => {
     hasMembers,
     memberSelections,
     sortMembers,
+    membersMap,
     setMember,
     setCurrentMember,
     setCurrentInvite,

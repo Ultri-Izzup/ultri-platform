@@ -1,7 +1,7 @@
 <template>
   <div>
     <q-toolbar class="bg-primary text-white shadow-2">
-      <q-toolbar-title>Circles / Members</q-toolbar-title>
+      <q-toolbar-title>{{ $t("circles.drawer.label") }}</q-toolbar-title>
     </q-toolbar>
     <q-list>
       <q-item clickable to="/circles">
@@ -9,7 +9,7 @@
           <q-icon name="mdi-dashboard" />
         </q-item-section>
         <q-item-section>
-          <q-item-label>{{ $t("circles.dashboard.name") }}</q-item-label>
+          <q-item-label>{{ $t("circles.dashboard.label") }}</q-item-label>
           <q-item-label caption>
             {{ $t("circles.dashboard.caption") }}
           </q-item-label>

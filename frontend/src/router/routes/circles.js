@@ -24,6 +24,14 @@ const routes = [
     children: [{ path: "", component: () => import("pages/OrgChartPage.vue") }]
   },
   {
+    path: "/circles/org-chart-alt",
+    meta: {
+      drawer: "Circle"
+    },
+    component: () => import("layouts/MainLayout.vue"),
+    children: [{ path: "", component: () => import("pages/OrgChartAltPage.vue") }]
+  },
+  {
     path: "/circles/diagram",
     meta: {
       drawer: "Circle"

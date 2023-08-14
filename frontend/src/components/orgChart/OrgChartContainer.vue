@@ -95,6 +95,36 @@ const props = defineProps({
 </script>
 
 <style lang="scss">
+
+.text-h1 {
+  font-size: 1.5em;
+  line-height: normal;
+}
+.text-h2 {
+  font-size: 1.4em;
+  line-height: normal;
+}
+.text-h3 {
+  font-size: 1.3em;
+  line-height: normal;
+}
+.text-h4 {
+  font-size: 1.2em;
+  line-height: normal;
+}
+.text-h5 {
+  font-size: 1.1em;
+  line-height: normal;
+}
+.text-h6 {
+  font-size: 1em;
+  line-height: normal;
+}
+.text-h7 {
+  font-size: .9em;
+  line-height: normal;
+}
+
 *,
 *:before,
 *:after {

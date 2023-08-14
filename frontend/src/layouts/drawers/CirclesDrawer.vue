@@ -48,6 +48,17 @@
           </q-item-label>
         </q-item-section>
       </q-item>
+      <q-item clickable to="/circles/org-chart-alt">
+        <q-item-section avatar>
+          <q-icon name="mdi-chart" />
+        </q-item-section>
+        <q-item-section>
+          <q-item-label>{{ $t("circles.orgChartAlt.label") }}</q-item-label>
+          <q-item-label caption>
+            {{ $t("circles.orgChart.caption") }}
+          </q-item-label>
+        </q-item-section>
+      </q-item>
     </q-list>
   </div>
 </template>

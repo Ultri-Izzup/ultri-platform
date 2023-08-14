@@ -30,6 +30,9 @@ export default {
       label: 'Organization Chart',
       caption: 'Top down organizational chart',
     },
+    orgChartAlt: {
+      label: 'Organization Chart (alt)',
+    },
     firstCircle: {
       button: {
         text: 'Default Circles'

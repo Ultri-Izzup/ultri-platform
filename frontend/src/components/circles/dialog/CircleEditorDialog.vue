@@ -31,7 +31,8 @@
               <q-select v-model="currentData.leaderUid" map-options emit-value :options="circleMembersStore.memberSelections" :label="$t('circles.roles.leader')"></q-select>
             </div>
             <div class="col-2 q-pa-sm">
-              <q-btn icon="mdi-plus" clickable @click="addMemberAs('leader')"></q-btn>
+              <q-btn v-if="currentData.leaderUid" icon="mdi-minus" clickable @click="unassignRole(currentData.uid, 'leader')"></q-btn>
+              <q-btn v-else icon="mdi-plus" clickable @click="addMemberAs('leader')"></q-btn>
             </div>
           </div>
           <div class="row  q-pb-md">
@@ -39,7 +40,8 @@
               <q-select v-model="currentData.delegateUid" map-options emit-value :options="circleMembersStore.memberSelections" :label="$t('circles.roles.delegate')"></q-select>
             </div>
             <div class="col-2 q-pa-sm">
-              <q-btn icon="mdi-plus" clickable @click="addMemberAs('delegate')"></q-btn>
+              <q-btn v-if="currentData.delegateUid" icon="mdi-minus" clickable @click="unassignRole(currentData.uid, 'delegate')"></q-btn>
+              <q-btn v-else icon="mdi-plus" clickable @click="addMemberAs('delgate')"></q-btn>
             </div>
           </div>
           <div class="row  q-pb-md">
@@ -47,7 +49,8 @@
               <q-select v-model="currentData.secretaryUid" map-options emit-value :options="circleMembersStore.memberSelections" :label="$t('circles.roles.secretary')"></q-select>
             </div>
             <div class="col-2 q-pa-sm">
-              <q-btn icon="mdi-plus" clickable @click="addMemberAs('secretary')"></q-btn>
+              <q-btn v-if="currentData.secretaryUid" icon="mdi-minus" clickable @click="unassignRole(currentData.uid, 'secretary')"></q-btn>
+              <q-btn v-else icon="mdi-plus" clickable @click="addMemberAs('secretary')"></q-btn>
             </div>
           </div>
           <div class="row  q-pb-md">
@@ -55,7 +58,8 @@
               <q-select v-model="currentData.facilitatorUid" map-options emit-value :options="circleMembersStore.memberSelections" :label="$t('circles.roles.facilitator')"></q-select>
             </div>
             <div class="col-2 q-pa-sm">
-              <q-btn icon="mdi-plus" clickable @click="addMemberAs('facilitator')"></q-btn>
+              <q-btn v-if="currentData.facilitatorUid" icon="mdi-minus" clickable @click="unassignRole(currentData.uid, 'facilitator')"></q-btn>
+              <q-btn v-else icon="mdi-plus" clickable @click="addMemberAs('facilitator')"></q-btn>
             </div>
           </div>
 
@@ -92,12 +96,6 @@ const currentRole = ref();
 const currentData = computed(() => {
   return circlesStore.current();
 })
-
-// currentData.value = circlesStore.current();
-
-// watch(circlesStore.currentCircleUid, (newValue, oldValue) => {
-//   currentData.value = circlesStore.current();
-// });
 
 const emit = defineEmits([
   // REQUIRED; need to specify some events that your
@@ -136,14 +134,13 @@ const onReset = () => {
 };
 
 const addMemberAs = async (role) => {
-
   currentRole.value = role;
-
   circleMembersStore.triggerAssignedMemberDialog();
+}
 
-
-    //console.log(circleMembersStore.currentMemberUid);
-    //circlesStore.setCircleRole(unref(circlesStore.currentCircleUid), role , unref(circleMembersStore.currentMemberUid));
+const unassignRole = (circleUid, role) => {
+  currentData.value[role + 'Uid'] = null;
+  circlesStore.unassignRole(circleUid, role)
 }
 </script>
 

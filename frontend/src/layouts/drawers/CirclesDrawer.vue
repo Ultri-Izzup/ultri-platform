@@ -4,7 +4,17 @@
       <q-toolbar-title>Circles / Members</q-toolbar-title>
     </q-toolbar>
     <q-list>
-
+      <q-item clickable to="">
+          <q-item-section avatar>
+            <q-icon name="mdi-office-building-plus" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>{{ $t("orgs.newOrg") }}</q-item-label>
+            <q-item-label caption>
+              {{ $t("orgs.createAnOrg") }}
+            </q-item-label>
+          </q-item-section>
+        </q-item>
     </q-list>
   </div>
 </template>

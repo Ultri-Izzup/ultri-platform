@@ -162,9 +162,7 @@ export const useCirclesStore = defineStore("circles", () => {
   const setCircleRole = async (circleUid, role, memberUid) => {
     // Get the current data
     const ix = orgCircles.value.findIndex((element) => element.uid == circleUid);
-    console.log(ix)
     const data = orgCircles.value[ix];
-    console.log(data)
 
     // Set role to memberUid
     data[role + 'Uid'] = memberUid;
@@ -179,6 +177,20 @@ export const useCirclesStore = defineStore("circles", () => {
         circle.leaderUid = null;
       }
     })
+  }
+
+  const unassignRole = (circleUid, role) => {
+    // Get the current data
+    const ix = orgCircles.value.findIndex((element) => element.uid == circleUid);
+    console.log(ix)
+    const data = orgCircles.value[ix];
+    console.log(data)
+
+    // Remove role
+    delete data[role + 'Uid'];
+
+    // Update array with new data
+    orgCircles.value[ix] = data;
   }
 
   const $reset = () => {
@@ -205,6 +217,7 @@ export const useCirclesStore = defineStore("circles", () => {
     formMode,
     hasCircles,
     orgCircleEdges,
+    unassignRole,
     deleteMembers,
     setCircleRole,
     clear,

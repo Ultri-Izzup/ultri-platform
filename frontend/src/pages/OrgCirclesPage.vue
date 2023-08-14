@@ -5,12 +5,15 @@
     </div>
 
     <div class="row full-width">
-      <div :class="Screen.lt.md ? ' col-12 q-px-md q-pb-md' : ' col-4 q-pl-md q-pr-sm'">
-        <CircleMembersList />
-      </div>
-      <div :class="Screen.lt.md ? ' col-12 q-px-md q-pb-md' : ' col-8 q-pr-md q-pl-sm'">
+
+      <div :class="Screen.lt.md ? ' col-12 q-px-md q-pb-md' : ' col-8 q-pl-md q-pr-sm'">
         <CirclesTree />
       </div>
+
+      <div :class="Screen.lt.md ? ' col-12 q-px-md q-pb-md' : ' col-4 q-pr-md q-pl-sm'">
+        <CircleMembersList />
+      </div>
+
     </div>
 
     <div class="fit">

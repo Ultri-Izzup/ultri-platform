@@ -8,12 +8,12 @@ const routes = [
     children: [{ path: "", component: () => import("pages/OrgCirclesPage.vue") }]
   },
   {
-    path: "/circles/test",
+    path: "/circles/visualization",
     meta: {
       drawer: "Circle"
     },
     component: () => import("layouts/MainLayout.vue"),
-    children: [{ path: "", component: () => import("pages/GraphPage.vue") }]
+    children: [{ path: "", component: () => import("pages/D3ForceBasedPage.vue") }]
   },
   {
     path: "/circles/org-chart",
@@ -21,7 +21,7 @@ const routes = [
       drawer: "Circle"
     },
     component: () => import("layouts/MainLayout.vue"),
-    children: [{ path: "", component: () => import("pages/GraphPage2.vue") }]
+    children: [{ path: "", component: () => import("pages/OrgChartPage.vue") }]
   },
   {
     path: "/circles/diagram",
@@ -29,7 +29,7 @@ const routes = [
       drawer: "Circle"
     },
     component: () => import("layouts/MainLayout.vue"),
-    children: [{ path: "", component: () => import("src/pages/D3ForcedGraph.vue") }]
+    children: [{ path: "", component: () => import("src/pages/D3ForceDirectedPage.vue") }]
   },
 ];
 

@@ -1,5 +1,5 @@
 <template>
-  <div id="container">
+  <div id="container" class="q-mb-lg">
     <ol class="organizational-chart">
       <li v-for="circle in circles" :key="circle.index">
         <div>

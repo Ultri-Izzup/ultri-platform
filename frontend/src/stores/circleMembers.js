@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 
 
 export const useCircleMembersStore = defineStore("circleMembers", () => {
-  const members = ref(useStorage("members", [{uid: "1234", name:"Brian", email:"brian@example.com"}]));
+  const members = ref(useStorage("members", []));
   const currentMemberUid = ref(useStorage("currentMemberUid", null));
   const currentMemberEmail = ref(useStorage("currentMemberEmail", null));
   const currentMemberName = ref(useStorage("currentMemberName", null));

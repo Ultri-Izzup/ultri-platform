@@ -100,24 +100,7 @@ const toggleLeftDrawer = () => {
 </script>
 
 <style lang="scss">
-a.noLinkStyle {
-  a:link {
-    color: inherit;
-    text-decoration: none;
-  }
-  a:visited {
-    color: inherit;
-    text-decoration: none;
-  }
-  a:hover {
-    color: inherit;
-    text-decoration: none;
-  }
-  a:active {
-    color: inherit;
-    text-decoration: none;
-  }
-}
+
 .u-navbar-light {
   background-color: white;
   color: $navbar-txt-lt;

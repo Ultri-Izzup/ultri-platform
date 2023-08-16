@@ -1,12 +1,13 @@
 <template>
   <q-page>
-    <div class="tree">
+    <div class="text-h1 text-center justify-center">Organization Chart</div>
+    <div class="tree justify-center text-center fit">
       <ul>
         <li v-for="circle in treeData" :key="circle.index">
           <a href="#"
-            ><div class="text-h1">{{ members.get(circle.leaderUid).name }}</div>
-            <div class="text-h2">
-              {{ circle.label }} {{ $t("circles.circle.label") }}
+            ><div class="text-l1">{{ members.get(circle.leaderUid).name }}</div>
+            <div class="text-l2">
+              {{ circle.label }} <br />
               {{ $t("circles.roles.leader") }}
             </div></a
           >
@@ -14,11 +15,11 @@
             <li v-for="circle2 in circle.children" :key="circle2.index">
               <a href="#"
                 ><div>
-                  <div class="text-h2">
+                  <div class="text-l2">
                     {{ members.get(circle2.leaderUid).name }}
                   </div>
-                  <div class="text-h3">
-                    {{ circle2.label }} {{ $t("circles.circle.label") }}
+                  <div class="text-l3">
+                    {{ circle2.label }}  <br />
                     {{ $t("circles.roles.leader") }}
                   </div>
                 </div></a
@@ -27,11 +28,11 @@
                 <li v-for="circle3 in circle2.children" :key="circle3.index">
                   <a href="#"
                     ><div>
-                      <div class="text-h3">
+                      <div class="text-l3">
                         {{ members.get(circle3.leaderUid).name }}
                       </div>
-                      <div class="text-h4">
-                        {{ circle3.label }} {{ $t("circles.circle.label") }}
+                      <div class="text-l4">
+                        {{ circle3.label }} <br />
                         {{ $t("circles.roles.leader") }}
                       </div>
                     </div></a
@@ -43,11 +44,11 @@
                     >
                       <a href="#"
                         ><div>
-                          <div class="text-h4">
+                          <div class="text-l4">
                             {{ members.get(circle4.leaderUid).name }}
                           </div>
-                          <div class="text-h5">
-                            {{ circle4.label }} {{ $t("circles.circle.label") }}
+                          <div class="text-l5">
+                            {{ circle4.label }} <br />
                             {{ $t("circles.roles.leader") }}
                           </div>
                         </div></a
@@ -59,12 +60,12 @@
                         >
                           <a href="#"
                             ><div>
-                              <div class="text-h5">
+                              <div class="text-l5">
                                 {{ members.get(circle5.leaderUid).name }}
                               </div>
-                              <div class="text-h6">
+                              <div class="text-l6">
                                 {{ circle5.label }}
-                                {{ $t("circles.circle.label") }}
+                               <br />
                                 {{ $t("circles.roles.leader") }}
                               </div>
                             </div></a
@@ -76,12 +77,12 @@
                             >
                               <a href="#"
                                 ><div>
-                                  <div class="text-h6">
+                                  <div class="text-l6">
                                     {{ members.get(circle6.leaderUid).name }}
                                   </div>
-                                  <div class="text-h7">
+                                  <div class="text-l7">
                                     {{ circle6.label }}
-                                    {{ $t("circles.circle.label") }}
+                                    <br />
                                     {{ $t("circles.roles.leader") }}
                                   </div>
                                 </div></a
@@ -131,40 +132,35 @@ const members = circleMembersStore.membersMap;
 </script>
 
 <style lang="scss" scoped>
-.text-h1 {
+.text-l1 {
   font-size: 1.5em;
   line-height: normal;
 }
-.text-h2 {
+.text-l2 {
   font-size: 1.4em;
   line-height: normal;
 }
-.text-h3 {
+.text-l3 {
   font-size: 1.3em;
   line-height: normal;
 }
-.text-h4 {
+.text-l4 {
   font-size: 1.2em;
   line-height: normal;
 }
-.text-h5 {
+.text-l5 {
   font-size: 1.1em;
   line-height: normal;
 }
-.text-h6 {
+.text-l6 {
   font-size: 1em;
   line-height: normal;
 }
-.text-h7 {
+.text-l7 {
   font-size: .9em;
   line-height: normal;
 }
 
-/*Now the CSS*/
-* {
-  margin: 0;
-  padding: 0;
-}
 
 .tree ul {
   padding-top: 20px;

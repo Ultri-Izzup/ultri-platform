@@ -20,8 +20,8 @@
     </q-card-section>
     <q-separator></q-separator>
     <q-list separator>
-      <q-card-section
-        class="q-pa-lg text-italic text-italic"
+      <q-card-section v-ripple clickable @click="dialogVisible = true"
+        class="q-pa-lg text-italic text-italic cursor-pointer q-hoverable"
         v-show="
           canvas[canvasName][info.sectionKey].size === 0 ||
           (Object.keys(canvas[canvasName][info.sectionKey]).length === 0 &&

@@ -11,9 +11,9 @@ export const useCircleDriversStore = defineStore("circleDrivers", () => {
   const currentDriverDescription = ref(
     useStorage("currentDriverDescription", null)
   );
-  const currentDriverSource = ref(useStorage("currentDriverSource", null));
+  const currentDriverInternal = ref(useStorage("currentDriverInternal", true));
   const fetching = ref(false);
-  const showNewCircleDriverDialog = ref(false);
+  const showCircleDriverDialog = ref(false);
   const showEditDriverDialog = ref(false);
 
   const hasDrivers = computed(() => drivers.value.length > 0);
@@ -39,12 +39,17 @@ export const useCircleDriversStore = defineStore("circleDrivers", () => {
     return newMap;
   });
 
+  const getDriverByUid = (driverUid) => {
+    console.log(driverUid)
+    const ix = drivers.value.findIndex((element) => element.uid == driverUid);
+    console.log(ix)
+    const data = drivers.value[ix];
+    console.log(data)
+    return (data)
+  }
+
   const setCurrentDriver = (uid) => {
     currentDriverUid.value = uid;
-  };
-
-  const triggerCircleDriversDialog = () => {
-    showNewCircleDriverDialog.value = true;
   };
 
   const validateName = (name) => {
@@ -57,24 +62,6 @@ export const useCircleDriversStore = defineStore("circleDrivers", () => {
     result.data.orgs.forEach((item) => {
       drivers.value.set(item.uid, item);
     });
-  };
-
-  const updateDriver = async (
-    orgUid,
-    driverUid,
-    name,
-    email,
-    roles,
-    circles
-  ) => {
-    const result = await api.put("/orgs/" + orgUid + "/drivers/" + driverUid, {
-      name: name,
-      email,
-      roles,
-      circles
-    });
-
-    return result.data;
   };
 
   const deleteDriver = async (driverUid) => {
@@ -93,7 +80,8 @@ export const useCircleDriversStore = defineStore("circleDrivers", () => {
       console.log("update");
     } else {
       driverObj.uid = uuidv4();
-      driverObj.createdAt = console.log("add");
+      driverObj.createdAt = 'somedate'
+      console.log("add");
     }
 
     drivers.value.push(driverObj);
@@ -103,11 +91,11 @@ export const useCircleDriversStore = defineStore("circleDrivers", () => {
 
   const triggerCircleDriverDialog = () => {
     console.log("triggeredNewCircleDriver");
-    showNewCircleDriverDialog.value = true;
+    showCircleDriverDialog.value = true;
   };
 
   const triggerEditDriverDialog = () => {
-    console.log("triggeredNewEditCircleDriver");
+    console.log("triggeredEditCircleDriver");
     showEditDriverDialog.value = true;
   };
 
@@ -116,28 +104,28 @@ export const useCircleDriversStore = defineStore("circleDrivers", () => {
     drivers.value = new Map();
     invites.value = new Map();
     currentDriverUid.value = null;
-    currentInviteUid.value = null;
     fetching.value = false;
-    showNewCircleDriverDialog.value = false;
+    showCircleDriverDialog.value = false;
     showEditDriverDialog.value = false;
+    currentDriverInternal.value = true;
   };
 
   return {
     drivers,
     currentDriverUid,
     fetching,
-    showNewCircleDriverDialog,
+    showCircleDriverDialog,
     hasDrivers,
     driverSelections,
     sortDrivers,
     driversMap,
+    getDriverByUid,
     addDriver,
     setCurrentDriver,
-    triggerCircleDriversDialog,
+    triggerCircleDriverDialog,
     triggerEditDriverDialog,
     validateName,
     loadDrivers,
-    updateDriver,
     deleteDriver,
     $reset
   };

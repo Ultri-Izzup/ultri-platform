@@ -8,6 +8,7 @@
     "dev:dump": "export PGPASSWORD=ultri_postgres_root_pass && sh ./docker-postgres/scripts/dump.sh",
     "dev:postman": "newman run postman/Automated.postman_collection.json -e  postman/LOCAL.postman_environment.json",
     "dev:quasar": "cd frontend && quasar dev",
+    "dev:mkcert": "cd gateway/certs && mkcert example.com www.example.com api.example.com",
     "dev:docker": "docker compose -f dev-compose.yaml up",
     "dev:windows": "docker compose -f dev-windows-compose.yaml up",
     "up": "(docker compose -f dev-compose.yaml up) & (cd frontend && quasar dev)",

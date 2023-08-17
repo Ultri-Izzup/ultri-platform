@@ -24,11 +24,6 @@ export const useCirclesStore = defineStore("circles", () => {
     return orgCircles.value.map(circle => ({ value: circle.uid, label: circle.label})).sort((a,b) => (a.label > b.label) ? 1 : -1);
   })
 
-  // Provide edges of orgCircles for D3
-  const orgCircleEdges2 =  computed(() => {
-    return orgCircles.value.filter((c) => c.parentCircle  !== null ).map(circle => ({ source: circle.parentCircle, target: circle.uid, relation: 'child', relation: 'parent', value: 1}));
-  });
-
   const orgCircleEdges =  computed(() => {
 
     var edges = [];
@@ -189,6 +184,35 @@ export const useCirclesStore = defineStore("circles", () => {
     orgCircles.value[ix] = data;
   }
 
+  const relateDriver = async (circleUid, driverUid) => {
+    // Get the current data
+    console.log(circleUid)
+    const ix = orgCircles.value.findIndex((element) => element.uid == circleUid);
+    console.log(ix)
+    const data = orgCircles.value[ix];
+    console.log(data)
+
+    // Create drivers array within the given circle, if it doesn't exist
+    if(! data.drivers) {
+      data.drivers = [];
+    }
+
+    // Push the driver relation to the Circle
+    data.drivers.push(driverUid);
+
+    // Update array with new data
+    orgCircles.value[ix] = data;
+  }
+
+  const circleDrivers = (circleUid) => {
+    console.log(circleUid)
+    const ix = orgCircles.value.findIndex((element) => element.uid == circleUid);
+    console.log(ix)
+    const data = orgCircles.value[ix];
+    console.log(data)
+    return (data.drivers)
+  }
+
   const $reset = () => {
     console.log("RESET CIRCLES");
     orgCircles.value = [];
@@ -213,6 +237,8 @@ export const useCirclesStore = defineStore("circles", () => {
     formMode,
     hasCircles,
     orgCircleEdges,
+    circleDrivers,
+    relateDriver,
     unassignRole,
     deleteMembers,
     setCircleRole,

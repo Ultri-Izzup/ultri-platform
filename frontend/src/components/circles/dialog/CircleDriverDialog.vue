@@ -17,7 +17,7 @@
           <div class="row q-pb-md">
             <q-input v-model="description" class="full-width" :label="$t('circles.dialog.drivers.description')"></q-input>
           </div>
-          {{ $t('circles.dialog.drivers.internal') }} <q-toggle toggle-indeterminate v-model="source" :label="$t('circles.dialog.drivers.external')"></q-toggle>
+          {{ $t('circles.dialog.drivers.external') }} <q-toggle  v-model="internal" :label="$t('circles.dialog.drivers.internal')"></q-toggle>
         </q-card-section>
         <q-card-actions class="justify-center">
           <q-btn :label="$t('circles.dialog.drivers.saveDriver')" color="primary" @click="saveCircleDriver()"></q-btn>
@@ -29,25 +29,23 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, unref } from "vue";
+import { ref, unref } from "vue";
 import { useDialogPluginComponent } from "quasar";
+import { useCirclesStore } from "../../../stores/circles";
 import { useCircleDriversStore } from "../../../stores/circleDrivers";
 
+const circlesStore = useCirclesStore();
 const circleDriversStore = useCircleDriversStore();
 
 const label = ref(null)
 const description = ref(null)
-const source = ref(null)
+const internal = ref(null)
 
 const reset = () => {
   label.value = null;
   description.value = null;
-  source.value = null;
+  internal.value = null;
 };
-
-const currentData = computed(() => {
-  return circleDriversStore.current();
-})
 
 defineEmits([
   // REQUIRED; need to specify some events that your
@@ -82,12 +80,14 @@ const saveCircleDriver = async () => {
   const driverObj = {
     label: unref(label),
     description: unref(description),
-    source: unref(source)
+    internal: unref(internal)
   }
 
-  const currentUid = await circleDriversStore.addDriver(driverObj);
+  const driverUid = await circleDriversStore.addDriver(driverObj);
 
-  circleDriversStore.currentDriverUid = currentUid
+  console.log('Woot', driverUid)
+
+  circlesStore.relateDriver(circlesStore.currentCircleUid, driverUid);
 
   reset();
   onDialogOK();

@@ -1,5 +1,5 @@
 <template>
-  <q-dialog ref="dialogRef" persistent>
+  <q-dialog ref="dialogRef" maximized persistent>
     <q-card class="q-dialog-plugin">
       <q-form>
         <!-- Toolbar -->
@@ -200,7 +200,7 @@
               <div class="row bg-primary">
                 <q-space />
                 <q-btn
-                  @click="circleDriversStore.triggerCircleDriversDialog()"
+                  @click="circleDriversStore.triggerCircleDriverDialog()"
                   dense
                   icon="mdi-plus"
                   size="sm"
@@ -208,7 +208,13 @@
                   v-ripple
                 ></q-btn>
               </div>
-              <div class="row q-pb-md"></div>
+              <div class="row q-pb-md">
+
+                <div v-for="driver in circlesStore.circleDrivers(circlesStore.currentCircleUid)" :key="driver" class="row full-width">
+                  <CircleDriverInlineEditor :driverUid="driver" />
+                </div>
+
+              </div>
             </q-expansion-item>
 
             <!-- OKR -->
@@ -256,10 +262,10 @@
       v-model="circleMembersStore.showAssignedMemberDialog"
       :role="currentRole"
     ></AssignedMemberDialog>
-    <CircleDriversDialog
-      v-model="circleDriversStore.showCircleDriversDialog"
+    <CircleDriverDialog
+      v-model="circleDriversStore.showCircleDriverDialog"
       :role="currentRole"
-    ></CircleDriversDialog>
+    ></CircleDriverDialog>
   </q-dialog>
 </template>
 
@@ -271,7 +277,8 @@ import { useCircleMembersStore } from "../../../stores/circleMembers";
 import { useCircleDriversStore } from "../../../stores/circleDrivers";
 
 import AssignedMemberDialog from "./AssignedMemberDialog.vue";
-import CircleDriversDialog from "./CircleDriversDialog.vue";
+import CircleDriverDialog from "./CircleDriverDialog.vue";
+import CircleDriverInlineEditor from "../driver/CircleDriverInlineEditor.vue";
 
 const circlesStore = useCirclesStore();
 const circleMembersStore = useCircleMembersStore();

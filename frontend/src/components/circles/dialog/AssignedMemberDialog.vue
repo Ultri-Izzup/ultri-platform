@@ -3,7 +3,7 @@
     <q-card class="q-dialog-plugin">
       <q-form @submit="onSubmit" @reset="reset">
         <!-- Toolbar -->
-        <q-bar class="dialog-qbar">
+        <q-bar class="bg-primary">
           {{ $t("circles.assignCircleMember") }}
           <q-space></q-space>
           <q-btn dense flat icon="mdi-close" v-close-popup @click="reset">

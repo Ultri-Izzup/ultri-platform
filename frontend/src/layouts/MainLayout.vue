@@ -37,7 +37,7 @@
 <script setup>
 import { ref, watch } from "vue";
 import { useRoute } from "vue-router";
-import { useQuasar } from "quasar";
+import { useQuasar, setCssVar } from "quasar";
 import { useAuthStore } from "../stores/auth";
 import { useOrgStore } from "../stores/org";
 import { useColorStore } from "../stores/color";
@@ -75,8 +75,10 @@ watch(
   () => {
     if (colorStore.darkMode) {
       $q.dark.set(true)
+      setCssVar('primary', '#424242')
     } else {
       $q.dark.set(false)
+      setCssVar('primary', '#747BFF')
     }
   },
   { immediate: true }

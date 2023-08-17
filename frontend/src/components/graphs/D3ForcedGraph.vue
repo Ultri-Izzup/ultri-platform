@@ -1,7 +1,7 @@
 <template>
   <q-dialog ref="dialogRef" persistent>
     <q-card class="q-dialog-plugin">
-      <q-bar class="dialog-qbar">
+      <q-bar class="bg-primary">
           {{ $t("circles.graph.d3Forced.title") }}
           <q-space></q-space>
           <q-btn dense flat icon="mdi-close" v-close-popup>

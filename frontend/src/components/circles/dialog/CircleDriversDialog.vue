@@ -1,23 +1,27 @@
 <template>
   <q-dialog ref="dialogRef" persistent>
     <q-card class="q-dialog-plugin">
-      <q-form @submit="onSubmit" @reset="onReset">
+      <q-form @submit="onSubmit" @reset="reset">
         <!-- Toolbar -->
         <q-bar class="bg-primary">
-          {{ $t("circles.dialog.childCircle.title") }}
+          {{ $t("circles.dialog.drivers.title") }}
           <q-space></q-space>
           <q-btn dense flat icon="mdi-close" v-close-popup @click="reset">
             <q-tooltip>{{ $t("nav.close") }} </q-tooltip>
           </q-btn>
         </q-bar>
         <q-card-section>
-          <div class="row full-width">
-            <q-input v-model="newCircleName" :label="$t('circles.circleName')" class="full-width"></q-input>
+          <div class="row q-pb-md">
+            <q-input v-model="label" class="full-width" :label="$t('circles.dialog.drivers.label.label')"></q-input>
           </div>
+          <div class="row q-pb-md">
+            <q-input v-model="description" class="full-width" :label="$t('circles.dialog.drivers.description')"></q-input>
+          </div>
+          {{ $t('circles.dialog.drivers.internal') }} <q-toggle toggle-indeterminate v-model="source" :label="$t('circles.dialog.drivers.external')"></q-toggle>
         </q-card-section>
         <q-card-actions class="justify-center">
-          <q-btn :label="$t('circles.dialog.childCircle.saveChild')" color="primary" @click="saveChild()"></q-btn>
-          <q-btn :label="$t('circles.dialog.cancel')" color="primary" @click="onDialogOK();"></q-btn>
+          <q-btn :label="$t('circles.dialog.drivers.saveDriver')" color="primary" @click="saveCircleDriver()"></q-btn>
+          <q-btn :label="$t('circles.dialog.cancel')" color="primary" v-close-popup @click="reset"></q-btn>
         </q-card-actions>
       </q-form>
     </q-card>
@@ -27,29 +31,29 @@
 <script setup>
 import { ref, computed, watch, unref } from "vue";
 import { useDialogPluginComponent } from "quasar";
-import { useCirclesStore } from "../../../stores/circles";
+import { useCircleDriversStore } from "../../../stores/circleDrivers";
 
-const circlesStore = useCirclesStore();
+const circleDriversStore = useCircleDriversStore();
 
-const newCircleName = ref(null)
+const label = ref(null)
+const description = ref(null)
+const source = ref(null)
 
-const reset = () => {};
+const reset = () => {
+  label.value = null;
+  description.value = null;
+  source.value = null;
+};
 
 const currentData = computed(() => {
-  return circlesStore.current();
+  return circleDriversStore.current();
 })
-
-// currentData.value = circlesStore.current();
-
-// watch(circlesStore.currentCircleUid, (newValue, oldValue) => {
-//   currentData.value = circlesStore.current();
-// });
 
 defineEmits([
   // REQUIRED; need to specify some events that your
   // component will emit through useDialogPluginComponent()
-  //...useDialogPluginComponent.emits,
-  "ok",
+  ...useDialogPluginComponent.emits,
+  //
 ]);
 
 const onSubmit = async () => {};
@@ -72,26 +76,23 @@ const onOKClick = () => {
 };
 
 
-const saveChild = () => {
-  console.log('Saving child, ' + newCircleName.value + ' for: ' + circlesStore.currentCircleUid)
+const saveCircleDriver = async () => {
+  console.log('Saving Driver')
 
-  const newCircleObj = { label: newCircleName.value, parentCircle: circlesStore.currentCircleUid }
+  const driverObj = {
+    label: unref(label),
+    description: unref(description),
+    source: unref(source)
+  }
 
-  circlesStore.addCircle(newCircleObj);
+  const currentUid = await circleDriversStore.addDriver(driverObj);
 
-  newCircleName.value = null;
+  circleDriversStore.currentDriverUid = currentUid
 
+  reset();
   onDialogOK();
-
 }
 
-const onSave = async () => {
-  submitted.value = true;
-};
-
-const onReset = () => {
-  currentData.value = []
-};
 </script>
 
 <style scoped lang="scss"></style>

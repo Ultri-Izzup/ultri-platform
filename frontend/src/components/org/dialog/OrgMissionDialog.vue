@@ -2,7 +2,7 @@
   <q-dialog ref="dialogRef" persistent>
     <q-card class="q-dialog-plugin">
       <q-form @submit="onSubmit" @reset="onReset">
-        <q-bar class="dialog-qbar">
+        <q-bar class="bg-primary">
           {{  $t('orgs.dialog.missionStatement.title') }}
           <q-space></q-space>
 

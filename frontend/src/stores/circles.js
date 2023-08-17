@@ -62,22 +62,18 @@ export const useCirclesStore = defineStore("circles", () => {
   };
 
   const triggerCircleEditorDialog = () => {
-    console.log('triggered')
     showCircleEditorDialog.value = true;
   };
 
   const triggerNewCircleDialog = () => {
-    console.log('triggeredNew')
     showNewCircleDialog.value = true;
   };
 
   const triggerChildCircleDialog = () => {
-    console.log('triggeredChild')
     showChildCircleDialog.value = true;
   };
 
   const triggerNewCircleMemberDialog = () => {
-    console.log('triggeredNew')
     showNewCircleMemberDialog.value = true;
   };
 

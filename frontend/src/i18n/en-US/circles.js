@@ -44,8 +44,38 @@ export default {
       }
     },
     dialog: {
+      drivers: {
+        title: 'Business Driver',
+        internal: 'Internal',
+        external: 'External',
+        description: 'Driver description',
+        saveDriver: "Save Driver",
+        label: {
+          label: "Name"
+        }
+      },
       editor: {
-        title: 'Circle Editor'
+        title: 'Circle Editor',
+        domain: {
+          label: 'Domain Description',
+          caption: 'Circle authority and responsibilities'
+        },
+        roles: {
+          label: 'Circle Roles',
+          caption: 'Assign circle roles'
+        },
+        mission: {
+          label: 'Mission Statement',
+          caption: 'A single guiding purpose'
+        },
+        drivers: {
+          label: 'Drivers',
+          caption: 'Key to achieving the mission'
+        },
+        okr: {
+          label: 'OKR',
+          caption: 'Measure mission success'
+        }
       },
       childCircle: {
         title: 'Add child circle',

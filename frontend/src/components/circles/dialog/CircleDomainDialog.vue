@@ -1,25 +1,7 @@
 <template>
   <q-dialog ref="dialogRef" persistent>
     <q-card class="q-dialog-plugin">
-      <q-form @submit="onSubmit" @reset="onReset">
-        <!-- Toolbar -->
-        <q-bar class="bg-primary">
-          {{ $t("circles.dialog.childCircle.title") }}
-          <q-space></q-space>
-          <q-btn dense flat icon="mdi-close" v-close-popup @click="reset">
-            <q-tooltip>{{ $t("nav.close") }} </q-tooltip>
-          </q-btn>
-        </q-bar>
-        <q-card-section>
-          <div class="row full-width">
-            <q-input v-model="newCircleName" :label="$t('circles.circleName')" class="full-width"></q-input>
-          </div>
-        </q-card-section>
-        <q-card-actions class="justify-center">
-          <q-btn :label="$t('circles.dialog.childCircle.saveChild')" color="primary" @click="saveChild()"></q-btn>
-          <q-btn :label="$t('circles.dialog.cancel')" color="primary" @click="onDialogOK();"></q-btn>
-        </q-card-actions>
-      </q-form>
+
     </q-card>
   </q-dialog>
 </template>
@@ -27,13 +9,19 @@
 <script setup>
 import { ref, computed, watch, unref } from "vue";
 import { useDialogPluginComponent } from "quasar";
-import { useCirclesStore } from "../../../stores/circles";
+import { useCircleMembersStore } from "../../../stores/circleMembers";
 
-const circlesStore = useCirclesStore();
+const circleMembersStore = useCircleMembersStore();
 
-const newCircleName = ref(null)
+const memberName = ref(null)
+const memberEmail = ref(null)
+const memberUid = ref(null)
 
-const reset = () => {};
+const reset = () => {
+  memberUid.value = null;
+  memberName.value = null;
+  memberEmail.value = null;
+};
 
 const currentData = computed(() => {
   return circlesStore.current();
@@ -72,26 +60,22 @@ const onOKClick = () => {
 };
 
 
-const saveChild = () => {
-  console.log('Saving child, ' + newCircleName.value + ' for: ' + circlesStore.currentCircleUid)
+const saveCircleMember = async () => {
+  console.log('Saving circle member')
 
-  const newCircleObj = { label: newCircleName.value, parentCircle: circlesStore.currentCircleUid }
+  const memberObj = {
+    name: unref(memberName),
+    email: unref(memberEmail),
+    uid: unref(memberUid)
+  }
+  const currentUid = await circleMembersStore.setMember(memberObj);
 
-  circlesStore.addCircle(newCircleObj);
+  circleMembersStore.currentMemberUid = currentUid
 
-  newCircleName.value = null;
-
-  onDialogOK();
-
+  reset();
+  onDialogOK({ member: memberObj });
 }
 
-const onSave = async () => {
-  submitted.value = true;
-};
-
-const onReset = () => {
-  currentData.value = []
-};
 </script>
 
 <style scoped lang="scss"></style>

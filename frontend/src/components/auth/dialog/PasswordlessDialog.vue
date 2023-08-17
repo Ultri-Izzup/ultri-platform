@@ -2,7 +2,7 @@
   <q-dialog ref="dialogRef" persistent>
     <q-card class="q-dialog-plugin" v-if="view == 'enterEmail'">
       <q-form @submit="onEmailSubmit" @reset="onEmailReset">
-        <q-bar class="dialog-qbar">
+        <q-bar class="bg-primary">
           {{  $t('auth.passwordless.dialog.DialogTitle') }}
           <q-space></q-space>
 
@@ -40,7 +40,7 @@
     </q-card>
     <q-card class="q-dialog-plugin" v-if="view == 'enterCode'">
       <q-form @submit="onCodeSubmit" @reset="onCodeReset">
-        <q-bar  class="dialog-qbar">
+        <q-bar  class="bg-primary">
           {{  $t('auth.passwordless.dialog.DialogTitle') }}
           <q-space></q-space>
 

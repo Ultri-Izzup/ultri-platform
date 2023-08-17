@@ -57,8 +57,6 @@ export const useOrgStore = defineStore("org", () => {
 
     const result = await api.get("/orgs/" + orgUid + "/logbook/entries");
 
-    console.log(result)
-
     const data = result.data.logbookEntries;
 
     data.forEach(item => {
@@ -98,9 +96,6 @@ export const useOrgStore = defineStore("org", () => {
   };
 
   const $reset = () => {
-    console.log(
-    'RESET ORGS'
-    )
     orgs.value = new Map();
     logbookEntries.value = new Map();
     currentOrgUid.value = null;

@@ -8,6 +8,7 @@ const boolFeatures = {
   sociocracy: "sociocracyOnly",
   dashboard: "memberDashboard",
   i18n: "i18nEnabled",
+  db: "dbEnabled"
 };
 
 export const useFeatureStore = defineStore("feature", {
@@ -17,6 +18,7 @@ export const useFeatureStore = defineStore("feature", {
     sociocracyOnly: useStorage('sociocracyOnly', false),
     memberDashboard: useStorage('memberDashboard', false),
     i18nEnabled: useStorage('i18nEnabled', false),
+    dbEnabled: useStorage('dbEnabled', false),
     enabledLocales: useStorage('enabledLocales', ['en-US','ro']),
     disabledCanvas: useStorage('disabledCanvas', [ 's3team', 'lean', 'coop'])
   }),
@@ -34,6 +36,7 @@ export const useFeatureStore = defineStore("feature", {
       this.sociocracyEnabled = false;
       this.memberDashboard = false;
       this.i18nEnabled = false;
+      this.dbEnabled = false;
       this.enabledLocales = ['en-US','ro'];
       this.disabledCanvas = [ 's3team', 'lean'];
     },

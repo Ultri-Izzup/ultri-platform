@@ -2,7 +2,7 @@
   <q-dialog ref="dialogRef" persistent>
     <q-card class="q-dialog-plugin">
       <q-form @submit="onSubmit" @reset="onReset">
-        <q-bar class="dialog-qbar">
+        <q-bar class="bg-primary">
           {{ $t("orgs.dialog.createOrg.title") }}
           <q-space></q-space>
 
@@ -30,7 +30,7 @@
           <q-input
             :label="$t('orgs.dialog.createOrg.orgNameHint')"
             v-model="orgName"
-            type="textarea"
+            :autogrow="true"
           ></q-input>
         </q-card-section>
         <!-- buttons example -->

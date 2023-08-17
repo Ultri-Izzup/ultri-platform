@@ -3,7 +3,7 @@
     <q-card class="q-dialog-plugin">
       <q-form>
         <!-- Toolbar -->
-        <q-bar class="dialog-qbar">
+        <q-bar color="primary">
           {{ $t("circles.dialog.editor.title") }}
           <q-space></q-space>
           <q-btn
@@ -35,109 +35,200 @@
               ></q-select>
             </div>
           </div>
-          <q-separator class="q-ma-md"/>
-
-            <div class="row q-pb-md">
-            <div class="col q-pr-xs">
-              <q-select
-                v-model="currentData.leaderUid"
-                map-options
-                emit-value
-                :options="circleMembersStore.memberSelections"
-                :label="$t('circles.roles.leader')"
-              ></q-select>
-            </div>
-            <div class="col-2 q-pa-sm">
-              <q-btn
-                v-if="currentData.leaderUid"
-                icon="mdi-minus"
-                clickable
-                @click="unassignRole(currentData.uid, 'leader')"
-              ></q-btn>
-              <q-btn
-                v-else
-                icon="mdi-plus"
-                clickable
-                @click="addMemberAs('leader')"
-              ></q-btn>
-            </div>
-          </div>
-          <div class="row q-pb-md">
-            <div class="col q-pr-xs">
-              <q-select
-                v-model="currentData.delegateUid"
-                map-options
-                emit-value
-                :options="circleMembersStore.memberSelections"
-                :label="$t('circles.roles.delegate')"
-              ></q-select>
-            </div>
-            <div class="col-2 q-pa-sm">
-              <q-btn
-                v-if="currentData.delegateUid"
-                icon="mdi-minus"
-                clickable
-                @click="unassignRole(currentData.uid, 'delegate')"
-              ></q-btn>
-              <q-btn
-                v-else
-                icon="mdi-plus"
-                clickable
-                @click="addMemberAs('delgate')"
-              ></q-btn>
-            </div>
-          </div>
-          <div class="row q-pb-md">
-            <div class="col q-pr-xs">
-              <q-select
-                v-model="currentData.secretaryUid"
-                map-options
-                emit-value
-                :options="circleMembersStore.memberSelections"
-                :label="$t('circles.roles.secretary')"
-              ></q-select>
-            </div>
-            <div class="col-2 q-pa-sm">
-              <q-btn
-                v-if="currentData.secretaryUid"
-                icon="mdi-minus"
-                clickable
-                @click="unassignRole(currentData.uid, 'secretary')"
-              ></q-btn>
-              <q-btn
-                v-else
-                icon="mdi-plus"
-                clickable
-                @click="addMemberAs('secretary')"
-              ></q-btn>
-            </div>
-          </div>
-          <div class="row q-pb-md">
-            <div class="col q-pr-xs">
-              <q-select
-                v-model="currentData.facilitatorUid"
-                map-options
-                emit-value
-                :options="circleMembersStore.memberSelections"
-                :label="$t('circles.roles.facilitator')"
-              ></q-select>
-            </div>
-            <div class="col-2 q-pa-sm">
-              <q-btn
-                v-if="currentData.facilitatorUid"
-                icon="mdi-minus"
-                clickable
-                @click="unassignRole(currentData.uid, 'facilitator')"
-              ></q-btn>
-              <q-btn
-                v-else
-                icon="mdi-plus"
-                clickable
-                @click="addMemberAs('facilitator')"
-              ></q-btn>
-            </div>
-          </div>
         </q-card-section>
+        <q-card-section>
+          <q-list border>
+            <!-- MISSION STATEMENT -->
+            <q-expansion-item
+              v-if="!currentData.parentCircle"
+              expand-separator
+              icon="mdi-script-text"
+              :label="$t('circles.dialog.editor.mission.label')"
+              :caption="$t('circles.dialog.editor.mission.caption')"
+              group="circle-editor"
+              header-class="text-body1"
+            >
+              <div class="row q-pb-md">
+                <q-input
+                  v-model="currentData.missionStatement"
+                  :label="$t('circles.dialog.editor.mission.label')"
+                  autogrow
+                  class="full-width"
+                ></q-input>
+              </div>
+            </q-expansion-item>
+
+            <!-- DOMAIN DESCRIPTION -->
+            <q-expansion-item
+              expand-separator
+              icon="mdi-domain"
+              :label="$t('circles.dialog.editor.domain.label')"
+              :caption="$t('circles.dialog.editor.domain.caption')"
+              group="circle-editor"
+              header-class="text-body1"
+            >
+              <div class="row q-pb-md">
+                <q-input
+                  v-model="currentData.domain"
+                  :label="$t('circles.dialog.editor.domain.label')"
+                  autogrow
+                  class="full-width"
+                ></q-input>
+              </div>
+            </q-expansion-item>
+
+            <!-- CIRCLE ROLES -->
+            <q-expansion-item
+              expand-separator
+              icon="mdi-account-supervisor"
+              :label="$t('circles.dialog.editor.roles.label')"
+              :caption="$t('circles.dialog.editor.roles.caption')"
+              group="circle-editor"
+              header-class="text-body1"
+            >
+              <div class="row q-pb-md">
+                <div class="col q-pr-xs">
+                  <q-select
+                    v-model="currentData.leaderUid"
+                    map-options
+                    emit-value
+                    :options="circleMembersStore.memberSelections"
+                    :label="$t('circles.roles.leader')"
+                  ></q-select>
+                </div>
+                <div class="col-2 q-pa-sm">
+                  <q-btn
+                    v-if="currentData.leaderUid"
+                    icon="mdi-minus"
+                    clickable
+                    @click="unassignRole(currentData.uid, 'leader')"
+                  ></q-btn>
+                  <q-btn
+                    v-else
+                    icon="mdi-plus"
+                    clickable
+                    @click="addMemberAs('leader')"
+                  ></q-btn>
+                </div>
+              </div>
+              <div class="row q-pb-md">
+                <div class="col q-pr-xs">
+                  <q-select
+                    v-model="currentData.delegateUid"
+                    map-options
+                    emit-value
+                    :options="circleMembersStore.memberSelections"
+                    :label="$t('circles.roles.delegate')"
+                  ></q-select>
+                </div>
+                <div class="col-2 q-pa-sm">
+                  <q-btn
+                    v-if="currentData.delegateUid"
+                    icon="mdi-minus"
+                    clickable
+                    @click="unassignRole(currentData.uid, 'delegate')"
+                  ></q-btn>
+                  <q-btn
+                    v-else
+                    icon="mdi-plus"
+                    clickable
+                    @click="addMemberAs('delgate')"
+                  ></q-btn>
+                </div>
+              </div>
+              <div class="row q-pb-md">
+                <div class="col q-pr-xs">
+                  <q-select
+                    v-model="currentData.secretaryUid"
+                    map-options
+                    emit-value
+                    :options="circleMembersStore.memberSelections"
+                    :label="$t('circles.roles.secretary')"
+                  ></q-select>
+                </div>
+                <div class="col-2 q-pa-sm">
+                  <q-btn
+                    v-if="currentData.secretaryUid"
+                    icon="mdi-minus"
+                    clickable
+                    @click="unassignRole(currentData.uid, 'secretary')"
+                  ></q-btn>
+                  <q-btn
+                    v-else
+                    icon="mdi-plus"
+                    clickable
+                    @click="addMemberAs('secretary')"
+                  ></q-btn>
+                </div>
+              </div>
+              <div class="row q-pb-md">
+                <div class="col q-pr-xs">
+                  <q-select
+                    v-model="currentData.facilitatorUid"
+                    map-options
+                    emit-value
+                    :options="circleMembersStore.memberSelections"
+                    :label="$t('circles.roles.facilitator')"
+                  ></q-select>
+                </div>
+                <div class="col-2 q-pa-sm">
+                  <q-btn
+                    v-if="currentData.facilitatorUid"
+                    icon="mdi-minus"
+                    clickable
+                    @click="unassignRole(currentData.uid, 'facilitator')"
+                  ></q-btn>
+                  <q-btn
+                    v-else
+                    icon="mdi-plus"
+                    clickable
+                    @click="addMemberAs('facilitator')"
+                  ></q-btn>
+                </div>
+              </div>
+            </q-expansion-item>
+
+            <!-- DRIVERS -->
+            <q-expansion-item
+              expand-separator
+              icon="mdi-sign-direction"
+              :label="$t('circles.dialog.editor.drivers.label')"
+              :caption="$t('circles.dialog.editor.drivers.caption')"
+              group="circle-editor"
+              header-class="text-body1"
+            >
+              <div class="row bg-primary">
+                <q-space />
+                <q-btn
+                  @click="circleDriversStore.triggerCircleDriversDialog()"
+                  dense
+                  icon="mdi-plus"
+                  size="sm"
+                  clickable
+                  v-ripple
+                ></q-btn>
+              </div>
+              <div class="row q-pb-md"></div>
+            </q-expansion-item>
+
+            <!-- OKR -->
+            <q-expansion-item
+              expand-separator
+              icon="mdi-flag-checkered"
+              :label="$t('circles.dialog.editor.okr.label')"
+              :caption="$t('circles.dialog.editor.okr.caption')"
+              group="circle-editor"
+            >
+              <div class="row bg-primary">
+                <q-space />
+                <q-btn dense icon="mdi-plus" size="sm"></q-btn>
+              </div>
+              <div class="row q-pb-md"></div>
+            </q-expansion-item>
+          </q-list>
+        </q-card-section>
+
+        <!-- ACTIONS -->
         <q-card-actions class="justify-center">
           <q-btn
             v-if="currentData.parentCircle"
@@ -159,10 +250,16 @@
         </q-card-actions>
       </q-form>
     </q-card>
+
+    <!-- DIALOG -->
     <AssignedMemberDialog
       v-model="circleMembersStore.showAssignedMemberDialog"
       :role="currentRole"
     ></AssignedMemberDialog>
+    <CircleDriversDialog
+      v-model="circleDriversStore.showCircleDriversDialog"
+      :role="currentRole"
+    ></CircleDriversDialog>
   </q-dialog>
 </template>
 
@@ -171,11 +268,14 @@ import { ref, computed, watch, unref } from "vue";
 import { useDialogPluginComponent } from "quasar";
 import { useCirclesStore } from "../../../stores/circles";
 import { useCircleMembersStore } from "../../../stores/circleMembers";
+import { useCircleDriversStore } from "../../../stores/circleDrivers";
 
 import AssignedMemberDialog from "./AssignedMemberDialog.vue";
+import CircleDriversDialog from "./CircleDriversDialog.vue";
 
 const circlesStore = useCirclesStore();
 const circleMembersStore = useCircleMembersStore();
+const circleDriversStore = useCircleDriversStore();
 
 const reset = () => {};
 

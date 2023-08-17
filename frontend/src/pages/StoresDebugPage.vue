@@ -21,6 +21,8 @@
     <vue-json-pretty :data="circles.$state" />
     Circle Members:
     <vue-json-pretty :data="circleMembers.$state" />
+    Circle Drivers:
+    <vue-json-pretty :data="circleDrivers.$state" />
   </div>
 </template>
 
@@ -36,6 +38,7 @@ import { useCanvasStore } from "../stores/canvas";
 import { useSocketStore } from "../stores/socket";
 import { useCirclesStore } from "../stores/circles";
 import { useCircleMembersStore } from "../stores/circleMembers";
+import { useCircleDriversStore } from "../stores/circleDrivers";
 
 const auth = useAuthStore();
 const org = useOrgStore();
@@ -45,6 +48,7 @@ const canvas = useCanvasStore();
 const socket = useSocketStore();
 const circles = useCirclesStore();
 const circleMembers = useCircleMembersStore();
+const circleDrivers = useCircleDriversStore();
 
 const clearStores = () => {
   console.log("Clearing stores")
@@ -56,6 +60,6 @@ const clearStores = () => {
   socket.$reset();
   circles.$reset();
   circleMembers.$reset();
-
+  circleDrivers.$reset();
 };
 </script>

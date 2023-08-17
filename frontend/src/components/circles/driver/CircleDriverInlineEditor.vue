@@ -1,5 +1,5 @@
 <template>
-  <div class="row full-width">Driver UID: {{ circleDriversStore.drivers }}</div>
+  <div class="row full-width">Driver UID: {{ circleDriversStore.getDriverByUid(driverUid) }}</div>
 </template>
 
 <script setup>

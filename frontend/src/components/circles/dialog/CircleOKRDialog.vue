@@ -4,7 +4,7 @@
       <q-form @submit="onSubmit" @reset="reset">
         <!-- Toolbar -->
         <q-bar class="bg-primary">
-          {{ $t("circles.circleMember") }}
+          {{ $t("circles.dialog.okrs.title") }}
           <q-space></q-space>
           <q-btn dense flat icon="mdi-close" v-close-popup @click="reset">
             <q-tooltip>{{ $t("nav.close") }} </q-tooltip>
@@ -12,15 +12,47 @@
         </q-bar>
         <q-card-section>
           <div class="row q-pb-md">
-            <q-input v-model="memberName" class="full-width" :label="$t('circles.dialog.member.name')"></q-input>
+            <q-input
+              v-model="label"
+              class="full-width"
+              :label="$t('circles.dialog.okrs.label.label')"
+            ></q-input>
           </div>
           <div class="row q-pb-md">
-            <q-input v-model="memberEmail" class="full-width" :label="$t('circles.dialog.member.email')"></q-input>
+            <q-input
+              v-model="description"
+              class="full-width"
+              :label="$t('circles.dialog.okrs.description')"
+            ></q-input>
           </div>
         </q-card-section>
+        <q-card-section>
+          <div class="row q-pb-md text-body1 text-bold">
+            {{ $t("circles.dialog.okrs.keyResults.label") }}
+          </div>
+          <div class="row q-pb-md"></div>
+        </q-card-section>
         <q-card-actions class="justify-center">
-          <q-btn :label="$t('circles.dialog.member.saveMember')" color="primary" @click="saveCircleMember()"></q-btn>
-          <q-btn :label="$t('circles.dialog.cancel')" color="primary" v-close-popup @click="reset"></q-btn>
+          <q-space />
+          <q-btn
+            :label="$t('circles.dialog.okrs.addKeyResult')"
+            color="primary"
+            @click="addKeyResult()"
+          ></q-btn>
+          <q-space />
+          <q-btn
+            :label="$t('circles.dialog.okrs.saveDriver')"
+            color="primary"
+            @click="saveCircleDriver()"
+          ></q-btn>
+          <q-space />
+          <q-btn
+            :label="$t('circles.dialog.cancel')"
+            color="secondary"
+            v-close-popup
+            @click="reset"
+          ></q-btn>
+          <q-space />
         </q-card-actions>
       </q-form>
     </q-card>
@@ -28,37 +60,29 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, unref } from "vue";
+import { ref, unref } from "vue";
 import { useDialogPluginComponent } from "quasar";
-import { useCircleMembersStore } from "../../../stores/circleMembers";
+import { useCirclesStore } from "../../../stores/circles";
+import { useCircleDriversStore } from "../../../stores/circleDrivers";
 
-const circleMembersStore = useCircleMembersStore();
+const circlesStore = useCirclesStore();
+const circleDriversStore = useCircleDriversStore();
 
-const memberName = ref(null)
-const memberEmail = ref(null)
-const memberUid = ref(null)
+const label = ref(null);
+const description = ref(null);
+const keyResults = ref([]);
 
 const reset = () => {
-  memberUid.value = null;
-  memberName.value = null;
-  memberEmail.value = null;
+  label.value = null;
+  description.value = null;
+  keyResults.value = [];
 };
-
-const currentData = computed(() => {
-  return circlesStore.current();
-})
-
-// currentData.value = circlesStore.current();
-
-// watch(circlesStore.currentCircleUid, (newValue, oldValue) => {
-//   currentData.value = circlesStore.current();
-// });
 
 defineEmits([
   // REQUIRED; need to specify some events that your
   // component will emit through useDialogPluginComponent()
-  //...useDialogPluginComponent.emits,
-  "ok",
+  ...useDialogPluginComponent.emits,
+  //
 ]);
 
 const onSubmit = async () => {};
@@ -80,23 +104,26 @@ const onOKClick = () => {
   // ...and it will also hide the dialog automatically
 };
 
+const saveCircleDriver = async () => {
+  console.log("Saving Driver");
 
-const saveCircleMember = async () => {
-  console.log('Saving circle member')
+  const okrObj = {
+    label: unref(label),
+    description: unref(description),
+    internal: unref(internal),
+  };
 
-  const memberObj = {
-    name: unref(memberName),
-    email: unref(memberEmail),
-    uid: unref(memberUid)
-  }
-  const currentUid = await circleMembersStore.setMember(memberObj);
+  const okrUid = await circleDriversStore.addDriver(okrObj);
 
-  circleMembersStore.currentMemberUid = currentUid
+  console.log("Woot", okrUid);
+
+  circlesStore.relateDriver(circlesStore.currentCircleUid, okrUid);
 
   reset();
-  onDialogOK({ member: memberObj });
-}
+  onDialogOK();
+};
 
+const triggerKeyResult = () => {};
 </script>
 
 <style scoped lang="scss"></style>

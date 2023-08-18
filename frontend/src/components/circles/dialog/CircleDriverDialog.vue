@@ -20,8 +20,11 @@
           {{ $t('circles.dialog.drivers.external') }} <q-toggle  v-model="internal" :label="$t('circles.dialog.drivers.internal')"></q-toggle>
         </q-card-section>
         <q-card-actions class="justify-center">
+          <q-space />
           <q-btn :label="$t('circles.dialog.drivers.saveDriver')" color="primary" @click="saveCircleDriver()"></q-btn>
-          <q-btn :label="$t('circles.dialog.cancel')" color="primary" v-close-popup @click="reset"></q-btn>
+          <q-space />
+          <q-btn :label="$t('circles.dialog.cancel')" color="secondary" v-close-popup @click="reset"></q-btn>
+          <q-space />
         </q-card-actions>
       </q-form>
     </q-card>

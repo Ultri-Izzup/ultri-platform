@@ -19,8 +19,11 @@
           </div>
         </q-card-section>
         <q-card-actions class="justify-center">
+          <q-space />
           <q-btn :label="$t('circles.dialog.member.saveMember')" color="primary" @click="saveCircleMember()"></q-btn>
-          <q-btn :label="$t('circles.dialog.cancel')" color="primary" v-close-popup @click="reset"></q-btn>
+          <q-space />
+          <q-btn :label="$t('circles.dialog.cancel')" color="secondary" v-close-popup @click="reset"></q-btn>
+          <q-space />
         </q-card-actions>
       </q-form>
     </q-card>

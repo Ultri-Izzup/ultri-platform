@@ -21,8 +21,11 @@
           </div>
         </q-card-section>
         <q-card-actions class="justify-center">
+          <q-space />
           <q-btn :label="$t('circles.dialog.childCircle.saveChild')" color="primary" @click="saveNewChild()"></q-btn>
-          <q-btn :label="$t('circles.dialog.cancel')" color="primary" @click="onDialogOK();"></q-btn>
+          <q-space />
+          <q-btn :label="$t('circles.dialog.cancel')" color="secondary" @click="onDialogOK();"></q-btn>
+          <q-space />
         </q-card-actions>
       </q-form>
     </q-card>

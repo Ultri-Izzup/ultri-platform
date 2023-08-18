@@ -9,8 +9,11 @@
           label="Select an exported circles *.json file"
         ></q-file>
         <q-card-actions class="justify-center">
+          <q-space />
           <q-btn @click="performUpload" label="Upload" color="primary"></q-btn>
-          <q-btn @click="onDialogOK()" label="Cancel" color="primary"></q-btn>
+          <q-space />
+          <q-btn @click="onDialogOK()" label="Cancel" color="secondary"></q-btn>
+          <q-space />
         </q-card-actions>
       </q-card-section>
     </q-card>

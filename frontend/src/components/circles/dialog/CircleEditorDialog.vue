@@ -211,11 +211,23 @@
                 ></q-btn>
               </div>
               <div class="row q-pb-md">
-
-                <div v-for="driver in circlesStore.circleDrivers(circlesStore.currentCircleUid)" :key="driver" class="row full-width">
-                  <CircleDriverInlineEditor :driverUid="driver" @unlink="circlesStore.unlinkDriver(circlesStore.currentCircleUid, driver)" />
+                <div
+                  v-for="driver in circlesStore.circleDrivers(
+                    circlesStore.currentCircleUid
+                  )"
+                  :key="driver"
+                  class="row full-width"
+                >
+                  <CircleDriverInlineEditor
+                    :driverUid="driver"
+                    @unlink="
+                      circlesStore.unlinkDriver(
+                        circlesStore.currentCircleUid,
+                        driver
+                      )
+                    "
+                  />
                 </div>
-
               </div>
             </q-expansion-item>
 
@@ -227,34 +239,64 @@
               :caption="$t('circles.dialog.editor.okr.caption')"
               group="circle-editor"
             >
-              <div class="row bg-primary">
+              <div class="row bg-primary q-pa-xs">
                 <q-space />
-                <q-btn dense icon="mdi-plus" size="sm"></q-btn>
+                <q-btn
+                  @click="circleOKRStore.triggerCircleOKRDialog()"
+                  dense
+                  icon-right="mdi-plus"
+                  size="sm"
+                  clickable
+                  v-ripple
+                  :label="$t('circles.dialog.editor.newOKR')"
+                  class="q-pl-sm"
+                ></q-btn>
               </div>
-              <div class="row q-pb-md"></div>
+              <div class="row q-pb-md">
+                <div
+                  v-for="okr in circlesStore.circleOKR(
+                    circlesStore.currentCircleUid
+                  )"
+                  :key="okr"
+                  class="row full-width"
+                >
+                  <CircleOKRInlineEditor
+                    :driverUid="driver"
+                    @unlink="
+                      circlesStore.unlinkOKR(
+                        circlesStore.currentCircleUid,
+                        okr
+                      )
+                    "
+                  />
+                </div>
+              </div>
             </q-expansion-item>
           </q-list>
         </q-card-section>
 
         <!-- ACTIONS -->
         <q-card-actions class="justify-center">
+          <q-space />
           <q-btn
             v-if="currentData.parentCircle"
             :label="$t('circles.dialog.delete')"
-            color="primary"
+            color="secondary"
             @click="deleteCircle()"
           ></q-btn>
-          <q-space></q-space>
+          <q-space />
           <q-btn
             :label="$t('circles.dialog.addChild')"
             color="primary"
             @click="addChild()"
           ></q-btn>
+          <q-space />
           <q-btn
             :label="$t('controls.close')"
-            color="primary"
+            color="secondary"
             @click="closeDialog()"
           ></q-btn>
+          <q-space />
         </q-card-actions>
       </q-form>
     </q-card>
@@ -266,8 +308,10 @@
     ></AssignedMemberDialog>
     <CircleDriverDialog
       v-model="circleDriversStore.showCircleDriverDialog"
-      :role="currentRole"
     ></CircleDriverDialog>
+    <CircleOKRDialog
+      v-model="circleOKRStore.showCircleOKRDialog"
+    ></CircleOKRDialog>
   </q-dialog>
 </template>
 
@@ -277,14 +321,18 @@ import { useDialogPluginComponent } from "quasar";
 import { useCirclesStore } from "../../../stores/circles";
 import { useCircleMembersStore } from "../../../stores/circleMembers";
 import { useCircleDriversStore } from "../../../stores/circleDrivers";
+import { useCircleOKRStore } from "../../../stores/circleOKR";
 
 import AssignedMemberDialog from "./AssignedMemberDialog.vue";
 import CircleDriverDialog from "./CircleDriverDialog.vue";
+import CircleOKRDialog from "./CircleOKRDialog.vue";
 import CircleDriverInlineEditor from "../driver/CircleDriverInlineEditor.vue";
+import CircleOKRInlineEditor from "../okr/CircleOKRInlineEditor.vue";
 
 const circlesStore = useCirclesStore();
 const circleMembersStore = useCircleMembersStore();
 const circleDriversStore = useCircleDriversStore();
+const circleOKRStore = useCircleOKRStore();
 
 const reset = () => {};
 

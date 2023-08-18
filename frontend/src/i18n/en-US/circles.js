@@ -65,12 +65,18 @@ export default {
         title: 'OKR - Objective',
         description: 'Objective description',
         saveDriver: "Save OKR",
+        saveKeyResult: "Save Key Result",
         label: {
           label: "Objective name"
         },
         addKeyResult: "Key Result",
         keyResults: {
-          label: "Key Results"
+          label: "Key Results",
+        },
+        keyResult: {
+          title: "Key Result Editor",
+          label: "Key Result",
+          description: "Description"
         }
       },
       editor: {

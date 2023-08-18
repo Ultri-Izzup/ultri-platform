@@ -3,7 +3,7 @@
     <q-card class="q-dialog-plugin">
       <q-form>
         <!-- Toolbar -->
-        <q-bar color="primary">
+        <q-bar class="bg-primary">
           {{ $t("circles.dialog.editor.title") }}
           <q-space></q-space>
           <q-btn
@@ -16,6 +16,8 @@
             <q-tooltip>{{ $t("nav.close") }} </q-tooltip>
           </q-btn>
         </q-bar>
+
+        <!-- CIRCLE BASICS -->
         <q-card-section>
           <div class="row q-pb-md">
             <q-input
@@ -36,6 +38,8 @@
             </div>
           </div>
         </q-card-section>
+
+        <!-- CIRCLE DETAILS -->
         <q-card-section>
           <q-list border>
             <!-- MISSION STATEMENT -->
@@ -261,7 +265,7 @@
                   class="row full-width"
                 >
                   <CircleOKRInlineEditor
-                    :driverUid="driver"
+                    :okrUid="okr"
                     @unlink="
                       circlesStore.unlinkOKR(
                         circlesStore.currentCircleUid,
@@ -301,7 +305,7 @@
       </q-form>
     </q-card>
 
-    <!-- DIALOG -->
+    <!-- DIALOGS -->
     <AssignedMemberDialog
       v-model="circleMembersStore.showAssignedMemberDialog"
       :role="currentRole"
@@ -312,6 +316,9 @@
     <CircleOKRDialog
       v-model="circleOKRStore.showCircleOKRDialog"
     ></CircleOKRDialog>
+    <CircleKeyResultDialog
+      v-model="circleOKRStore.showCircleKeyResultDialog"
+    ></CircleKeyResultDialog>
   </q-dialog>
 </template>
 
@@ -326,6 +333,7 @@ import { useCircleOKRStore } from "../../../stores/circleOKR";
 import AssignedMemberDialog from "./AssignedMemberDialog.vue";
 import CircleDriverDialog from "./CircleDriverDialog.vue";
 import CircleOKRDialog from "./CircleOKRDialog.vue";
+import CircleKeyResultDialog from "./CircleKeyResultDialog.vue";
 import CircleDriverInlineEditor from "../driver/CircleDriverInlineEditor.vue";
 import CircleOKRInlineEditor from "../okr/CircleOKRInlineEditor.vue";
 

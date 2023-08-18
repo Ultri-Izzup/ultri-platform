@@ -235,7 +235,7 @@ export const useCirclesStore = defineStore("circles", () => {
     console.log(ix)
     const data = orgCircles.value[ix];
     console.log(data)
-    return (data.okr)
+    return (data.okrs)
   }
 
   const unlinkOKR = (circleUid, okrUid) => {
@@ -245,8 +245,8 @@ export const useCirclesStore = defineStore("circles", () => {
     const data = orgCircles.value[ix];
     console.log(data)
     // Remove the OKR relation to the Circle
-    data.okr.splice(
-      data.okr.findIndex((item) => item === okrUid),
+    data.okrs.splice(
+      data.okrs.findIndex((item) => item === okrUid),
       1
     );
 

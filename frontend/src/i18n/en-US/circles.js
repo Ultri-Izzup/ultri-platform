@@ -46,6 +46,10 @@ export default {
     drivers: {
       removeLink: "Remove driver link",
     },
+    okr: {
+      removeLink: "Remove OKR link",
+      addKeyResult: "Add Key Result"
+    },
     dialog: {
       drivers: {
         title: 'Business Driver',

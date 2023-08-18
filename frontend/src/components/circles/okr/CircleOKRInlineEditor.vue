@@ -5,7 +5,7 @@
         <contenteditable
           tag="div"
           :contenteditable="true"
-          v-model="data.label"
+          v-model="circleOKRStore.getOKRByUid(props.okrUid).label"
           :no-nl="true"
           :no-html="true"
           @returned="enterPressed"
@@ -15,15 +15,20 @@
         <contenteditable
           tag="div"
           :contenteditable="true"
-          v-model="data.description"
+          v-model="circleOKRStore.getOKRByUid(props.okrUid).description"
           :no-nl="true"
           :no-html="true"
           @returned="enterPressed"
         />
       </q-card-section>
+      <q-card-section>
+        {{ circleOKRStore.getOKRByUid(props.okrUid).keyResults }}
+      </q-card-section>
       <q-card-actions>
         <q-space />
-        <q-btn @click="emit('unlink')" :label="$t('circles.drivers.removeLink')" color="secondary" />
+        <q-btn @click="circleOKRStore.triggerCircleKeyResultDialog()" :label="$t('circles.okr.addKeyResult')" color="primary" />
+        <q-space />
+        <q-btn @click="emit('unlink')" :label="$t('circles.okr.removeLink')" color="secondary" />
         <q-space />
       </q-card-actions>
     </q-card>
@@ -32,6 +37,7 @@
 </template>
 
 <script setup>
+import { ref } from "vue";
 import contenteditable from "vue-contenteditable"; // Not needed it registered globally
 import { useCircleOKRStore } from "../../../stores/circleOKR";
 
@@ -43,7 +49,6 @@ const emit = defineEmits(['unlink'])
 
 const enterPressed = () => {};
 
-const circleDriversStore = useCircleOKRStore();
+const circleOKRStore = useCircleOKRStore();
 
-const data = circleDriversStore.getOKRByUid(props.okrUid);
 </script>

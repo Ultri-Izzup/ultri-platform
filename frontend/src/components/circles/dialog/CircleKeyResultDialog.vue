@@ -4,7 +4,7 @@
       <q-form @submit="onSubmit" @reset="reset">
         <!-- Toolbar -->
         <q-bar class="bg-primary">
-          {{ $t("circles.dialog.okrs.title") }}
+          {{ $t("circles.dialog.okrs.keyResults.title") }}
           <q-space></q-space>
           <q-btn dense flat icon="mdi-close" v-close-popup @click="reset">
             <q-tooltip>{{ $t("nav.close") }} </q-tooltip>
@@ -26,26 +26,13 @@
             ></q-input>
           </div>
         </q-card-section>
-        <q-card-section>
-          <div class="row q-pb-md text-body1 text-bold">
-            {{ $t("circles.dialog.okrs.keyResults.label") }}
-          </div>
-          <div class="row q-pb-md">
-            {{ keyResults}}
-          </div>
-        </q-card-section>
         <q-card-actions class="justify-center">
+
           <q-space />
           <q-btn
-            :label="$t('circles.dialog.okrs.addKeyResult')"
+            :label="$t('circles.dialog.okrs.saveKeyResult')"
             color="primary"
-            @click="triggerKeyResultDialog()"
-          ></q-btn>
-          <q-space />
-          <q-btn
-            :label="$t('circles.dialog.okrs.saveDriver')"
-            color="primary"
-            @click="saveCircleDriver()"
+            @click="saveCircleKeyResult()"
           ></q-btn>
           <q-space />
           <q-btn

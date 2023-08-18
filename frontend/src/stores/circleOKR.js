@@ -15,6 +15,7 @@ export const useCircleOKRStore = defineStore("circleOKR", () => {
   const fetching = ref(false);
   const showCircleOKRDialog = ref(false);
   const showEditOKRDialog = ref(false);
+  const showCircleKeyResultDialog = ref(false);
 
   const hasOKRs = computed(() => okrs.value.length > 0);
 
@@ -90,13 +91,16 @@ export const useCircleOKRStore = defineStore("circleOKR", () => {
   };
 
   const triggerCircleOKRDialog = () => {
-    console.log("triggeredNewCircleOKR");
     showCircleOKRDialog.value = true;
   };
 
   const triggerEditOKRDialog = () => {
-    console.log("triggeredEditCircleOKR");
     showEditOKRDialog.value = true;
+  };
+
+  const triggerCircleKeyResultDialog = () => {
+    console.log('TRIGGERD')
+    showCircleKeyResultDialog.value = true;
   };
 
   const $reset = () => {
@@ -107,6 +111,7 @@ export const useCircleOKRStore = defineStore("circleOKR", () => {
     fetching.value = false;
     showCircleOKRDialog.value = false;
     showEditOKRDialog.value = false;
+    showKeyResultDialog.value = false;
     currentOKRInternal.value = true;
   };
 
@@ -115,6 +120,7 @@ export const useCircleOKRStore = defineStore("circleOKR", () => {
     currentOKRUid,
     fetching,
     showCircleOKRDialog,
+    showCircleKeyResultDialog,
     hasOKRs,
     okrSelections,
     sortOKRs,
@@ -124,6 +130,7 @@ export const useCircleOKRStore = defineStore("circleOKR", () => {
     setCurrentOKR,
     triggerCircleOKRDialog,
     triggerEditOKRDialog,
+    triggerCircleKeyResultDialog,
     validateName,
     loadOKRs,
     deleteOKR,

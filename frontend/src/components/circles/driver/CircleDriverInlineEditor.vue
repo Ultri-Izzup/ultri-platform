@@ -5,7 +5,7 @@
         <contenteditable
           tag="div"
           :contenteditable="true"
-          v-model="data.label"
+          v-model="circleDriversStore.getDriverByUid(props.driverUid).label"
           :no-nl="true"
           :no-html="true"
           @returned="enterPressed"
@@ -15,7 +15,7 @@
         <contenteditable
           tag="div"
           :contenteditable="true"
-          v-model="data.description"
+          v-model="circleDriversStore.getDriverByUid(props.driverUid).description"
           :no-nl="true"
           :no-html="true"
           @returned="enterPressed"
@@ -23,7 +23,7 @@
       </q-card-section>
       <q-card-actions>
         <q-space />
-        <q-toggle  v-model="data.internal" :label="$t('circles.dialog.drivers.internal')"></q-toggle>
+        <q-toggle  v-model="circleDriversStore.getDriverByUid(props.driverUid).internal" :label="$t('circles.dialog.drivers.internal')"></q-toggle>
         <q-space />
         <q-btn @click="emit('unlink')" :label="$t('circles.drivers.removeLink')" color="secondary" />
         <q-space />
@@ -47,5 +47,4 @@ const enterPressed = () => {};
 
 const circleDriversStore = useCircleDriversStore();
 
-const data = circleDriversStore.getDriverByUid(props.driverUid);
 </script>

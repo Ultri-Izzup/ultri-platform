@@ -68,7 +68,7 @@ import { useDialogPluginComponent } from "quasar";
 import { useCirclesStore } from "../../../stores/circles";
 import { useCircleOKRStore } from "../../../stores/circleOKR";
 
-import KeyResultDialog from "./KeyResultDialog.vue";
+import CircleKeyResultDialog from "./CircleKeyResultDialog.vue";
 
 const circlesStore = useCirclesStore();
 const circleOKRStore = useCircleOKRStore();
@@ -78,9 +78,6 @@ const description = ref(null);
 const keyResults = ref([]);
 const showKeyResultDialog = ref(false);
 
-const triggerKeyResultDialog = () => {
-
-}
 
 const reset = () => {
   label.value = null;

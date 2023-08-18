@@ -22,12 +22,16 @@
             <q-input
               v-model="description"
               class="full-width"
-              :label="$t('circles.dialog.okrs.description')"
+              :label="$t('circles.dialog.okrs.keyResults.description')"
             ></q-input>
           </div>
+          <div class="row q-pb-md">
+            <q-select v-model="model" :options="metricTypes" label="Metric Type" class="full-width"></q-select>
+          </div>
+
+
         </q-card-section>
         <q-card-actions class="justify-center">
-
           <q-space />
           <q-btn
             :label="$t('circles.dialog.okrs.saveKeyResult')"
@@ -45,7 +49,7 @@
         </q-card-actions>
       </q-form>
     </q-card>
-    <KeyResultDialog v-mode="showKeyResultDialog" />
+    <CircleKeyResultDialog v-model="circleOKRStore.showCircleKeyResultDialog" />
   </q-dialog>
 </template>
 
@@ -63,9 +67,24 @@ const description = ref(null);
 const keyResults = ref([]);
 const showKeyResultDialog = ref(false);
 
-const triggerKeyResultDialog = () => {
-
-}
+const metricTypes = [
+  {
+    label: "Boolean",
+    value: "boolean",
+  },
+  {
+    label: "Percentage",
+    value: "percentage",
+  },
+  {
+    label: "Count",
+    value: "count",
+  },
+  {
+    label: "Velocity",
+    value: "velocity",
+  },
+];
 
 const reset = () => {
   label.value = null;

@@ -72,6 +72,7 @@ export default {
         addKeyResult: "Key Result",
         keyResults: {
           label: "Key Results",
+          description: "Description"
         },
         keyResult: {
           title: "Key Result Editor",

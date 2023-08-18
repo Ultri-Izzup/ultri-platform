@@ -58,7 +58,7 @@
         </q-card-actions>
       </q-form>
     </q-card>
-    <KeyResultDialog v-mode="showKeyResultDialog" />
+    <CircleKeyResultDialog v-model="circleOKRStore.showCircleKeyResultDialog" />
   </q-dialog>
 </template>
 
@@ -77,7 +77,6 @@ const label = ref(null);
 const description = ref(null);
 const keyResults = ref([]);
 const showKeyResultDialog = ref(false);
-
 
 const reset = () => {
   label.value = null;

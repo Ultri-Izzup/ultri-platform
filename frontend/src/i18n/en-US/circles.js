@@ -43,6 +43,9 @@ export default {
         text: 'Reset'
       }
     },
+    drivers: {
+      removeLink: "Remove driver link",
+    },
     dialog: {
       drivers: {
         title: 'Business Driver',

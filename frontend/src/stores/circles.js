@@ -213,6 +213,22 @@ export const useCirclesStore = defineStore("circles", () => {
     return (data.drivers)
   }
 
+  const unlinkDriver = (circleUid, driverUid) => {
+    console.log(circleUid, driverUid)
+    const ix = orgCircles.value.findIndex((element) => element.uid == circleUid);
+    console.log(ix)
+    const data = orgCircles.value[ix];
+    console.log(data)
+    // Remove the driver relation to the Circle
+    data.drivers.splice(
+      data.drivers.findIndex((item) => item === driverUid),
+      1
+    );
+
+    // Update array with new data
+    orgCircles.value[ix] = data;
+  }
+
   const $reset = () => {
     console.log("RESET CIRCLES");
     orgCircles.value = [];
@@ -237,6 +253,7 @@ export const useCirclesStore = defineStore("circles", () => {
     formMode,
     hasCircles,
     orgCircleEdges,
+    unlinkDriver,
     circleDrivers,
     relateDriver,
     unassignRole,

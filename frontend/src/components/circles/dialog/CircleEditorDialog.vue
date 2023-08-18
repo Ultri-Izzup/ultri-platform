@@ -1,5 +1,5 @@
 <template>
-  <q-dialog ref="dialogRef" maximized persistent>
+  <q-dialog ref="dialogRef" persistent>
     <q-card class="q-dialog-plugin">
       <q-form>
         <!-- Toolbar -->
@@ -211,7 +211,7 @@
               <div class="row q-pb-md">
 
                 <div v-for="driver in circlesStore.circleDrivers(circlesStore.currentCircleUid)" :key="driver" class="row full-width">
-                  <CircleDriverInlineEditor :driverUid="driver" />
+                  <CircleDriverInlineEditor :driverUid="driver" @unlink="circlesStore.unlinkDriver(circlesStore.currentCircleUid, driver)" />
                 </div>
 
               </div>

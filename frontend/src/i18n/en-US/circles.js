@@ -57,9 +57,22 @@ export default {
           label: "Name"
         }
       },
+      okrs: {
+        title: 'OKR - Objective',
+        description: 'Objective description',
+        saveDriver: "Save OKR",
+        label: {
+          label: "Objective name"
+        },
+        addKeyResult: "Key Result",
+        keyResults: {
+          label: "Key Results"
+        }
+      },
       editor: {
         title: 'Circle Editor',
         newDriver: 'new driver',
+        newOKR: 'new OKR',
         domain: {
           label: 'Domain Description',
           caption: 'Circle authority and responsibilities'

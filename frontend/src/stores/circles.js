@@ -229,6 +229,31 @@ export const useCirclesStore = defineStore("circles", () => {
     orgCircles.value[ix] = data;
   }
 
+  const circleOKR = (okrUid) => {
+    console.log(okrUid)
+    const ix = orgCircles.value.findIndex((element) => element.uid == okrUid);
+    console.log(ix)
+    const data = orgCircles.value[ix];
+    console.log(data)
+    return (data.okr)
+  }
+
+  const unlinkOKR = (circleUid, okrUid) => {
+    console.log(circleUid, okrUid)
+    const ix = orgCircles.value.findIndex((element) => element.uid == circleUid);
+    console.log(ix)
+    const data = orgCircles.value[ix];
+    console.log(data)
+    // Remove the OKR relation to the Circle
+    data.okr.splice(
+      data.okr.findIndex((item) => item === okrUid),
+      1
+    );
+
+    // Update array with new data
+    orgCircles.value[ix] = data;
+  }
+
   const $reset = () => {
     console.log("RESET CIRCLES");
     orgCircles.value = [];
@@ -253,6 +278,8 @@ export const useCirclesStore = defineStore("circles", () => {
     formMode,
     hasCircles,
     orgCircleEdges,
+    circleOKR,
+    unlinkOKR,
     unlinkDriver,
     circleDrivers,
     relateDriver,

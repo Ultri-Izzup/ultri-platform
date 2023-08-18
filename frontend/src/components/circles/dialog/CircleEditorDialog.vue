@@ -197,15 +197,17 @@
               group="circle-editor"
               header-class="text-body1"
             >
-              <div class="row bg-primary">
+              <div class="row bg-primary q-pa-xs">
                 <q-space />
                 <q-btn
                   @click="circleDriversStore.triggerCircleDriverDialog()"
                   dense
-                  icon="mdi-plus"
+                  icon-right="mdi-plus"
                   size="sm"
                   clickable
                   v-ripple
+                  :label="$t('circles.dialog.editor.newDriver')"
+                  class="q-pl-sm"
                 ></q-btn>
               </div>
               <div class="row q-pb-md">

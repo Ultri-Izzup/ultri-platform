@@ -25,7 +25,7 @@
         <q-space />
         <q-toggle  v-model="data.internal" :label="$t('circles.dialog.drivers.internal')"></q-toggle>
         <q-space />
-        <q-btn @click="emit('unlink')" :label="$t('circles.drivers.removeLink')" color="primary" />
+        <q-btn @click="emit('unlink')" :label="$t('circles.drivers.removeLink')" color="secondary" />
         <q-space />
       </q-card-actions>
     </q-card>

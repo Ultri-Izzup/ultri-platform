@@ -59,6 +59,7 @@ export default {
       },
       editor: {
         title: 'Circle Editor',
+        newDriver: 'new driver',
         domain: {
           label: 'Domain Description',
           caption: 'Circle authority and responsibilities'

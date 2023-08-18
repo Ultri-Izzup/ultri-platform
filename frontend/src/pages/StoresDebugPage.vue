@@ -23,6 +23,8 @@
     <vue-json-pretty :data="circleMembers.$state" />
     Circle Drivers:
     <vue-json-pretty :data="circleDrivers.$state" />
+    Circle OKR:
+    <vue-json-pretty :data="circleOKR.$state" />
   </div>
 </template>
 
@@ -39,6 +41,7 @@ import { useSocketStore } from "../stores/socket";
 import { useCirclesStore } from "../stores/circles";
 import { useCircleMembersStore } from "../stores/circleMembers";
 import { useCircleDriversStore } from "../stores/circleDrivers";
+import { useCircleOKRStore } from "../stores/circleOKR";
 
 const auth = useAuthStore();
 const org = useOrgStore();
@@ -49,6 +52,7 @@ const socket = useSocketStore();
 const circles = useCirclesStore();
 const circleMembers = useCircleMembersStore();
 const circleDrivers = useCircleDriversStore();
+const circleOKR = useCircleOKRStore();
 
 const clearStores = () => {
   console.log("Clearing stores")
@@ -61,5 +65,6 @@ const clearStores = () => {
   circles.$reset();
   circleMembers.$reset();
   circleDrivers.$reset();
+  circleOKR.$reset();
 };
 </script>

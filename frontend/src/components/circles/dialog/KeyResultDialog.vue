@@ -66,12 +66,10 @@
 import { ref, unref } from "vue";
 import { useDialogPluginComponent } from "quasar";
 import { useCirclesStore } from "../../../stores/circles";
-import { useCircleOKRStore } from "../../../stores/circleOKR";
-
-import KeyResultDialog from "./KeyResultDialog.vue";
+import { useCircleDriversStore } from "../../../stores/circleDrivers";
 
 const circlesStore = useCirclesStore();
-const circleOKRStore = useCircleOKRStore();
+const circleOKRStore = useCircleDriversStore();
 
 const label = ref(null);
 const description = ref(null);
@@ -116,18 +114,19 @@ const onOKClick = () => {
 };
 
 const saveCircleDriver = async () => {
-  console.log("Saving OKR");
+  console.log("Saving Driver");
 
   const okrObj = {
     label: unref(label),
     description: unref(description),
+    internal: unref(internal),
   };
 
-  const okrUid = await circleOKRStore.addOKR(okrObj);
+  const okrUid = await circleDriversStore.addDriver(okrObj);
 
   console.log("Woot", okrUid);
 
-  circlesStore.relateOKR(circlesStore.currentCircleUid, okrUid);
+  circlesStore.relateDriver(circlesStore.currentCircleUid, okrUid);
 
   reset();
   onDialogOK();

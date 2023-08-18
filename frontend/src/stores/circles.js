@@ -254,6 +254,26 @@ export const useCirclesStore = defineStore("circles", () => {
     orgCircles.value[ix] = data;
   }
 
+  const relateOKR = async (circleUid, okrUid) => {
+    // Get the current data
+    console.log(circleUid)
+    const ix = orgCircles.value.findIndex((element) => element.uid == circleUid);
+    console.log(ix)
+    const data = orgCircles.value[ix];
+    console.log(data)
+
+    // Create okrs array within the given circle, if it doesn't exist
+    if(! data.okrs) {
+      data.okrs = [];
+    }
+
+    // Push the okr relation to the Circle
+    data.okrs.push(okrUid);
+
+    // Update array with new data
+    orgCircles.value[ix] = data;
+  }
+
   const $reset = () => {
     console.log("RESET CIRCLES");
     orgCircles.value = [];
@@ -283,6 +303,7 @@ export const useCirclesStore = defineStore("circles", () => {
     unlinkDriver,
     circleDrivers,
     relateDriver,
+    relateOKR,
     unassignRole,
     deleteMembers,
     setCircleRole,

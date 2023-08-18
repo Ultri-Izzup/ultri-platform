@@ -23,8 +23,6 @@
       </q-card-section>
       <q-card-actions>
         <q-space />
-        <q-toggle  v-model="data.internal" :label="$t('circles.dialog.drivers.internal')"></q-toggle>
-        <q-space />
         <q-btn @click="emit('unlink')" :label="$t('circles.drivers.removeLink')" color="secondary" />
         <q-space />
       </q-card-actions>
@@ -35,17 +33,17 @@
 
 <script setup>
 import contenteditable from "vue-contenteditable"; // Not needed it registered globally
-import { useCircleDriversStore } from "../../../stores/circleDrivers";
+import { useCircleOKRStore } from "../../../stores/circleOKR";
 
 const props = defineProps({
-  driverUid: String,
+  okrUid: String,
 });
 
 const emit = defineEmits(['unlink'])
 
 const enterPressed = () => {};
 
-const circleDriversStore = useCircleDriversStore();
+const circleDriversStore = useCircleOKRStore();
 
-const data = circleDriversStore.getDriverByUid(props.driverUid);
+const data = circleDriversStore.getOKRByUid(props.okrUid);
 </script>

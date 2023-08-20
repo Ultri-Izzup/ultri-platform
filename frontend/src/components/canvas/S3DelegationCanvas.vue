@@ -1,13 +1,5 @@
 <template>
-  <q-page class="flex flex-center" v-if="ufs.canvasDisabled('delegation')"
-    ><q-card
-      ><q-card-section class="q-pa-xl"
-        ><div class="text-h2">{{$t('canvas.s3.delegation.name')}}</div>
-        <div class="text-h2">{{$t('canvas.comingSoon')}}</div></q-card-section
-      ></q-card
-    ></q-page
-  >
-  <q-page v-else class="container q-pa-md">
+  <q-page class="container q-pa-md">
       <CanvasSection
         v-for="info in canvasDef"
         :info="info"

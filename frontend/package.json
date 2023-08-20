@@ -10,13 +10,7 @@
     "format": "prettier --write \"**/*.{js,vue,scss,html,md,json}\" --ignore-path .gitignore",
     "test": "echo \"No test specified\" && exit 0",
     "dev": "quasar dev",
-    "build": "quasar build",
-    "docs:dev": "vitepress dev docs",
-    "docs:build": "vitepress build docs",
-    "docs:pub": "vitepress build docs && rm -Rf public/co-op/* && cp -Rf docs/.vitepress/dist/* public/co-op/",
-    "docs:preview": "vitepress preview docs",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build": "quasar build"
   },
   "dependencies": {
     "@fastify/cookie": "^8.3.0",
@@ -46,14 +40,6 @@
     "@intlify/vite-plugin-vue-i18n": "^3.3.1",
     "@quasar/app-vite": "^1.0.0",
     "@quasar/quasar-app-extension-qcalendar": "^4.0.0-beta.15",
-    "@quasar/quasar-app-extension-qmarkdown": "^1.4.4",
-    "@storybook/addon-essentials": "^7.1.1",
-    "@storybook/addon-interactions": "^7.1.1",
-    "@storybook/addon-links": "^7.1.1",
-    "@storybook/blocks": "^7.1.1",
-    "@storybook/testing-library": "^0.2.0",
-    "@storybook/vue3": "^7.1.1",
-    "@storybook/vue3-vite": "^7.1.1",
     "autoprefixer": "^10.4.2",
     "eslint": "^8.10.0",
     "eslint-config-prettier": "^8.1.0",
@@ -63,8 +49,7 @@
     "postcss": "^8.4.14",
     "prettier": "^2.5.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "storybook": "^7.1.1"
+    "react-dom": "^18.2.0"
   },
   "engines": {
     "node": "^18 || ^16 || ^14.19",

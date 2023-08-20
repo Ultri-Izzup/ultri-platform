@@ -21,13 +21,12 @@ import { ref } from "vue";
 import { useDialogPluginComponent } from 'quasar';
 
 import { useCanvasStore } from "../../../stores/canvas";
-import { emit } from "process";
 
 defineEmits([
   // REQUIRED; need to specify some events that your
   // component will emit through useDialogPluginComponent()
-  //...useDialogPluginComponent.emits,
-  'ok',
+  ...useDialogPluginComponent.emits,
+  //'ok',
 ]);
 
 const { dialogRef, onDialogOK } = useDialogPluginComponent();

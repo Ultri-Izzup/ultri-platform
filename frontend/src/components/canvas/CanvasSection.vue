@@ -15,7 +15,10 @@
       <q-icon
         name="mdi-plus-circle-outline"
         size="20px"
+        clickable
+        v-ripple
         @click="dialogVisible = true"
+        class="cursor-pointer"
       ></q-icon>
     </q-card-section>
     <q-separator></q-separator>

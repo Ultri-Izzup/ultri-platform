@@ -1,6 +1,7 @@
 // Import requried route files
 import site from './site'
 import canvas from './canvas'
+import canava from './canava'
 import circles from './circles'
 import org from './org'
 import features from './features'
@@ -12,6 +13,7 @@ import catchall from './catchall'
 const routes = [
   ...site,
   ...canvas,
+  ...canava,
   ...circles,
   ...org,
   ...features,

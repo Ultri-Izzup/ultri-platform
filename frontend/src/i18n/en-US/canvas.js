@@ -198,7 +198,7 @@ export default {
         deliverables: {
           title: "Key Deliverables",
           instructions:
-            "What are the top three drivers your organization responds to?",
+            "What does your organization provide to meet the key drivers? Describe the top three.",
         },
         customer: {
           title: "Customer Segment",
@@ -228,7 +228,7 @@ export default {
         partners: {
           title: "Key Partners",
           instructions:
-            "Who can provide essential support, services or materials to your organization? What might you outsource our buy?",
+            "Who can provide essential support, services or materials to your organization? What might you outsource or buy?",
         },
         values: {
           title: "Key Values",

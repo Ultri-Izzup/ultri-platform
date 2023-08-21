@@ -228,7 +228,7 @@ export default {
         partners: {
           title: "Key Partners",
           instructions:
-            "Who can provide essential support, services or materials to your organization? What might you outsource our buy?",
+            "Who can provide essential support, services or materials to your organization? What might you outsource or buy?",
         },
         values: {
           title: "Key Values",

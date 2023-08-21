@@ -42,7 +42,6 @@
 </template>
 
 <script setup>
-import CanavaSection from "./CanavaSection.vue";
 
 import { computed, watch } from "vue";
 

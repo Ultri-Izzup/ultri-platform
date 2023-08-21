@@ -1,8 +1,25 @@
 <template>
   <div>
-    <CanavaCreator v-model="canvasData"></CanavaCreator>
-    <br />
-    <CanavaEditor v-model="canvasData"></CanavaEditor>
+    <q-tabs
+      v-model="tab"
+      dense
+      class="text-grey-9"
+      active-color="primary"
+      indicator-color="primary"
+      align="justify"
+    >
+      <q-tab name="create" label="Define Canvas">
+
+      </q-tab>
+      <q-tab name="edit" label="Canvas View">
+
+      </q-tab>
+    </q-tabs>
+    <q-tab-panels v-model="tab" animated>
+      <q-tab-panel name="create"> <CanavaCreator v-model="canvasData"></CanavaCreator></q-tab-panel>
+      <q-tab-panel name="edit"><CanavaEditor v-model="canvasData"></CanavaEditor></q-tab-panel>
+    </q-tab-panels>
+
     <q-page-sticky
       :position="Screen.gt.sm ? 'bottom-right' : 'bottom'"
       :offset="fabPos"
@@ -74,7 +91,7 @@ const devData = {
       sectionKey: "drivers",
       gridColumn: "1/4",
       gridRow: "1/3",
-      sequence: "1"
+      sequence: "1",
     },
     {
       title: t("canvas.s3.organization.deliverables.title"),
@@ -82,7 +99,7 @@ const devData = {
       sectionKey: "deliverables",
       gridColumn: "4/7",
       gridRow: "1/3",
-      sequence: "2.b"
+      sequence: "2.b",
     },
     {
       title: t("canvas.s3.organization.customer.title"),
@@ -90,7 +107,7 @@ const devData = {
       sectionKey: "customer",
       gridColumn: "7/10",
       gridRow: "1/3",
-      sequence: "2.a"
+      sequence: "2.a",
     },
     {
       title: t("canvas.s3.organization.proposition.title"),
@@ -98,7 +115,7 @@ const devData = {
       sectionKey: "proposition",
       gridColumn: "10/13",
       gridRow: "1/3",
-      sequence: "3"
+      sequence: "3",
     },
     {
       title: t("canvas.s3.organization.challenges.title"),
@@ -106,7 +123,7 @@ const devData = {
       sectionKey: "challenges",
       gridColumn: "1/4",
       gridRow: "3/5",
-      sequence: "4"
+      sequence: "4",
     },
     {
       title: t("canvas.s3.organization.channels.title"),
@@ -114,7 +131,7 @@ const devData = {
       sectionKey: "channels",
       gridColumn: "4/7",
       gridRow: "3/5",
-      sequence: "4.2"
+      sequence: "4.2",
     },
     {
       title: t("canvas.s3.organization.resources.title"),
@@ -122,7 +139,7 @@ const devData = {
       sectionKey: "resources",
       gridColumn: "7/10",
       gridRow: "3/5",
-      sequence: "5"
+      sequence: "5",
     },
     {
       title: t("canvas.s3.organization.partners.title"),
@@ -130,7 +147,7 @@ const devData = {
       sectionKey: "partners",
       gridColumn: "10/13",
       gridRow: "3/5",
-      sequence: "6"
+      sequence: "6",
     },
     {
       title: t("canvas.s3.organization.values.title"),
@@ -138,7 +155,7 @@ const devData = {
       sectionKey: "values",
       gridColumn: "1/7",
       gridRow: "5/7",
-      sequence: "9"
+      sequence: "9",
     },
     {
       title: t("canvas.s3.organization.cost.title"),
@@ -146,7 +163,7 @@ const devData = {
       sectionKey: "cost",
       gridColumn: "1/7",
       gridRow: "7/8",
-      sequence: "10"
+      sequence: "10",
     },
     {
       title: t("canvas.s3.organization.revenue.title"),
@@ -154,7 +171,7 @@ const devData = {
       sectionKey: "revenue",
       gridColumn: "7/13",
       gridRow: "7/8",
-      sequence: "8"
+      sequence: "8",
     },
     {
       title: t("canvas.s3.organization.metrics.title"),
@@ -162,14 +179,18 @@ const devData = {
       sectionKey: "metrics",
       gridColumn: "7/13",
       gridRow: "5/7",
-      sequence: "7"
+      sequence: "7",
     },
   ],
 };
 
 // Sort data so lowest row/col come first
-devData.sections.sort((a,b) =>  a.gridRow.localeCompare(b.gridRow) || a.gridColumn.localeCompare(b.gridColumn))
-console.log(devData.sections)
+devData.sections.sort(
+  (a, b) =>
+    a.gridRow.localeCompare(b.gridRow) ||
+    a.gridColumn.localeCompare(b.gridColumn)
+);
+console.log(devData.sections);
 canvasData.value = devData;
 
 // Instantiate our stores early so they are available
@@ -178,6 +199,8 @@ const canvasStore = useCanvasStore();
 // FAB - Floating Action Button to save/download
 const fabPos = ref([18, 18]);
 const draggingFab = ref(false);
+
+const tab = ref("creator");
 
 const displayUpload = ref(false);
 

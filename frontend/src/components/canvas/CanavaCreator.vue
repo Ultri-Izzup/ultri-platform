@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="q-px-md q-pb-md"><q-btn label="Add Section" @click="triggerNew()" color="primary" /></div>
+    <div class="q-pa-md"><q-btn label="Add Section" @click="triggerNew()" color="primary" /></div>
     <div class="container">
       <q-card
         class="container-card"

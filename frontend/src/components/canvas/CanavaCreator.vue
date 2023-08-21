@@ -56,6 +56,31 @@
           </q-card-section>
         </q-card>
       </q-dialog>
+      <q-dialog v-model="showNewDialog">
+        <q-card>
+          <q-bar class="bg-primary">
+            New Canvas Section
+            <q-space></q-space>
+            <q-btn dense flat icon="mdi-close" v-close-popup @click="resetNew()">
+              <q-tooltip>{{ $t("nav.close") }} </q-tooltip>
+            </q-btn>
+          </q-bar>
+          <q-card-section>
+            <q-input label="Title" v-model="newSectionData.title" />
+            <q-input
+              label="Instructions"
+              v-model="newSectionData.instructions"
+            />
+            <q-input label="Key" v-model="newSectionData.sectionKey" />
+            <q-input label="Cols" v-model="newSectionData.gridColumn" />
+            <q-input label="Rows" v-model="newSectionData.gridRow" />
+            <q-input label="Sequence (opt)" v-model="newSectionData.sequence" />
+          </q-card-section>
+          <q-card-actions class="justify-center">
+            <q-btn label="Save" color="primary" @click="saveNew()"></q-btn>
+          </q-card-actions>
+        </q-card>
+      </q-dialog>
     </div>
   </div>
 </template>
@@ -71,9 +96,11 @@ const props = defineProps(["modelValue"]);
 const emit = defineEmits(["update:modelValue"]);
 
 const showEditDialog = ref(false);
+const showNewDialog = ref(false);
 
 const currentSectionKey = ref(null);
 const currentSectionData = ref(null);
+const newSectionData = ref({});
 
 const value = computed({
   get() {
@@ -109,6 +136,9 @@ document.body.appendChild(sheet);
 watch(value.value.sections, (newVal, oldVal) => {
   let dynamicStyles = "";
 
+  value.value.sections.sort((a,b) =>  a.gridRow.localeCompare(b.gridRow) || a.gridColumn.localeCompare(b.gridColumn))
+
+
   value.value.sections.forEach((s) => {
     console.log(s);
     const sectionCSS =
@@ -137,7 +167,7 @@ const triggerEdit = (sectionKey) => {
 };
 
 const triggerNew = () => {
-  showEditDialog.value = true;
+  showNewDialog.value = true;
 };
 
 const deleteSection = (sectionKey) => {
@@ -147,6 +177,15 @@ const deleteSection = (sectionKey) => {
     1
   );
 };
+
+const saveNew = () => {
+  console.log(newSectionData.value)
+  value.value.sections.push(newSectionData.value)
+}
+
+const resetNew = () => {
+  newSectionData.value = {};
+}
 </script>
 
 <style lang="scss" scoped>

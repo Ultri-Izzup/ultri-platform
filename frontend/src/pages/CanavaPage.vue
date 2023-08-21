@@ -141,14 +141,6 @@ const devData = {
       sequence: "9"
     },
     {
-      title: t("canvas.s3.organization.metrics.title"),
-      instructions: t("canvas.s3.organization.metrics.instructions"),
-      sectionKey: "metrics",
-      gridColumn: "7/13",
-      gridRow: "5/7",
-      sequence: "7"
-    },
-    {
       title: t("canvas.s3.organization.cost.title"),
       instructions: t("canvas.s3.organization.cost.instructions"),
       sectionKey: "cost",
@@ -164,9 +156,20 @@ const devData = {
       gridRow: "7/8",
       sequence: "8"
     },
+    {
+      title: t("canvas.s3.organization.metrics.title"),
+      instructions: t("canvas.s3.organization.metrics.instructions"),
+      sectionKey: "metrics",
+      gridColumn: "7/13",
+      gridRow: "5/7",
+      sequence: "7"
+    },
   ],
 };
 
+// Sort data so lowest row/col come first
+devData.sections.sort((a,b) =>  a.gridRow.localeCompare(b.gridRow) || a.gridColumn.localeCompare(b.gridColumn))
+console.log(devData.sections)
 canvasData.value = devData;
 
 // Instantiate our stores early so they are available

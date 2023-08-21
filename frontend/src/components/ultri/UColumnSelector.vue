@@ -12,6 +12,8 @@
         marker-labels
         label-always
         color="primary"
+        snap
+        drag-range
       ></q-range>
     </div>
   </div>

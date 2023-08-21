@@ -60,7 +60,7 @@
               v-model="currentSectionData.sequence"
             />
             <UColumnSelector v-model="currentSectionData.gridColumn" />
-            <q-input label="Rows" v-model="currentSectionData.gridRow" />
+            <URowSelector v-model="currentSectionData.gridRow" />
           </q-card-section>
         </q-card>
       </q-dialog>
@@ -106,6 +106,7 @@ import { ref, computed, watch } from "vue";
 import { useColorStore } from "../../stores/color";
 
 import UColumnSelector from "../ultri/UColumnSelector.vue"
+import URowSelector from "../ultri/URowSelector.vue"
 
 // Instantiate our stores early so they are available
 const colorStore = useColorStore();

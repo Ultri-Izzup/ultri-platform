@@ -2,15 +2,17 @@
   <q-layout view="lHh Lpr lFf">
     <u-header @toggleDrawer="toggleLeftDrawer()"></u-header>
     <!-- LEFT DRAWER -->
-    <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
-      <HomepageDrawer v-if="route.meta.drawer == 'Homepage'" />
-      <DefaultDrawer v-if="route.meta.drawer == 'Default'" />
-      <LogbookDrawer v-if="route.meta.drawer == 'Logbook'" />
-      <CanvasDrawer v-if="route.meta.drawer == 'Canvas'" />
-      <OrgDrawer v-if="route.meta.drawer == 'Org'" />
-      <OrgCirclesDrawer v-if="route.meta.drawer == 'OrgCircle'" />
-      <CirclesDrawer v-if="route.meta.drawer == 'Circle'" />
-    </q-drawer>
+    <div v-if="route.meta.drawer">
+      <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
+        <HomepageDrawer v-if="route.meta.drawer == 'Homepage'" />
+        <DefaultDrawer v-if="route.meta.drawer == 'Default'" />
+        <LogbookDrawer v-if="route.meta.drawer == 'Logbook'" />
+        <CanvasDrawer v-if="route.meta.drawer == 'Canvas'" />
+        <OrgDrawer v-if="route.meta.drawer == 'Org'" />
+        <OrgCirclesDrawer v-if="route.meta.drawer == 'OrgCircle'" />
+        <CirclesDrawer v-if="route.meta.drawer == 'Circle'" />
+      </q-drawer>
+    </div>
 
     <!-- PAGE -->
     <q-page-container>
@@ -57,7 +59,6 @@ import OrgCreateDialog from "../components/org/dialog/OrgCreateDialog.vue";
 import OrgCreateLogbookEntryDialog from "../components/org/dialog/OrgCreateLogbookEntryDialog.vue";
 import OrgMissionDialog from "../components/org/dialog/OrgMissionDialog.vue";
 
-
 import UHeader from "../components/ultri/UHeader.vue";
 import UDynamicFooter from "../components/footer/UDynamicFooter.vue";
 
@@ -70,19 +71,19 @@ const authStore = useAuthStore();
 const colorStore = useColorStore();
 const orgStore = useOrgStore();
 
-watch(
-  () => colorStore.darkMode,
-  () => {
-    if (colorStore.darkMode) {
-      $q.dark.set(true)
-      setCssVar('primary', '#424242')
-    } else {
-      $q.dark.set(false)
-      setCssVar('primary', '#747BFF')
-    }
-  },
-  { immediate: true }
-);
+// watch(
+//   () => colorStore.darkMode,
+//   () => {
+//     if (colorStore.darkMode) {
+//       $q.dark.set(true);
+//       setCssVar("primary", "#424242");
+//     } else {
+//       $q.dark.set(false);
+//       setCssVar("primary", "#747BFF");
+//     }
+//   },
+//   { immediate: true }
+// );
 
 watch(
   () => route.params.orgUid,
@@ -102,7 +103,6 @@ const toggleLeftDrawer = () => {
 </script>
 
 <style lang="scss">
-
 .u-navbar-light {
   background-color: white;
   color: $navbar-txt-lt;

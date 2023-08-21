@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- <pre>{{canvasData}}</pre> -->
     <q-tabs
       v-model="tab"
       dense

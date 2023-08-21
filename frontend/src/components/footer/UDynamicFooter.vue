@@ -38,9 +38,9 @@
         <!-- XS SCREEN -->
         <div class="xs row full-width">
           <div class="col">
-            <q-space /><a href="https://coop.ultri.com" class="navbar-text-link"
+            <!-- <q-space /><a href="https://coop.ultri.com" class="navbar-text-link"
               >Co-op Info</a
-            >
+            > -->
             <q-space /><a
               href="https://www.opensociocracy.org"
               class="navbar-text-link"
@@ -59,9 +59,9 @@
         </div>
         <!-- LARGER THAN XS -->
         <div class="gt-xs row full-width">
-          <q-space /><a href="https://coop.ultri.com" class="navbar-text-link"
+          <!-- <q-space /><a href="https://coop.ultri.com" class="navbar-text-link"
             >Co-op Info</a
-          >
+          > -->
           <q-space /><a
             href="https://www.opensociocracy.org"
             class="navbar-text-link"

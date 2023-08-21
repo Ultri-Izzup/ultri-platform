@@ -1,30 +1,69 @@
 <template>
-  <div class="row full-width">
-    <div>{{ value.name }}</div>
-    <q-list class="row full-width">
-      <q-item v-for="section in value.sections" :key="section.sectionkey" class="row full-width">
-        <q-item-section class="row full-width">
-          <q-item-label class="text-h6">{{ section.title }}</q-item-label>
-          <q-input label="Title" v-model="section.title"></q-input>
-          <q-input
-            label="Instructions"
-            v-model="section.instructions"
-            auto-grow
-          ></q-input>
-          <q-input label="Key" v-model="section.sectionKey"></q-input>
-          <q-input label="Columns" v-model="section.gridColumn"></q-input>
-          <q-input label="Rows" v-model="section.gridRow"></q-input>
-        </q-item-section>
-      </q-item>
-    </q-list>
+  <div class="container">
+    <q-card
+      class="container-card"
+      v-for="section in value.sections"
+      :key="section.sectionKey"
+      :class="section.sectionKey"
+    >
+      <q-card-section
+        :class="colorStore.darkMode ? 'dark-top-q-card' : 'top-q-card'"
+      >
+        <p class="text-bold">
+          {{ section.title }}
+        </p>
+        <q-icon
+          name="mdi-pencil-circle-outline"
+          size="20px"
+          clickable
+          v-ripple
+          @click="triggerEdit(section.sectionKey)"
+          class="cursor-pointer"
+        ></q-icon> </q-card-section
+    >
+    </q-card>
+    <q-dialog v-model="showEditDialog">
+      <q-card>
+        <q-bar class="bg-primary">
+          Edit Canvas Section
+          <q-space></q-space>
+          <q-btn dense flat icon="mdi-delete" v-close-popup @click="deleteSection(currentSectionData.sectionKey)">
+            <q-tooltip>{{ $t("nav.delete") }} </q-tooltip>
+          </q-btn>
+          <q-btn dense flat icon="mdi-close" v-close-popup @click="reset">
+            <q-tooltip>{{ $t("nav.close") }} </q-tooltip>
+          </q-btn>
+        </q-bar>
+        <q-card-section>
+          <q-input label="Title" v-model="currentSectionData.title" />
+          <q-input label="Instructions" v-model="currentSectionData.instructions" />
+          <q-input label="Key" v-model="currentSectionData.sectionKey" />
+          <q-input label="Cols" v-model="currentSectionData.gridColumn" />
+          <q-input label="Rows" v-model="currentSectionData.gridRow" />
+        </q-card-section>
+      </q-card>
+    </q-dialog>
+
+
+
   </div>
 </template>
 
 <script setup>
-import { computed } from "vue";
+
+import { ref, computed, watch } from "vue";
+
+import { useColorStore } from "../../stores/color";
+// Instantiate our stores early so they are available
+const colorStore = useColorStore();
 
 const props = defineProps(["modelValue"]);
 const emit = defineEmits(["update:modelValue"]);
+
+const showEditDialog = ref(false);
+
+const currentSectionKey = ref(null);
+const currentSectionData = ref(null);
 
 const value = computed({
   get() {
@@ -34,4 +73,117 @@ const value = computed({
     emit("update:modelValue", value);
   },
 });
+
+let sheet = document.createElement("style");
+
+let dynamicStyles = "";
+
+value.value.sections.forEach((s) => {
+  console.log(s);
+  const sectionCSS =
+    "." +
+    s.sectionKey +
+    " { grid-column: " +
+    s.gridColumn +
+    "; grid-row: " +
+    s.gridRow +
+    "; } \n";
+  dynamicStyles = dynamicStyles + sectionCSS;
+});
+
+console.log(dynamicStyles);
+
+sheet.innerHTML = dynamicStyles;
+document.body.appendChild(sheet);
+
+watch(value.value.sections, (newVal, oldVal) => {
+
+  let dynamicStyles = "";
+
+  value.value.sections.forEach((s) => {
+    console.log(s);
+    const sectionCSS =
+      "." +
+      s.sectionKey +
+      " { grid-column: " +
+      s.gridColumn +
+      "; grid-row: " +
+      s.gridRow +
+      "; } \n";
+    dynamicStyles = dynamicStyles + sectionCSS;
+  });
+
+  sheet.innerHTML = dynamicStyles;
+})
+
+const triggerEdit = (sectionKey) => {
+  currentSectionKey.value = sectionKey;
+  const filteredResult = value.value.sections.find((e) => e.sectionKey == sectionKey);
+
+  console.log(filteredResult);
+  currentSectionData.value = filteredResult;
+  showEditDialog.value = true;
+}
+
+const deleteSection = (sectionKey) => {
+  currentSectionKey.value = sectionKey;
+  value.value.sections.splice(value.value.sections.findIndex(item => item.sectionKey === sectionKey), 1)
+
+}
+
+
 </script>
+
+<style lang="scss" scoped>
+.container {
+  display: grid;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+.dark-top-q-card {
+  position: sticky;
+  top: -10px;
+  background-color: $dark;
+  color: white;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px;
+  padding-bottom: 1px;
+}
+.top-q-card {
+  position: sticky;
+  top: -10px;
+  background-color: white;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px;
+  padding-bottom: 1px;
+}
+p {
+  margin: 0;
+  padding: 10px;
+}
+
+.container-card {
+  word-break: break-word;
+  overflow: scroll;
+  padding: 10px;
+  box-shadow: 1px 10px 10px rgba(128, 128, 128, 0.2);
+  min-height: 100%;
+  border-color: lightgray;
+  border-width: 1px;
+  border-style: solid;
+}
+.q-dialog .q-card {
+  min-width: 350px;
+}
+.input {
+  width: 100%;
+  padding: 0 20px;
+}
+</style>

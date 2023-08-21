@@ -248,7 +248,7 @@ export default {
         revenue: {
           title: "Revenue Streams",
           instructions:
-            "How will you start and sustain your organization financially?          ",
+            "How will you start and sustain your organization financially?",
         },
       },
       team: {

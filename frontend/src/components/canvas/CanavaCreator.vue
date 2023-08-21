@@ -55,13 +55,12 @@
               v-model="currentSectionData.instructions"
             />
             <q-input label="Key" v-model="currentSectionData.sectionKey" />
-            <UColumnSelector v-model="currentSectionData.gridColumn" />
-            <q-input label="Cols" v-model="currentSectionData.gridColumn" />
-            <q-input label="Rows" v-model="currentSectionData.gridRow" />
             <q-input
               label="Sequence (opt)"
               v-model="currentSectionData.sequence"
             />
+            <UColumnSelector v-model="currentSectionData.gridColumn" />
+            <q-input label="Rows" v-model="currentSectionData.gridRow" />
           </q-card-section>
         </q-card>
       </q-dialog>

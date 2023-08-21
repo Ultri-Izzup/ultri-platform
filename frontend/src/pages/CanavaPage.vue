@@ -74,8 +74,8 @@ import { useCanvasStore } from "../stores/canvas";
 import { Screen } from "quasar";
 
 // Import the individual canvas SFC module
-import CanavaEditor from "../components/canvas/CanavaEditor.vue";
-import CanavaCreator from "../components/canvas/CanavaCreator.vue";
+import CanavaEditor from "../components/canava/CanavaEditor.vue";
+import CanavaCreator from "../components/canava/CanavaCreator.vue";
 import UploadCanvasDialog from "../components/canvas/dialog/UploadCanvasDialog.vue";
 
 // Create i18n accessor as t

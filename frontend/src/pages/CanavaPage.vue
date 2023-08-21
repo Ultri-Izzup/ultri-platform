@@ -74,6 +74,7 @@ const devData = {
       sectionKey: "drivers",
       gridColumn: "1/4",
       gridRow: "1/3",
+      sequence: "1"
     },
     {
       title: t("canvas.s3.organization.deliverables.title"),
@@ -81,6 +82,7 @@ const devData = {
       sectionKey: "deliverables",
       gridColumn: "4/7",
       gridRow: "1/3",
+      sequence: "2.b"
     },
     {
       title: t("canvas.s3.organization.customer.title"),
@@ -88,6 +90,7 @@ const devData = {
       sectionKey: "customer",
       gridColumn: "7/10",
       gridRow: "1/3",
+      sequence: "2.a"
     },
     {
       title: t("canvas.s3.organization.proposition.title"),
@@ -95,6 +98,7 @@ const devData = {
       sectionKey: "proposition",
       gridColumn: "10/13",
       gridRow: "1/3",
+      sequence: "3"
     },
     {
       title: t("canvas.s3.organization.challenges.title"),
@@ -102,6 +106,7 @@ const devData = {
       sectionKey: "challenges",
       gridColumn: "1/4",
       gridRow: "3/5",
+      sequence: "4"
     },
     {
       title: t("canvas.s3.organization.channels.title"),
@@ -109,6 +114,7 @@ const devData = {
       sectionKey: "channels",
       gridColumn: "4/7",
       gridRow: "3/5",
+      sequence: "4.2"
     },
     {
       title: t("canvas.s3.organization.resources.title"),
@@ -116,6 +122,7 @@ const devData = {
       sectionKey: "resources",
       gridColumn: "7/10",
       gridRow: "3/5",
+      sequence: "5"
     },
     {
       title: t("canvas.s3.organization.partners.title"),
@@ -123,6 +130,7 @@ const devData = {
       sectionKey: "partners",
       gridColumn: "10/13",
       gridRow: "3/5",
+      sequence: "6"
     },
     {
       title: t("canvas.s3.organization.values.title"),
@@ -130,6 +138,7 @@ const devData = {
       sectionKey: "values",
       gridColumn: "1/7",
       gridRow: "5/7",
+      sequence: "9"
     },
     {
       title: t("canvas.s3.organization.metrics.title"),
@@ -137,6 +146,7 @@ const devData = {
       sectionKey: "metrics",
       gridColumn: "7/13",
       gridRow: "5/7",
+      sequence: "7"
     },
     {
       title: t("canvas.s3.organization.cost.title"),
@@ -144,6 +154,7 @@ const devData = {
       sectionKey: "cost",
       gridColumn: "1/7",
       gridRow: "7/8",
+      sequence: "10"
     },
     {
       title: t("canvas.s3.organization.revenue.title"),
@@ -151,6 +162,7 @@ const devData = {
       sectionKey: "revenue",
       gridColumn: "7/13",
       gridRow: "7/8",
+      sequence: "8"
     },
   ],
 };

@@ -10,6 +10,7 @@
         :class="colorStore.darkMode ? 'dark-top-q-card' : 'top-q-card'"
       >
         <p class="text-bold">
+          <q-avatar v-if="section.sequence" size="24px" color="grey-5"><span class="text-grey-8">{{section.sequence}}</span></q-avatar>
           {{ section.title }}
           <sup>
             ?

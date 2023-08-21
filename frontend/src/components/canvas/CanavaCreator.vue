@@ -1,56 +1,66 @@
 <template>
-  <div class="container">
-    <q-card
-      class="container-card"
-      v-for="section in value.sections"
-      :key="section.sectionKey"
-      :class="section.sectionKey"
-    >
-      <q-card-section
-        :class="colorStore.darkMode ? 'dark-top-q-card' : 'top-q-card'"
+  <div>
+    <div class="q-px-md q-pb-md"><q-btn label="Add Section" @click="triggerNew()" color="primary" /></div>
+    <div class="container">
+      <q-card
+        class="container-card"
+        v-for="section in value.sections"
+        :key="section.sectionKey"
+        :class="section.sectionKey"
       >
-        <p class="text-bold">
-          {{ section.title }}
-        </p>
-        <q-icon
-          name="mdi-pencil-circle-outline"
-          size="20px"
-          clickable
-          v-ripple
-          @click="triggerEdit(section.sectionKey)"
-          class="cursor-pointer"
-        ></q-icon> </q-card-section
-    >
-    </q-card>
-    <q-dialog v-model="showEditDialog">
-      <q-card>
-        <q-bar class="bg-primary">
-          Edit Canvas Section
-          <q-space></q-space>
-          <q-btn dense flat icon="mdi-delete" v-close-popup @click="deleteSection(currentSectionData.sectionKey)">
-            <q-tooltip>{{ $t("nav.delete") }} </q-tooltip>
-          </q-btn>
-          <q-btn dense flat icon="mdi-close" v-close-popup @click="reset">
-            <q-tooltip>{{ $t("nav.close") }} </q-tooltip>
-          </q-btn>
-        </q-bar>
-        <q-card-section>
-          <q-input label="Title" v-model="currentSectionData.title" />
-          <q-input label="Instructions" v-model="currentSectionData.instructions" />
-          <q-input label="Key" v-model="currentSectionData.sectionKey" />
-          <q-input label="Cols" v-model="currentSectionData.gridColumn" />
-          <q-input label="Rows" v-model="currentSectionData.gridRow" />
+        <q-card-section
+          :class="colorStore.darkMode ? 'dark-top-q-card' : 'top-q-card'"
+        >
+          <p class="text-bold">
+            <q-avatar v-if="section.sequence" size="24px" color="grey-4"><span class="text-grey-7">{{section.sequence}}</span></q-avatar>
+            {{ section.title }}
+          </p>
+          <q-icon
+            name="mdi-pencil-circle-outline"
+            size="20px"
+            clickable
+            v-ripple
+            @click="triggerEdit(section.sectionKey)"
+            class="cursor-pointer"
+          ></q-icon>
         </q-card-section>
       </q-card>
-    </q-dialog>
-
-
-
+      <q-dialog v-model="showEditDialog">
+        <q-card>
+          <q-bar class="bg-primary">
+            Edit Canvas Section
+            <q-space></q-space>
+            <q-btn
+              dense
+              flat
+              icon="mdi-delete"
+              v-close-popup
+              @click="deleteSection(currentSectionData.sectionKey)"
+            >
+              <q-tooltip>{{ $t("nav.delete") }} </q-tooltip>
+            </q-btn>
+            <q-btn dense flat icon="mdi-close" v-close-popup @click="reset">
+              <q-tooltip>{{ $t("nav.close") }} </q-tooltip>
+            </q-btn>
+          </q-bar>
+          <q-card-section>
+            <q-input label="Title" v-model="currentSectionData.title" />
+            <q-input
+              label="Instructions"
+              v-model="currentSectionData.instructions"
+            />
+            <q-input label="Key" v-model="currentSectionData.sectionKey" />
+            <q-input label="Cols" v-model="currentSectionData.gridColumn" />
+            <q-input label="Rows" v-model="currentSectionData.gridRow" />
+            <q-input label="Sequence (opt)" v-model="currentSectionData.sequence" />
+          </q-card-section>
+        </q-card>
+      </q-dialog>
+    </div>
   </div>
 </template>
 
 <script setup>
-
 import { ref, computed, watch } from "vue";
 
 import { useColorStore } from "../../stores/color";
@@ -97,7 +107,6 @@ sheet.innerHTML = dynamicStyles;
 document.body.appendChild(sheet);
 
 watch(value.value.sections, (newVal, oldVal) => {
-
   let dynamicStyles = "";
 
   value.value.sections.forEach((s) => {
@@ -114,24 +123,30 @@ watch(value.value.sections, (newVal, oldVal) => {
   });
 
   sheet.innerHTML = dynamicStyles;
-})
+});
 
 const triggerEdit = (sectionKey) => {
   currentSectionKey.value = sectionKey;
-  const filteredResult = value.value.sections.find((e) => e.sectionKey == sectionKey);
+  const filteredResult = value.value.sections.find(
+    (e) => e.sectionKey == sectionKey
+  );
 
   console.log(filteredResult);
   currentSectionData.value = filteredResult;
   showEditDialog.value = true;
-}
+};
+
+const triggerNew = () => {
+  showEditDialog.value = true;
+};
 
 const deleteSection = (sectionKey) => {
   currentSectionKey.value = sectionKey;
-  value.value.sections.splice(value.value.sections.findIndex(item => item.sectionKey === sectionKey), 1)
-
-}
-
-
+  value.value.sections.splice(
+    value.value.sections.findIndex((item) => item.sectionKey === sectionKey),
+    1
+  );
+};
 </script>
 
 <style lang="scss" scoped>

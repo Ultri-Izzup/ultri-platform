@@ -200,7 +200,7 @@ const canvasStore = useCanvasStore();
 const fabPos = ref([18, 18]);
 const draggingFab = ref(false);
 
-const tab = ref("creator");
+const tab = ref("create");
 
 const displayUpload = ref(false);
 

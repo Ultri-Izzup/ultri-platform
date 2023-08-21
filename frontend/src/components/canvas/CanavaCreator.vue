@@ -1,6 +1,8 @@
 <template>
   <div>
-    <div class="q-pa-md"><q-btn label="Add Section" @click="triggerNew()" color="primary" /></div>
+    <div class="q-pa-md">
+      <q-btn label="Add Section" @click="triggerNew()" color="primary" />
+    </div>
     <div class="container">
       <q-card
         class="container-card"
@@ -12,7 +14,9 @@
           :class="colorStore.darkMode ? 'dark-top-q-card' : 'top-q-card'"
         >
           <p class="text-bold">
-            <q-avatar v-if="section.sequence" size="24px" color="grey-4"><span class="text-grey-7">{{section.sequence}}</span></q-avatar>
+            <q-avatar v-if="section.sequence" size="24px" color="grey-4"
+              ><span class="text-grey-7">{{ section.sequence }}</span></q-avatar
+            >
             {{ section.title }}
           </p>
           <q-icon
@@ -46,13 +50,17 @@
           <q-card-section>
             <q-input label="Title" v-model="currentSectionData.title" />
             <q-input
+              autogrow
               label="Instructions"
               v-model="currentSectionData.instructions"
             />
             <q-input label="Key" v-model="currentSectionData.sectionKey" />
             <q-input label="Cols" v-model="currentSectionData.gridColumn" />
             <q-input label="Rows" v-model="currentSectionData.gridRow" />
-            <q-input label="Sequence (opt)" v-model="currentSectionData.sequence" />
+            <q-input
+              label="Sequence (opt)"
+              v-model="currentSectionData.sequence"
+            />
           </q-card-section>
         </q-card>
       </q-dialog>
@@ -61,13 +69,20 @@
           <q-bar class="bg-primary">
             New Canvas Section
             <q-space></q-space>
-            <q-btn dense flat icon="mdi-close" v-close-popup @click="resetNew()">
+            <q-btn
+              dense
+              flat
+              icon="mdi-close"
+              v-close-popup
+              @click="resetNew()"
+            >
               <q-tooltip>{{ $t("nav.close") }} </q-tooltip>
             </q-btn>
           </q-bar>
           <q-card-section>
             <q-input label="Title" v-model="newSectionData.title" />
             <q-input
+              autogrow
               label="Instructions"
               v-model="newSectionData.instructions"
             />
@@ -113,7 +128,7 @@ const value = computed({
 
 let sheet = document.createElement("style");
 
-let dynamicStyles = "";
+let dynamicStyles = "@media screen and (min-width: 864px) { \n";
 
 value.value.sections.forEach((s) => {
   console.log(s);
@@ -128,16 +143,21 @@ value.value.sections.forEach((s) => {
   dynamicStyles = dynamicStyles + sectionCSS;
 });
 
+dynamicStyles = dynamicStyles + " } \n";
+
 console.log(dynamicStyles);
 
 sheet.innerHTML = dynamicStyles;
 document.body.appendChild(sheet);
 
 watch(value.value.sections, (newVal, oldVal) => {
-  let dynamicStyles = "";
+  let dynamicStyles = "@media screen and (min-width: 864px) { \n";
 
-  value.value.sections.sort((a,b) =>  a.gridRow.localeCompare(b.gridRow) || a.gridColumn.localeCompare(b.gridColumn))
-
+  value.value.sections.sort(
+    (a, b) =>
+      a.gridRow.localeCompare(b.gridRow) ||
+      a.gridColumn.localeCompare(b.gridColumn)
+  );
 
   value.value.sections.forEach((s) => {
     console.log(s);
@@ -151,6 +171,8 @@ watch(value.value.sections, (newVal, oldVal) => {
       "; } \n";
     dynamicStyles = dynamicStyles + sectionCSS;
   });
+
+  dynamicStyles = dynamicStyles + " } \n";
 
   sheet.innerHTML = dynamicStyles;
 });
@@ -179,13 +201,13 @@ const deleteSection = (sectionKey) => {
 };
 
 const saveNew = () => {
-  console.log(newSectionData.value)
-  value.value.sections.push(newSectionData.value)
-}
+  console.log(newSectionData.value);
+  value.value.sections.push(newSectionData.value);
+};
 
 const resetNew = () => {
   newSectionData.value = {};
-}
+};
 </script>
 
 <style lang="scss" scoped>

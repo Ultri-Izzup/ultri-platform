@@ -10,7 +10,7 @@
         :class="colorStore.darkMode ? 'dark-top-q-card' : 'top-q-card'"
       >
         <p class="text-bold">
-          <q-avatar v-if="section.sequence" size="24px" color="grey-5"><span class="text-grey-8">{{section.sequence}}</span></q-avatar>
+          <q-avatar v-if="section.sequence" size="24px" color="grey-4"><span class="text-grey-8">{{section.sequence}}</span></q-avatar>
           {{ section.title }}
           <sup>
             ?
@@ -31,7 +31,7 @@
     <q-card-section>
       <q-list separator>
       <q-card-section v-ripple clickable @click="dialogVisible = true"
-        class="q-pa-lg text-italic text-italic cursor-pointer q-hoverable">
+        class="q-pa-sm text-italic cursor-pointer q-hoverable">
         {{ section.instructions }}
       </q-card-section>
 
@@ -64,10 +64,10 @@ const value = computed({
 
 let sheet = document.createElement("style");
 
-let dynamicStyles = "";
+let dynamicStyles = "@media screen and (min-width: 864px) { \n";
 
 value.value.sections.forEach((s) => {
-  console.log(s);
+
   const sectionCSS =
     "." +
     s.sectionKey +
@@ -79,6 +79,8 @@ value.value.sections.forEach((s) => {
   dynamicStyles = dynamicStyles + sectionCSS;
 });
 
+dynamicStyles = dynamicStyles + ' } \n';
+
 console.log(dynamicStyles);
 
 sheet.innerHTML = dynamicStyles;
@@ -87,7 +89,7 @@ watch(value.value.sections, (newVal, oldVal) => {
   console.log('NEW ', newVal, 'OLD ', oldVal)
 
 
-  let dynamicStyles = "";
+  let dynamicStyles = "@media screen and (min-width: 864px) { \n";
 
   value.value.sections.forEach((s) => {
     console.log(s);
@@ -101,6 +103,8 @@ watch(value.value.sections, (newVal, oldVal) => {
       "; } \n";
     dynamicStyles = dynamicStyles + sectionCSS;
   });
+
+  dynamicStyles = dynamicStyles + ' } \n';
 
   console.log(dynamicStyles);
 

@@ -1,8 +1,8 @@
 <template>
   <div>
-    <CanvasEditor v-model="canvasData"></CanvasEditor>
+    <CanavaCreator v-model="canvasData"></CanavaCreator>
     <br />
-    <CanvasRenderer v-model="canvasData"></CanvasRenderer>
+    <CanavaEditor v-model="canvasData"></CanavaEditor>
     <q-page-sticky
       :position="Screen.gt.sm ? 'bottom-right' : 'bottom'"
       :offset="fabPos"
@@ -56,8 +56,8 @@ import { useCanvasStore } from "../stores/canvas";
 import { Screen } from "quasar";
 
 // Import the individual canvas SFC module
-import CanvasEditor from "../components/canvas/CanvasEditor.vue";
-import CanvasRenderer from "../components/canvas/CanvasRenderer.vue";
+import CanavaEditor from "../components/canvas/CanavaEditor.vue";
+import CanavaCreator from "../components/canvas/CanavaCreator.vue";
 import UploadCanvasDialog from "../components/canvas/dialog/UploadCanvasDialog.vue";
 
 // Create i18n accessor as t
@@ -71,108 +71,84 @@ const devData = {
     {
       title: t("canvas.s3.organization.drivers.title"),
       instructions: t("canvas.s3.organization.drivers.instructions"),
-      class: "drivers",
       sectionKey: "drivers",
-      id: 1,
       gridColumn: "1/4",
       gridRow: "1/3",
     },
     {
       title: t("canvas.s3.organization.deliverables.title"),
       instructions: t("canvas.s3.organization.deliverables.instructions"),
-      class: "deliverables",
       sectionKey: "deliverables",
-      id: 2,
       gridColumn: "4/7",
       gridRow: "1/3",
     },
     {
       title: t("canvas.s3.organization.customer.title"),
       instructions: t("canvas.s3.organization.customer.instructions"),
-      class: "customer",
       sectionKey: "customer",
-      id: 3,
       gridColumn: "7/10",
       gridRow: "1/3",
     },
     {
       title: t("canvas.s3.organization.proposition.title"),
       instructions: t("canvas.s3.organization.proposition.instructions"),
-      class: "proposition",
       sectionKey: "proposition",
-      id: 4,
       gridColumn: "10/13",
       gridRow: "1/3",
     },
     {
       title: t("canvas.s3.organization.challenges.title"),
       instructions: t("canvas.s3.organization.challenges.instructions"),
-      class: "challenges",
       sectionKey: "challenges",
-      id: 5,
       gridColumn: "1/4",
       gridRow: "3/5",
     },
     {
       title: t("canvas.s3.organization.channels.title"),
       instructions: t("canvas.s3.organization.channels.instructions"),
-      class: "channels",
       sectionKey: "channels",
-      id: 6,
       gridColumn: "4/7",
       gridRow: "3/5",
     },
     {
       title: t("canvas.s3.organization.resources.title"),
       instructions: t("canvas.s3.organization.resources.instructions"),
-      class: "resources",
       sectionKey: "resources",
-      id: 7,
       gridColumn: "7/10",
       gridRow: "3/5",
     },
     {
       title: t("canvas.s3.organization.partners.title"),
       instructions: t("canvas.s3.organization.partners.instructions"),
-      class: "partners",
       sectionKey: "partners",
-      id: 8,
       gridColumn: "10/13",
       gridRow: "3/5",
     },
     {
       title: t("canvas.s3.organization.values.title"),
       instructions: t("canvas.s3.organization.values.instructions"),
-      class: "values",
       sectionKey: "values",
-      id: 9,
       gridColumn: "1/7",
       gridRow: "5/7",
     },
     {
       title: t("canvas.s3.organization.metrics.title"),
       instructions: t("canvas.s3.organization.metrics.instructions"),
-      class: "metrics",
       sectionKey: "metrics",
-      id: 10,
       gridColumn: "7/13",
       gridRow: "5/7",
     },
     {
       title: t("canvas.s3.organization.cost.title"),
       instructions: t("canvas.s3.organization.cost.instructions"),
-      class: "cost",
       sectionKey: "cost",
-      id: 11,
       gridColumn: "1/7",
       gridRow: "7/8",
     },
     {
       title: t("canvas.s3.organization.revenue.title"),
       instructions: t("canvas.s3.organization.revenue.instructions"),
-      class: "revenue",
       sectionKey: "revenue",
-      id: 12,
       gridColumn: "7/13",
       gridRow: "7/8",
     },

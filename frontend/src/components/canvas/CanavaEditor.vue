@@ -44,7 +44,7 @@
 <script setup>
 import CanavaSection from "./CanavaSection.vue";
 
-import { computed, unref } from "vue";
+import { computed, watch } from "vue";
 
 import { useColorStore } from "../../stores/color";
 // Instantiate our stores early so they are available
@@ -82,6 +82,32 @@ value.value.sections.forEach((s) => {
 console.log(dynamicStyles);
 
 sheet.innerHTML = dynamicStyles;
+
+watch(value.value.sections, (newVal, oldVal) => {
+  console.log('NEW ', newVal, 'OLD ', oldVal)
+
+
+  let dynamicStyles = "";
+
+  value.value.sections.forEach((s) => {
+    console.log(s);
+    const sectionCSS =
+      "." +
+      s.sectionKey +
+      " { grid-column: " +
+      s.gridColumn +
+      "; grid-row: " +
+      s.gridRow +
+      "; } \n";
+    dynamicStyles = dynamicStyles + sectionCSS;
+  });
+
+  console.log(dynamicStyles);
+
+  sheet.innerHTML = dynamicStyles;
+
+
+})
 
 console.log(sheet);
 

@@ -21,7 +21,6 @@ import VueJsonPretty from "vue-json-pretty";
 import "vue-json-pretty/lib/styles.css";
 
 import { useFeatureStore } from "../stores/feature"
-import { conditionalExpression } from "@babel/types";
 const ufs = useFeatureStore();
 
 // ref to hold the slected canvas for temp enabling

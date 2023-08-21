@@ -43,7 +43,7 @@
             >
               <q-tooltip>{{ $t("nav.delete") }} </q-tooltip>
             </q-btn>
-            <q-btn dense flat icon="mdi-close" v-close-popup @click="reset">
+            <q-btn dense flat icon="mdi-close" v-close-popup @click="resetNew">
               <q-tooltip>{{ $t("nav.close") }} </q-tooltip>
             </q-btn>
           </q-bar>
@@ -55,6 +55,7 @@
               v-model="currentSectionData.instructions"
             />
             <q-input label="Key" v-model="currentSectionData.sectionKey" />
+            <UColumnSelector v-model="currentSectionData.gridColumn" />
             <q-input label="Cols" v-model="currentSectionData.gridColumn" />
             <q-input label="Rows" v-model="currentSectionData.gridRow" />
             <q-input
@@ -104,6 +105,9 @@
 import { ref, computed, watch } from "vue";
 
 import { useColorStore } from "../../stores/color";
+
+import UColumnSelector from "../ultri/UColumnSelector.vue"
+
 // Instantiate our stores early so they are available
 const colorStore = useColorStore();
 

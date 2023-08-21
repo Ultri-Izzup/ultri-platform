@@ -3,7 +3,7 @@ const routes = [
     path: "/canava",
     component: () => import("layouts/MainLayout.vue"),
     meta: {
-      drawer: "Canava",
+      drawer: null,
       app: "Logbook"
     },
     children: [

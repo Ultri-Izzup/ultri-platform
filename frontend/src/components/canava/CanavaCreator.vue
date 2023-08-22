@@ -156,7 +156,7 @@ sheet.innerHTML = dynamicStyles;
 document.body.appendChild(sheet);
 
 watch(value, (newVal, oldVal) => {
-  console.log('Saw this change')
+
   let dynamicStyles = "@media screen and (min-width: 864px) { \n";
 
   value.value.sections.sort(

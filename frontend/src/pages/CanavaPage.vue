@@ -1,5 +1,16 @@
 <template>
   <div>
+    <div>
+      <q-toolbar class="q-px-lg q-pb-md">
+        <span class="text-h6 q-pr-md">Load Canvas:</span>
+        <q-select
+          label="Selected Canvas"
+          v-model="selectedCanvas"
+          :options="canvasOpts"
+        ></q-select>
+        <q-space></q-space>
+      </q-toolbar>
+    </div>
     <!-- <pre>{{canvasData}}</pre> -->
     <q-tabs
       v-model="tab"
@@ -9,16 +20,16 @@
       indicator-color="primary"
       align="justify"
     >
-      <q-tab name="create" label="Define Canvas">
-
-      </q-tab>
-      <q-tab name="edit" label="Canvas View">
-
-      </q-tab>
+      <q-tab name="edit" label="Canvas View"> </q-tab>
+      <q-tab name="create" label="Configure Canvas"> </q-tab>
     </q-tabs>
     <q-tab-panels v-model="tab" animated>
-      <q-tab-panel name="create"> <CanavaCreator v-model="canvasData"></CanavaCreator></q-tab-panel>
-      <q-tab-panel name="edit"><CanavaEditor v-model="canvasData"></CanavaEditor></q-tab-panel>
+      <q-tab-panel name="create">
+        <CanavaCreator v-model="canvasData"></CanavaCreator
+      ></q-tab-panel>
+      <q-tab-panel name="edit"
+        ><CanavaEditor v-model="canvasData"></CanavaEditor
+      ></q-tab-panel>
     </q-tab-panels>
 
     <q-page-sticky
@@ -82,6 +93,7 @@ import UploadCanvasDialog from "../components/canvas/dialog/UploadCanvasDialog.v
 const { t } = useI18n();
 
 const canvasData = ref({});
+const selectedCanvas = ref(null);
 
 const devData = {
   name: "Custom Canvas",
@@ -195,13 +207,20 @@ console.log(devData.sections);
 canvasData.value = devData;
 
 // Instantiate our stores early so they are available
-const canvasStore = useCanvasStore();
+//const canvasStore = useCanvasStore();
 
 // FAB - Floating Action Button to save/download
 const fabPos = ref([18, 18]);
 const draggingFab = ref(false);
 
-const tab = ref("create");
+const tab = ref("edit");
+
+const canvasOpts = [
+  {
+    label: "S3 Delegation Canvas",
+    value: "s3Delegation",
+  },
+];
 
 const displayUpload = ref(false);
 

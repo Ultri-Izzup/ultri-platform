@@ -40,6 +40,7 @@
               icon="mdi-delete"
               v-close-popup
               @click="deleteSection(currentSectionData.sectionKey)"
+              class="q-pr-sm"
             >
               <q-tooltip>{{ $t("nav.delete") }} </q-tooltip>
             </q-btn>
@@ -207,6 +208,8 @@ const deleteSection = (sectionKey) => {
 const saveNew = () => {
   console.log(newSectionData.value);
   value.value.sections.push(newSectionData.value);
+  showNewDialog.value = false;
+  resetNew();
 };
 
 const resetNew = () => {

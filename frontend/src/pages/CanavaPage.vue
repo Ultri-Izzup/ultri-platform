@@ -25,14 +25,14 @@
           ><q-tooltip> Delete </q-tooltip></q-btn
         >
 
-          <div class="text-h6 q-px-md col-1">Template:</div>
-          <q-select
-            label="Select Canvas"
-            v-model="selectedCanvas"
-            :options="canvasOpts"
-            class="q-pl-md col-2"
-          ></q-select>
-
+        <div class="text-h6 q-px-md col-1">Template:</div>
+        <q-select
+          label="Select Canvas"
+          v-model="selectedCanvas"
+          :options="canvasOpts"
+          class="q-pl-md col-2"
+          @update:model-value="loadCanvasTemplate()"
+        ></q-select>
       </q-toolbar>
     </div>
     <!-- <pre>{{canvasData}}</pre> -->
@@ -55,43 +55,6 @@
         ><CanavaEditor v-model="canvasData"></CanavaEditor
       ></q-tab-panel>
     </q-tab-panels>
-
-    <q-page-sticky
-      :position="Screen.gt.sm ? 'bottom-right' : 'bottom'"
-      :offset="fabPos"
-      class="ontop"
-    >
-      <q-fab
-        icon="mdi-file-arrow-up-down-outline"
-        direction="up"
-        color="accent"
-        :disable="draggingFab"
-        v-touch-pan.prevent.mouse="moveFab"
-        class="ontop"
-      >
-        <q-fab-action
-          @click="onDownloadClick()"
-          color="primary"
-          icon="mdi-download"
-          :disable="draggingFab"
-          class="ontop"
-        ></q-fab-action>
-        <q-fab-action
-          @click="onUploadClick"
-          color="primary"
-          icon="mdi-upload"
-          :disable="draggingFab"
-          class="ontop"
-        ></q-fab-action>
-        <q-fab-action
-          @click="onDeleteClick()"
-          color="secondary"
-          icon="mdi-delete"
-          :disable="draggingFab"
-          class="ontop"
-        ></q-fab-action>
-      </q-fab>
-    </q-page-sticky>
     <a id="downloadAnchorElem" style="display: none"></a>
     <UploadCanavaDialog
       v-model="displayUpload"
@@ -116,126 +79,127 @@ import CanavaEditor from "../components/canava/CanavaEditor.vue";
 import CanavaCreator from "../components/canava/CanavaCreator.vue";
 import UploadCanavaDialog from "../components/canava/dialog/UploadCanavaDialog.vue";
 
+import businessModelData from "../data/canava/businessModel.json";
+import s3DelegationData from "../data/canava/s3Delegation.json";
+import s3OrganizationData from "../data/canava/s3Organization.json";
+import coopOwnershipData from "../data/canava/coopOwnership.json";
+
 // Create i18n accessor as t
 const { t } = useI18n();
 
 const canvasData = ref({ name: "", sections: [] });
 const selectedCanvas = ref(null);
 const displayUpload = ref(false);
+const tab = ref("edit");
 
-const devData = {
-  name: "S3 Organization Canvas",
-  sections: [
-    {
-      title: t("canvas.s3.organization.drivers.title"),
-      instructions: t("canvas.s3.organization.drivers.instructions"),
-      sectionKey: "drivers",
-      gridColumn: "1/4",
-      gridRow: "1/4",
-      sequence: "1",
-    },
-    {
-      title: t("canvas.s3.organization.deliverables.title"),
-      instructions: t("canvas.s3.organization.deliverables.instructions"),
-      sectionKey: "deliverables",
-      gridColumn: "4/7",
-      gridRow: "1/4",
-      sequence: "2",
-    },
-    {
-      title: t("canvas.s3.organization.customer.title"),
-      instructions: t("canvas.s3.organization.customer.instructions"),
-      sectionKey: "customer",
-      gridColumn: "7/10",
-      gridRow: "1/5",
-      sequence: "3",
-    },
-    {
-      title: t("canvas.s3.organization.proposition.title"),
-      instructions: t("canvas.s3.organization.proposition.instructions"),
-      sectionKey: "proposition",
-      gridColumn: "10/13",
-      gridRow: "1/3",
-      sequence: "4",
-    },
-    {
-      title: t("canvas.s3.organization.challenges.title"),
-      instructions: t("canvas.s3.organization.challenges.instructions"),
-      sectionKey: "challenges",
-      gridColumn: "10/13",
-      gridRow: "3/5",
-      sequence: "5",
-    },
-    {
-      title: t("canvas.s3.organization.partners.title"),
-      instructions: t("canvas.s3.organization.partners.instructions"),
-      sectionKey: "partners",
-      gridColumn: "1/4",
-      gridRow: "4/6",
-      sequence: "8",
-    },
-    {
-      title: t("canvas.s3.organization.resources.title"),
-      instructions: t("canvas.s3.organization.resources.instructions"),
-      sectionKey: "resources",
-      gridColumn: "4/7",
-      gridRow: "4/6",
-      sequence: "7",
-    },
-    {
-      title: t("canvas.s3.organization.channels.title"),
-      instructions: t("canvas.s3.organization.channels.instructions"),
-      sectionKey: "channels",
-      gridColumn: "6/13",
-      gridRow: "5/6",
-      sequence: "6",
-    },
-    {
-      title: t("canvas.s3.organization.metrics.title"),
-      instructions: t("canvas.s3.organization.metrics.instructions"),
-      sectionKey: "metrics",
-      gridColumn: "1/6",
-      gridRow: "6/7",
-      sequence: "10",
-    },
-    {
-      title: t("canvas.s3.organization.values.title"),
-      instructions: t("canvas.s3.organization.values.instructions"),
-      sectionKey: "values",
-      gridColumn: "6/13",
-      gridRow: "6/7",
-      sequence: "9",
-    },
+const canvasMap = {
+  businessModel: businessModelData,
+  s3Delegation: s3DelegationData,
+  s3Organization: s3OrganizationData,
+  coopOwnership: coopOwnershipData
+}
 
-    {
-      title: t("canvas.s3.organization.cost.title"),
-      instructions: t("canvas.s3.organization.cost.instructions"),
-      sectionKey: "cost",
-      gridColumn: "1/6",
-      gridRow: "7/8",
-      sequence: "11",
-    },
-    {
-      title: t("canvas.s3.organization.revenue.title"),
-      instructions: t("canvas.s3.organization.revenue.instructions"),
-      sectionKey: "revenue",
-      gridColumn: "6/13",
-      gridRow: "7/8",
-      sequence: "12",
-    },
-  ],
-  sequenced: false,
-  canavaVers: "1.0.0",
-};
+const loadCanvasTemplate = () => {
 
-// Sort data so lowest row/col come first
-devData.sections.sort(
-  (a, b) =>
-    a.gridRow.localeCompare(b.gridRow) ||
-    a.gridColumn.localeCompare(b.gridColumn)
-);
-console.log(devData.sections);
-canvasData.value = devData;
+  console.log(selectedCanvas.value.value);
+
+  const templateData = canvasMap[selectedCanvas.value.value];
+
+  canvasData.value = templateData;
+
+}
+
+// const devData = {
+//   name: "Co-op Ownership Canvas",
+//   sections: [
+//     {
+//       title: t("canvas.coop.purpose.title"),
+//       instructions: t("canvas.coop.purpose.instructions"),
+//       sectionKey: "purpose",
+//       gridColumn: "1/11",
+//       gridRow: "1/2",
+//       sequence: "1",
+//     },
+
+//     {
+//       title: t("canvas.coop.stakeholders.title"),
+//       instructions: t("canvas.coop.stakeholders.instructions"),
+//       sectionKey: "stakeholders",
+//       gridColumn: "1/3",
+//       gridRow: "2/5",
+//       sequence: "2",
+//     },
+//     {
+//       title: t("canvas.coop.nonOwnerStakeholders.title"),
+//       instructions: t("canvas.coop.nonOwnerStakeholders.instructions"),
+//       sectionKey: "nonOwnerStakeholders",
+//       gridColumn: "1/3",
+//       gridRow: "5/7",
+//       sequence: "2.1",
+//     },
+//     {
+//       title: t("canvas.coop.benefits.title"),
+//       instructions: t("canvas.coop.benefits.instructions"),
+//       sectionKey: "benefits",
+//       gridColumn: "3/5",
+//       gridRow: "2/7",
+//       sequence: "3",
+//     },
+//     {
+//       title: t("canvas.coop.responsibilities.title"),
+//       instructions: t("canvas.coop.responsibilities.instructions"),
+//       sectionKey: "responsibilities",
+//       gridColumn: "5/7",
+//       gridRow: "2/7",
+//       sequence: "4",
+//     },
+//     {
+//       title: t("canvas.coop.governance.title"),
+//       instructions: t("canvas.coop.governance.instructions"),
+//       sectionKey: "governance",
+//       gridColumn: "7/9",
+//       gridRow: "2/7",
+//       sequence: "6",
+//     },
+//     {
+//       title: t("canvas.coop.financial.title"),
+//       instructions: t("canvas.coop.financial.instructions"),
+//       sectionKey: "financial",
+//       gridColumn: "9/11",
+//       gridRow: "2/7",
+//       sequence: "7",
+//     },
+
+//     {
+//       title: t("canvas.coop.guidance.title"),
+//       instructions: t("canvas.coop.guidance.instructions"),
+//       sectionKey: "guidance",
+//       gridColumn: "1/6",
+//       gridRow: "7/9",
+//       sequence: "5",
+//     },
+
+//     {
+//       title: t("canvas.coop.investment.title"),
+//       instructions: t("canvas.coop.investment.instructions"),
+//       sectionKey: "investment",
+//       gridColumn: "6/11",
+//       gridRow: "7/9",
+//       sequence: "8",
+//     },
+//   ],
+//   sequenced: true,
+//   canavaVers: "1.0.0",
+// };
+
+// // Sort data so lowest row/col come first
+// devData.sections.sort(
+//   (a, b) =>
+//     a.gridRow.localeCompare(b.gridRow) ||
+//     a.gridColumn.localeCompare(b.gridColumn)
+// );
+// console.log(devData.sections);
+// canvasData.value = devData;
 
 const importUpload = (data) => {
   data.sections.sort(
@@ -245,15 +209,6 @@ const importUpload = (data) => {
   );
   canvasData.value = data;
 };
-
-// Instantiate our stores early so they are available
-//const canvasStore = useCanvasStore();
-
-// FAB - Floating Action Button to save/download
-const fabPos = ref([18, 18]);
-const draggingFab = ref(false);
-
-const tab = ref("edit");
 
 const canvasOpts = [
   {
@@ -267,6 +222,10 @@ const canvasOpts = [
   {
     label: "S3 Delegation Canvas",
     value: "s3Delegation",
+  },
+  {
+    label: "Co-op Ownership Model",
+    value: "coopOwnership",
   },
 ];
 
@@ -304,14 +263,9 @@ const onDownloadClick = () => {
   dlAnchorElem.setAttribute("download", "canvas.json");
   dlAnchorElem.click();
 };
-const moveFab = (ev) => {
-  draggingFab.value = ev.isFirst !== true && ev.isFinal !== true;
-  fabPos.value = [fabPos.value[0] - ev.delta.x, fabPos.value[1] - ev.delta.y];
-};
+
 </script>
 
 <style lang="scss">
-.ontop {
-  z-index: 3;
-}
+
 </style>

@@ -152,12 +152,11 @@ value.value.sections.forEach((s) => {
 
 dynamicStyles = dynamicStyles + " } \n";
 
-console.log(dynamicStyles);
-
 sheet.innerHTML = dynamicStyles;
 document.body.appendChild(sheet);
 
-watch(value.value.sections, (newVal, oldVal) => {
+watch(value, (newVal, oldVal) => {
+  console.log('Saw this change')
   let dynamicStyles = "@media screen and (min-width: 864px) { \n";
 
   value.value.sections.sort(
@@ -167,7 +166,6 @@ watch(value.value.sections, (newVal, oldVal) => {
   );
 
   value.value.sections.forEach((s) => {
-    console.log(s);
     const sectionCSS =
       "." +
       s.sectionKey +
@@ -182,7 +180,7 @@ watch(value.value.sections, (newVal, oldVal) => {
   dynamicStyles = dynamicStyles + " } \n";
 
   sheet.innerHTML = dynamicStyles;
-});
+}, {immediate: true});
 
 const triggerEdit = (sectionKey) => {
   currentSectionKey.value = sectionKey;

@@ -1,0 +1,79 @@
+{
+  "name": "Co-op Ownership Canvas",
+  "sections": [
+    {
+      "title": "Purpose",
+      "instructions": "What does your project hope to achieve? Why does it exist?",
+      "sectionKey": "purpose",
+      "gridColumn": "1/11",
+      "gridRow": "1/2",
+      "sequence": "1"
+    },
+    {
+      "title": "Stakeholders",
+      "instructions": "Who are your member owners, those with long-term interests?",
+      "sectionKey": "stakeholders",
+      "gridColumn": "1/3",
+      "gridRow": "2/5",
+      "sequence": "2"
+    },
+    {
+      "title": "Benefits",
+      "instructions": "What benefits do your member-owners get?",
+      "sectionKey": "benefits",
+      "gridColumn": "3/5",
+      "gridRow": "2/7",
+      "sequence": "3"
+    },
+    {
+      "title": "Responsibilities",
+      "instructions": "What financial and non-financial (e.g., labor) inputs are required for member-owners?",
+      "sectionKey": "responsibilities",
+      "gridColumn": "5/7",
+      "gridRow": "2/7",
+      "sequence": "4"
+    },
+    {
+      "title": "Governance Rights",
+      "instructions": "Which key decisions are made, through which process, and by which stakeholders?",
+      "sectionKey": "governance",
+      "gridColumn": "7/9",
+      "gridRow": "2/7",
+      "sequence": "6"
+    },
+    {
+      "title": "Financial Rights",
+      "instructions": "What determines if/how you distribute surplus profits (dividends) to member-owners?",
+      "sectionKey": "financial",
+      "gridColumn": "9/11",
+      "gridRow": "2/7",
+      "sequence": "7"
+    },
+    {
+      "title": "Non-owner Stakeholders",
+      "instructions": "Who are your non-owner stakeholders?",
+      "sectionKey": "nonOwnerStakeholders",
+      "gridColumn": "1/3",
+      "gridRow": "5/7",
+      "sequence": "2.1"
+    },
+    {
+      "title": "Guidance",
+      "instructions": "Who are your advisors, and which stakeholder groups do they represent? If you have a board of directors, how many board seats go to each stakeholder group?",
+      "sectionKey": "guidance",
+      "gridColumn": "1/6",
+      "gridRow": "7/9",
+      "sequence": "5"
+    },
+    {
+      "title": "Investment",
+      "instructions": "How much money do you need to be viable over the next year? How much can you raise from member-owners vs. other sources?",
+      "sectionKey": "investment",
+      "gridColumn": "6/11",
+      "gridRow": "7/9",
+      "sequence": "8"
+    }
+  ],
+  "sequenced": true,
+  "canavaVers": "1.0.0"
+}

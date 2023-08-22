@@ -71,19 +71,19 @@ const authStore = useAuthStore();
 const colorStore = useColorStore();
 const orgStore = useOrgStore();
 
-// watch(
-//   () => colorStore.darkMode,
-//   () => {
-//     if (colorStore.darkMode) {
-//       $q.dark.set(true);
-//       setCssVar("primary", "#424242");
-//     } else {
-//       $q.dark.set(false);
-//       setCssVar("primary", "#747BFF");
-//     }
-//   },
-//   { immediate: true }
-// );
+watch(
+  () => colorStore.darkMode,
+  () => {
+    if (colorStore.darkMode) {
+      $q.dark.set(true);
+      //setCssVar("primary", "#424242");
+    } else {
+      $q.dark.set(false);
+      //setCssVar("primary", "#747BFF");
+    }
+  },
+  { immediate: true }
+);
 
 watch(
   () => route.params.orgUid,

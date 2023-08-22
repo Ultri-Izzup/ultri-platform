@@ -2,21 +2,29 @@
   <div>
     <div>
       <span v-if="route.name != 'canvasPage'">
-      <span class="q-pr-lg">
-        <router-link to="/canvas" class="navbar-text-link" color="primary">{{
-          $t("nav.canvas")
-        }}</router-link>
-      </span>
-      <span class="q-pr-lg" v-if="featureStore.enabled('pricing')">
-        <router-link to="/pricing" class="navbar-text-link" color="primary">{{
-          $t("nav.pricing")
-        }}</router-link>
-      </span>
-      <span class="q-pr-lg">
-        <router-link to="/calendar" class="navbar-text-link" color="primary">{{
-          $t("nav.calendar")
-        }}</router-link>
-      </span>
+        <span class="q-pr-lg">
+          <router-link to="/canava" class="navbar-text-link" color="primary">{{
+            $t("nav.canava")
+          }}</router-link>
+        </span>
+        <span class="gt-md q-pr-lg">
+          <router-link to="/canvas" class="navbar-text-link" color="primary">{{
+            $t("nav.canvas")
+          }}</router-link>
+        </span>
+        <span class="gt-md q-pr-lg" v-if="featureStore.enabled('pricing')">
+          <router-link to="/pricing" class="navbar-text-link" color="primary">{{
+            $t("nav.pricing")
+          }}</router-link>
+        </span>
+        <span class="gt-md q-pr-lg">
+          <router-link
+            to="/calendar"
+            class="navbar-text-link"
+            color="primary"
+            >{{ $t("nav.calendar") }}</router-link
+          >
+        </span>
       </span>
       <q-toggle
         v-model="colorStore.darkMode"
@@ -47,8 +55,8 @@ import { useColorStore } from "../../stores/color";
 import { useAuthStore } from "../../stores/auth";
 import { useFeatureStore } from "../../stores/feature";
 
-import MemberButton from "./button/MemberButton.vue"
-import NotificationsButton from "./button/NotificationsButton.vue"
+import MemberButton from "./button/MemberButton.vue";
+import NotificationsButton from "./button/NotificationsButton.vue";
 
 const route = useRoute();
 

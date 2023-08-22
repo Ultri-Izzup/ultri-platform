@@ -1,0 +1,79 @@
+{
+  "name": "Business Model Canvas",
+  "sections": [
+    {
+      "title": "Key Activities",
+      "instructions": "What activities are required to meet your value propositions, distribution channels, customer relationships and revenue streams?",
+      "sectionKey": "activities",
+      "gridColumn": "3/5",
+      "gridRow": "1/3",
+      "sequence": "7"
+    },
+    {
+      "title": "Customer Relations",
+      "instructions": "What does each customer segment expect? Which relationships have been established? How are they or will they be integrated? What are the related costs?",
+      "sectionKey": "custRelations",
+      "gridColumn": "7/9",
+      "gridRow": "1/3",
+      "sequence": "4"
+    },
+    {
+      "title": "Key Partners",
+      "instructions": "Who are your key partners or suppliers? What resources do they provide? What activities do they perform?",
+      "sectionKey": "partners",
+      "gridColumn": "1/3",
+      "gridRow": "1/5",
+      "sequence": "8"
+    },
+    {
+      "title": "Value Propositions",
+      "instructions": "What value do you deliver to the customer? What customer problems are you solving, or needs are you satisfying? How are you solving each?",
+      "sectionKey": "valueProps",
+      "gridColumn": "5/7",
+      "gridRow": "1/5",
+      "sequence": "2"
+    },
+    {
+      "title": "Customer Segments",
+      "instructions": "Who are your most important customers? Who are you creating value for?",
+      "sectionKey": "custSegments",
+      "gridColumn": "9/11",
+      "gridRow": "1/5",
+      "sequence": "1"
+    },
+    {
+      "title": "Key Resources",
+      "instructions": "What resources are required to meet your value propositions, distribution channels, customer relationships and revenue streams?",
+      "sectionKey": "resources",
+      "gridColumn": "3/5",
+      "gridRow": "3/5",
+      "sequence": "6"
+    },
+    {
+      "title": "Channels",
+      "instructions": "What channels are right for your customer segments? How do you reach them in the best channels? How cost effective are the segments? How will you integrate the channels?",
+      "sectionKey": "channels",
+      "gridColumn": "7/9",
+      "gridRow": "3/5",
+      "sequence": "3"
+    },
+    {
+      "title": "Cost Structure",
+      "instructions": "What costs are associated with key resources or activities? What are the most important costs and strategies for managing them?",
+      "sectionKey": "costs",
+      "gridColumn": "1/6",
+      "gridRow": "5/6",
+      "sequence": "9"
+    },
+    {
+      "title": "Revenue Streams",
+      "instructions": "What value do you provide that people will pay for? How much and how are they currently paying? How much does each stream contribute to revenues?",
+      "sectionKey": "revenue",
+      "gridColumn": "6/11",
+      "gridRow": "5/6",
+      "sequence": "5"
+    }
+  ],
+  "sequenced": true,
+  "canavaVers": "1.0.0"
+}

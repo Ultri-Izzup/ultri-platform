@@ -1,17 +1,21 @@
 <template>
   <div>
-    <div class="row full-width q-px-lg q-pb-md">
-      <div class="col-2">
-        <span class="text-h6 q-pr-md">Canvas Height:</span>
+    <div class="row">
 
-      <q-slider v-model="vh" :min="50" :max="200" :step="1"></q-slider>
-    </div>
-    <div class="col-2">
-      <span class="text-h6 q-pl-lg q-pr-md">Show Detail:</span>
-
-      <q-toggle v-model="showDetail" color="primary"></q-toggle>
-      </div>
+      <span class="text-h3">{{ value.name }}</span>
       <q-space></q-space>
+
+        <div class="col-2">
+          <span class="text-h6 q-pr-md">Canvas Height:</span>
+
+          <q-slider v-model="vh" :min="50" :max="200" :step="1"></q-slider>
+        </div>
+        <div class="col-2">
+          <span class="text-h6 q-pl-lg q-pr-md">Show Detail:</span>
+
+          <q-toggle v-model="showDetail" color="primary"></q-toggle>
+        </div>
+
     </div>
 
     <div class="container">
@@ -121,13 +125,11 @@ const add = ref(true);
 const showDetail = ref(true);
 const vh = ref(80);
 
-
-
-watch((vh), (oldVal, newVal) => {
+watch(vh, (oldVal, newVal) => {
   console.log(vh.value);
   const element = document.querySelector(".container");
-  element.style.height = vh.value + 'vh';
-})
+  element.style.height = vh.value + "vh";
+});
 
 const reset = () => {
   currentSectionKey.value = null;

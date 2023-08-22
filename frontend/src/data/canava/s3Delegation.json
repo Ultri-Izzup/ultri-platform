@@ -1,0 +1,101 @@
+{
+  "name": "S3 Organization Canvas",
+  "sections": [
+    {
+      "title": "Key Drivers",
+      "instructions": "What are the top three drivers your organization responds to?",
+      "sectionKey": "drivers",
+      "gridColumn": "1/4",
+      "gridRow": "1/3",
+      "sequence": ""
+    },
+    {
+      "title": "Unique Value Proposition",
+      "instructions": "What is the one thing that makes your organization unique? Explain what will convince your customers and your partners to choose your organization over others.",
+      "sectionKey": "proposition",
+      "gridColumn": "10/13",
+      "gridRow": "1/3",
+      "sequence": ""
+    },
+    {
+      "title": "Key Deliverables",
+      "instructions": "What does your organization provide to meet the key drivers? Describe the top three.",
+      "sectionKey": "deliverables",
+      "gridColumn": "4/7",
+      "gridRow": "1/3",
+      "sequence": ""
+    },
+    {
+      "title": "Customer Segment",
+      "instructions": "Who will be your ideal customers? These should relate to the actors mentioned in your key drivers.",
+      "sectionKey": "customer",
+      "gridColumn": "7/10",
+      "gridRow": "1/3",
+      "sequence": ""
+    },
+    {
+      "title": "Key Challenges",
+      "instructions": "What are important constraints or risks your organization is facing? Look to your key drivers, customer segment and unique value proposition to identify them.",
+      "sectionKey": "challenges",
+      "gridColumn": "1/4",
+      "gridRow": "3/5",
+      "sequence": ""
+    },
+    {
+      "title": "Key Partners",
+      "instructions": "Who can provide essential support, services or materials to your organization? What might you outsource or buy?",
+      "sectionKey": "partners",
+      "gridColumn": "10/13",
+      "gridRow": "3/5",
+      "sequence": ""
+    },
+    {
+      "title": "Channels",
+      "instructions": "How does your organization deliver its value proposition to its customers? How do customers find out about your organization?",
+      "sectionKey": "channels",
+      "gridColumn": "4/7",
+      "gridRow": "3/5",
+      "sequence": ""
+    },
+    {
+      "title": "Key Resources and Skills",
+      "instructions": "What does your organization need to sustain itself and create value for the customer? What skills do you need to create the key deliverables?",
+      "sectionKey": "resources",
+      "gridColumn": "7/10",
+      "gridRow": "3/5",
+      "sequence": ""
+    },
+    {
+      "title": "Key Values",
+      "instructions": "Describe the culture of your collaboration, and how you will interact with the rest of the world. List three guidelines for behavior and/or ethical constraints you consider essential to the success of your organization.",
+      "sectionKey": "values",
+      "gridColumn": "1/7",
+      "gridRow": "5/7",
+      "sequence": ""
+    },
+    {
+      "title": "Key Metrics",
+      "instructions": "How will you measure effectiveness of your response to your key drivers? Prefer simple, continuous and actionable metrics.",
+      "sectionKey": "metrics",
+      "gridColumn": "7/13",
+      "gridRow": "5/7",
+      "sequence": ""
+    },
+    {
+      "title": "Cost Structure",
+      "instructions": "What are fixed and running costs for your organization?",
+      "sectionKey": "cost",
+      "gridColumn": "1/7",
+      "gridRow": "7/8",
+      "sequence": ""
+    },
+    {
+      "title": "Revenue Streams",
+      "instructions": "How will you start and sustain your organization financially?",
+      "sectionKey": "revenue",
+      "gridColumn": "7/13",
+      "gridRow": "7/8",
+      "sequence": ""
+    }
+  ]
+}

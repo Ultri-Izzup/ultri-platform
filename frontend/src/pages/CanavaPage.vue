@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>DATA {{canvasData}}
+    <div>
       <q-toolbar class="q-px-lg q-pb-md">
         <span class="text-h6">Canvas data:</span>
         <q-btn
@@ -91,7 +91,7 @@
       </q-fab>
     </q-page-sticky>
     <a id="downloadAnchorElem" style="display: none"></a>
-    <UploadCanvasDialog v-model="displayUpload"></UploadCanvasDialog>
+    <UploadCanavaDialog v-model="displayUpload" @uploaded="(event) => importUpload(event)"></UploadCanavaDialog>
   </div>
 </template>
 
@@ -109,114 +109,98 @@ import { Screen } from "quasar";
 // Import the individual canvas SFC module
 import CanavaEditor from "../components/canava/CanavaEditor.vue";
 import CanavaCreator from "../components/canava/CanavaCreator.vue";
-import UploadCanvasDialog from "../components/canvas/dialog/UploadCanvasDialog.vue";
+import UploadCanavaDialog from "../components/canava/dialog/UploadCanavaDialog.vue";
 
 // Create i18n accessor as t
 const { t } = useI18n();
 
 const canvasData = ref({name: "", sections: []});
 const selectedCanvas = ref(null);
+const displayUpload = ref(false);
 
 const devData = {
-  name: "Custom Canvas",
-  sections: [
+  "name": "S3 Delegation Canvas",
+  "sections": [
     {
-      title: t("canvas.s3.organization.drivers.title"),
-      instructions: t("canvas.s3.organization.drivers.instructions"),
-      sectionKey: "drivers",
-      gridColumn: "1/4",
-      gridRow: "1/3",
-      sequence: "1",
+      "title": "Purpose",
+      "instructions": "What purpose does the team (or role) serve in the organization?",
+      "sectionKey": "purpose",
+      "gridColumn": "1/6",
+      "gridRow": "1/4"
     },
     {
-      title: t("canvas.s3.organization.deliverables.title"),
-      instructions: t("canvas.s3.organization.deliverables.instructions"),
-      sectionKey: "deliverables",
-      gridColumn: "4/7",
-      gridRow: "1/3",
-      sequence: "2.b",
+      "title": "Key Resources",
+      "instructions": "What are essential resources the delegatee(s) can make use of?",
+      "sectionKey": "resources",
+      "gridColumn": "9/13",
+      "gridRow": "1/4"
     },
     {
-      title: t("canvas.s3.organization.customer.title"),
-      instructions: t("canvas.s3.organization.customer.instructions"),
-      sectionKey: "customer",
-      gridColumn: "7/10",
-      gridRow: "1/3",
-      sequence: "2.a",
+      "title": "Key Challenges",
+      "instructions": "What are the three most important known (or anticipated) challenges the delegatee(s) might face?",
+      "sectionKey": "challenges",
+      "gridColumn": "6/9",
+      "gridRow": "1/5"
     },
     {
-      title: t("canvas.s3.organization.proposition.title"),
-      instructions: t("canvas.s3.organization.proposition.instructions"),
-      sectionKey: "proposition",
-      gridColumn: "10/13",
-      gridRow: "1/3",
-      sequence: "3",
+      "title": "Key responsibilities",
+      "instructions": "What are the delegatee’s main responsibilities, i.e. objectives, or essential work and decision making being delegated?",
+      "sectionKey": "responsibilities",
+      "gridColumn": "1/6",
+      "gridRow": "4/7"
     },
     {
-      title: t("canvas.s3.organization.challenges.title"),
-      instructions: t("canvas.s3.organization.challenges.instructions"),
-      sectionKey: "challenges",
-      gridColumn: "1/4",
-      gridRow: "3/5",
-      sequence: "4",
+      "title": "Delegator Responsibilities",
+      "instructions": "What is the delegator’s contribution to the success of the delegatee(s)?",
+      "sectionKey": "delegator",
+      "gridColumn": "9/13",
+      "gridRow": "4/7"
     },
     {
-      title: t("canvas.s3.organization.channels.title"),
-      instructions: t("canvas.s3.organization.channels.instructions"),
-      sectionKey: "channels",
-      gridColumn: "4/7",
-      gridRow: "3/5",
-      sequence: "4.2",
+      "title": " Key Deliverables",
+      "instructions": "What does the team/role provide to achieve its purpose and meet the key responsibilities and key challenges?",
+      "sectionKey": "deliverables",
+      "gridColumn": "6/9",
+      "gridRow": "5/9"
     },
     {
-      title: t("canvas.s3.organization.resources.title"),
-      instructions: t("canvas.s3.organization.resources.instructions"),
-      sectionKey: "resources",
-      gridColumn: "7/10",
-      gridRow: "3/5",
-      sequence: "5",
+      "title": "Dependencies",
+      "instructions": "What are the essential dependencies between this domain and other parts of the organization?",
+      "sectionKey": "dependencies",
+      "gridColumn": "1/6",
+      "gridRow": "7/10"
     },
     {
-      title: t("canvas.s3.organization.partners.title"),
-      instructions: t("canvas.s3.organization.partners.instructions"),
-      sectionKey: "partners",
-      gridColumn: "10/13",
-      gridRow: "3/5",
-      sequence: "6",
+      "title": "Key Metrics",
+      "instructions": "What are the critical indicators of progress, project health or performance?",
+      "sectionKey": "metrics",
+      "gridColumn": "9/13",
+      "gridRow": "7/10"
     },
     {
-      title: t("canvas.s3.organization.values.title"),
-      instructions: t("canvas.s3.organization.values.instructions"),
-      sectionKey: "values",
-      gridColumn: "1/7",
-      gridRow: "5/7",
-      sequence: "9",
+      "title": "Competencies, qualities and skills",
+      "instructions": "What competencies, qualities and skills are required – or at least preferable – to successfully achieve the purpose of this domain?",
+      "sectionKey": "competencies",
+      "gridColumn": "6/9",
+      "gridRow": "9/13"
     },
     {
-      title: t("canvas.s3.organization.cost.title"),
-      instructions: t("canvas.s3.organization.cost.instructions"),
-      sectionKey: "cost",
-      gridColumn: "1/7",
-      gridRow: "7/8",
-      sequence: "10",
+      "title": "External Constraints",
+      "instructions": "What are important external constraints to the autonomy and influence of the delegatee(s)?",
+      "sectionKey": "constraints",
+      "gridColumn": "1/6",
+      "gridRow": "10/13"
     },
     {
-      title: t("canvas.s3.organization.revenue.title"),
-      instructions: t("canvas.s3.organization.revenue.instructions"),
-      sectionKey: "revenue",
-      gridColumn: "7/13",
-      gridRow: "7/8",
-      sequence: "8",
-    },
-    {
-      title: t("canvas.s3.organization.metrics.title"),
-      instructions: t("canvas.s3.organization.metrics.instructions"),
-      sectionKey: "metrics",
-      gridColumn: "7/13",
-      gridRow: "5/7",
-      sequence: "7",
-    },
+      "title": "Monitoring and Evaluation",
+      "instructions": "How will you monitor the key metrics, and when (and how) will you evaluate success of the team/role?",
+      "sectionKey": "monitoring",
+      "gridColumn": "9/13",
+      "gridRow": "10/13"
+    }
   ],
+  "sequenced": false,
+  "canavaVers": "1.0.0"
 };
 
 // Sort data so lowest row/col come first
@@ -227,6 +211,15 @@ devData.sections.sort(
 );
 console.log(devData.sections);
 canvasData.value = devData;
+
+const importUpload = (data) => {
+  data.sections.sort(
+    (a, b) =>
+      a.gridRow.localeCompare(b.gridRow) ||
+      a.gridColumn.localeCompare(b.gridColumn)
+  );
+  canvasData.value = data;
+}
 
 // Instantiate our stores early so they are available
 //const canvasStore = useCanvasStore();
@@ -244,7 +237,7 @@ const canvasOpts = [
   },
 ];
 
-const displayUpload = ref(false);
+
 
 const onUploadClick = () => {
   console.log("Upload Data for Current Canvas");
@@ -259,54 +252,27 @@ const reset = () => {
   canvasData.value = {name: "", sections: []};
   selectedCanvas.value = null;
   tab.value = "edit";
+  displayUpload.value = false;
 };
 const onDownloadClick = () => {
   console.log("Download Data for Current Canvas");
 
-  // Get the canvas sections one at a time
-  const canvasProps = Object.entries(canvasStore.currentCanvas);
-
   // Define an object to hold our ouput
-  const outObj = { canvas: {} };
-
-  outObj["canvas"][canvasName.value] = {};
-
-  canvasProps.forEach((section) => {
-    let outVal = [];
-    console.log(section);
-    // The first element is the section name
-    const sectionName = section[0];
-
-    // The second element is the data
-    const sectionData = section[1];
-
-    let rawData;
-
-    if (isProxy(sectionData)) {
-      rawData = toRaw(sectionData);
-      if (rawData instanceof Map) {
-        let itemArray = [];
-        console.log("Converting Map to array", rawData);
-        rawData.forEach((item) => {
-          console.log(item);
-          itemArray.push(item);
-        });
-        outVal = itemArray;
-      }
-    }
-
-    outObj["canvas"][canvasName.value][sectionName] = outVal;
-  });
+  const outObj = {
+    name: canvasData.value.name,
+    sections: canvasData.value.sections,
+    sequenced: canvasData.value.sequenced ? true : false,
+    canavaVers: '1.0.0'
+   };
 
   var dataStr =
     "data:text/json;charset=utf-8," +
     encodeURIComponent(JSON.stringify(outObj, 0, 2));
   var dlAnchorElem = document.getElementById("downloadAnchorElem");
   dlAnchorElem.setAttribute("href", dataStr);
-  dlAnchorElem.setAttribute("download", canvasName.value + "-canvas.json");
+  dlAnchorElem.setAttribute("download", "canvas.json");
   dlAnchorElem.click();
 
-  console.log(outObj);
 };
 const moveFab = (ev) => {
   draggingFab.value = ev.isFirst !== true && ev.isFinal !== true;

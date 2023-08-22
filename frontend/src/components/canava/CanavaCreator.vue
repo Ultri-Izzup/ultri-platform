@@ -1,7 +1,9 @@
 <template>
   <div>
-    <div class="q-pa-md">
-      <q-btn label="Add Section" @click="triggerNew()" color="primary" />
+    <div class="row q-pa-md">
+      <q-input label="Canvas Name" v-model="value.name"></q-input
+      ><q-space></q-space
+      ><q-btn label="Add Section" @click="triggerNew()" color="primary" />
     </div>
     <div class="container">
       <q-card
@@ -91,7 +93,6 @@
             <q-input label="Sequence (opt)" v-model="newSectionData.sequence" />
             <UColumnSelector v-model="newSectionData.gridColumn" />
             <URowSelector v-model="newSectionData.gridRow" />
-
           </q-card-section>
           <q-card-actions class="justify-center">
             <q-btn label="Save" color="primary" @click="saveNew()"></q-btn>
@@ -107,8 +108,8 @@ import { ref, computed, watch } from "vue";
 
 import { useColorStore } from "../../stores/color";
 
-import UColumnSelector from "../ultri/UColumnSelector.vue"
-import URowSelector from "../ultri/URowSelector.vue"
+import UColumnSelector from "../ultri/UColumnSelector.vue";
+import URowSelector from "../ultri/URowSelector.vue";
 
 // Instantiate our stores early so they are available
 const colorStore = useColorStore();

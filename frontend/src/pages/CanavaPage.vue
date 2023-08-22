@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <q-toolbar class="q-px-lg q-pb-md">
+      <q-toolbar class="q-px-lg q-pb-md row">
         <span class="text-h6">Canvas data:</span>
         <q-btn
           @click="onDownloadClick()"
@@ -24,13 +24,15 @@
           class="q-ml-md"
           ><q-tooltip> Delete </q-tooltip></q-btn
         >
-        <span class="text-h6 q-pl-md">Template:</span>
-        <q-select
-          label="Selected Canvas"
-          v-model="selectedCanvas"
-          :options="canvasOpts"
-          class="q-ml-sm"
-        ></q-select>
+
+          <div class="text-h6 q-px-md col-1">Template:</div>
+          <q-select
+            label="Select Canvas"
+            v-model="selectedCanvas"
+            :options="canvasOpts"
+            class="q-pl-md col-2"
+          ></q-select>
+
       </q-toolbar>
     </div>
     <!-- <pre>{{canvasData}}</pre> -->
@@ -91,7 +93,10 @@
       </q-fab>
     </q-page-sticky>
     <a id="downloadAnchorElem" style="display: none"></a>
-    <UploadCanavaDialog v-model="displayUpload" @uploaded="(event) => importUpload(event)"></UploadCanavaDialog>
+    <UploadCanavaDialog
+      v-model="displayUpload"
+      @uploaded="(event) => importUpload(event)"
+    ></UploadCanavaDialog>
   </div>
 </template>
 
@@ -114,93 +119,113 @@ import UploadCanavaDialog from "../components/canava/dialog/UploadCanavaDialog.v
 // Create i18n accessor as t
 const { t } = useI18n();
 
-const canvasData = ref({name: "", sections: []});
+const canvasData = ref({ name: "", sections: [] });
 const selectedCanvas = ref(null);
 const displayUpload = ref(false);
 
 const devData = {
-  "name": "S3 Delegation Canvas",
-  "sections": [
+  name: "S3 Organization Canvas",
+  sections: [
     {
-      "title": "Purpose",
-      "instructions": "What purpose does the team (or role) serve in the organization?",
-      "sectionKey": "purpose",
-      "gridColumn": "1/6",
-      "gridRow": "1/4"
+      title: t("canvas.s3.organization.drivers.title"),
+      instructions: t("canvas.s3.organization.drivers.instructions"),
+      sectionKey: "drivers",
+      gridColumn: "1/4",
+      gridRow: "1/4",
+      sequence: "1",
     },
     {
-      "title": "Key Resources",
-      "instructions": "What are essential resources the delegatee(s) can make use of?",
-      "sectionKey": "resources",
-      "gridColumn": "9/13",
-      "gridRow": "1/4"
+      title: t("canvas.s3.organization.deliverables.title"),
+      instructions: t("canvas.s3.organization.deliverables.instructions"),
+      sectionKey: "deliverables",
+      gridColumn: "4/7",
+      gridRow: "1/4",
+      sequence: "2",
     },
     {
-      "title": "Key Challenges",
-      "instructions": "What are the three most important known (or anticipated) challenges the delegatee(s) might face?",
-      "sectionKey": "challenges",
-      "gridColumn": "6/9",
-      "gridRow": "1/5"
+      title: t("canvas.s3.organization.customer.title"),
+      instructions: t("canvas.s3.organization.customer.instructions"),
+      sectionKey: "customer",
+      gridColumn: "7/10",
+      gridRow: "1/5",
+      sequence: "3",
     },
     {
-      "title": "Key responsibilities",
-      "instructions": "What are the delegatee’s main responsibilities, i.e. objectives, or essential work and decision making being delegated?",
-      "sectionKey": "responsibilities",
-      "gridColumn": "1/6",
-      "gridRow": "4/7"
+      title: t("canvas.s3.organization.proposition.title"),
+      instructions: t("canvas.s3.organization.proposition.instructions"),
+      sectionKey: "proposition",
+      gridColumn: "10/13",
+      gridRow: "1/3",
+      sequence: "4",
     },
     {
-      "title": "Delegator Responsibilities",
-      "instructions": "What is the delegator’s contribution to the success of the delegatee(s)?",
-      "sectionKey": "delegator",
-      "gridColumn": "9/13",
-      "gridRow": "4/7"
+      title: t("canvas.s3.organization.challenges.title"),
+      instructions: t("canvas.s3.organization.challenges.instructions"),
+      sectionKey: "challenges",
+      gridColumn: "10/13",
+      gridRow: "3/5",
+      sequence: "5",
     },
     {
-      "title": " Key Deliverables",
-      "instructions": "What does the team/role provide to achieve its purpose and meet the key responsibilities and key challenges?",
-      "sectionKey": "deliverables",
-      "gridColumn": "6/9",
-      "gridRow": "5/9"
+      title: t("canvas.s3.organization.partners.title"),
+      instructions: t("canvas.s3.organization.partners.instructions"),
+      sectionKey: "partners",
+      gridColumn: "1/4",
+      gridRow: "4/6",
+      sequence: "8",
     },
     {
-      "title": "Dependencies",
-      "instructions": "What are the essential dependencies between this domain and other parts of the organization?",
-      "sectionKey": "dependencies",
-      "gridColumn": "1/6",
-      "gridRow": "7/10"
+      title: t("canvas.s3.organization.resources.title"),
+      instructions: t("canvas.s3.organization.resources.instructions"),
+      sectionKey: "resources",
+      gridColumn: "4/7",
+      gridRow: "4/6",
+      sequence: "7",
     },
     {
-      "title": "Key Metrics",
-      "instructions": "What are the critical indicators of progress, project health or performance?",
-      "sectionKey": "metrics",
-      "gridColumn": "9/13",
-      "gridRow": "7/10"
+      title: t("canvas.s3.organization.channels.title"),
+      instructions: t("canvas.s3.organization.channels.instructions"),
+      sectionKey: "channels",
+      gridColumn: "6/13",
+      gridRow: "5/6",
+      sequence: "6",
     },
     {
-      "title": "Competencies, qualities and skills",
-      "instructions": "What competencies, qualities and skills are required – or at least preferable – to successfully achieve the purpose of this domain?",
-      "sectionKey": "competencies",
-      "gridColumn": "6/9",
-      "gridRow": "9/13"
+      title: t("canvas.s3.organization.metrics.title"),
+      instructions: t("canvas.s3.organization.metrics.instructions"),
+      sectionKey: "metrics",
+      gridColumn: "1/6",
+      gridRow: "6/7",
+      sequence: "10",
     },
     {
-      "title": "External Constraints",
-      "instructions": "What are important external constraints to the autonomy and influence of the delegatee(s)?",
-      "sectionKey": "constraints",
-      "gridColumn": "1/6",
-      "gridRow": "10/13"
+      title: t("canvas.s3.organization.values.title"),
+      instructions: t("canvas.s3.organization.values.instructions"),
+      sectionKey: "values",
+      gridColumn: "6/13",
+      gridRow: "6/7",
+      sequence: "9",
+    },
+
+    {
+      title: t("canvas.s3.organization.cost.title"),
+      instructions: t("canvas.s3.organization.cost.instructions"),
+      sectionKey: "cost",
+      gridColumn: "1/6",
+      gridRow: "7/8",
+      sequence: "11",
     },
     {
-      "title": "Monitoring and Evaluation",
-      "instructions": "How will you monitor the key metrics, and when (and how) will you evaluate success of the team/role?",
-      "sectionKey": "monitoring",
-      "gridColumn": "9/13",
-      "gridRow": "10/13"
-    }
+      title: t("canvas.s3.organization.revenue.title"),
+      instructions: t("canvas.s3.organization.revenue.instructions"),
+      sectionKey: "revenue",
+      gridColumn: "6/13",
+      gridRow: "7/8",
+      sequence: "12",
+    },
   ],
-  "sequenced": false,
-  "canavaVers": "1.0.0"
+  sequenced: false,
+  canavaVers: "1.0.0",
 };
 
 // Sort data so lowest row/col come first
@@ -219,7 +244,7 @@ const importUpload = (data) => {
       a.gridColumn.localeCompare(b.gridColumn)
   );
   canvasData.value = data;
-}
+};
 
 // Instantiate our stores early so they are available
 //const canvasStore = useCanvasStore();
@@ -232,12 +257,18 @@ const tab = ref("edit");
 
 const canvasOpts = [
   {
+    label: "Business Model Canvas",
+    value: "businessModel",
+  },
+  {
+    label: "S3 Organization Canvas",
+    value: "s3Organization",
+  },
+  {
     label: "S3 Delegation Canvas",
     value: "s3Delegation",
   },
 ];
-
-
 
 const onUploadClick = () => {
   console.log("Upload Data for Current Canvas");
@@ -246,10 +277,10 @@ const onUploadClick = () => {
 };
 const onDeleteClick = () => {
   console.log("Delete All Data for Current Canvas");
-  reset()
+  reset();
 };
 const reset = () => {
-  canvasData.value = {name: "", sections: []};
+  canvasData.value = { name: "", sections: [] };
   selectedCanvas.value = null;
   tab.value = "edit";
   displayUpload.value = false;
@@ -262,8 +293,8 @@ const onDownloadClick = () => {
     name: canvasData.value.name,
     sections: canvasData.value.sections,
     sequenced: canvasData.value.sequenced ? true : false,
-    canavaVers: '1.0.0'
-   };
+    canavaVers: "1.0.0",
+  };
 
   var dataStr =
     "data:text/json;charset=utf-8," +
@@ -272,7 +303,6 @@ const onDownloadClick = () => {
   dlAnchorElem.setAttribute("href", dataStr);
   dlAnchorElem.setAttribute("download", "canvas.json");
   dlAnchorElem.click();
-
 };
 const moveFab = (ev) => {
   draggingFab.value = ev.isFirst !== true && ev.isFinal !== true;

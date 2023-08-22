@@ -2,84 +2,84 @@
   "name": "S3 Organization Canvas",
   "sections": [
     {
-      "title": "Key Drivers",
-      "instructions": "What are the top three drivers your organization responds to?",
-      "sectionKey": "drivers",
-      "gridColumn": "1/4",
-      "gridRow": "1/3",
-      "sequence": ""
-    },
-    {
       "title": "Unique Value Proposition",
       "instructions": "What is the one thing that makes your organization unique? Explain what will convince your customers and your partners to choose your organization over others.",
       "sectionKey": "proposition",
       "gridColumn": "10/13",
       "gridRow": "1/3",
-      "sequence": ""
+      "sequence": "4"
+    },
+    {
+      "title": "Key Drivers",
+      "instructions": "What are the top three drivers your organization responds to?",
+      "sectionKey": "drivers",
+      "gridColumn": "1/4",
+      "gridRow": "1/4",
+      "sequence": "1"
     },
     {
       "title": "Key Deliverables",
       "instructions": "What does your organization provide to meet the key drivers? Describe the top three.",
       "sectionKey": "deliverables",
       "gridColumn": "4/7",
-      "gridRow": "1/3",
-      "sequence": ""
+      "gridRow": "1/4",
+      "sequence": "2"
     },
     {
       "title": "Customer Segment",
       "instructions": "Who will be your ideal customers? These should relate to the actors mentioned in your key drivers.",
       "sectionKey": "customer",
       "gridColumn": "7/10",
-      "gridRow": "1/3",
-      "sequence": ""
+      "gridRow": "1/5",
+      "sequence": "3"
     },
     {
       "title": "Key Challenges",
       "instructions": "What are important constraints or risks your organization is facing? Look to your key drivers, customer segment and unique value proposition to identify them.",
       "sectionKey": "challenges",
-      "gridColumn": "1/4",
+      "gridColumn": "10/13",
       "gridRow": "3/5",
-      "sequence": ""
+      "sequence": "5"
     },
     {
       "title": "Key Partners",
       "instructions": "Who can provide essential support, services or materials to your organization? What might you outsource or buy?",
       "sectionKey": "partners",
-      "gridColumn": "10/13",
-      "gridRow": "3/5",
-      "sequence": ""
-    },
-    {
-      "title": "Channels",
-      "instructions": "How does your organization deliver its value proposition to its customers? How do customers find out about your organization?",
-      "sectionKey": "channels",
-      "gridColumn": "4/7",
-      "gridRow": "3/5",
-      "sequence": ""
+      "gridColumn": "1/4",
+      "gridRow": "4/6",
+      "sequence": "8"
     },
     {
       "title": "Key Resources and Skills",
       "instructions": "What does your organization need to sustain itself and create value for the customer? What skills do you need to create the key deliverables?",
       "sectionKey": "resources",
-      "gridColumn": "7/10",
-      "gridRow": "3/5",
-      "sequence": ""
+      "gridColumn": "4/7",
+      "gridRow": "4/6",
+      "sequence": "7"
+    },
+    {
+      "title": "Channels",
+      "instructions": "How does your organization deliver its value proposition to its customers? How do customers find out about your organization?",
+      "sectionKey": "channels",
+      "gridColumn": "7/13",
+      "gridRow": "5/6",
+      "sequence": "6"
     },
     {
       "title": "Key Metrics",
       "instructions": "How will you measure effectiveness of your response to your key drivers? Prefer simple, continuous and actionable metrics.",
       "sectionKey": "metrics",
       "gridColumn": "1/7",
-      "gridRow": "5/7",
-      "sequence": ""
+      "gridRow": "6/7",
+      "sequence": "10"
     },
     {
       "title": "Key Values",
       "instructions": "Describe the culture of your collaboration, and how you will interact with the rest of the world. List three guidelines for behavior and/or ethical constraints you consider essential to the success of your organization.",
       "sectionKey": "values",
       "gridColumn": "7/13",
-      "gridRow": "5/7",
-      "sequence": ""
+      "gridRow": "6/7",
+      "sequence": "9"
     },
     {
       "title": "Cost Structure",
@@ -87,7 +87,7 @@
       "sectionKey": "cost",
       "gridColumn": "1/7",
       "gridRow": "7/8",
-      "sequence": ""
+      "sequence": "11"
     },
     {
       "title": "Revenue Streams",
@@ -95,9 +95,9 @@
       "sectionKey": "revenue",
       "gridColumn": "7/13",
       "gridRow": "7/8",
-      "sequence": ""
+      "sequence": "12"
     }
   ],
-  "sequenced": false,
+  "sequenced": true,
   "canavaVers": "1.0.0"
 }

@@ -1,101 +1,95 @@
 {
-  "name": "S3 Organization Canvas",
+  "name": "S3 Delegation Canvas",
   "sections": [
     {
-      "title": "Key Drivers",
-      "instructions": "What are the top three drivers your organization responds to?",
-      "sectionKey": "drivers",
+      "title": "Purpose",
+      "instructions": "What purpose does the team (or role) serve in the organization?",
+      "sectionKey": "purpose",
       "gridColumn": "1/4",
-      "gridRow": "1/3",
-      "sequence": ""
+      "gridRow": "1/2",
+      "sequence": "1"
     },
     {
-      "title": "Unique Value Proposition",
-      "instructions": "What is the one thing that makes your organization unique? Explain what will convince your customers and your partners to choose your organization over others.",
-      "sectionKey": "proposition",
+      "title": "External Constraints",
+      "instructions": "What are important external constraints to the autonomy and influence of the delegatee(s)?",
+      "sectionKey": "constraints",
       "gridColumn": "10/13",
-      "gridRow": "1/3",
-      "sequence": ""
+      "gridRow": "1/2",
+      "sequence": "4"
     },
     {
-      "title": "Key Deliverables",
-      "instructions": "What does your organization provide to meet the key drivers? Describe the top three.",
-      "sectionKey": "deliverables",
+      "title": "Key responsibilities",
+      "instructions": "What are the delegatee’s main responsibilities, i.e. objectives, or essential work and decision making being delegated?",
+      "sectionKey": "responsibilities",
       "gridColumn": "4/7",
-      "gridRow": "1/3",
-      "sequence": ""
+      "gridRow": "1/2",
+      "sequence": "2"
     },
     {
-      "title": "Customer Segment",
-      "instructions": "Who will be your ideal customers? These should relate to the actors mentioned in your key drivers.",
-      "sectionKey": "customer",
+      "title": "Dependencies",
+      "instructions": "What are the essential dependencies between this domain and other parts of the organization?",
+      "sectionKey": "dependencies",
       "gridColumn": "7/10",
-      "gridRow": "1/3",
-      "sequence": ""
+      "gridRow": "1/2",
+      "sequence": "3"
     },
     {
       "title": "Key Challenges",
-      "instructions": "What are important constraints or risks your organization is facing? Look to your key drivers, customer segment and unique value proposition to identify them.",
+      "instructions": "What are the three most important known (or anticipated) challenges the delegatee(s) might face?",
       "sectionKey": "challenges",
-      "gridColumn": "1/4",
-      "gridRow": "3/5",
-      "sequence": ""
+      "gridColumn": "1/5",
+      "gridRow": "2/3",
+      "sequence": "5"
     },
     {
-      "title": "Key Partners",
-      "instructions": "Who can provide essential support, services or materials to your organization? What might you outsource or buy?",
-      "sectionKey": "partners",
-      "gridColumn": "10/13",
-      "gridRow": "3/5",
-      "sequence": ""
+      "title": " Key Deliverables",
+      "instructions": "What does the team/role provide to achieve its purpose and meet the key responsibilities and key challenges?",
+      "sectionKey": "deliverables",
+      "gridColumn": "5/9",
+      "gridRow": "2/3",
+      "sequence": "6"
     },
     {
-      "title": "Channels",
-      "instructions": "How does your organization deliver its value proposition to its customers? How do customers find out about your organization?",
-      "sectionKey": "channels",
-      "gridColumn": "4/7",
-      "gridRow": "3/5",
-      "sequence": ""
+      "title": "Competencies, qualities and skills",
+      "instructions": "What competencies, qualities and skills are required – or at least preferable – to successfully achieve the purpose of this domain?",
+      "sectionKey": "competencies",
+      "gridColumn": "9/13",
+      "gridRow": "2/3",
+      "sequence": "7"
     },
     {
-      "title": "Key Resources and Skills",
-      "instructions": "What does your organization need to sustain itself and create value for the customer? What skills do you need to create the key deliverables?",
+      "title": "Key Resources",
+      "instructions": "What are essential resources the delegatee(s) can make use of?",
       "sectionKey": "resources",
-      "gridColumn": "7/10",
-      "gridRow": "3/5",
-      "sequence": ""
+      "gridColumn": "1/4",
+      "gridRow": "3/4",
+      "sequence": "8"
     },
     {
-      "title": "Key Values",
-      "instructions": "Describe the culture of your collaboration, and how you will interact with the rest of the world. List three guidelines for behavior and/or ethical constraints you consider essential to the success of your organization.",
-      "sectionKey": "values",
-      "gridColumn": "1/7",
-      "gridRow": "5/7",
-      "sequence": ""
+      "title": "Monitoring and Evaluation",
+      "instructions": "How will you monitor the key metrics, and when (and how) will you evaluate success of the team/role?",
+      "sectionKey": "monitoring",
+      "gridColumn": "10/13",
+      "gridRow": "3/4",
+      "sequence": "11"
+    },
+    {
+      "title": "Delegator Responsibilities",
+      "instructions": "What is the delegator’s contribution to the success of the delegatee(s)?",
+      "sectionKey": "delegator",
+      "gridColumn": "4/7",
+      "gridRow": "3/4",
+      "sequence": "9"
     },
     {
       "title": "Key Metrics",
-      "instructions": "How will you measure effectiveness of your response to your key drivers? Prefer simple, continuous and actionable metrics.",
+      "instructions": "What are the critical indicators of progress, project health or performance?",
       "sectionKey": "metrics",
-      "gridColumn": "7/13",
-      "gridRow": "5/7",
-      "sequence": ""
-    },
-    {
-      "title": "Cost Structure",
-      "instructions": "What are fixed and running costs for your organization?",
-      "sectionKey": "cost",
-      "gridColumn": "1/7",
-      "gridRow": "7/8",
-      "sequence": ""
-    },
-    {
-      "title": "Revenue Streams",
-      "instructions": "How will you start and sustain your organization financially?",
-      "sectionKey": "revenue",
-      "gridColumn": "7/13",
-      "gridRow": "7/8",
-      "sequence": ""
+      "gridColumn": "7/10",
+      "gridRow": "3/4",
+      "sequence": "10"
     }
-  ]
+  ],
+  "sequenced": true,
+  "canavaVers": "1.0.0"
 }

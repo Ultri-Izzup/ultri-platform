@@ -2,13 +2,41 @@
   <div>
     <div>
       <q-toolbar class="q-px-lg q-pb-md">
-        <span class="text-h6 q-pr-md">Load Canvas:</span>
+        <span class="text-h6">Canvas data:</span>
+        <q-btn
+          @click="onDownloadClick()"
+          color="primary"
+          icon="mdi-download"
+          class="q-ml-md"
+        ><q-tooltip>
+          Download
+        </q-tooltip></q-btn>
+        <q-btn
+          @click="onUploadClick"
+          color="primary"
+          icon="mdi-upload"
+          class="q-ml-md"
+        ><q-tooltip>
+          Upload
+        </q-tooltip></q-btn>
+        <q-btn
+          @click="onDeleteClick()"
+          color="secondary"
+          icon="mdi-delete"
+          class="q-ml-md"
+        ><q-tooltip>
+          Delete
+        </q-tooltip></q-btn>
+        <span class="text-h6 q-pl-md">Template:</span>
         <q-select
           label="Selected Canvas"
           v-model="selectedCanvas"
           :options="canvasOpts"
+          class="q-ml-sm"
         ></q-select>
-        <q-space></q-space>
+
+
+
       </q-toolbar>
     </div>
     <!-- <pre>{{canvasData}}</pre> -->

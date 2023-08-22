@@ -4,7 +4,7 @@
       <div class="col-2">
         <span class="text-h6 q-pr-md">Canvas Height:</span>
 
-      <q-slider v-model="vh" :min="60" :max="180" :step="1"></q-slider>
+      <q-slider v-model="vh" :min="50" :max="200" :step="1"></q-slider>
     </div>
     <div class="col-2">
       <span class="text-h6 q-pl-lg q-pr-md">Show Detail:</span>

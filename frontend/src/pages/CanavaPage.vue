@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div>
-      <q-toolbar class="q-px-lg q-pb-md row">
-        <span class="text-h6">Canvas data:</span>
+    <div class="row full-width q-pb-lg">
+      <q-toolbar class="col-6">
+        <span class="gt-md text-h6">Canvas data:</span>
         <q-btn
           @click="onDownloadClick()"
           color="primary"
@@ -24,15 +24,18 @@
           class="q-ml-md"
           ><q-tooltip> Delete </q-tooltip></q-btn
         >
+      </q-toolbar>
+      <q-toolbar class="col-12 col-md-6">
+        <div class="text-h6 gt-md q-pl-lg q-pr-sm col-2">Template:</div>
 
-        <div class="text-h6 q-px-md col-1">Template:</div>
-        <q-select
-          label="Select Canvas"
-          v-model="selectedCanvas"
-          :options="canvasOpts"
-          class="q-pl-md col-2"
-          @update:model-value="loadCanvasTemplate()"
-        ></q-select>
+        <div class="q-pl-md col">
+          <q-select
+            label="Canvas Template"
+            v-model="selectedCanvas"
+            :options="canvasOpts"
+            @update:model-value="loadCanvasTemplate()"
+          ></q-select>
+        </div>
       </q-toolbar>
     </div>
     <!-- <pre>{{canvasData}}</pre> -->
@@ -96,18 +99,16 @@ const canvasMap = {
   businessModel: businessModelData,
   s3Delegation: s3DelegationData,
   s3Organization: s3OrganizationData,
-  coopOwnership: coopOwnershipData
-}
+  coopOwnership: coopOwnershipData,
+};
 
 const loadCanvasTemplate = () => {
-
   console.log(selectedCanvas.value.value);
 
   const templateData = canvasMap[selectedCanvas.value.value];
 
   canvasData.value = templateData;
-
-}
+};
 
 // const devData = {
 //   name: "Co-op Ownership Canvas",
@@ -263,9 +264,7 @@ const onDownloadClick = () => {
   dlAnchorElem.setAttribute("download", "canvas.json");
   dlAnchorElem.click();
 };
-
 </script>
 
 <style lang="scss">
-
 </style>

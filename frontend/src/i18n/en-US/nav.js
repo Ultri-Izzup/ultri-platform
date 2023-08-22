@@ -3,6 +3,7 @@ export default {
     account: "Accounts",
     home: "Home",
     close: "Close",
+    canava: "Canava",
     canvas: "Free Canvas",
     calendar: "Calendar",
     benefits: "Benefits",

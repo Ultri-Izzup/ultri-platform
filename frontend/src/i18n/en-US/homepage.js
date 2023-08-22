@@ -1,15 +1,16 @@
 export default {
   homepage: {
-    heading1: "The first free",
-    heading2: "canvas is now",
-    heading3: "available.",
-    heading4: "Check it out!",
-    tagline: "Just Own It!",
-    button: "Join the Discussion",
+    heading1: "Introducing",
+    heading2: "Canava",
+    heading3: "Custom Canvas",
+    heading4: "Builder and Editor",
+    tagline: "Build your canvas, your way.",
+    button: "CANAVA",
     signedIn: {
       heading: "Welcome",
       tagline: "Build in public underway",
       button: "Dashboard",
     },
+    preview: "Preview!"
   },
 };

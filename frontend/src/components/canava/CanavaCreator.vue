@@ -88,9 +88,10 @@
               v-model="newSectionData.instructions"
             />
             <q-input label="Key" v-model="newSectionData.sectionKey" />
-            <q-input label="Cols" v-model="newSectionData.gridColumn" />
-            <q-input label="Rows" v-model="newSectionData.gridRow" />
             <q-input label="Sequence (opt)" v-model="newSectionData.sequence" />
+            <UColumnSelector v-model="newSectionData.gridColumn" />
+            <URowSelector v-model="newSectionData.gridRow" />
+
           </q-card-section>
           <q-card-actions class="justify-center">
             <q-btn label="Save" color="primary" @click="saveNew()"></q-btn>

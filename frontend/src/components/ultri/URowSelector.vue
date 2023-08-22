@@ -41,11 +41,11 @@ const value = computed({
 });
 
 const startCol = computed(() => {
-  return value.value.split("/")[0];
+  return value.value ? value.value.split("/")[0] : 1;
 });
 
 const endCol = computed(() => {
-  return value.value.split("/")[1] - 1;
+  return value.value ? value.value.split("/")[1] - 1 : 3;
 });
 
 const minMax = computed({

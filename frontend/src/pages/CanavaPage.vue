@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>
+    <div>DATA {{canvasData}}
       <q-toolbar class="q-px-lg q-pb-md">
         <span class="text-h6">Canvas data:</span>
         <q-btn
@@ -8,25 +8,22 @@
           color="primary"
           icon="mdi-download"
           class="q-ml-md"
-        ><q-tooltip>
-          Download
-        </q-tooltip></q-btn>
+          ><q-tooltip> Download </q-tooltip></q-btn
+        >
         <q-btn
           @click="onUploadClick"
           color="primary"
           icon="mdi-upload"
           class="q-ml-md"
-        ><q-tooltip>
-          Upload
-        </q-tooltip></q-btn>
+          ><q-tooltip> Upload </q-tooltip></q-btn
+        >
         <q-btn
           @click="onDeleteClick()"
           color="secondary"
           icon="mdi-delete"
           class="q-ml-md"
-        ><q-tooltip>
-          Delete
-        </q-tooltip></q-btn>
+          ><q-tooltip> Delete </q-tooltip></q-btn
+        >
         <span class="text-h6 q-pl-md">Template:</span>
         <q-select
           label="Selected Canvas"
@@ -34,9 +31,6 @@
           :options="canvasOpts"
           class="q-ml-sm"
         ></q-select>
-
-
-
       </q-toolbar>
     </div>
     <!-- <pre>{{canvasData}}</pre> -->
@@ -120,7 +114,7 @@ import UploadCanvasDialog from "../components/canvas/dialog/UploadCanvasDialog.v
 // Create i18n accessor as t
 const { t } = useI18n();
 
-const canvasData = ref({});
+const canvasData = ref({name: "", sections: []});
 const selectedCanvas = ref(null);
 
 const devData = {
@@ -259,7 +253,12 @@ const onUploadClick = () => {
 };
 const onDeleteClick = () => {
   console.log("Delete All Data for Current Canvas");
-  canvasStore.clearCanvas("currentCanvas");
+  reset()
+};
+const reset = () => {
+  canvasData.value = {name: "", sections: []};
+  selectedCanvas.value = null;
+  tab.value = "edit";
 };
 const onDownloadClick = () => {
   console.log("Download Data for Current Canvas");

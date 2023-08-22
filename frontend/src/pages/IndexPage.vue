@@ -31,10 +31,10 @@
                 class="q-pa-md"
               >
                 <div class="absolute-full flex flex-center text-center gt-xs text-h3">
-                  A Better Business Model Canvas
+                  A collection of customizable business canvas.
                 </div>
                 <div class="absolute-full flex flex-center text-center lt-sm">
-                  Business Model Canvas
+                  Customizable Business Canvas
                 </div>
               </q-img>
             </a>

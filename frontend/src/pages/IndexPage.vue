@@ -1,25 +1,32 @@
 <template>
   <q-page class="row items-center justify-evenly">
     <div
-      class="text-h3 full-width text-center text-bold navbar-brand-link q-ma-lg"
+      class="text-h3 full-width text-center text-bold navbar-text-link q-ma-lg"
     >
       {{ $t("homepage.heading1") }}
       <br />
-      {{ $t("homepage.heading2") }}
-      <br />
+      <span class="text-h1 text-bold ">{{ $t("homepage.heading2") }}</span>
+      </div>
+      <div
+      class="text-h3 full-width text-center text-bold navbar-brand-link"
+    >
       {{ $t("homepage.heading3") }}
+      <br />
+      {{ $t("homepage.heading4") }}
+      <br />
+      <span class="text-italic">{{ $t("homepage.preview") }}</span>
     </div>
 
     <div class="row fit justify-center">
       <div class="col-9 q-ma-lg">
         <q-card class="full-width" flat>
           <q-card-section class="q-pa-md">
-            <a href="/canvas/business">
+            <a href="/canava">
               <q-img
                 :src="
                   colorStore.darkMode
-                    ? 'https://platform.ultri.com/imgs/canvas/business-model-canvas-dark.png'
-                    : 'https://platform.ultri.com/imgs/canvas/business-model-canvas-light.png'
+                    ? 'https://platform.ultri.com/imgs/canava/canava-dark.png'
+                    : 'https://platform.ultri.com/imgs/canava/canava-light.png'
                 "
                 class="q-pa-md"
               >
@@ -46,7 +53,7 @@
         size="xl"
         :label="$t('homepage.button')"
         color="primary"
-        href="https://discord.gg/jaJ3v6Zx"
+        href="/canava"
         rounded
       ></q-btn>
     </div>

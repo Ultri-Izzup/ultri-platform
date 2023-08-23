@@ -5,15 +5,15 @@
       <span class="text-h3">{{ value.name }}</span>
       <q-space></q-space>
 
-        <div class="col-2">
-          <span class="text-body1 q-pr-md">Canvas Height:</span>
+        <div class="col-2 text-center">
+          <span class="text-body1 q-pr-md">Canvas Height</span>
 
           <q-slider v-model="vh" :min="50" :max="200" :step="1"></q-slider>
         </div>
-        <div class="col-2">
-          <span class="text-body1 q-pl-lg q-pr-md">Show Detail:</span>
+        <div class="col-2 text-center">
+          <span class="text-body1 q-pl-lg q-pr-md">Show Detail</span><br />
 
-          <q-toggle v-model="showDetail" color="primary"></q-toggle>
+          <q-toggle v-model="showDetail" color="primary" size="xs"></q-toggle>
         </div>
 
     </div>

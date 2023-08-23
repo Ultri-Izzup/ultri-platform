@@ -8,6 +8,8 @@
           color="primary"
           icon="mdi-download"
           class="q-ml-md"
+          size="md"
+          dense
           ><q-tooltip> Download </q-tooltip></q-btn
         >
         <q-btn
@@ -15,6 +17,8 @@
           color="primary"
           icon="mdi-upload"
           class="q-ml-md"
+          size="md"
+          dense
           ><q-tooltip> Upload </q-tooltip></q-btn
         >
         <q-btn
@@ -22,6 +26,8 @@
           color="secondary"
           icon="mdi-delete"
           class="q-ml-md"
+          size="md"
+          dense
           ><q-tooltip> Delete </q-tooltip></q-btn
         >
       </q-toolbar>

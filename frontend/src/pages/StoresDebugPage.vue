@@ -25,6 +25,8 @@
     <vue-json-pretty :data="circleDrivers.$state" />
     Circle OKR:
     <vue-json-pretty :data="circleOKR.$state" />
+    Canava:
+    <vue-json-pretty :data="canava.$state" />
   </div>
 </template>
 
@@ -42,6 +44,7 @@ import { useCirclesStore } from "../stores/circles";
 import { useCircleMembersStore } from "../stores/circleMembers";
 import { useCircleDriversStore } from "../stores/circleDrivers";
 import { useCircleOKRStore } from "../stores/circleOKR";
+import { useCanavaStore } from "../stores/canava";
 
 const auth = useAuthStore();
 const org = useOrgStore();
@@ -53,6 +56,7 @@ const circles = useCirclesStore();
 const circleMembers = useCircleMembersStore();
 const circleDrivers = useCircleDriversStore();
 const circleOKR = useCircleOKRStore();
+const canava = useCanavaStore();
 
 const clearStores = () => {
   console.log("Clearing stores")
@@ -66,5 +70,6 @@ const clearStores = () => {
   circleMembers.$reset();
   circleDrivers.$reset();
   circleOKR.$reset();
+  canava.$reset();
 };
 </script>

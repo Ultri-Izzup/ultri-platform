@@ -11,6 +11,16 @@
           <q-slider v-model="vh" :min="50" :max="200" :step="1"></q-slider>
         </div>
         <div class="col-2 text-center">
+          <span class="text-body1 q-pl-lg q-pr-md">Show Instructions</span><br />
+
+          <q-toggle v-model="showInstructions" color="primary" size="xs"></q-toggle>
+        </div>
+        <div class="col-2 text-center">
+          <span class="text-body1 q-pl-lg q-pr-md">Show Items</span><br />
+
+          <q-toggle v-model="showItems" color="primary" size="xs"></q-toggle>
+        </div>
+        <div class="col-2 text-center">
           <span class="text-body1 q-pl-lg q-pr-md">Show Detail</span><br />
 
           <q-toggle v-model="showDetail" color="primary" size="xs"></q-toggle>
@@ -50,14 +60,14 @@
           ></q-icon>
         </q-card-section>
         <q-card-section
-          v-if="!section.items"
+          v-if="showInstructions && !section.items"
           v-ripple
           clickable
           @click="triggerNew(section.sectionKey)"
           class="q-pa-md text-italic cursor-pointer q-hoverable"
           >{{ section.instructions }}
         </q-card-section>
-        <q-card-section v-else class="q-pa-none">
+        <q-card-section v-if="section.items && showItems" class="q-pa-none">
           <q-list separator>
             <q-item v-for="item in section.items" :key="item.uid">
               <q-item-section>
@@ -123,6 +133,8 @@ const showDialog = ref(false);
 const editorHelp = ref(false);
 const add = ref(true);
 const showDetail = ref(true);
+const showInstructions = ref(true);
+const showItems = ref(true);
 const vh = ref(80);
 
 watch(vh, (oldVal, newVal) => {

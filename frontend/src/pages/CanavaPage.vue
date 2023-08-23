@@ -39,7 +39,7 @@
           class="q-ml-md"
           size="md"
           dense
-          ><q-tooltip> Preview </q-tooltip></q-btn
+          ><q-tooltip> View Canvas </q-tooltip></q-btn
         >
       </q-toolbar>
       <q-toolbar v-if="pageMode=='creator'" class="col-12 col-md-6">
@@ -136,7 +136,7 @@ const loadCanvasTemplate = () => {
 };
 
 watch(
-  () => route,
+  () => route.params.canvasTemplate,
   () => {
     if (route.params.canvasTemplate) {
       pageMode.value = 'template';

@@ -161,8 +161,8 @@ watch(value, (newVal, oldVal) => {
 
   value.value.sections.sort(
     (a, b) =>
-      a.gridRow.localeCompare(b.gridRow) ||
-      a.gridColumn.localeCompare(b.gridColumn)
+    (a.gridRow && b.gridRow && a.gridRow.localeCompare(b.gridRow)) ||
+    (a.gridColumn && b.gridColumn &&  a.gridColumn.localeCompare(b.gridColumn))
   );
 
   value.value.sections.forEach((s) => {

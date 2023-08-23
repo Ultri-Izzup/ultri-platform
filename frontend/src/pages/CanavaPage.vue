@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div class="row full-width q-pb-lg">
+    <div class="row full-width ">
       <q-toolbar class="col-6">
-        <span class="gt-md text-h6">Canvas data:</span>
+        <span class="gt-md text-body1">Canvas data:</span>
         <q-btn
           @click="onDownloadClick()"
           color="primary"
@@ -25,8 +25,8 @@
           ><q-tooltip> Delete </q-tooltip></q-btn
         >
       </q-toolbar>
-      <q-toolbar class="col-12 col-md-6">
-        <div class="text-h6 gt-md q-pl-lg q-pr-sm col-2">Template:</div>
+      <q-toolbar v-if="editorMode" class="col-12 col-md-6">
+        <div class="text-body1 gt-md q-pl-lg q-pr-sm col-2">Template:</div>
 
         <div class="q-pl-md col">
           <q-select
@@ -46,6 +46,7 @@
       active-color="primary"
       indicator-color="primary"
       align="justify"
+      v-if="editorMode"
     >
       <q-tab name="edit" label="Canvas View"> </q-tab>
       <q-tab name="create" label="Configure Canvas"> </q-tab>
@@ -72,10 +73,16 @@ import { ref, computed, watch, isProxy, toRaw } from "vue";
 
 import { useI18n } from "vue-i18n";
 
+import { useRoute } from "vue-router";
+
 // Import stores
 import { useCanvasStore } from "../stores/canvas";
 
 import { Screen } from "quasar";
+
+const route = useRoute();
+
+const editorMode = ref(true);
 
 // Import the individual canvas SFC module
 import CanavaEditor from "../components/canava/CanavaEditor.vue";
@@ -110,97 +117,20 @@ const loadCanvasTemplate = () => {
   canvasData.value = templateData;
 };
 
-// const devData = {
-//   name: "Co-op Ownership Canvas",
-//   sections: [
-//     {
-//       title: t("canvas.coop.purpose.title"),
-//       instructions: t("canvas.coop.purpose.instructions"),
-//       sectionKey: "purpose",
-//       gridColumn: "1/11",
-//       gridRow: "1/2",
-//       sequence: "1",
-//     },
-
-//     {
-//       title: t("canvas.coop.stakeholders.title"),
-//       instructions: t("canvas.coop.stakeholders.instructions"),
-//       sectionKey: "stakeholders",
-//       gridColumn: "1/3",
-//       gridRow: "2/5",
-//       sequence: "2",
-//     },
-//     {
-//       title: t("canvas.coop.nonOwnerStakeholders.title"),
-//       instructions: t("canvas.coop.nonOwnerStakeholders.instructions"),
-//       sectionKey: "nonOwnerStakeholders",
-//       gridColumn: "1/3",
-//       gridRow: "5/7",
-//       sequence: "2.1",
-//     },
-//     {
-//       title: t("canvas.coop.benefits.title"),
-//       instructions: t("canvas.coop.benefits.instructions"),
-//       sectionKey: "benefits",
-//       gridColumn: "3/5",
-//       gridRow: "2/7",
-//       sequence: "3",
-//     },
-//     {
-//       title: t("canvas.coop.responsibilities.title"),
-//       instructions: t("canvas.coop.responsibilities.instructions"),
-//       sectionKey: "responsibilities",
-//       gridColumn: "5/7",
-//       gridRow: "2/7",
-//       sequence: "4",
-//     },
-//     {
-//       title: t("canvas.coop.governance.title"),
-//       instructions: t("canvas.coop.governance.instructions"),
-//       sectionKey: "governance",
-//       gridColumn: "7/9",
-//       gridRow: "2/7",
-//       sequence: "6",
-//     },
-//     {
-//       title: t("canvas.coop.financial.title"),
-//       instructions: t("canvas.coop.financial.instructions"),
-//       sectionKey: "financial",
-//       gridColumn: "9/11",
-//       gridRow: "2/7",
-//       sequence: "7",
-//     },
-
-//     {
-//       title: t("canvas.coop.guidance.title"),
-//       instructions: t("canvas.coop.guidance.instructions"),
-//       sectionKey: "guidance",
-//       gridColumn: "1/6",
-//       gridRow: "7/9",
-//       sequence: "5",
-//     },
-
-//     {
-//       title: t("canvas.coop.investment.title"),
-//       instructions: t("canvas.coop.investment.instructions"),
-//       sectionKey: "investment",
-//       gridColumn: "6/11",
-//       gridRow: "7/9",
-//       sequence: "8",
-//     },
-//   ],
-//   sequenced: true,
-//   canavaVers: "1.0.0",
-// };
-
-// // Sort data so lowest row/col come first
-// devData.sections.sort(
-//   (a, b) =>
-//     a.gridRow.localeCompare(b.gridRow) ||
-//     a.gridColumn.localeCompare(b.gridColumn)
-// );
-// console.log(devData.sections);
-// canvasData.value = devData;
+watch(
+  () => route.params.canvasTemplate,
+  () => {
+    if (route.params.canvasTemplate) {
+      editorMode.value = false;
+      tab.value = 'edit';
+      const templateData = canvasMap[route.params.canvasTemplate];
+      canvasData.value = templateData;
+    } else {
+      editorMode.value = true;
+    }
+  },
+  { immediate: true }
+);
 
 const importUpload = (data) => {
   data.sections.sort(

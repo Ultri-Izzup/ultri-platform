@@ -6,12 +6,12 @@
       <q-space></q-space>
 
         <div class="col-2">
-          <span class="text-h6 q-pr-md">Canvas Height:</span>
+          <span class="text-body1 q-pr-md">Canvas Height:</span>
 
           <q-slider v-model="vh" :min="50" :max="200" :step="1"></q-slider>
         </div>
         <div class="col-2">
-          <span class="text-h6 q-pl-lg q-pr-md">Show Detail:</span>
+          <span class="text-body1 q-pl-lg q-pr-md">Show Detail:</span>
 
           <q-toggle v-model="showDetail" color="primary"></q-toggle>
         </div>

@@ -16,7 +16,7 @@
       <q-item
         clickable
         v-ripple
-        :to="{ name: toRoute, params: { canvasTemplate: 'businessModel' } }"
+        :to="{ name: toRoute, params: { canvasName: 'business' } }"
       >
         <q-item-section label>
           <q-item-label class="text-bold"
@@ -34,7 +34,7 @@
       <q-item
         clickable
         v-ripple
-        :to="{ name: toRoute, params: { canvasTemplate: 's3Organization' } }"
+        :to="{ name: toRoute, params: { canvasName: 's3organization' } }"
       >
         <q-item-section>
           <q-item-label class="text-bold"
@@ -52,7 +52,7 @@
       <q-item
         clickable
         v-ripple
-        :to="{ name: toRoute, params: { canvasTemplate: 's3Delegation' } }"
+        :to="{ name: toRoute, params: { canvasName: 's3delegation' } }"
       >
         <q-item-section>
           <q-item-label class="text-bold"
@@ -70,7 +70,7 @@
       <q-item
         clickable
         v-ripple
-        :to="{ name: toRoute, params: { canvasTemplate: 's3Team' } }"
+        :to="{ name: toRoute, params: { canvasName: 's3team' } }"
       >
         <q-item-section>
           <q-item-label class="text-bold">{{
@@ -83,7 +83,7 @@
       <q-item
         clickable
         v-ripple
-        :to="{ name: toRoute, params: { canvasTemplate: 'coopOwnership' } }"
+        :to="{ name: toRoute, params: { canvasName: 'coop' } }"
       >
         <q-item-section>
           <q-item-label class="text-bold">{{
@@ -100,7 +100,7 @@
       <q-item
         clickable
         v-ripple
-        :to="{ name: toRoute, params: { canvasTemplate: 'leanCanvas' } }"
+        :to="{ name: toRoute, params: { canvasName: 'lean' } }"
       >
         <q-item-section>
           <q-item-label class="text-bold">{{
@@ -120,7 +120,7 @@ const route = useRoute();
 
 const orgUid = route.params.orgUid;
 
-const toRoute = ref("canavaTemplateViewer");
+const toRoute = ref("canvasPage");
 
 if (orgUid) {
   toRoute.value = "orgCanvasPage";

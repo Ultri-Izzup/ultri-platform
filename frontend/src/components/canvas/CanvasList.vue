@@ -29,7 +29,7 @@
           </q-card-section>
           <q-card-actions class="justify-center">
             <q-btn
-              :to="{ name: toRoute, params: { canvasTemplate: 'businessModel' } }"
+              :to="{ name: toRoute, params: { canvasName: 'business' } }"
               color="primary"
               >{{ $t("canvas.business.name", "Business") }}</q-btn
             >
@@ -50,7 +50,7 @@
           </q-card-section>
           <q-card-actions class="justify-center">
             <q-btn
-              :to="{ name: toRoute, params: { canvasTemplate: 's3Organization' } }"
+              :to="{ name: toRoute, params: { canvasName: 's3organization' } }"
               color="primary"
               >{{ $t("canvas.s3.organization.name") }}</q-btn
             >
@@ -71,7 +71,7 @@
           </q-card-section>
           <q-card-actions class="justify-center">
             <q-btn
-              :to="{ name: toRoute, params: { canvasTemplate: 's3Delegation' } }"
+              :to="{ name: toRoute, params: { canvasName: 's3delegation' } }"
               color="primary"
               >{{ $t("canvas.s3.delegation.name") }}</q-btn
             >
@@ -87,7 +87,7 @@
           </q-card-section>
           <q-card-actions class="justify-center">
             <q-btn
-              :to="{ name: toRoute, params: { canvasTemplate: 's3Team' } }"
+              :to="{ name: toRoute, params: { canvasName: 's3team' } }"
               color="primary"
               >{{ $t("canvas.s3.team.name") }}</q-btn
             >
@@ -107,7 +107,7 @@
           </q-card-section>
           <q-card-actions class="justify-center">
             <q-btn
-              :to="{ name: toRoute, params: { canvasTemplate: 'coopOwnership' } }"
+              :to="{ name: toRoute, params: { canvasName: 'coop' } }"
               color="primary"
               >{{ $t("canvas.coop.name") }}</q-btn
             >
@@ -122,7 +122,7 @@
           </q-card-section>
           <q-card-actions class="justify-center">
             <q-btn
-              :to="{ name: toRoute, params: { canvasTemplate: 'leanCanvas' } }"
+              :to="{ name: toRoute, params: { canvasName: 'lean' } }"
               color="primary"
               >{{ $t("canvas.lean.name") }}</q-btn
             >
@@ -140,7 +140,7 @@ const route = useRoute();
 
 const orgUid = route.params.orgUid;
 
-const toRoute = ref("canavaTemplateViewer");
+const toRoute = ref("canvasPage");
 
 if (orgUid) {
   toRoute.value = "orgCanvasPage";

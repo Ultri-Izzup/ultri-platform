@@ -1,31 +1,38 @@
 <template>
   <div>
     <div class="row">
-
+      <div class="col-1">Stretch View</div>
+      <div class="col">
+        <q-slider v-model="vh" :min="50" :max="200" :step="1"></q-slider>
+      </div>
+      <div class="col text-center">
+        <q-toggle
+          v-model="showInstructions"
+          color="primary"
+          label="Instructions"
+          size="xs"
+        ></q-toggle>
+      </div>
+      <div class="col text-center">
+        <q-toggle
+          v-model="showItems"
+          color="primary"
+          size="xs"
+          label="Items"
+        ></q-toggle>
+      </div>
+      <div class="col text-center">
+        <q-toggle
+          v-model="showDetail"
+          color="primary"
+          size="xs"
+          label="Item Details"
+        ></q-toggle>
+      </div>
+    </div>
+    <div class="row">
       <span class="text-h3">{{ value.name }}</span>
       <q-space></q-space>
-
-        <div class="col-2 text-center">
-          <span class="text-body1 q-pr-md">Canvas Height</span>
-
-          <q-slider v-model="vh" :min="50" :max="200" :step="1"></q-slider>
-        </div>
-        <div class="col-2 text-center">
-          <span class="text-body1 q-pl-lg q-pr-md">Show Instructions</span><br />
-
-          <q-toggle v-model="showInstructions" color="primary" size="xs"></q-toggle>
-        </div>
-        <div class="col-2 text-center">
-          <span class="text-body1 q-pl-lg q-pr-md">Show Items</span><br />
-
-          <q-toggle v-model="showItems" color="primary" size="xs"></q-toggle>
-        </div>
-        <div class="col-2 text-center">
-          <span class="text-body1 q-pl-lg q-pr-md">Show Detail</span><br />
-
-          <q-toggle v-model="showDetail" color="primary" size="xs"></q-toggle>
-        </div>
-
     </div>
 
     <div class="container">
@@ -167,7 +174,6 @@ document.body.appendChild(sheet);
 watch(
   value,
   (newVal, oldVal) => {
-
     let dynamicStyles = "@media screen and (min-width: 864px) { \n";
 
     value.value.sections.forEach((s) => {

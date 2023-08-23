@@ -1,0 +1,103 @@
+{
+  "name": "Lean Canvas",
+  "sections": [
+    {
+      "gridColumn": "1/3",
+      "gridRow": "1/2",
+      "sequence": "2",
+      "instructions": "What is the problem we are trying to solve? What is the customer pain-point we want to solve? How prevalent is this problem? ",
+      "title": "Problem",
+      "sectionKey": "problem"
+    },
+    {
+      "title": "Solution",
+      "sequence": "4",
+      "sectionKey": "solutions",
+      "instructions": "How do your proposed solutions ease existing pain points? How does it make the lives of your customers better? Summarize your product or service in this section. ",
+      "gridRow": "1/2",
+      "gridColumn": "3/5"
+    },
+    {
+      "sequence": "5",
+      "gridRow": "1/2",
+      "title": "Unique Value Proposition",
+      "instructions": "Describe the uniqueness of your product and show its key difference from other alternatives.",
+      "sectionKey": "valueProp",
+      "gridColumn": "5/7"
+    },
+    {
+      "title": "Unfair Advantage",
+      "instructions": "What is your secret sauce? What do you have that will ensure that your product or service cannot be copied? What gives you an edge over the competition?",
+      "sectionKey": "advantage",
+      "sequence": "9",
+      "gridColumn": "7/9",
+      "gridRow": "1/2"
+    },
+    {
+      "gridRow": "1/2",
+      "gridColumn": "9/11",
+      "sequence": "1",
+      "sectionKey": "customer",
+      "title": "Customers",
+      "instructions": "Define your customers, narrow down the customer segment as accurately as possible. "
+    },
+    {
+      "gridRow": "2/3",
+      "gridColumn": "1/3",
+      "title": "Existing Alternatives",
+      "sequence": "2.1",
+      "sectionKey": "alternatives",
+      "instructions": "How are the problems currently being solved?"
+    },
+    {
+      "title": "Key Metrics",
+      "sectionKey": "metrics",
+      "sequence": "7",
+      "instructions": "How will you define success for your startup? What are the KPIs you want to aim for? For a service-based start-up, these may be metrics that involve growth and adoption such as engagement, revenue, Customer Acquisition Cost (CAC) and Customer Lifetime Value (CLV).",
+      "gridRow": "2/3",
+      "gridColumn": "3/5"
+    },
+    {
+      "gridRow": "2/3",
+      "gridColumn": "5/7",
+      "title": "High-Level Concept",
+      "instructions": "The high-level concept sub-section conveys the value proposition in the most succinct manner possible. List your X for Y analogy. E.g. YouTube = Flickr for videos.",
+      "sectionKey": "concept",
+      "sequence": "5.1"
+    },
+    {
+      "title": "Channels",
+      "sequence": "6",
+      "sectionKey": "channels",
+      "instructions": "How do you plan to reach your customers? Which channels will you use to connect with your target market? Consider the media and channels your key demographic uses, and who they trust: TV news, magazines, social media, influencers or major retailers.",
+      "gridColumn": "7/9",
+      "gridRow": "2/3"
+    },
+    {
+      "gridColumn": "9/11",
+      "gridRow": "2/3",
+      "title": "Early Adopters",
+      "sequence": "1.1",
+      "sectionKey": "adopters",
+      "instructions": "What are the existing alternatives to the problems outlined? Taking the Uber example further, the founders would’ve written down taxis or chauffeurs in this section. "
+    },
+    {
+      "title": "Cost Structure",
+      "instructions": "Consider operational costs, both variable and fixed, so you have a clear idea of your runway. While the numbers only need to be indicative, make sure you do some initial research into manufacturing and distribution costs to give some weight to the numbers. ",
+      "sectionKey": "costs",
+      "sequence": "8",
+      "gridRow": "3/4",
+      "gridColumn": "1/6"
+    },
+    {
+      "gridColumn": "6/11",
+      "gridRow": "3/4",
+      "sequence": "3",
+      "sectionKey": "revenue",
+      "instructions": "Which revenue model will you use? Depending on your product or service, you may opt for subscriptions, advertising or freemium. On top of that, consider what the lifetime value of your product will be, recurring revenue, customer value and gross margins.",
+      "title": "Revenue Streams"
+    }
+  ],
+  "sequenced": true,
+  "canavaVers": "1.0.0"
+}

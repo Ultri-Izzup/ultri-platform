@@ -1,36 +1,46 @@
 <template>
   <div>
     <div class="row">
-      <div class="col-1">Stretch View</div>
-      <div class="col">
-        <q-slider v-model="vh" :min="50" :max="200" :step="1"></q-slider>
+      <div :class="Screen.gt.md ? ' col-6 ' : ' col-12 '">
+        <div class="row q-ml-xl q-pb-md">
+          <div class="col-3">
+            <q-slider v-model="vh" :min="50" :max="200" :step="1"></q-slider>
+          </div>
+          <div class="col-1 justify-left q-pl-md q-pt-xs">Stretch</div>
+        </div>
       </div>
-      <div class="col text-center">
-        <q-toggle
-          v-model="showInstructions"
-          color="primary"
-          label="Instructions"
-          size="xs"
-        ></q-toggle>
-      </div>
-      <div class="col text-center">
-        <q-toggle
-          v-model="showItems"
-          color="primary"
-          size="xs"
-          label="Items"
-        ></q-toggle>
-      </div>
-      <div class="col text-center">
-        <q-toggle
-          v-model="showDetail"
-          color="primary"
-          size="xs"
-          label="Item Details"
-        ></q-toggle>
+      <div :class="Screen.gt.md ? ' col-6 ' : ' col-12 '">
+        <div class="row q-ml-md q-pb-md">
+          <div class="col text-center">
+            <q-toggle
+              v-model="showInstructions"
+              color="primary"
+              label="Instructions"
+              size="xs"
+            ></q-toggle>
+          </div>
+          <div class="col text-center">
+            <q-toggle
+              v-model="showItems"
+              color="primary"
+              size="xs"
+              label="Items"
+            ></q-toggle>
+          </div>
+          <div class="col text-center">
+            <q-toggle
+              v-model="showDetail"
+              color="primary"
+              size="xs"
+              label="Item Details"
+            ></q-toggle>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="row">
+
+    <q-separator />
+    <div class="row q-pa-md">
       <span class="text-h3">{{ value.name }}</span>
       <q-space></q-space>
     </div>
@@ -123,6 +133,7 @@
 
 <script setup>
 import { ref, computed, watch, unref } from "vue";
+import { Screen } from "quasar";
 
 import { nanoid } from "nanoid";
 

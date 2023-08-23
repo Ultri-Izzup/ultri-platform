@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="row full-width ">
+    <div class="row full-width q-pb-lg">
       <q-toolbar v-if="pageMode != 'viewer'" class="col-6">
         <span class="gt-md text-body1">Canvas data:</span>
         <q-btn
@@ -32,7 +32,6 @@
         >
 
         <q-btn
-        v-if="pageMode=='creator'"
           to="/canava/viewer"
           color="secondary"
           icon="mdi-eye"
@@ -42,7 +41,7 @@
           ><q-tooltip> View Canvas </q-tooltip></q-btn
         >
       </q-toolbar>
-      <q-toolbar v-if="pageMode=='creator'" class="col-12 col-md-6">
+      <q-toolbar class="col-12 col-md-6">
         <div class="text-body1 gt-md q-pl-lg q-pr-sm col-2">Template:</div>
 
         <div class="q-pl-md col">
@@ -55,27 +54,8 @@
         </div>
       </q-toolbar>
     </div>
-    <!-- <pre>{{canvasData}}</pre> -->
-    <q-tabs
-      v-model="tab"
-      dense
-      class="text-grey-9"
-      active-color="primary"
-      indicator-color="primary"
-      align="justify"
-      v-if="pageMode=='creator'"
-    >
-      <q-tab name="edit" label="Canvas View"> </q-tab>
-      <q-tab name="create" label="Configure Canvas"> </q-tab>
-    </q-tabs>
-    <q-tab-panels v-model="tab" animated>
-      <q-tab-panel name="create">
-        <CanavaCreator v-model="canavaStore.canvasData"></CanavaCreator
-      ></q-tab-panel>
-      <q-tab-panel name="edit"
-        ><CanavaEditor v-model="canavaStore.canvasData"></CanavaEditor
-      ></q-tab-panel>
-    </q-tab-panels>
+    <q-separator />
+    <CanavaCreator v-model="canavaStore.canvasData"></CanavaCreator>
     <a id="downloadAnchorElem" style="display: none"></a>
     <UploadCanavaDialog
       v-model="displayUpload"
@@ -95,8 +75,6 @@ import { useRoute } from "vue-router";
 // Import stores
 import { useCanavaStore } from "../stores/canava";
 
-import { Screen } from "quasar";
-
 // Import the individual canvas SFC module
 import CanavaEditor from "../components/canava/CanavaEditor.vue";
 import CanavaCreator from "../components/canava/CanavaCreator.vue";
@@ -106,25 +84,24 @@ import businessModelData from "../data/canava/businessModel.json";
 import s3DelegationData from "../data/canava/s3Delegation.json";
 import s3OrganizationData from "../data/canava/s3Organization.json";
 import coopOwnershipData from "../data/canava/coopOwnership.json";
+import leanCanvasData from "../data/canava/leanCanvas.json";
 
 // Create i18n accessor as t
 const { t } = useI18n();
 
 const route = useRoute();
 
-const pageMode = ref('editor');
-
 const canavaStore = useCanavaStore();
 
 const selectedCanvas = ref(null);
 const displayUpload = ref(false);
-const tab = ref("edit");
 
 const canvasMap = {
   businessModel: businessModelData,
   s3Delegation: s3DelegationData,
   s3Organization: s3OrganizationData,
   coopOwnership: coopOwnershipData,
+  leanCanvas: leanCanvasData,
 };
 
 const loadCanvasTemplate = () => {
@@ -134,22 +111,6 @@ const loadCanvasTemplate = () => {
 
   canavaStore.canvasData = templateData;
 };
-
-watch(
-  () => route.params.canvasTemplate,
-  () => {
-    if (route.params.canvasTemplate) {
-      pageMode.value = 'template';
-      tab.value = 'edit';
-      const templateData = canvasMap[route.params.canvasTemplate];
-      canavaStore.canvasData = templateData;
-    } else {
-      pageMode.value = 'creator';
-      tab.value = 'create';
-    }
-  },
-  { immediate: true }
-);
 
 const importUpload = (data) => {
   data.sections.sort(
@@ -164,6 +125,10 @@ const canvasOpts = [
   {
     label: "Business Model Canvas",
     value: "businessModel",
+  },
+  {
+    label: "Lean Canvas",
+    value: "leanCanvas",
   },
   {
     label: "S3 Organization Canvas",

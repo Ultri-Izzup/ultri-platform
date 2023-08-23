@@ -120,7 +120,7 @@ const route = useRoute();
 
 const orgUid = route.params.orgUid;
 
-const toRoute = ref("canavaViewer");
+const toRoute = ref("canavaTemplateViewer");
 
 if (orgUid) {
   toRoute.value = "orgCanvasPage";

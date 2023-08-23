@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="row full-width ">
-      <q-toolbar class="col-6">
+      <q-toolbar v-if="pageMode != 'viewer'" class="col-6">
         <span class="gt-md text-body1">Canvas data:</span>
         <q-btn
           @click="onDownloadClick()"
@@ -30,8 +30,19 @@
           dense
           ><q-tooltip> Delete </q-tooltip></q-btn
         >
+
+        <q-btn
+        v-if="pageMode=='creator'"
+          to="/canava/viewer"
+          color="secondary"
+          icon="mdi-eye"
+          class="q-ml-md"
+          size="md"
+          dense
+          ><q-tooltip> Preview </q-tooltip></q-btn
+        >
       </q-toolbar>
-      <q-toolbar v-if="editorMode" class="col-12 col-md-6">
+      <q-toolbar v-if="pageMode=='creator'" class="col-12 col-md-6">
         <div class="text-body1 gt-md q-pl-lg q-pr-sm col-2">Template:</div>
 
         <div class="q-pl-md col">
@@ -52,7 +63,7 @@
       active-color="primary"
       indicator-color="primary"
       align="justify"
-      v-if="editorMode"
+      v-if="pageMode=='creator'"
     >
       <q-tab name="edit" label="Canvas View"> </q-tab>
       <q-tab name="create" label="Configure Canvas"> </q-tab>
@@ -101,11 +112,10 @@ const { t } = useI18n();
 
 const route = useRoute();
 
-const editorMode = ref(true);
+const pageMode = ref('editor');
 
 const canavaStore = useCanavaStore();
 
-const canvasData = ref({ name: "", sections: [] });
 const selectedCanvas = ref(null);
 const displayUpload = ref(false);
 const tab = ref("edit");
@@ -126,15 +136,16 @@ const loadCanvasTemplate = () => {
 };
 
 watch(
-  () => route.params.canvasTemplate,
+  () => route,
   () => {
     if (route.params.canvasTemplate) {
-      editorMode.value = false;
+      pageMode.value = 'template';
       tab.value = 'edit';
       const templateData = canvasMap[route.params.canvasTemplate];
       canavaStore.canvasData = templateData;
     } else {
-      editorMode.value = true;
+      pageMode.value = 'creator';
+      tab.value = 'create';
     }
   },
   { immediate: true }
@@ -180,7 +191,7 @@ const onDeleteClick = () => {
 const reset = () => {
   canavaStore.$reset();
   selectedCanvas.value = null;
-  tab.value = "edit";
+  tab.value = "create";
   displayUpload.value = false;
 };
 const onDownloadClick = () => {

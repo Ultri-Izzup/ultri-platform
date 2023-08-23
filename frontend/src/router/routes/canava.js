@@ -15,7 +15,7 @@ const routes = [
     ]
   },
   {
-    path: "/canava/:canvasTemplate",
+    path: "/canava/viewer",
     component: () => import("layouts/MainLayout.vue"),
     meta: {
       drawer: null,
@@ -25,9 +25,24 @@ const routes = [
       {
         name: "canavaViewer",
         path: "",
+        component: () => import("pages/CanavaViewerPage.vue")
+      }
+    ]
+  },
+  {
+    path: "/canava/:canvasTemplate",
+    component: () => import("layouts/MainLayout.vue"),
+    meta: {
+      drawer: null,
+      app: "Logbook"
+    },
+    children: [
+      {
+        name: "canavaTemplateViewer",
+        path: "",
         component: () => import("pages/CanavaPage.vue")
       }
     ]
-  }
+  },
 ]
 export default routes;

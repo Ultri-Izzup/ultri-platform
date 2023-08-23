@@ -38,7 +38,7 @@ export const useFeatureStore = defineStore("feature", {
       this.i18nEnabled = false;
       this.dbEnabled = false;
       this.enabledLocales = ['en-US','ro'];
-      this.disabledCanvas = [ 's3team', 'lean'];
+      this.disabledCanvas = [ ];
     },
     enabled(feature) {
       return this[boolFeatures[feature]];

@@ -59,10 +59,10 @@
     </q-tabs>
     <q-tab-panels v-model="tab" animated>
       <q-tab-panel name="create">
-        <CanavaCreator v-model="canvasData"></CanavaCreator
+        <CanavaCreator v-model="canavaStore.canvasData"></CanavaCreator
       ></q-tab-panel>
       <q-tab-panel name="edit"
-        ><CanavaEditor v-model="canvasData"></CanavaEditor
+        ><CanavaEditor v-model="canavaStore.canvasData"></CanavaEditor
       ></q-tab-panel>
     </q-tab-panels>
     <a id="downloadAnchorElem" style="display: none"></a>
@@ -82,13 +82,9 @@ import { useI18n } from "vue-i18n";
 import { useRoute } from "vue-router";
 
 // Import stores
-import { useCanvasStore } from "../stores/canvas";
+import { useCanavaStore } from "../stores/canava";
 
 import { Screen } from "quasar";
-
-const route = useRoute();
-
-const editorMode = ref(true);
 
 // Import the individual canvas SFC module
 import CanavaEditor from "../components/canava/CanavaEditor.vue";
@@ -102,6 +98,12 @@ import coopOwnershipData from "../data/canava/coopOwnership.json";
 
 // Create i18n accessor as t
 const { t } = useI18n();
+
+const route = useRoute();
+
+const editorMode = ref(true);
+
+const canavaStore = useCanavaStore();
 
 const canvasData = ref({ name: "", sections: [] });
 const selectedCanvas = ref(null);
@@ -120,7 +122,7 @@ const loadCanvasTemplate = () => {
 
   const templateData = canvasMap[selectedCanvas.value.value];
 
-  canvasData.value = templateData;
+  canavaStore.canvasData = templateData;
 };
 
 watch(
@@ -130,7 +132,7 @@ watch(
       editorMode.value = false;
       tab.value = 'edit';
       const templateData = canvasMap[route.params.canvasTemplate];
-      canvasData.value = templateData;
+      canavaStore.canvasData = templateData;
     } else {
       editorMode.value = true;
     }
@@ -144,7 +146,7 @@ const importUpload = (data) => {
       a.gridRow.localeCompare(b.gridRow) ||
       a.gridColumn.localeCompare(b.gridColumn)
   );
-  canvasData.value = data;
+  canavaStore.canvasData = data;
 };
 
 const canvasOpts = [
@@ -176,7 +178,7 @@ const onDeleteClick = () => {
   reset();
 };
 const reset = () => {
-  canvasData.value = { name: "", sections: [] };
+  canavaStore.$reset();
   selectedCanvas.value = null;
   tab.value = "edit";
   displayUpload.value = false;
@@ -186,9 +188,9 @@ const onDownloadClick = () => {
 
   // Define an object to hold our ouput
   const outObj = {
-    name: canvasData.value.name,
-    sections: canvasData.value.sections,
-    sequenced: canvasData.value.sequenced ? true : false,
+    name: canavaStore.canvasData.name,
+    sections: canavaStore.canvasData.sections,
+    sequenced: canavaStore.canvasData.sequenced ? true : false,
     canavaVers: "1.0.0",
   };
 

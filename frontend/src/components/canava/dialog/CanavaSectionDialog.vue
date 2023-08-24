@@ -20,7 +20,6 @@
         </q-btn>
       </q-bar>
       <q-card-section>
-        Data {{data}} Edit {{edit.value.title}}
         <q-input label="Title" v-model="edit.value.title" />
         <div class="q-pt-sm q-pb-xs text-caption text-grey-8">Instructions</div>
         {{edit.value.instructions}}

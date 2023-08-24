@@ -36,7 +36,6 @@
         </q-card>
       </div>
     </div>
-    {{currentSectionData}}
     <CanavaSectionDialog
       v-model="showSectionDialog"
       :data="currentSectionData"
@@ -87,7 +86,11 @@ const newSection = (section) => {
 
 const updateSection = (section) => {
   console.log(section)
-  //value.value.sections.push(section)
+  // Find the section in existing data
+  const ix = value.value.sections.findIndex((element) => element.uid == section.uid);
+    console.log(ix)
+  // Update to new value
+  value.value.sections[ix] = section;
 }
 
 const removeSection = (section) => {

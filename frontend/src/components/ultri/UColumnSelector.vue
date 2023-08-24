@@ -27,8 +27,6 @@ const emit = defineEmits(["update:modelValue"]);
 
 const numCols = 12;
 
-console.log(props);
-
 const value = computed({
   get() {
     return props.modelValue;
@@ -43,7 +41,7 @@ const startCol = computed(() => {
 });
 
 const endCol = computed(() => {
-  return value.value ? value.value.split("/")[1] - 1 : 2;
+  return value.value ? value.value.split("/")[1] - 1 : 4;
 });
 
 const minMax = computed({

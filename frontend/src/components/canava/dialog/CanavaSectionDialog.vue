@@ -20,17 +20,18 @@
         </q-btn>
       </q-bar>
       <q-card-section>
+        Data {{data}} Edit {{edit.value.title}}
         <q-input label="Title" v-model="edit.title" />
         <div class="q-pt-sm q-pb-xs text-caption text-grey-8">Instructions</div>
-        <q-editor
+        {{edit.value.instructions}}
+        <!-- <q-editor
           v-model="edit.instructions"
           min-height="5rem"
           label="Instructions"
-        ></q-editor>
+        ></q-editor> -->
         <q-input label="Key" v-model="edit.sectionKey" />
         <q-input label="Sequence (opt)" v-model="edit.sequence" />
-        <UColumnSelector v-model="edit.gridColumn" />
-        <URowSelector v-model="edit.gridRow" />
+
       </q-card-section>
       <q-card-actions class="justify-center">
         <q-btn label="Save" color="primary" @click="save()"></q-btn>
@@ -40,7 +41,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, watch, toRefs, toRef, reactive} from "vue";
 import { useDialogPluginComponent } from "quasar";
 
 import { v4 as uuidv4 } from "uuid";
@@ -57,16 +58,17 @@ const emit = defineEmits([
   "remove",
 ]);
 
-const props = defineProps({
-  data: {
-    type: Object,
-    default(rawProps) {
-      return { instructions: "" };
-    },
-  },
-});
+const props = defineProps(['data']);
 
-const edit = ref(props.data);
+const edit = reactive({});
+
+watch(
+  () => props.data,
+  () => {
+    edit.value = reactive(props.data)
+  },
+  {immediate: true}
+)
 
 const { dialogRef, onDialogOK } = useDialogPluginComponent();
 // dialogRef      - Vue ref to be applied to QDialog
@@ -100,6 +102,6 @@ const save = () => {
 };
 
 const reset = () => {
-  edit.value = { instructions: "" };
+  //edit.value = {};
 };
 </script>

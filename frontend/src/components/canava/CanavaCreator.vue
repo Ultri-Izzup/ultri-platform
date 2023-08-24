@@ -34,57 +34,9 @@
             ></q-icon>
           </q-card-section>
         </q-card>
-        <!-- <q-dialog v-model="showEditDialog">
-          <q-card>
-            <q-bar class="bg-primary">
-              Edit Canvas Section
-              <q-space></q-space>
-              <q-btn
-                dense
-                flat
-                icon="mdi-delete"
-                v-close-popup
-                @click="deleteSection(currentSectionData.sectionKey)"
-                class="q-pr-sm"
-              >
-                <q-tooltip>{{ $t("nav.delete") }} </q-tooltip>
-              </q-btn>
-              <q-btn
-                dense
-                flat
-                icon="mdi-close"
-                v-close-popup
-                @click="resetNew"
-              >
-                <q-tooltip>{{ $t("nav.close") }} </q-tooltip>
-              </q-btn>
-            </q-bar>
-            <q-card-section>
-              <q-input label="Title" v-model="currentSectionData.title" />
-              <div class="q-pt-sm q-pb-xs text-caption text-grey-9">
-                Instructions
-              </div>
-              <q-editor
-                v-model="newSectionData.instructions"
-                min-height="5rem"
-                label="Instructions"
-              ></q-editor>
-              <q-input
-                label="Key"
-                v-model="currentSectionData.sectionKey"
-                disable
-              />
-              <q-input
-                label="Sequence (opt)"
-                v-model="currentSectionData.sequence"
-              />
-              <UColumnSelector v-model="currentSectionData.gridColumn" />
-              <URowSelector v-model="currentSectionData.gridRow" />
-            </q-card-section>
-          </q-card>
-        </q-dialog> -->
       </div>
     </div>
+    {{currentSectionData}}
     <CanavaSectionDialog
       v-model="showSectionDialog"
       :data="currentSectionData"
@@ -114,7 +66,7 @@ const showEditDialog = ref(false);
 const showSectionDialog = ref(false);
 
 const currentSectionKey = ref(null);
-const currentSectionData = ref();
+const currentSectionData = ref({});
 
 const value = computed({
   get() {
@@ -185,6 +137,7 @@ const triggerEdit = (sectionKey) => {
 };
 
 const triggerNew = () => {
+  currentSectionData.value = {}
   showSectionDialog.value = true;
 };
 
@@ -196,19 +149,6 @@ const deleteSection = (sectionKey) => {
   );
 };
 
-const saveNew = () => {
-  console.log(newSectionData.value);
-  value.value.sections.push(newSectionData.value);
-  showSectionDialog.value = false;
-  resetNew();
-};
-
-const resetNew = () => {
-  newSectionData.value = {
-    title: "",
-    instructions: "",
-  };
-};
 </script>
 
 <style lang="scss" scoped>

@@ -36,6 +36,10 @@ const value = computed({
   },
 });
 
+if(typeof value.value === "undefined"){
+  value.value = "1/4"
+}
+
 const startCol = computed(() => {
   return value.value ? value.value.split("/")[0] : 1 ;
 });

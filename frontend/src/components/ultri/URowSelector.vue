@@ -29,8 +29,6 @@ const emit = defineEmits(["update:modelValue"]);
 
 const numCols = 12;
 
-console.log(props);
-
 const value = computed({
   get() {
     return props.modelValue;
@@ -39,6 +37,9 @@ const value = computed({
     emit("update:modelValue", value);
   },
 });
+if(typeof value.value === "undefined"){
+  value.value = "1/4"
+}
 
 const startCol = computed(() => {
   return value.value ? value.value.split("/")[0] : 1;

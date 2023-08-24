@@ -3986,6 +3986,11 @@ uvu@^0.5.0:
     kleur "^4.0.3"
     sade "^1.7.3"
 
+vanilla-jsoneditor@^0.17.3:
+  version "0.17.10"
+  resolved "https://registry.yarnpkg.com/vanilla-jsoneditor/-/vanilla-jsoneditor-0.17.10.tgz#ee1fac43b10586cb740ba2250dba3e0615472220"
+  integrity sha512-2ScoLNqq3kRSJ1+sG8rzbh4YtetrgEXbRX0OYxOk1Lqlg6tSkELGPsTA4KADFwk1s84oPj2ozMmFY6SwbZRJhg==
+
 vary@~1.1.2:
   version "1.1.2"
   resolved "https://registry.npmjs.org/vary/-/vary-1.1.2.tgz"
@@ -4076,6 +4081,14 @@ vue3-text-clamp@^0.1.2:
   integrity sha512-896tGhkwaDObKL4gUv9KhR6GQQYzIzut77P2jmfUoTaJ5lJP6kLMfCUEKwGQWbDgXXkqDcoE/QV/UtP4Jn7r3Q==
   dependencies:
     resize-detector "^0.3.0"
+    vue "^3.2.37"
+
+vue3-ts-jsoneditor@^2.9.0:
+  version "2.9.0"
+  resolved "https://registry.yarnpkg.com/vue3-ts-jsoneditor/-/vue3-ts-jsoneditor-2.9.0.tgz#7cf460824440f705ba95820f335ca3363d464a6f"
+  integrity sha512-0MCMHb2koruCkPVXXvke1BOlsubY2urvfrtSlkYMqmi1oA/5UWdS7/7/yIQizYgCu3E1Q+f40uIDEgjNeK+tPQ==
+  dependencies:
+    vanilla-jsoneditor "^0.17.3"
     vue "^3.2.37"
 
 vue@^3.0.0, vue@^3.2.37, vue@^3.2.45:

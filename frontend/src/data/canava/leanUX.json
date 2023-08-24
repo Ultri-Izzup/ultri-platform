@@ -1,0 +1,71 @@
+{
+  "name": "Lean UX Canvas",
+  "sections": [
+    {
+      "title": "Business problem",
+      "sequence": "1",
+      "sectionKey": "problem",
+      "instructions": "What’s changed: Better and more detailed instructions, along with some hints about what specifically should go in this box.\nWhy it changed: There wasn’t enough clarity around what exactly a good business problem is and how it should be worded. This box is designed to help the team articulate what’s changed in the world that has impacted their business in a way that needs to be solved.",
+      "gridColumn": "1/5",
+      "gridRow": "1/2"
+    },
+    {
+      "title": "Business outcomes",
+      "sequence": "2",
+      "sectionKey": "businessOutcomes",
+      "instructions": "What’s changed: More detail about what a good outcome should be.\nWhy it changed: A clearer distinction was needed between this box and Box 4. Also, this is an attempt to be clear that what’s needed in this box is a change in someone’s behaviour — a customer, a user, an employee, an executive, etc.",
+      "gridColumn": "8/12",
+      "gridRow": "1/2"
+    },
+    {
+      "title": "Solutions",
+      "instructions": "What’s changed: Again, better instructional text and hints.\nWhy it changed: Depending on the team using the canvas, the items created for this box can vary greatly in scope. This change was designed to help teams see that this box provides the opportunity to offer up solutions big, small, innovative and perhaps a bit “weird.” The goal was to help enhance the brainstorm for this box to include not just tactical features, but new systems or business models as well as non-technical solutions.",
+      "sectionKey": "solutions",
+      "sequence": "5",
+      "gridColumn": "5/8",
+      "gridRow": "1/3"
+    },
+    {
+      "instructions": "What’s changed: A simplification and clarification was added that this is where we’re we add persons and that they should focus not just on customers or users but admins and buyers among other users.\nWhy it changed: Having had several canvases sent to me (and seeing them in action with the teams I work with) I noticed that teams were taking a bit of a shortcut with this box. While there are certainly user characteristics everyone believes, it’s important to ensure the team is aligned around a shared vision of the customer.",
+      "title": "Users",
+      "sequence": "3",
+      "sectionKey": "users",
+      "gridColumn": "1/5",
+      "gridRow": "2/3"
+    },
+    {
+      "sequence": "4",
+      "title": "User outcomes and benefits",
+      "sectionKey": "userBenefits",
+      "instructions": "What’s changed: The name of the box has been updated to include benefits and the explanatory text does a more thorough job of explaining what should go in here and why this is an important, unique part of the canvas.\nWhy it changed: This has been the part of the canvas with the most confusion. The original goal here was to call these “outcomes” out as emotional goals, but the language got confusing.",
+      "gridColumn": "8/12",
+      "gridRow": "2/3"
+    },
+    {
+      "sequence": "6",
+      "title": "Hypotheses",
+      "sectionKey": "hypotheses",
+      "instructions": "What’s changed? Why did it change?",
+      "gridColumn": "1/5",
+      "gridRow": "3/4"
+    },
+    {
+      "title": "What’s the most important thing we need to learn first?",
+      "sectionKey": "firstStep",
+      "sequence": "7",
+      "gridColumn": "5/8",
+      "instructions": "Whats has changed? Why has it changed?",
+      "gridRow": "3/4"
+    },
+    {
+      "title": "What’s the least amount of work to learn the next most important thing?",
+      "instructions": "What has changed? Why has it changed?",
+      "sectionKey": "leastEffort",
+      "sequence": "8",
+      "gridColumn": "8/12",
+      "gridRow": "3/4"
+    }
+  ],
+  "sequenced": true,
+  "canavaVers": "1.0.0"
+}

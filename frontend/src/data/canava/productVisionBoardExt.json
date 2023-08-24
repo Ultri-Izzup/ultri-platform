@@ -1,0 +1,70 @@
+{
+  "name": "Product Vision Board",
+  "sections": [
+    {
+      "title": "Vision",
+      "gridColumn": "1/5",
+      "gridRow": "1/2",
+      "sequence": "1",
+      "sectionKey": "vision"
+    },
+    {
+      "title": "Target Group",
+      "gridColumn": "1/2",
+      "gridRow": "2/3",
+      "sectionKey": "target",
+      "sequence": "2"
+    },
+    {
+      "title": "Needs",
+      "sectionKey": "needs",
+      "sequence": "3",
+      "gridColumn": "2/3",
+      "gridRow": "2/3"
+    },
+    {
+      "title": "Product",
+      "sectionKey": "product",
+      "sequence": "4",
+      "gridColumn": "3/4",
+      "gridRow": "2/3"
+    },
+    {
+      "title": "Business Goals",
+      "sectionKey": "goals",
+      "sequence": "5",
+      "gridColumn": "4/5",
+      "gridRow": "2/3"
+    },
+    {
+      "title": "Competitors",
+      "gridColumn": "1/2",
+      "gridRow": "3/4",
+      "sectionKey": "competitors",
+      "sequence": "6"
+    },
+    {
+      "title": "Revenue Streams",
+      "sectionKey": "revenue",
+      "sequence": "7",
+      "gridColumn": "2/3",
+      "gridRow": "3/4"
+    },
+    {
+      "title": "Cost Factors",
+      "sectionKey": "cost",
+      "sequence": "8",
+      "gridColumn": "3/4",
+      "gridRow": "3/4"
+    },
+    {
+      "title": "Channels",
+      "sectionKey": "channels",
+      "sequence": "9",
+      "gridColumn": "4/5",
+      "gridRow": "3/4"
+    }
+  ],
+  "sequenced": false,
+  "canavaVers": "1.0.0"
+}

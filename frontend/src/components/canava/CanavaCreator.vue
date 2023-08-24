@@ -86,8 +86,11 @@
       </div>
     </div>
     <CanavaSectionDialog
-      v-model="showNewDialog"
-      @save="((event) => newSection(event))" />
+      v-model="showSectionDialog"
+      :data="currentSectionData"
+      @add="((event) => newSection(event))"
+      @modify="((event) => updateSection(event))"
+      @remove="((event) => removeSection(event))" />
   </div>
 </template>
 
@@ -99,9 +102,6 @@ import { ref, computed, watch } from "vue";
 
 import { useColorStore } from "../../stores/color";
 
-import UColumnSelector from "../ultri/UColumnSelector.vue";
-import URowSelector from "../ultri/URowSelector.vue";
-
 import CanavaSectionDialog from "../canava/dialog/CanavaSectionDialog.vue";
 
 // Instantiate our stores early so they are available
@@ -111,11 +111,10 @@ const props = defineProps(["modelValue"]);
 const emit = defineEmits(["update:modelValue"]);
 
 const showEditDialog = ref(false);
-const showNewDialog = ref(false);
+const showSectionDialog = ref(false);
 
 const currentSectionKey = ref(null);
 const currentSectionData = ref();
-const newSectionData = ref();
 
 const value = computed({
   get() {
@@ -127,30 +126,21 @@ const value = computed({
 });
 
 let sheet = document.createElement("style");
-
-let dynamicStyles = "@media screen and (min-width: 864px) { \n";
-
-value.value.sections.forEach((s) => {
-  console.log(s);
-  const sectionCSS =
-    "." +
-    s.sectionKey +
-    " { grid-column: " +
-    s.gridColumn +
-    "; grid-row: " +
-    s.gridRow +
-    "; } \n";
-  dynamicStyles = dynamicStyles + sectionCSS;
-});
-
-dynamicStyles = dynamicStyles + " } \n";
-
-sheet.innerHTML = dynamicStyles;
 document.body.appendChild(sheet);
 
 const newSection = (section) => {
   console.log(section)
   value.value.sections.push(section)
+}
+
+const updateSection = (section) => {
+  console.log(section)
+  //value.value.sections.push(section)
+}
+
+const removeSection = (section) => {
+  console.log(section)
+  //value.value.sections.push(section)
 }
 
 watch(
@@ -190,14 +180,12 @@ const triggerEdit = (sectionKey) => {
   const filteredResult = value.value.sections.find(
     (e) => e.sectionKey == sectionKey
   );
-
-  console.log(filteredResult);
   currentSectionData.value = filteredResult;
-  showEditDialog.value = true;
+  showSectionDialog.value = true;
 };
 
 const triggerNew = () => {
-  showNewDialog.value = true;
+  showSectionDialog.value = true;
 };
 
 const deleteSection = (sectionKey) => {
@@ -211,7 +199,7 @@ const deleteSection = (sectionKey) => {
 const saveNew = () => {
   console.log(newSectionData.value);
   value.value.sections.push(newSectionData.value);
-  showNewDialog.value = false;
+  showSectionDialog.value = false;
   resetNew();
 };
 

@@ -2,21 +2,32 @@
   <q-dialog ref="dialogRef">
     <q-card>
       <q-bar class="bg-primary">
-        New Canvas Section
+        Canvas Section
         <q-space></q-space>
-        <q-btn dense flat icon="mdi-close" v-close-popup @click="resetNew()">
+        <q-btn
+          v-if="edit.uid"
+          dense
+          flat
+          icon="mdi-delete"
+          v-close-popup
+          @click="emit('deleteSection')"
+          class="q-pr-sm"
+        >
+          <q-tooltip>{{ $t("nav.delete") }} </q-tooltip>
+        </q-btn>
+        <q-btn dense flat icon="mdi-close" v-close-popup @click="reset()">
           <q-tooltip>{{ $t("nav.close") }} </q-tooltip>
         </q-btn>
       </q-bar>
       <q-card-section>
         <q-input label="Title" v-model="edit.title" />
         <div class="q-pt-sm q-pb-xs text-caption text-grey-8">Instructions</div>
-         <q-editor
+        <q-editor
           v-model="edit.instructions"
           min-height="5rem"
           label="Instructions"
         ></q-editor>
-         <q-input label="Key" v-model="edit.sectionKey" />
+        <q-input label="Key" v-model="edit.sectionKey" />
         <q-input label="Sequence (opt)" v-model="edit.sequence" />
         <UColumnSelector v-model="edit.gridColumn" />
         <URowSelector v-model="edit.gridRow" />
@@ -41,20 +52,21 @@ const emit = defineEmits([
   // REQUIRED; need to specify some events that your
   // component will emit through useDialogPluginComponent()
   ...useDialogPluginComponent.emits,
-  "save",
+  "add",
+  "modify",
+  "remove",
 ]);
 
 const props = defineProps({
-  sectionData: {
+  data: {
     type: Object,
     default(rawProps) {
-      return { instructions: ''}
-    }
-  }
+      return { instructions: "" };
+    },
+  },
 });
 
-const edit = ref(props.sectionData);
-
+const edit = ref(props.data);
 
 const { dialogRef, onDialogOK } = useDialogPluginComponent();
 // dialogRef      - Vue ref to be applied to QDialog
@@ -74,13 +86,20 @@ const onOKClick = () => {
 };
 
 const save = () => {
-  emit('save', edit.value);
+  if (edit.value.uid) {
+    // Update
+    emit("modify", edit.value);
+  } else {
+    // New
+    console.log("NEW");
+    edit.value.uid = uuidv4();
+    emit("add", edit.value);
+  }
   reset();
   onDialogOK();
-}
+};
 
 const reset = () => {
-  edit.value = {}
-}
-
+  edit.value = { instructions: "" };
+};
 </script>

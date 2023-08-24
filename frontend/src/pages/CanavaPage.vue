@@ -182,7 +182,6 @@ const onDeleteClick = () => {
 const reset = () => {
   canavaStore.$reset();
   selectedCanvas.value = null;
-  tab.value = "create";
   displayUpload.value = false;
 };
 const onDownloadClick = () => {

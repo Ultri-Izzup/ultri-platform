@@ -2,7 +2,7 @@
   <div>
     <div class="row">
       <div :class="Screen.gt.md ? ' col-6 ' : ' col-12 '">
-        <div class="row q-ml-xl q-pb-md">
+        <div class="row q-ml-xl q-pb-sm">
           <div class="col-3">
             <q-slider v-model="vh" :min="50" :max="200" :step="1"></q-slider>
           </div>
@@ -10,7 +10,7 @@
         </div>
       </div>
       <div :class="Screen.gt.md ? ' col-6 ' : ' col-12 '">
-        <div class="row q-ml-md q-pb-md">
+        <div class="row q-ml-md q-pb-sm">
           <div class="col text-center">
             <q-toggle
               v-model="showInstructions"
@@ -44,7 +44,7 @@
       <span class="text-h3">{{ value.name }}</span>
       <q-space></q-space>
     </div>
-
+    <div class="q-ma-sm container-wrapper">
     <div class="container">
       <q-card
         class="container-card"
@@ -82,7 +82,7 @@
           clickable
           @click="triggerNew(section.sectionKey)"
           class="q-pa-md text-italic cursor-pointer q-hoverable"
-          >{{ section.instructions }}
+          ><div v-html="section.instructions" />"
         </q-card-section>
         <q-card-section v-if="section.items && showItems" class="q-pa-none">
           <q-list separator>
@@ -128,6 +128,7 @@
         </q-card>
       </q-dialog>
     </div>
+  </div>
   </div>
 </template>
 
@@ -248,6 +249,12 @@ const save = () => {
 .container {
   display: grid;
   height: 60vh;
+}
+.container-wrapper {
+  border-style:solid;
+  border-width:1px;
+  border-color: $grey-4;
+  border-radius: 5px;
 }
 ::-webkit-scrollbar {
   display: none;

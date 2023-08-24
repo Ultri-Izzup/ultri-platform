@@ -5,12 +5,12 @@
         Canvas Section
         <q-space></q-space>
         <q-btn
-          v-if="edit.uid"
+          v-if="edit.value.uid"
           dense
           flat
           icon="mdi-delete"
           v-close-popup
-          @click="emit('deleteSection')"
+          @click="emit('remove', edit.value.uid)"
           class="q-pr-sm"
         >
           <q-tooltip>{{ $t("nav.delete") }} </q-tooltip>
@@ -22,11 +22,28 @@
       <q-card-section>
         <q-input label="Title" v-model="edit.value.title" />
         <div class="q-pt-sm q-pb-xs text-caption text-grey-8">Instructions</div>
-        {{edit.value.instructions}}
         <q-editor
           v-model="edit.value.instructions"
           min-height="5rem"
-          label="Instructions"
+          :dense="$q.screen.lt.md"
+          :toolbar="[
+            ['bold', 'italic', 'subscript', 'superscript'],
+            [{
+                icon: 'mdi-format-size',
+                fixedLabel: true,
+                fixedIcon: true,
+                list: 'no-icons',
+                options: [
+                  'size-1',
+                  'size-2',
+                  'size-3',
+                  'size-4',
+                  'size-5',
+                ],
+            }],
+            ['hr', 'link'],
+            ['quote', 'unordered', 'ordered', 'outdent', 'indent'],
+          ]"
         ></q-editor>
         <q-input label="Key" v-model="edit.value.sectionKey" />
         <q-input label="Sequence (opt)" v-model="edit.value.sequence" />
@@ -41,8 +58,8 @@
 </template>
 
 <script setup>
-import { ref, watch, toRefs, toRef, reactive} from "vue";
-import { useDialogPluginComponent } from "quasar";
+import { ref, watch, toRefs, toRef, reactive } from "vue";
+import { useDialogPluginComponent, useQuasar } from "quasar";
 
 import { v4 as uuidv4 } from "uuid";
 
@@ -58,17 +75,19 @@ const emit = defineEmits([
   "remove",
 ]);
 
-const props = defineProps(['data']);
+const props = defineProps(["data"]);
 
 const edit = reactive({});
+
+const $q = useQuasar();
 
 watch(
   () => props.data,
   () => {
-    edit.value = reactive(props.data)
+    edit.value = reactive(props.data);
   },
-  {immediate: true}
-)
+  { immediate: true }
+);
 
 const { dialogRef, onDialogOK } = useDialogPluginComponent();
 // dialogRef      - Vue ref to be applied to QDialog

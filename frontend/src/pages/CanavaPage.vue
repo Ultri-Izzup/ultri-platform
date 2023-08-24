@@ -72,6 +72,8 @@ import { useI18n } from "vue-i18n";
 
 import { useRoute } from "vue-router";
 
+import { v4 as uuidv4 } from "uuid";
+
 // Import stores
 import { useCanavaStore } from "../stores/canava";
 
@@ -119,6 +121,13 @@ const loadCanvasTemplate = () => {
 
   const templateData = canvasMap[selectedCanvas.value.value];
 
+  templateData.sections.forEach(function(item, index) {
+    if(!item.uid) {
+      item.uid = uuidv4();
+    }
+    console.log(item, index);
+  });
+
   canavaStore.canvasData = templateData;
 };
 
@@ -128,6 +137,7 @@ const importUpload = (data) => {
       a.gridRow.localeCompare(b.gridRow) ||
       a.gridColumn.localeCompare(b.gridColumn)
   );
+
   canavaStore.canvasData = data;
 };
 

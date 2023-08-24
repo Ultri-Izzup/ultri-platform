@@ -3,7 +3,7 @@
     <div class="row q-pa-md">
       <q-input label="Canvas Name" v-model="value.name"></q-input
       ><q-space></q-space
-      ><q-btn label="Add Section" @click="triggerNew()" color="primary" />
+      ><q-btn size="md" label="Add Section" @click="triggerNew()" color="primary" />
     </div>
     <div class="q-pa-sm row">
       <div class="col container container-wrapper full-width">
@@ -95,7 +95,11 @@ const updateSection = (section) => {
 
 const removeSection = (section) => {
   console.log(section)
-  //value.value.sections.push(section)
+  // Find index of section
+  const ix = value.value.sections.findIndex((element) => element.uid == section);
+  value.value.sections.splice(ix, 1);
+  // Delete Index
+
 }
 
 watch(

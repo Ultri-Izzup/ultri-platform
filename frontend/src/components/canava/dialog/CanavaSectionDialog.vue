@@ -21,17 +21,18 @@
       </q-bar>
       <q-card-section>
         Data {{data}} Edit {{edit.value.title}}
-        <q-input label="Title" v-model="edit.title" />
+        <q-input label="Title" v-model="edit.value.title" />
         <div class="q-pt-sm q-pb-xs text-caption text-grey-8">Instructions</div>
         {{edit.value.instructions}}
-        <!-- <q-editor
-          v-model="edit.instructions"
+        <q-editor
+          v-model="edit.value.instructions"
           min-height="5rem"
           label="Instructions"
-        ></q-editor> -->
-        <q-input label="Key" v-model="edit.sectionKey" />
-        <q-input label="Sequence (opt)" v-model="edit.sequence" />
-
+        ></q-editor>
+        <q-input label="Key" v-model="edit.value.sectionKey" />
+        <q-input label="Sequence (opt)" v-model="edit.value.sequence" />
+        <UColumnSelector v-model="edit.value.gridColumn" />
+        <URowSelector v-model="edit.value.gridRow" />
       </q-card-section>
       <q-card-actions class="justify-center">
         <q-btn label="Save" color="primary" @click="save()"></q-btn>

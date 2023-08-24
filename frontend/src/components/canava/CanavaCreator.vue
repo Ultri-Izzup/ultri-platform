@@ -137,7 +137,7 @@ const triggerEdit = (sectionKey) => {
 };
 
 const triggerNew = () => {
-  currentSectionData.value = {}
+  currentSectionData.value = {instructions: ""}
   showSectionDialog.value = true;
 };
 

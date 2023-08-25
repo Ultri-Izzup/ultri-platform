@@ -28,10 +28,10 @@
             img-src="https://platform.ultri.com/imgs/canava/canava-light.png"
           >
             <div class="absolute-center custom-caption text-blue-10">
-              <div class="text-h1 text-bold text-center">
+              <div :class="Screen.lt.md ? ' text-h2 text-bold text-center ' : ' text-h1 text-bold text-center '">
                 Intoducing CANAVA!
               </div>
-              <div class="text-h2 text-center text-bold">
+              <div :class="Screen.lt.md ? ' text-h3 text-bold text-center ' : ' text-h2 text-bold text-center '">
                 A better canvas builder
               </div>
             </div>
@@ -41,8 +41,8 @@
             img-src="https://platform.ultri.com/imgs/canava/canava-dark.png"
           >
             <div class="absolute-center custom-caption text-white">
-              <div class="text-h1 text-bold text-center">DARK MODE</div>
-              <div class="text-h2 text-center text-bold">SUPPORTED</div>
+              <div :class="Screen.lt.md ? ' text-h2 text-bold text-center ' : ' text-h1 text-bold text-center '">DARK MODE</div>
+              <div :class="Screen.lt.md ? ' text-h3 text-bold text-center ' : ' text-h2 text-bold text-center '">SUPPORTED</div>
             </div>
           </q-carousel-slide>
           <q-carousel-slide
@@ -50,8 +50,8 @@
             img-src="https://platform.ultri.com/imgs/canava/canava-canvas-template-options.png"
           >
             <div class="absolute-center custom-caption text-blue-10">
-              <div class="text-h1 text-bold text-center">Use a template</div>
-              <div class="text-h2 text-center text-bold">
+              <div :class="Screen.lt.md ? ' text-h2 text-bold text-center ' : ' text-h1 text-bold text-center '">Use a template</div>
+              <div :class="Screen.lt.md ? ' text-h3 text-bold text-center ' : ' text-h2 text-bold text-center '">
                 or start from scratch
               </div>
             </div>
@@ -61,8 +61,8 @@
             img-src="https://platform.ultri.com/imgs/canava/canava-creator-dialog.png"
           >
             <div class="absolute-center custom-caption text-blue-10">
-              <div class="text-h1 text-bold text-center">Configure canvas</div>
-              <div class="text-h2 text-center text-bold">sections easily</div>
+              <div :class="Screen.lt.md ? ' text-h2 text-bold text-center ' : ' text-h1 text-bold text-center '">Configure canvas</div>
+              <div :class="Screen.lt.md ? ' text-h3 text-bold text-center ' : ' text-h2 text-bold text-center '">sections easily</div>
             </div>
           </q-carousel-slide>
           <q-carousel-slide
@@ -70,8 +70,8 @@
             img-src="https://platform.ultri.com/imgs/canava/canava-view-canvas-button.png"
           >
             <div class="absolute-center custom-caption text-blue-10">
-              <div class="text-h1 text-bold text-center">View Canvas</div>
-              <div class="text-h2 text-center text-bold">
+              <div :class="Screen.lt.md ? ' text-h2 text-bold text-center ' : ' text-h1 text-bold text-center '">View Canvas</div>
+              <div :class="Screen.lt.md ? ' text-h3 text-bold text-center ' : ' text-h2 text-bold text-center '">
                 by clicking on the eye button
               </div>
             </div>
@@ -81,8 +81,8 @@
             img-src="https://platform.ultri.com/imgs/canava/canava-canvas-interaction-view.png"
           >
             <div class="absolute-center custom-caption text-blue-10">
-              <div class="text-h1 text-bold text-center">Canvas interface</div>
-              <div class="text-h2 text-center text-bold">
+              <div :class="Screen.lt.md ? ' text-h2 text-bold text-center ' : ' text-h1 text-bold text-center '">Canvas interface</div>
+              <div :class="Screen.lt.md ? ' text-h3 text-bold text-center ' : ' text-h2 text-bold text-center '">
                 allows managing the canvas items
               </div>
             </div>
@@ -92,8 +92,8 @@
             img-src="https://platform.ultri.com/imgs/canava/canava-item-editor.png"
           >
             <div class="absolute-center custom-caption text-blue-10">
-              <div class="text-h1 text-bold text-center">Manage items</div>
-              <div class="text-h2 text-center text-bold">
+              <div :class="Screen.lt.md ? ' text-h2 text-bold text-center ' : ' text-h1 text-bold text-center '">Manage items</div>
+              <div :class="Screen.lt.md ? ' text-h3 text-bold text-center ' : ' text-h2 text-bold text-center '">
                 in each section individually
               </div>
             </div>
@@ -103,8 +103,8 @@
             img-src="https://platform.ultri.com/imgs/canava/canava-configure-link.png"
           >
             <div class="absolute-center custom-caption text-blue-10">
-              <div class="text-h1 text-bold text-center">Configure canvas</div>
-              <div class="text-h2 text-center text-bold">
+              <div :class="Screen.lt.md ? ' text-h2 text-bold text-center ' : ' text-h1 text-bold text-center '">Configure canvas</div>
+              <div :class="Screen.lt.md ? ' text-h3 text-bold text-center ' : ' text-h2 text-bold text-center '">
                 by clicking on the cog button
               </div>
             </div>
@@ -114,8 +114,8 @@
             img-src="https://platform.ultri.com/imgs/canava/canava-colored-sections.png"
           >
             <div class="absolute-center custom-caption text-blue-10">
-              <div class="text-h1 text-bold text-center">Custom colors</div>
-              <div class="text-h2 text-center text-bold">
+              <div :class="Screen.lt.md ? ' text-h2 text-bold text-center ' : ' text-h1 text-bold text-center '">Custom colors</div>
+              <div :class="Screen.lt.md ? ' text-h3 text-bold text-center ' : ' text-h2 text-bold text-center '">
                 for background and text
               </div>
             </div>
@@ -125,8 +125,8 @@
             img-src="https://platform.ultri.com/imgs/canava/canava-turn-off-instructions.png"
           >
             <div class="absolute-center custom-caption text-blue-10">
-              <div class="text-h1 text-bold text-center">Hide elements</div>
-              <div class="text-h2 text-center text-bold">
+              <div :class="Screen.lt.md ? ' text-h2 text-bold text-center ' : ' text-h1 text-bold text-center '">Hide elements</div>
+              <div :class="Screen.lt.md ? ' text-h3 text-bold text-center ' : ' text-h2 text-bold text-center '">
                 to reduce noise on screen
               </div>
             </div>
@@ -136,8 +136,8 @@
             img-src="https://platform.ultri.com/imgs/canava/canava-delete-link.png"
           >
             <div class="absolute-center custom-caption text-blue-10">
-              <div class="text-h1 text-bold text-center">Start fresh</div>
-              <div class="text-h2 text-center text-bold">
+              <div :class="Screen.lt.md ? ' text-h2 text-bold text-center ' : ' text-h1 text-bold text-center '">Start fresh</div>
+              <div :class="Screen.lt.md ? ' text-h3 text-bold text-center ' : ' text-h2 text-bold text-center '">
                 by deleting any canvas data
               </div>
             </div>
@@ -163,6 +163,8 @@ import { ref } from "vue";
 import { useQuasar } from "quasar";
 import { useAuthStore } from "../stores/auth";
 import { useColorStore } from "../stores/color";
+import { Screen } from "quasar";
+
 const auth = useAuthStore();
 const colorStore = useColorStore();
 

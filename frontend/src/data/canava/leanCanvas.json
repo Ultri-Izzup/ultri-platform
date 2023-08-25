@@ -5,33 +5,37 @@
       "gridColumn": "1/3",
       "gridRow": "1/2",
       "sequence": "2",
-      "instructions": "What is the problem we are trying to solve? What is the customer pain-point we want to solve? How prevalent is this problem? ",
+      "instructions": "<ul><li>What is the problem we are trying to solve?&nbsp;</li><li>What is the customer pain-point we want to solve?&nbsp;</li><li>How prevalent is this problem? </li></ul>",
       "title": "Problem",
-      "sectionKey": "problem"
+      "sectionKey": "problem",
+      "uid": "eb9a9e37-7311-4f62-82cb-e6609098fe74"
     },
     {
       "title": "Solution",
       "sequence": "4",
       "sectionKey": "solutions",
-      "instructions": "How do your proposed solutions ease existing pain points? How does it make the lives of your customers better? Summarize your product or service in this section. ",
+      "instructions": "<ul><li>How do your proposed solutions ease existing pain points?&nbsp;</li><li>How does it make the lives of your customers better?&nbsp;</li><li>Summarize your product or service in this section. </li></ul>",
       "gridRow": "1/2",
-      "gridColumn": "3/5"
+      "gridColumn": "3/5",
+      "uid": "69a654b0-afca-4db8-93b3-e770738df35a"
     },
     {
-      "sequence": "5",
+      "sequence": "3",
       "gridRow": "1/2",
       "title": "Unique Value Proposition",
-      "instructions": "Describe the uniqueness of your product and show its key difference from other alternatives.",
+      "instructions": "<ul><li>Describe the uniqueness of your product and show its key difference from other alternatives.</li></ul>",
       "sectionKey": "valueProp",
-      "gridColumn": "5/7"
+      "gridColumn": "5/7",
+      "uid": "b52511ac-626c-4ff4-b17a-90713cdc83bc"
     },
     {
       "title": "Unfair Advantage",
-      "instructions": "What is your secret sauce? What do you have that will ensure that your product or service cannot be copied? What gives you an edge over the competition?",
+      "instructions": "<ul><li>What is your secret sauce?&nbsp;</li><li>What do you have that will ensure that your product or service cannot be copied?&nbsp;</li><li>What gives you an edge over the competition?</li></ul>",
       "sectionKey": "advantage",
       "sequence": "9",
       "gridColumn": "7/9",
-      "gridRow": "1/2"
+      "gridRow": "1/2",
+      "uid": "830529be-b0f1-485e-9068-2fb42910e5bc"
     },
     {
       "gridRow": "1/2",
@@ -39,7 +43,8 @@
       "sequence": "1",
       "sectionKey": "customer",
       "title": "Customers",
-      "instructions": "Define your customers, narrow down the customer segment as accurately as possible. "
+      "instructions": "<ul><li>Define your customers, narrow down the customer segment as accurately as possible. </li></ul>",
+      "uid": "5bbced8a-da62-40eb-afed-202201c3fdba"
     },
     {
       "gridRow": "2/3",
@@ -47,31 +52,35 @@
       "title": "Existing Alternatives",
       "sequence": "2.1",
       "sectionKey": "alternatives",
-      "instructions": "How are the problems currently being solved?"
+      "instructions": "<ul><li>How are the problems currently being solved?</li></ul>",
+      "uid": "e5ba4444-c8b4-4594-8711-fb845b9e050d"
     },
     {
       "title": "Key Metrics",
       "sectionKey": "metrics",
-      "sequence": "7",
-      "instructions": "How will you define success for your startup? What are the KPIs you want to aim for? For a service-based start-up, these may be metrics that involve growth and adoption such as engagement, revenue, Customer Acquisition Cost (CAC) and Customer Lifetime Value (CLV).",
+      "sequence": "8",
+      "instructions": "<ul><li>How will you define success for your startup?&nbsp;</li><li>What are the KPIs you want to aim for?&nbsp;</li><li>For a service-based start-up, these may be metrics that involve growth and adoption such as engagement, revenue, Customer Acquisition Cost (CAC) and Customer Lifetime Value (CLV).</li></ul>",
       "gridRow": "2/3",
-      "gridColumn": "3/5"
+      "gridColumn": "3/5",
+      "uid": "25db3607-6f9f-47d8-9324-580105cf1a33"
     },
     {
       "gridRow": "2/3",
       "gridColumn": "5/7",
       "title": "High-Level Concept",
-      "instructions": "The high-level concept sub-section conveys the value proposition in the most succinct manner possible. List your X for Y analogy. E.g. YouTube = Flickr for videos.",
+      "instructions": "<ul><li>The high-level concept sub-section conveys the value proposition in the most succinct manner possible.&nbsp;</li><li>List your X for Y analogy. E.g. YouTube = Flickr for videos.</li></ul>",
       "sectionKey": "concept",
-      "sequence": "5.1"
+      "sequence": "3.1",
+      "uid": "c9698aca-ab58-4e38-b43b-4dcb8fa41fa7"
     },
     {
       "title": "Channels",
-      "sequence": "6",
+      "sequence": "5",
       "sectionKey": "channels",
-      "instructions": "How do you plan to reach your customers? Which channels will you use to connect with your target market? Consider the media and channels your key demographic uses, and who they trust: TV news, magazines, social media, influencers or major retailers.",
+      "instructions": "<ul><li>How do you plan to reach your customers?&nbsp;</li><li>Which channels will you use to connect with your target market?&nbsp;</li><li>Consider the media and channels your key demographic uses, and who they trust: TV news, magazines, social media, influencers or major retailers.</li></ul>",
       "gridColumn": "7/9",
-      "gridRow": "2/3"
+      "gridRow": "2/3",
+      "uid": "2ca9be42-0fe3-41b3-9482-8e2ce5da8a33"
     },
     {
       "gridColumn": "9/11",
@@ -79,23 +88,26 @@
       "title": "Early Adopters",
       "sequence": "1.1",
       "sectionKey": "adopters",
-      "instructions": "What are the existing alternatives to the problems outlined? Taking the Uber example further, the founders would’ve written down taxis or chauffeurs in this section. "
+      "instructions": "<ul><li>What are the existing alternatives to the problems outlined?&nbsp;</li><li>Taking the Uber example further, the founders would’ve written down taxis or chauffeurs in this section. </li></ul>",
+      "uid": "1827fdf0-c2ae-47ba-9b8f-f2daa22368d8"
     },
     {
       "title": "Cost Structure",
-      "instructions": "Consider operational costs, both variable and fixed, so you have a clear idea of your runway. While the numbers only need to be indicative, make sure you do some initial research into manufacturing and distribution costs to give some weight to the numbers. ",
+      "instructions": "<ul><li>Consider operational costs, both variable and fixed, so you have a clear idea of your runway.&nbsp;</li><li>While the numbers only need to be indicative, make sure you do some initial research into manufacturing and distribution costs to give some weight to the numbers. </li></ul>",
       "sectionKey": "costs",
-      "sequence": "8",
+      "sequence": "7",
       "gridRow": "3/4",
-      "gridColumn": "1/6"
+      "gridColumn": "1/6",
+      "uid": "45acc605-6cd4-4d53-b4ed-213a5af912c0"
     },
     {
       "gridColumn": "6/11",
       "gridRow": "3/4",
-      "sequence": "3",
+      "sequence": "6",
       "sectionKey": "revenue",
-      "instructions": "Which revenue model will you use? Depending on your product or service, you may opt for subscriptions, advertising or freemium. On top of that, consider what the lifetime value of your product will be, recurring revenue, customer value and gross margins.",
-      "title": "Revenue Streams"
+      "instructions": "<ul><li>Which revenue model will you use?&nbsp;</li><li>Depending on your product or service, you may opt for subscriptions, advertising or freemium.&nbsp;</li><li>Consider what the lifetime value of your product will be, recurring revenue, customer value and gross margins.</li></ul>",
+      "title": "Revenue Streams",
+      "uid": "2ed7883e-3ea3-4b5a-afe4-c02cc04d362b"
     }
   ],
   "sequenced": true,

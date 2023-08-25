@@ -14,7 +14,7 @@
       <br />
       {{ $t("homepage.heading4") }}
       <br />
-      <span class="text-italic">{{ $t("homepage.preview") }}</span>
+      <span class="text-italic text-strike">{{ $t("homepage.preview") }}</span><br /><span class="text-italic text-bolder">{{ $t("homepage.released") }}</span>
     </div>
 
     <div class="row fit justify-center">

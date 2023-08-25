@@ -11,6 +11,7 @@ export default {
       tagline: "Build in public underway",
       button: "Dashboard",
     },
-    preview: "Preview!"
+    preview: "Preview!",
+    released: "LIVE!"
   },
 };

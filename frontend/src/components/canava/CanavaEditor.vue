@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="row">
+    <div class="row full-width">
       <div :class="Screen.gt.md ? ' col-6 ' : ' col-12 '">
         <div class="row q-ml-xl q-pb-sm">
           <div class="col-3">
@@ -51,11 +51,16 @@
           :class="section.sectionKey"
           v-for="section in value.sections"
           :key="section.sectionKey"
-          :style="'background-color: ' + section.backgroundColor + '; color: ' + section.textColor  "
+          :style="
+            'background-color: ' +
+            section.backgroundColor +
+            '; color: ' +
+            section.textColor
+          "
         >
           <q-card-section
             :class="colorStore.darkMode ? 'dark-top-q-card' : 'top-q-card'"
-            :style="'background-color: ' + section.backgroundColor "
+            :style="'background-color: ' + section.backgroundColor"
           >
             <p class="text-bold">
               <q-avatar v-if="section.sequence" size="24px" color="grey-4"
@@ -65,7 +70,7 @@
               >
               {{ section.title }}
               <sup>
-                <q-icon name="mdi-help-circle" size="13px" color="grey-6"/>
+                <q-icon name="mdi-help-circle" size="13px" color="grey-6" />
                 <q-tooltip>
                   <span v-html="section.instructions" />
                 </q-tooltip>
@@ -95,7 +100,13 @@
                   <q-item-label class="text-bold">
                     {{ item.label }}
                   </q-item-label>
-                  <span v-if="showDetail" v-html="item.details" clickable v-ripple @click="editItem(section.sectionKey, item.uid)"></span>
+                  <span
+                    v-if="showDetail"
+                    v-html="item.details"
+                    clickable
+                    v-ripple
+                    @click="editItem(section.sectionKey, item.uid)"
+                  ></span>
                 </q-item-section>
               </q-item>
             </q-list>
@@ -109,7 +120,7 @@
                 class="q-pl-xs clickable v-ripple"
                 @click="toggleEditorHelp()"
               >
-                <q-icon name="mdi-help-circle" size="13px"/>
+                <q-icon name="mdi-help-circle" size="13px" />
               </sup>
               <q-space></q-space>
               <q-btn dense flat icon="mdi-close" v-close-popup @click="reset()">
@@ -125,7 +136,9 @@
               </div>
 
               <q-input label="Label" v-model="currentItem.label"></q-input>
-              <div class="q-pt-sm q-pb-xs text-caption text-grey-8">Details</div>
+              <div class="q-pt-sm q-pb-xs text-caption text-grey-8">
+                Details
+              </div>
               <q-editor
                 v-model="currentItem.details"
                 min-height="5rem"
@@ -154,12 +167,20 @@
               <!-- <q-input label="Details" v-model="currentItem.details"></q-input> -->
             </q-card-section>
             <q-card-actions class="justify-center">
-              <q-btn v-if="currentItem.uid" label="Delete" color="secondary" @click="deleteItem()"></q-btn>
+              <q-btn
+                v-if="currentItem.uid"
+                label="Delete"
+                color="secondary"
+                @click="deleteItem()"
+              ></q-btn>
               <q-btn label="Save" color="primary" @click="saveItem()"></q-btn>
             </q-card-actions>
           </q-card>
         </q-dialog>
       </div>
+    </div>
+    <div class="row full-width text-center q-pa-sm">
+      <div class="col-12 q-pa-lg" v-html="value.attribution" ></div>
     </div>
   </div>
 </template>
@@ -197,7 +218,7 @@ watch(vh, (oldVal, newVal) => {
 const reset = () => {
   currentSectionKey.value = null;
   currentSectionData.value = { title: "", instructions: "" };
-  currentItem.value = {  uid: "", label: "", details: "" };
+  currentItem.value = { uid: "", label: "", details: "" };
   editorHelp.value = false;
   showDialog.value = false;
   add.value = false;
@@ -256,24 +277,19 @@ const toggleEditorHelp = () => {
 };
 
 const editItem = (sectionKey, itemUid) => {
-
   currentSectionKey.value = sectionKey;
   const filteredResult = value.value.sections.find(
     (e) => e.sectionKey == sectionKey
   );
   currentSectionData.value = filteredResult;
 
-  const itemData = filteredResult.items.find(
-    (e) => e.uid == itemUid
-  )
+  const itemData = filteredResult.items.find((e) => e.uid == itemUid);
   currentItem.value = itemData;
 
   showDialog.value = true;
-
-}
+};
 
 const saveItem = () => {
-
   // Create section items array if missing
   if (!currentSectionData.value.items) {
     currentSectionData.value.items = [];
@@ -283,14 +299,18 @@ const saveItem = () => {
   if (!currentItem.value.uid) {
     currentItem.value.uid = nanoid();
     currentSectionData.value.items.push(unref(currentItem.value));
-    const ix = value.value.sections.findIndex((element) => element.sectionKey == currentSectionKey.value)
+    const ix = value.value.sections.findIndex(
+      (element) => element.sectionKey == currentSectionKey.value
+    );
 
     value.value.sections[ix] = currentSectionData.value;
   } else {
     // Update the existing record by UID
 
     // Get current section data from the root data
-    const ix = value.value.sections.findIndex((element) => element.sectionKey == currentSectionKey.value)
+    const ix = value.value.sections.findIndex(
+      (element) => element.sectionKey == currentSectionKey.value
+    );
 
     value.value.sections[ix] = currentSectionData.value;
   }
@@ -299,14 +319,17 @@ const saveItem = () => {
 };
 
 const deleteItem = () => {
-
   // Get the current Section data
-  const sectionDataIx = value.value.sections.findIndex((element) => element.sectionKey == currentSectionKey.value);
-  const sectionData = value.value.sections[sectionDataIx]
+  const sectionDataIx = value.value.sections.findIndex(
+    (element) => element.sectionKey == currentSectionKey.value
+  );
+  const sectionData = value.value.sections[sectionDataIx];
 
-  console.log(sectionData)
+  console.log(sectionData);
   // Find the index of the item to delete
-  const ix = sectionData.items.findIndex((element) => element.uid == currentItem.value.uid);
+  const ix = sectionData.items.findIndex(
+    (element) => element.uid == currentItem.value.uid
+  );
 
   // // Remove the one item
   sectionData.items.splice(ix, 1);
@@ -314,7 +337,7 @@ const deleteItem = () => {
   // // Update the main data
   value.value.sections[sectionDataIx] = sectionData;
 
- reset();
+  reset();
 };
 </script>
 

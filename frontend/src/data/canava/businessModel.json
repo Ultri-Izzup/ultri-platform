@@ -3,51 +3,57 @@
   "sections": [
     {
       "title": "Key Activities",
-      "instructions": "What activities are required to meet your value propositions, distribution channels, customer relationships and revenue streams?",
+      "instructions": "<ul><li>What activities are required to meet your value propositions, distribution channels, customer relationships and revenue streams?</li></ul>",
       "sectionKey": "activities",
       "gridColumn": "3/5",
       "gridRow": "1/3",
-      "sequence": "7"
+      "sequence": "7",
+      "uid": "24505fb7-5d90-4672-8c1a-81fa613f37ec"
     },
     {
       "title": "Customer Relations",
-      "instructions": "What does each customer segment expect? Which relationships have been established? How are they or will they be integrated? What are the related costs?",
+      "instructions": "<ul><li>What does each customer segment expect?&nbsp;</li><li>Which relationships have been established?&nbsp;</li><li>How are they or will they be integrated?&nbsp;</li><li>What are the related costs?</li></ul>",
       "sectionKey": "custRelations",
       "gridColumn": "7/9",
       "gridRow": "1/3",
-      "sequence": "4"
+      "sequence": "4",
+      "uid": "534eca72-0a10-4942-a961-bed2c7442f27"
     },
     {
       "title": "Key Partners",
-      "instructions": "Who are your key partners or suppliers? What resources do they provide? What activities do they perform?",
+      "instructions": "<ul><li>Who are your key partners or suppliers?&nbsp;</li><li>What resources do they provide?&nbsp;</li><li>What activities do they perform?</li></ul>",
       "sectionKey": "partners",
       "gridColumn": "1/3",
       "gridRow": "1/5",
-      "sequence": "8"
+      "sequence": "8",
+      "uid": "9b61e235-ce97-4f1e-ac0e-856b79fd0f63"
     },
     {
       "title": "Value Propositions",
-      "instructions": "What value do you deliver to the customer? What customer problems are you solving, or needs are you satisfying? How are you solving each?",
+      "instructions": "<ul><li>What value do you deliver to the customer?&nbsp;</li><li>What customer problems are you solving, or needs are you satisfying?&nbsp;</li><li>How are you solving each?</li></ul>",
       "sectionKey": "valueProps",
       "gridColumn": "5/7",
       "gridRow": "1/5",
-      "sequence": "2"
+      "sequence": "2",
+      "uid": "1313bb30-9571-449e-8e5a-64c1e08f38b2"
     },
     {
       "title": "Customer Segments",
-      "instructions": "Who are your most important customers? Who are you creating value for?",
+      "instructions": "<ul><li>Who are your most important customers?&nbsp;</li><li>Who are you creating value for?</li></ul>",
       "sectionKey": "custSegments",
       "gridColumn": "9/11",
       "gridRow": "1/5",
-      "sequence": "1"
+      "sequence": "1",
+      "uid": "b3e85b56-6ef8-4cde-9370-14a66e2126bb"
     },
     {
       "title": "Key Resources",
-      "instructions": "What resources are required to meet your value propositions, distribution channels, customer relationships and revenue streams?",
+      "instructions": "<ul><li>What resources are required to meet your value propositions, distribution channels, customer relationships and revenue streams?</li></ul>",
       "sectionKey": "resources",
       "gridColumn": "3/5",
       "gridRow": "3/5",
-      "sequence": "6"
+      "sequence": "6",
+      "uid": "8d0faf3e-9f08-4691-9014-ca2b8f0327c6"
     },
     {
       "title": "Channels",
@@ -55,23 +61,26 @@
       "sectionKey": "channels",
       "gridColumn": "7/9",
       "gridRow": "3/5",
-      "sequence": "3"
+      "sequence": "3",
+      "uid": "7a46399f-b4a4-4a88-b756-b297dffde573"
     },
     {
       "title": "Cost Structure",
-      "instructions": "What costs are associated with key resources or activities? What are the most important costs and strategies for managing them?",
+      "instructions": "<ul><li>What costs are associated with key resources or activities?&nbsp;</li><li>What are the most important costs and strategies for managing them?</li></ul>",
       "sectionKey": "costs",
       "gridColumn": "1/6",
       "gridRow": "5/6",
-      "sequence": "9"
+      "sequence": "9",
+      "uid": "939917fa-567c-4a47-aced-b7b51f5ecd53"
     },
     {
       "title": "Revenue Streams",
-      "instructions": "What value do you provide that people will pay for? How much and how are they currently paying? How much does each stream contribute to revenues?",
+      "instructions": "<ul><li>What value do you provide that people will pay for?&nbsp;</li><li>How much, and how are they currently paying?&nbsp;</li><li>How much does each stream contribute to revenues?</li></ul>",
       "sectionKey": "revenue",
       "gridColumn": "6/11",
       "gridRow": "5/6",
-      "sequence": "5"
+      "sequence": "5",
+      "uid": "4c3e0cb2-69d2-4e04-ae82-dba51e3eda73"
     }
   ],
   "sequenced": true,

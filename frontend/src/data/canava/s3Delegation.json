@@ -3,91 +3,102 @@
   "sections": [
     {
       "title": "Purpose",
-      "instructions": "What purpose does the team (or role) serve in the organization?",
+      "instructions": "<ul><li>What purpose does the team (or role) serve in the organization?</li></ul>",
       "sectionKey": "purpose",
       "gridColumn": "1/4",
       "gridRow": "1/2",
-      "sequence": "1"
+      "sequence": "1",
+      "uid": "6c325196-6b87-4d06-bdb3-9a32d90a22d4"
     },
     {
       "title": "External Constraints",
-      "instructions": "What are important external constraints to the autonomy and influence of the delegatee(s)?",
+      "instructions": "<ul><li>What are important external constraints to the autonomy and influence of the delegatee(s)?</li></ul>",
       "sectionKey": "constraints",
       "gridColumn": "10/13",
       "gridRow": "1/2",
-      "sequence": "4"
+      "sequence": "4",
+      "uid": "37c70c17-403d-4703-8395-44e79363c755"
     },
     {
       "title": "Key responsibilities",
-      "instructions": "What are the delegatee’s main responsibilities, i.e. objectives, or essential work and decision making being delegated?",
+      "instructions": "<ul><li>What are the delegate’s main responsibilities, i.e. objectives, or essential work and decision-making being delegated?</li></ul>",
       "sectionKey": "responsibilities",
       "gridColumn": "4/7",
       "gridRow": "1/2",
-      "sequence": "2"
+      "sequence": "2",
+      "uid": "5c217400-25b0-49d1-a852-69b12e21e7a9"
     },
     {
       "title": "Dependencies",
-      "instructions": "What are the essential dependencies between this domain and other parts of the organization?",
+      "instructions": "<ul><li>What are the essential dependencies between this domain and other parts of the organization?</li></ul>",
       "sectionKey": "dependencies",
       "gridColumn": "7/10",
       "gridRow": "1/2",
-      "sequence": "3"
+      "sequence": "3",
+      "uid": "678e97b8-da39-43c4-8aad-6e5135ce947f"
     },
     {
       "title": "Key Challenges",
-      "instructions": "What are the three most important known (or anticipated) challenges the delegatee(s) might face?",
+      "instructions": "<ul><li>What are the three most important known (or anticipated) challenges the delegate(s) might face?</li></ul>",
       "sectionKey": "challenges",
       "gridColumn": "1/5",
       "gridRow": "2/3",
-      "sequence": "5"
+      "sequence": "5",
+      "uid": "80434748-d627-4e6e-83a8-00edcfada096"
     },
     {
       "title": " Key Deliverables",
-      "instructions": "What does the team/role provide to achieve its purpose and meet the key responsibilities and key challenges?",
+      "instructions": "<ul><li>What does the team/role provide to achieve its purpose and meet the key responsibilities and key challenges?</li></ul>",
       "sectionKey": "deliverables",
       "gridColumn": "5/9",
       "gridRow": "2/3",
-      "sequence": "6"
+      "sequence": "6",
+      "uid": "c244ea6b-1854-4330-b939-233c5b6a24f1"
     },
     {
       "title": "Competencies, qualities and skills",
-      "instructions": "What competencies, qualities and skills are required – or at least preferable – to successfully achieve the purpose of this domain?",
+      "instructions": "<ul><li>What competencies, qualities and skills are required – or at least preferable – to successfully achieve the purpose of this domain?</li></ul>",
       "sectionKey": "competencies",
       "gridColumn": "9/13",
       "gridRow": "2/3",
-      "sequence": "7"
+      "sequence": "7",
+      "uid": "30c73d89-fb4b-4f7c-8bfb-d1ae152234fe"
     },
     {
       "title": "Key Resources",
-      "instructions": "What are essential resources the delegatee(s) can make use of?",
+      "instructions": "<ul><li>What are essential resources the delegate(s) can make use of?</li></ul>",
       "sectionKey": "resources",
       "gridColumn": "1/4",
       "gridRow": "3/4",
-      "sequence": "8"
+      "sequence": "8",
+      "uid": "e8f96721-07e9-4df2-8bc7-ab24cfc759c2"
     },
     {
       "title": "Monitoring and Evaluation",
-      "instructions": "How will you monitor the key metrics, and when (and how) will you evaluate success of the team/role?",
+      "instructions": "<ul><li>How will you monitor the key metrics, and when (and how) will you evaluate success of the team/role?</li></ul>",
       "sectionKey": "monitoring",
       "gridColumn": "10/13",
       "gridRow": "3/4",
-      "sequence": "11"
+      "sequence": "11",
+      "uid": "86765922-ffd1-46b6-a31f-08e6dec4c278"
     },
     {
       "title": "Delegator Responsibilities",
-      "instructions": "What is the delegator’s contribution to the success of the delegatee(s)?",
+      "instructions": "What is the delegator’s contribution to the success of the delegate(s)?",
       "sectionKey": "delegator",
       "gridColumn": "4/7",
       "gridRow": "3/4",
-      "sequence": "9"
+      "sequence": "9",
+      "uid": "b341f12b-bd97-4178-b5ca-ef3fa150c4a7"
     },
     {
       "title": "Key Metrics",
-      "instructions": "What are the critical indicators of progress, project health or performance?",
+      "instructions": "<ul><li>What are the critical indicators of progress, project health or performance?</li></ul>",
       "sectionKey": "metrics",
       "gridColumn": "7/10",
       "gridRow": "3/4",
-      "sequence": "10"
+      "sequence": "10",
+      "uid": "0d99497d-d82e-4194-a0db-eda8e5d84a89"
     }
   ],
   "sequenced": true,

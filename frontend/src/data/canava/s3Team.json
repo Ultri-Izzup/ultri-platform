@@ -3,75 +3,84 @@
   "sections": [
     {
       "title": "People Matrix",
-      "instructions": "List all team members, each with key skills and their weekly capacity available for this team.",
+      "instructions": "<ul><li>List all team members, each with key skills, and their weekly capacity available for this team.</li></ul>",
       "sectionKey": "people",
       "sequence": "1",
       "gridColumn": "1/7",
-      "gridRow": "1/3"
+      "gridRow": "1/3",
+      "uid": "7524fb78-fd4b-4520-9124-c9e8be367362"
     },
     {
       "title": "Key Values / Code of Conduct",
-      "instructions": "Describe the culture of your collaboration, and how you will interact with the rest of the world. List at least three guidelines for behaviors or ethical constraints you consider essential to the success of your team.",
+      "instructions": "<ul><li>Describe the culture of your collaboration, and how you will interact with the rest of the world.&nbsp;</li><li>List at least three guidelines for behaviors or ethical constraints you consider essential to the success of your team.</li></ul>",
       "sectionKey": "values",
       "sequence": "5",
       "gridColumn": "7/13",
-      "gridRow": "1/3"
+      "gridRow": "1/3",
+      "uid": "37e49e02-6a17-4720-8260-4a62b99b5b5e"
     },
     {
       "title": "Team Development and Goals",
-      "instructions": "Describe where the team wants to be in 90 days, the strategy to achieve these goals, and, if possible, how to measure success.",
+      "instructions": "<ul><li>Describe where the team wants to be in 90 days, the strategy to achieve these goals, and, if possible, how to measure success.</li></ul>",
       "sectionKey": "goals",
       "sequence": "6",
       "gridColumn": "7/13",
-      "gridRow": "3/5"
+      "gridRow": "3/5",
+      "uid": "ad37b3a0-13a9-4929-9d22-20c3cb4267a6"
     },
     {
       "title": "Required Skills",
       "sequence": "2",
-      "instructions": "Compile a list of all required skills for the team’s work, assess each team member’s skill levels from 0=untrained, to 4=can teach others) and interest in applying or acquiring that skill (0-3).",
+      "instructions": "<ul><li>Compile a list of all required skills for the team’s work, assess each team member’s skill levels from 0=untrained, to 4=can teach others) and interest in applying or acquiring that skill (0-3).</li></ul>",
       "sectionKey": "skills",
       "gridColumn": "1/4",
-      "gridRow": "3/8"
+      "gridRow": "3/8",
+      "uid": "fe52ca9d-e71f-435a-8244-0ddb5d084c17"
     },
     {
       "gridColumn": "4/7",
       "title": "Roles and Responsibilities",
-      "instructions": "List all roles in your team, and who currently holds them, as well as any other expected contributions for each member of the team.",
+      "instructions": "<ul><li>List all roles in your team, and who currently holds them, as well as any other expected contributions for each member of the team.</li></ul>",
       "sectionKey": "roles",
       "sequence": "3",
-      "gridRow": "3/8"
+      "gridRow": "3/8",
+      "uid": "f4cfebf2-30a9-4ed8-a93a-0c8f34a4ceb0"
     },
     {
       "title": "Personal Goals and Growing Edges",
       "sequence": "7",
       "gridColumn": "7/13",
       "gridRow": "5/7",
-      "instructions": "Describe individual member’s personal goals and growing edges related to the team.",
-      "sectionKey": "personalGoals"
+      "instructions": "<ul><li>Describe individual member’s personal goals and growing edges related to the team.</li></ul>",
+      "sectionKey": "personalGoals",
+      "uid": "bd378727-40b6-4956-a79c-b3d80cc56864"
     },
     {
       "sequence": "8",
       "title": "People’s Needs and Expectations",
-      "instructions": "List any needs and expectations of individual team members relevant to the team.",
+      "instructions": "<ul><li>List any needs and expectations of individual team members relevant to the team.</li></ul>",
       "sectionKey": "needs",
       "gridColumn": "7/13",
-      "gridRow": "7/9"
+      "gridRow": "7/9",
+      "uid": "fe5f1765-32b0-4811-842b-303cf41437c1"
     },
     {
       "gridColumn": "1/7",
       "gridRow": "8/11",
-      "instructions": "Important agreements/norms/rules that are essential for the daily work of the team, e.g. about distribution of work, decision making, work process or conflict resolution.",
+      "instructions": "<ul><li>Important agreements/norms/rules that are essential for the daily work of the team, e.g. about distribution of work, decision-making, work process or conflict resolution.</li></ul>",
       "title": "Key Agreements",
       "sectionKey": "agreements",
-      "sequence": "4"
+      "sequence": "4",
+      "uid": "9672c6d6-4e76-44c3-97af-23c40830ccef"
     },
     {
       "gridRow": "9/11",
       "sequence": "9",
       "sectionKey": "events",
       "title": "Events",
-      "instructions": "A schedule of regular team events (e.g. Daily Standup, Retrospectives, Governance Meetings).",
-      "gridColumn": "7/13"
+      "instructions": "<ul><li>A schedule of regular team events (e.g. Daily Standup, Retrospectives, Governance Meetings).</li></ul>",
+      "gridColumn": "7/13",
+      "uid": "aee69d43-62c0-4cb9-98a1-931e800a9b79"
     }
   ],
   "sequenced": true,

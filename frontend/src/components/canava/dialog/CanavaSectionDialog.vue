@@ -45,6 +45,34 @@
             ['quote', 'unordered', 'ordered', 'outdent', 'indent'],
           ]"
         ></q-editor>
+        <div class="q-pt-sm q-pb-none text-caption text-grey-8">Background</div>
+        <q-input
+        v-model="edit.value.backgroundColor"
+        :rules="['anyColor']"
+        class="q-pt-none"
+        >
+        <template v-slot:append>
+          <q-icon name="mdi-palette" class="cursor-pointer">
+            <q-popup-proxy cover transition-show="scale" transition-hide="scale">
+              <q-color v-model="edit.value.backgroundColor"></q-color>
+            </q-popup-proxy>
+          </q-icon>
+        </template>
+      </q-input>
+      <div class="q-pt-sm q-pb-none text-caption text-grey-8">Text</div>
+      <q-input
+        v-model="edit.value.textColor"
+        :rules="['anyColor']"
+        class="q-pt-none"
+      >
+        <template v-slot:append>
+          <q-icon name="mdi-palette" class="cursor-pointer">
+            <q-popup-proxy cover transition-show="scale" transition-hide="scale">
+              <q-color v-model="edit.value.textColor"></q-color>
+            </q-popup-proxy>
+          </q-icon>
+        </template>
+      </q-input>
         <q-input label="Key" v-model="edit.value.sectionKey" />
         <q-input label="Sequence (opt)" v-model="edit.value.sequence" />
         <UColumnSelector v-model="edit.value.gridColumn" />
@@ -80,6 +108,7 @@ const props = defineProps(["data"]);
 const edit = reactive({});
 
 const $q = useQuasar();
+
 
 watch(
   () => props.data,

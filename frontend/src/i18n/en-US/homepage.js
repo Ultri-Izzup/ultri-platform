@@ -1,7 +1,7 @@
 export default {
   homepage: {
-    heading1: "Introducing",
-    heading2: "Canava",
+    heading1: "Build your canvas, your way.",
+    heading2: "With Canava",
     heading3: "Custom Canvas",
     heading4: "Builder and Editor",
     tagline: "Build your canvas, your way.",

@@ -19,6 +19,7 @@
     "axios": "^1.2.1",
     "calendar-link": "^2.4.0",
     "d3": "^7.8.5",
+    "html-to-image": "^1.11.11",
     "mermaid": "^10.3.1",
     "nanoid": "^4.0.2",
     "performant-array-to-tree": "^1.11.0",

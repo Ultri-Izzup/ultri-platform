@@ -168,6 +168,8 @@ import { Screen } from "quasar";
 const auth = useAuthStore();
 const colorStore = useColorStore();
 
+const autoplay = ref(true);
+
 const $q = useQuasar();
 
 const slide = ref("first");

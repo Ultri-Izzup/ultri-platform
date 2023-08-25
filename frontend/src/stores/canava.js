@@ -3,12 +3,12 @@ import { useStorage } from "@vueuse/core";
 
 export const useCanavaStore = defineStore("canava", {
   state: () => ({
-    canvasData: useStorage("canvasData", { name: "", sections: [] }),
+    canvasData: useStorage("canvasData", { name: "", attribution: "", createdBy: "", createdAt: "", version: "", sections: [] }),
   }),
   getters: {},
   actions: {
     $reset() {
-      this.canvasData = { name: "", sections: [] };
+      this.canvasData = { name: "", attribution: "", createdBy: "", createdAt: "", version: "", sections: [] };
     }
   }
 });

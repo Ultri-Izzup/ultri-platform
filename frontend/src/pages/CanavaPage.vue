@@ -204,6 +204,10 @@ const onDownloadClick = () => {
   // Define an object to hold our ouput
   const outObj = {
     name: canavaStore.canvasData.name,
+    completedOn: canavaStore.canvasData.completedOn,
+    completedBy: canavaStore.canvasData.completedBy,
+    attribution: canavaStore.canvasData.attribution,
+    version: canavaStore.canvasData.version,
     sections: canavaStore.canvasData.sections,
     sequenced: canavaStore.canvasData.sequenced ? true : false,
     canavaVers: "1.0.0",

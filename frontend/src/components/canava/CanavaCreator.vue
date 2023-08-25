@@ -3,7 +3,12 @@
     <div class="row q-pa-md">
       <q-input label="Canvas Name" v-model="value.name"></q-input
       ><q-space></q-space
-      ><q-btn size="md" label="Add Section" @click="triggerNew()" color="primary" />
+      ><q-btn
+        size="md"
+        label="Add Section"
+        @click="triggerNew()"
+        color="primary"
+      />
     </div>
     <div class="q-pa-sm row">
       <div class="col container container-wrapper full-width">
@@ -36,18 +41,64 @@
         </q-card>
       </div>
     </div>
+    <div class="row full-width q-pt-sm">
+
+      <div class="col q-px-lg">
+        <div class="q-pt-sm q-pb-xs text-caption text-grey-8">Attribution</div>
+        <q-editor
+                v-model="value.attribution"
+                min-height="5rem"
+                :dense="$q.screen.lt.md"
+                :toolbar="[
+                  ['bold', 'italic', 'subscript', 'superscript'],
+                  [
+                    {
+                      icon: 'mdi-format-size',
+                      fixedLabel: true,
+                      fixedIcon: true,
+                      list: 'no-icons',
+                      options: [
+                        'size-1',
+                        'size-2',
+                        'size-3',
+                        'size-4',
+                        'size-5',
+                      ],
+                    },
+                  ],
+                  ['hr', 'link'],
+                  ['quote', 'unordered', 'ordered', 'outdent', 'indent'],
+                ]"
+              ></q-editor>
+      </div>
+    </div>
+    <div class="row full-width q-pt-md">
+      <div class="col q-px-lg">
+        <q-input label="Completed on" v-model="value.completedOn"></q-input>
+      </div>
+      <div class="col q-px-lg">
+        <q-input
+          autogrow
+          label="Completed by"
+          v-model="value.completedBy"
+        ></q-input>
+      </div>
+      <div class="col q-px-lg">
+        <q-input label="Version" v-model="value.version"></q-input>
+      </div>
+    </div>
     <CanavaSectionDialog
       v-model="showSectionDialog"
       :data="currentSectionData"
-      @add="((event) => newSection(event))"
-      @modify="((event) => updateSection(event))"
-      @remove="((event) => removeSection(event))" />
+      @add="(event) => newSection(event)"
+      @modify="(event) => updateSection(event)"
+      @remove="(event) => removeSection(event)"
+    />
   </div>
 </template>
 
 <script setup>
 import { ref, computed, watch } from "vue";
-
 
 // import VueJsoneditor from "vue3-ts-jsoneditor";
 
@@ -80,27 +131,30 @@ let sheet = document.createElement("style");
 document.body.appendChild(sheet);
 
 const newSection = (section) => {
-  console.log(section)
-  value.value.sections.push(section)
-}
+  console.log(section);
+  value.value.sections.push(section);
+};
 
 const updateSection = (section) => {
-  console.log(section)
+  console.log(section);
   // Find the section in existing data
-  const ix = value.value.sections.findIndex((element) => element.uid == section.uid);
-    console.log(ix)
+  const ix = value.value.sections.findIndex(
+    (element) => element.uid == section.uid
+  );
+  console.log(ix);
   // Update to new value
   value.value.sections[ix] = section;
-}
+};
 
 const removeSection = (section) => {
-  console.log(section)
+  console.log(section);
   // Find index of section
-  const ix = value.value.sections.findIndex((element) => element.uid == section);
+  const ix = value.value.sections.findIndex(
+    (element) => element.uid == section
+  );
   value.value.sections.splice(ix, 1);
   // Delete Index
-
-}
+};
 
 watch(
   value,
@@ -144,7 +198,7 @@ const triggerEdit = (sectionKey) => {
 };
 
 const triggerNew = () => {
-  currentSectionData.value = {instructions: ""}
+  currentSectionData.value = { instructions: "" };
   showSectionDialog.value = true;
 };
 
@@ -155,7 +209,6 @@ const deleteSection = (sectionKey) => {
     1
   );
 };
-
 </script>
 
 <style lang="scss" scoped>

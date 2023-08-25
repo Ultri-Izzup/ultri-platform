@@ -107,7 +107,7 @@
       </div>
       </q-card-section>
       <q-card-actions class="justify-center">
-        <q-btn label="Visit Discord" color="primary" href="https://discord.gg/jaJ3v6Zx"></q-btn>
+        <q-btn label="Visit Discord" color="primary" href="https://discord.gg/mpkwjGN9"></q-btn>
       </q-card-actions>
     </q-card>
 

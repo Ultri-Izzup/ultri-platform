@@ -67,7 +67,7 @@
               <sup>
                 <q-icon name="mdi-help-circle" size="13px" color="grey-6"/>
                 <q-tooltip>
-                  {{ section.instructions }}
+                  <span v-html="section.instructions" />
                 </q-tooltip>
               </sup>
             </p>
@@ -121,7 +121,7 @@
                 v-if="!editorHelp"
                 class="row full-width text-italic text-body1 q-pa-sm"
               >
-                {{ currentSectionData.instructions }}
+                <span v-html="currentSectionData.instructions" />
               </div>
 
               <q-input label="Label" v-model="currentItem.label"></q-input>

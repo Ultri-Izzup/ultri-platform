@@ -12,7 +12,7 @@
     {
       "title": "Key Values / Code of Conduct",
       "instructions": "Describe the culture of your collaboration, and how you will interact with the rest of the world. List at least three guidelines for behaviors or ethical constraints you consider essential to the success of your team.",
-      "sectionKey": "v",
+      "sectionKey": "values",
       "sequence": "5",
       "gridColumn": "7/13",
       "gridRow": "1/3"
@@ -47,7 +47,7 @@
       "gridColumn": "7/13",
       "gridRow": "5/7",
       "instructions": "Describe individual member’s personal goals and growing edges related to the team.",
-      "sectionKey": "p"
+      "sectionKey": "personalGoals"
     },
     {
       "sequence": "8",

@@ -51,9 +51,11 @@
           :class="section.sectionKey"
           v-for="section in value.sections"
           :key="section.sectionKey"
+          :style="'background-color: ' + section.backgroundColor + '; color: ' + section.textColor  "
         >
           <q-card-section
             :class="colorStore.darkMode ? 'dark-top-q-card' : 'top-q-card'"
+            :style="'background-color: ' + section.backgroundColor "
           >
             <p class="text-bold">
               <q-avatar v-if="section.sequence" size="24px" color="grey-4"

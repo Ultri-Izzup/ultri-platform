@@ -147,6 +147,10 @@ const canvasOpts = [
     value: "businessModel",
   },
   {
+    label: "Lean Canvas",
+    value: "leanCanvas",
+  },
+  {
     label: "Lean UX Canvas",
     value: "leanUX",
   },

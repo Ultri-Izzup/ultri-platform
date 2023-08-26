@@ -87,7 +87,7 @@
         <q-input label="Version" v-model="value.version"></q-input>
       </div>
     </div>
-    <CanavaSectionDialog
+    <CanavaCreatorSectionDialog
       v-model="showSectionDialog"
       :data="currentSectionData"
       @add="(event) => newSection(event)"
@@ -104,7 +104,7 @@ import { ref, computed, watch } from "vue";
 
 import { useColorStore } from "../../stores/color";
 
-import CanavaSectionDialog from "../canava/dialog/CanavaSectionDialog.vue";
+import CanavaCreatorSectionDialog from "../canava/dialog/CanavaCreatorSectionDialog.vue";
 
 // Instantiate our stores early so they are available
 const colorStore = useColorStore();

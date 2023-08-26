@@ -89,6 +89,15 @@
                   </q-tooltip>
                 </sup>
               </p>
+              <q-space />
+              <q-icon
+                name="mdi-magnify"
+                size="20px"
+                clickable
+                v-ripple
+                @click="magnifySection(section.sectionKey)"
+                class="cursor-pointer"
+              ></q-icon>
               <q-icon
                 name="mdi-plus-circle-outline"
                 size="20px"
@@ -140,8 +149,8 @@
                   dense
                   flat
                   icon="mdi-close"
-                  v-close-popup
-                  @click="reset()"
+                  v-close-popup="1"
+                  @click="resetCurrentItem()"
                 >
                   <q-tooltip>{{ $t("nav.close") }} </q-tooltip>
                 </q-btn>
@@ -196,6 +205,13 @@
               </q-card-actions>
             </q-card>
           </q-dialog>
+          <CanavaEditorSectionDialog
+            v-model="showMagnifyDialog"
+            :data="currentSectionData"
+            @add="(event) => newSection(event)"
+            @modify="(event) => updateSection(event)"
+            @remove="(event) => removeSection(event)"
+          />
         </div>
       </div>
       <div class="row full-width text-center q-pa-sm">
@@ -215,17 +231,16 @@ import { nanoid } from "nanoid";
 import * as htmlToImage from "html-to-image";
 import { toPng, toJpeg, toBlob, toPixelData, toSvg } from "html-to-image";
 
+import CanavaEditorSectionDialog from "../canava/dialog/CanavaEditorSectionDialog.vue";
+import CanavaSectionItemDialog from "../canava/dialog/CanavaSectionItemDialog.vue";
+
+
 import { useColorStore } from "../../stores/color";
 // Instantiate our stores early so they are available
 const colorStore = useColorStore();
 
 const props = defineProps(["modelValue"]);
 const emit = defineEmits(["update:modelValue"]);
-
-// onMounted(() => {
-//   var canvasImageNode = document.getElementById("canvas-image-wrapper");
-
-// });
 
 const takeSnapshot = () => {
   var canvasImageNode = document.getElementById("canvas-image-wrapper");
@@ -238,16 +253,11 @@ const takeSnapshot = () => {
         "overflow-x": "hidden",
         "::-webkit-scrollbar": "none",
         "-ms-overflow-style": "none",
-        "scrollbar-width": "none"
+        "scrollbar-width": "none",
       },
       backgroundColor: "#FFFFFF",
     })
     .then(function (dataUrl) {
-      console.log(dataUrl);
-
-      //   var dataStr =
-      // "data:text/json;charset=utf-8," +
-      // encodeURIComponent(JSON.stringify(outObj, 0, 2));
       var dlAnchorElem = document.getElementById("downloadAnchorElem");
       dlAnchorElem.setAttribute("href", dataUrl);
       dlAnchorElem.setAttribute("download", "canvas-image.png");
@@ -262,6 +272,7 @@ const currentSectionKey = ref(null);
 const currentSectionData = ref({ title: "", instructions: "" });
 const currentItem = ref({ uid: "", label: "", details: "" });
 const showDialog = ref(false);
+const showMagnifyDialog = ref(false);
 const editorHelp = ref(false);
 const add = ref(true);
 const showDetail = ref(true);
@@ -281,7 +292,13 @@ const reset = () => {
   currentItem.value = { uid: "", label: "", details: "" };
   editorHelp.value = false;
   showDialog.value = false;
+  showMagnifyDialog.value = false;
   add.value = false;
+};
+
+const resetCurrentItem = () => {
+  currentItem.value = { uid: "", label: "", details: "" };
+  editorHelp.value = false;
 };
 
 const value = computed({
@@ -376,6 +393,20 @@ const saveItem = () => {
   }
 
   reset();
+};
+
+const magnifySection = (sectionKey) => {
+  console.log(sectionKey);
+  currentSectionKey.value = sectionKey;
+  const filteredResult = value.value.sections.find(
+    (e) => e.sectionKey == sectionKey
+  );
+  currentSectionData.value = filteredResult;
+
+  showMagnifyDialog.value = true;
+
+  //const currentSectionKey = ref(null);
+  //const currentSectionData = ref({ title: "", instructions: "" });
 };
 
 const deleteItem = () => {

@@ -53,8 +53,8 @@
 
     <q-separator />
     <div id="canvas-image-wrapper">
-      <div class="row q-pa-md">
-        <span class="text-h3">{{ value.name }}</span>
+      <div class="row q-pa-md full-width">
+        <span class="text-h3 full-width">{{ value.name }}</span>
         <q-space></q-space>
       </div>
       <div class="q-ma-sm container-wrapper">

@@ -5,7 +5,7 @@
       class="container-card"
       :class="section.sectionKey + ' full-width'"
       :style="
-        'background-color: ' +
+        'max-width: 900px; background-color: ' +
         section.backgroundColor +
         '; color: ' +
         section.textColor

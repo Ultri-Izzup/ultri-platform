@@ -58,7 +58,7 @@
         <q-space></q-space>
       </div>
       <div class="q-ma-sm container-wrapper">
-        <div class="container">
+        <div v-if="value.sections.length > 0" class="container">
           <q-card
             class="container-card"
             :class="section.sectionKey"
@@ -108,7 +108,7 @@
               ></q-icon>
             </q-card-section>
             <q-card-section
-              v-if="showInstructions && !section.items"
+              v-if="showInstructions && ( !section.items || section.items.length < 1 )"
               v-ripple
               clickable
               @click="triggerNew(section.sectionKey)"
@@ -134,84 +134,23 @@
               </q-list>
             </q-card-section>
           </q-card>
-          <q-dialog v-model="showDialog">
-            <q-card>
-              <q-bar class="bg-primary">
-                {{ currentSectionData.title }} Item
-                <sup
-                  class="q-pl-xs clickable v-ripple"
-                  @click="toggleEditorHelp()"
-                >
-                  <q-icon name="mdi-help-circle" size="13px" />
-                </sup>
-                <q-space></q-space>
-                <q-btn
-                  dense
-                  flat
-                  icon="mdi-close"
-                  v-close-popup="1"
-                  @click="resetCurrentItem()"
-                >
-                  <q-tooltip>{{ $t("nav.close") }} </q-tooltip>
-                </q-btn>
-              </q-bar>
-              <q-card-section>
-                <div
-                  v-if="!editorHelp"
-                  class="row full-width text-italic text-body1 q-pa-sm"
-                >
-                  <span v-html="currentSectionData.instructions" />
-                </div>
-
-                <q-input label="Label" v-model="currentItem.label"></q-input>
-                <div class="q-pt-sm q-pb-xs text-caption text-grey-8">
-                  Details
-                </div>
-                <q-editor
-                  v-model="currentItem.details"
-                  min-height="5rem"
-                  :dense="$q.screen.lt.md"
-                  :toolbar="[
-                    ['bold', 'italic', 'subscript', 'superscript'],
-                    [
-                      {
-                        icon: 'mdi-format-size',
-                        fixedLabel: true,
-                        fixedIcon: true,
-                        list: 'no-icons',
-                        options: [
-                          'size-1',
-                          'size-2',
-                          'size-3',
-                          'size-4',
-                          'size-5',
-                        ],
-                      },
-                    ],
-                    ['hr', 'link'],
-                    ['quote', 'unordered', 'ordered', 'outdent', 'indent'],
-                  ]"
-                ></q-editor>
-                <!-- <q-input label="Details" v-model="currentItem.details"></q-input> -->
-              </q-card-section>
-              <q-card-actions class="justify-center">
-                <q-btn
-                  v-if="currentItem.uid"
-                  label="Delete"
-                  color="secondary"
-                  @click="deleteItem()"
-                ></q-btn>
-                <q-btn label="Save" color="primary" @click="saveItem()"></q-btn>
-              </q-card-actions>
-            </q-card>
-          </q-dialog>
+          <CanavaEditorSectionItemDialog
+            v-model="showItemDialog"
+            :section="toValue(currentSectionData)"
+            :item="toValue(currentItem)"
+            @save="(event) => saveItem(event)"
+            @remove="(event) => removeItem(event)"
+          />
           <CanavaEditorSectionDialog
             v-model="showMagnifyDialog"
-            :data="currentSectionData"
-            @add="(event) => newSection(event)"
-            @modify="(event) => updateSection(event)"
-            @remove="(event) => removeSection(event)"
+            :section="toValue(currentSectionData)"
+            @save="(event) => newItem(event)"
+            @remove="(event) => removeItem(event)"
           />
+        </div>
+        <div v-else class="q-ma-sm">
+          <div class="text-h6">Select a Canvas Template</div>
+          <q-select v-model="selectedCanvas" label="Canvas Template" :options="canvasOpts" @update:model-value="emit('canvasSelected', selectedCanvas.value)" />
         </div>
       </div>
       <div class="row full-width text-center q-pa-sm">
@@ -223,24 +162,27 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, unref, onMounted } from "vue";
+import { ref, computed, watch, unref, toValue, onMounted } from "vue";
 import { Screen } from "quasar";
 
-import { nanoid } from "nanoid";
+//import { nanoid } from "nanoid";
+import { v4 as uuidv4 } from "uuid";
 
 import * as htmlToImage from "html-to-image";
 import { toPng, toJpeg, toBlob, toPixelData, toSvg } from "html-to-image";
 
 import CanavaEditorSectionDialog from "../canava/dialog/CanavaEditorSectionDialog.vue";
-import CanavaSectionItemDialog from "../canava/dialog/CanavaSectionItemDialog.vue";
+import CanavaEditorSectionItemDialog from "../canava/dialog/CanavaEditorSectionItemDialog.vue";
 
 
 import { useColorStore } from "../../stores/color";
 // Instantiate our stores early so they are available
 const colorStore = useColorStore();
 
-const props = defineProps(["modelValue"]);
-const emit = defineEmits(["update:modelValue"]);
+const props = defineProps(["modelValue","canvasOpts"]);
+const emit = defineEmits(["update:modelValue","canvasSelected"]);
+
+const selectedCanvas = ref(null);
 
 const takeSnapshot = () => {
   var canvasImageNode = document.getElementById("canvas-image-wrapper");
@@ -271,7 +213,7 @@ const takeSnapshot = () => {
 const currentSectionKey = ref(null);
 const currentSectionData = ref({ title: "", instructions: "" });
 const currentItem = ref({ uid: "", label: "", details: "" });
-const showDialog = ref(false);
+const showItemDialog = ref(false);
 const showMagnifyDialog = ref(false);
 const editorHelp = ref(false);
 const add = ref(true);
@@ -291,14 +233,13 @@ const reset = () => {
   currentSectionData.value = { title: "", instructions: "" };
   currentItem.value = { uid: "", label: "", details: "" };
   editorHelp.value = false;
-  showDialog.value = false;
+  showItemDialog.value = false;
   showMagnifyDialog.value = false;
   add.value = false;
 };
 
 const resetCurrentItem = () => {
   currentItem.value = { uid: "", label: "", details: "" };
-  editorHelp.value = false;
 };
 
 const value = computed({
@@ -344,9 +285,10 @@ const triggerNew = (sectionKey) => {
     (e) => e.sectionKey == sectionKey
   );
 
-  console.log(filteredResult);
   currentSectionData.value = filteredResult;
-  showDialog.value = true;
+  resetCurrentItem();
+  showItemDialog.value = true;
+
 };
 
 const toggleEditorHelp = () => {
@@ -363,36 +305,39 @@ const editItem = (sectionKey, itemUid) => {
   const itemData = filteredResult.items.find((e) => e.uid == itemUid);
   currentItem.value = itemData;
 
-  showDialog.value = true;
+  showItemDialog.value = true;
 };
 
-const saveItem = () => {
-  // Create section items array if missing
-  if (!currentSectionData.value.items) {
-    currentSectionData.value.items = [];
+const saveItem = (event) => {
+  console.log(event.sectionKey, event.item)
+
+  // Get current section data from the root data
+  const ix = value.value.sections.findIndex(
+    (element) => element.sectionKey == event.sectionKey
+  );
+
+  const currentData = value.value.sections[ix];
+
+  if(!currentData.items) {
+    currentData.items = []
   }
 
-  // If no current UID, it's a new record
-  if (!currentItem.value.uid) {
-    currentItem.value.uid = nanoid();
-    currentSectionData.value.items.push(unref(currentItem.value));
-    const ix = value.value.sections.findIndex(
-      (element) => element.sectionKey == currentSectionKey.value
+  if(event.item.uid) {
+
+    // Update, find the item index
+    const itemIx = currentData.items.findIndex(
+      (element) => element.uid == event.item.uid
     );
 
-    value.value.sections[ix] = currentSectionData.value;
+    // Save the new data to the same index
+    currentData.items[ix] = event.item;
+
   } else {
-    // Update the existing record by UID
-
-    // Get current section data from the root data
-    const ix = value.value.sections.findIndex(
-      (element) => element.sectionKey == currentSectionKey.value
-    );
-
-    value.value.sections[ix] = currentSectionData.value;
+    // Add, uid and push to array
+    event.item.uid = uuidv4();
+    currentData.items.push(event.item)
   }
 
-  reset();
 };
 
 const magnifySection = (sectionKey) => {
@@ -409,7 +354,7 @@ const magnifySection = (sectionKey) => {
   //const currentSectionData = ref({ title: "", instructions: "" });
 };
 
-const deleteItem = () => {
+const removeItem = () => {
   // Get the current Section data
   const sectionDataIx = value.value.sections.findIndex(
     (element) => element.sectionKey == currentSectionKey.value

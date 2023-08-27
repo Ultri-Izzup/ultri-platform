@@ -55,7 +55,7 @@
       </q-toolbar>
     </div>
     <q-separator />
-    <CanavaCreator v-model="canavaStore.canvasData"></CanavaCreator>
+    <CanavaCreator v-model="canavaStore.canvasData" :canvasOpts="canvasOpts"></CanavaCreator>
     <a id="downloadAnchorElem" style="display: none"></a>
     <UploadCanavaDialog
       v-model="displayUpload"

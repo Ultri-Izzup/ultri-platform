@@ -1,122 +1,123 @@
 <template>
   <q-dialog ref="dialogRef">
     <q-card>
-      <q-bar class="bg-primary">
-        Canvas Section
-        <q-space></q-space>
-        <q-btn
-          v-if="edit.value.uid"
-          dense
-          flat
-          icon="mdi-delete"
-          v-close-popup
-          @click="emit('remove', edit.value.uid)"
-          class="q-pr-sm"
-        >
-          <q-tooltip>{{ $t("nav.delete") }} </q-tooltip>
-        </q-btn>
-        <q-btn dense flat icon="mdi-close" v-close-popup @click="reset()">
-          <q-tooltip>{{ $t("nav.close") }} </q-tooltip>
-        </q-btn>
-      </q-bar>
-      <q-card-section>
-        <q-input label="Title" v-model="edit.value.title" />
-        <div class="q-pt-sm q-pb-xs text-caption text-grey-8">Instructions</div>
-        <q-editor
-          v-model="edit.value.instructions"
-          min-height="5rem"
-          :dense="$q.screen.lt.md"
-          :toolbar="[
-            ['bold', 'italic', 'subscript', 'superscript'],
-            [{
-                icon: 'mdi-format-size',
-                fixedLabel: true,
-                fixedIcon: true,
-                list: 'no-icons',
-                options: [
-                  'size-1',
-                  'size-2',
-                  'size-3',
-                  'size-4',
-                  'size-5',
-                ],
-            }],
-            ['hr', 'link'],
-            ['quote', 'unordered', 'ordered', 'outdent', 'indent'],
-          ]"
-        ></q-editor>
-        <div class="q-pt-sm q-pb-none text-caption text-grey-8">Background</div>
-        <q-input
-        v-model="edit.value.backgroundColor"
-        :rules="['anyColor']"
-        class="q-pt-none"
-        >
-        <template v-slot:append>
-          <q-icon name="mdi-palette" class="cursor-pointer">
-            <q-popup-proxy cover transition-show="scale" transition-hide="scale">
-              <q-color v-model="edit.value.backgroundColor"></q-color>
-            </q-popup-proxy>
-          </q-icon>
-        </template>
-      </q-input>
-      <div class="q-pt-sm q-pb-none text-caption text-grey-8">Text</div>
-      <q-input
-        v-model="edit.value.textColor"
-        :rules="['anyColor']"
-        class="q-pt-none"
-      >
-        <template v-slot:append>
-          <q-icon name="mdi-palette" class="cursor-pointer">
-            <q-popup-proxy cover transition-show="scale" transition-hide="scale">
-              <q-color v-model="edit.value.textColor"></q-color>
-            </q-popup-proxy>
-          </q-icon>
-        </template>
-      </q-input>
-        <q-input label="Key" v-model="edit.value.sectionKey" />
-        <q-input label="Sequence (opt)" v-model="edit.value.sequence" />
-        <UColumnSelector v-model="edit.value.gridColumn" />
-        <URowSelector v-model="edit.value.gridRow" />
-      </q-card-section>
-      <q-card-actions class="justify-center">
-        <q-btn label="Save" color="primary" @click="save()"></q-btn>
-      </q-card-actions>
+      <q-card
+            class="container-card"
+            :class="data.sectionKey"
+            :style="
+              'background-color: ' +
+              data.backgroundColor +
+              '; color: ' +
+              data.textColor
+            "
+          >
+            <q-card-section
+              :class="darkMode ? 'dark-top-q-card' : 'top-q-card'"
+              :style="'background-color: ' + data.backgroundColor"
+            >
+              <p class="text-bold">
+                <q-avatar v-if="data.sequence" size="24px" color="grey-4"
+                  ><span class="text-grey-8">{{
+                    data.sequence
+                  }}</span></q-avatar
+                >
+                {{ data.title }}
+                <sup>
+                  <q-icon name="mdi-help-circle" size="13px" color="grey-6" />
+                  <q-tooltip>
+                    <span v-html="data.instructions" />
+                  </q-tooltip>
+                </sup>
+              </p>
+              <q-space />
+              <q-icon
+                name="mdi-close"
+                size="20px"
+                clickable
+                v-ripple
+
+                class="cursor-pointer"
+              ></q-icon>
+              <q-icon
+                name="mdi-plus-circle-outline"
+                size="20px"
+                clickable
+                v-ripple
+                @click="triggerNew(data.sectionKey)"
+                class="cursor-pointer"
+              ></q-icon>
+            </q-card-section>
+            <q-card-section
+              v-if="showInstructions && !data.items"
+              v-ripple
+              clickable
+              @click="triggerNew(data.sectionKey)"
+              class="q-pa-md text-italic cursor-pointer q-hoverable"
+              ><div v-html="data.instructions" />
+            </q-card-section>
+            <q-card-section v-if="data.items && showItems" class="q-pa-none">
+              <q-list separator>
+                <q-item v-for="item in data.items" :key="item.uid">
+                  <q-item-section>
+                    <q-item-label class="text-bold">
+                      {{ item.label }}
+                    </q-item-label>
+                    <span
+                      v-if="showDetail"
+                      v-html="item.details"
+                      clickable
+                      v-ripple
+                      @click="editItem(data.sectionKey, item.uid)"
+                    ></span>
+                  </q-item-section>
+                </q-item>
+              </q-list>
+            </q-card-section>
+          </q-card>
     </q-card>
   </q-dialog>
 </template>
 
 <script setup>
-import { ref, watch, toRefs, toRef, reactive } from "vue";
+import { ref, watch, toRefs, toRef, reactive, unref } from "vue";
 import { useDialogPluginComponent, useQuasar } from "quasar";
 
 import { v4 as uuidv4 } from "uuid";
 
-import UColumnSelector from "../../ultri/UColumnSelector.vue";
-import URowSelector from "../../ultri/URowSelector.vue";
+import CanavaEditorSection from "../CanavaEditorSection.vue";
+
+const props = defineProps(["data","darkMode"]);
 
 const emit = defineEmits([
   // REQUIRED; need to specify some events that your
   // component will emit through useDialogPluginComponent()
   ...useDialogPluginComponent.emits,
+  // These apply to Section Items, not sections themselves.
   "add",
   "modify",
   "remove",
 ]);
 
-const props = defineProps(["data"]);
+const items = ref();
 
-const edit = reactive({});
+if(props.items) {
+  items.value = unref(props.items);
+}
+
+const showInstructions = ref(true);
+
+console.log(items)
 
 const $q = useQuasar();
 
 
-watch(
-  () => props.data,
-  () => {
-    edit.value = reactive(props.data);
-  },
-  { immediate: true }
-);
+// watch(
+//   () => props.data,
+//   () => {
+//     edit.value = reactive(props.data);
+//   },
+//   { immediate: true }
+// );
 
 const { dialogRef, onDialogOK } = useDialogPluginComponent();
 // dialogRef      - Vue ref to be applied to QDialog

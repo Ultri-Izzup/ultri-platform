@@ -108,7 +108,9 @@
               ></q-icon>
             </q-card-section>
             <q-card-section
-              v-if="showInstructions && ( !section.items || section.items.length < 1 )"
+              v-if="
+                showInstructions && (!section.items || section.items.length < 1)
+              "
               v-ripple
               clickable
               @click="triggerNew(section.sectionKey)"
@@ -117,18 +119,18 @@
             </q-card-section>
             <q-card-section v-if="section.items && showItems" class="q-pa-none">
               <q-list separator>
-                <q-item v-for="item in section.items" :key="item.uid">
+                <q-item
+                  v-for="item in section.items"
+                  :key="item.uid"
+                  clickable
+                  v-ripple
+                  @click="editItem(section.sectionKey, item.uid)"
+                >
                   <q-item-section>
                     <q-item-label class="text-bold">
                       {{ item.label }}
                     </q-item-label>
-                    <span
-                      v-if="showDetail"
-                      v-html="item.details"
-                      clickable
-                      v-ripple
-                      @click="editItem(section.sectionKey, item.uid)"
-                    ></span>
+                    <span v-if="showDetail" v-html="item.details"></span>
                   </q-item-section>
                 </q-item>
               </q-list>
@@ -136,21 +138,26 @@
           </q-card>
           <CanavaEditorSectionItemDialog
             v-model="showItemDialog"
-            :section="toValue(currentSectionData)"
+            :section="currentSectionData"
             :item="toValue(currentItem)"
             @save="(event) => saveItem(event)"
-            @remove="(event) => removeItem(event)"
+            @delete="(event) => deleteItem(event)"
           />
-          <CanavaEditorSectionDialog
+          <CanavaMagnifySectionDialog
             v-model="showMagnifyDialog"
-            :section="toValue(currentSectionData)"
-            @save="(event) => newItem(event)"
-            @remove="(event) => removeItem(event)"
+            :section="currentSectionData"
+            @save="(event) => saveItem(event)"
+            @delete="(event) => deleteItem(event)"
           />
         </div>
         <div v-else class="q-ma-sm">
           <div class="text-h6">Select a Canvas Template</div>
-          <q-select v-model="selectedCanvas" label="Canvas Template" :options="canvasOpts" @update:model-value="emit('canvasSelected', selectedCanvas.value)" />
+          <q-select
+            v-model="selectedCanvas"
+            label="Canvas Template"
+            :options="canvasOpts"
+            @update:model-value="emit('canvasSelected', selectedCanvas.value)"
+          />
         </div>
       </div>
       <div class="row full-width text-center q-pa-sm">
@@ -171,16 +178,15 @@ import { v4 as uuidv4 } from "uuid";
 import * as htmlToImage from "html-to-image";
 import { toPng, toJpeg, toBlob, toPixelData, toSvg } from "html-to-image";
 
-import CanavaEditorSectionDialog from "../canava/dialog/CanavaEditorSectionDialog.vue";
+import CanavaMagnifySectionDialog from "../canava/dialog/CanavaMagnifySectionDialog.vue";
 import CanavaEditorSectionItemDialog from "../canava/dialog/CanavaEditorSectionItemDialog.vue";
-
 
 import { useColorStore } from "../../stores/color";
 // Instantiate our stores early so they are available
 const colorStore = useColorStore();
 
-const props = defineProps(["modelValue","canvasOpts"]);
-const emit = defineEmits(["update:modelValue","canvasSelected"]);
+const props = defineProps(["modelValue", "canvasOpts"]);
+const emit = defineEmits(["update:modelValue", "canvasSelected"]);
 
 const selectedCanvas = ref(null);
 
@@ -270,11 +276,16 @@ watch(
         "; } \n";
 
       dynamicStyles = dynamicStyles + sectionCSS;
+
+      if(s.sectionKey === currentSectionKey.value) {
+        currentSectionData.value = s
+      }
     });
 
     dynamicStyles = dynamicStyles + " } \n";
 
     sheet.innerHTML = dynamicStyles;
+
   },
   { immediate: true }
 );
@@ -284,11 +295,9 @@ const triggerNew = (sectionKey) => {
   const filteredResult = value.value.sections.find(
     (e) => e.sectionKey == sectionKey
   );
-
   currentSectionData.value = filteredResult;
   resetCurrentItem();
   showItemDialog.value = true;
-
 };
 
 const toggleEditorHelp = () => {
@@ -309,7 +318,7 @@ const editItem = (sectionKey, itemUid) => {
 };
 
 const saveItem = (event) => {
-  console.log(event.sectionKey, event.item)
+  console.log(event.sectionKey, event.item);
 
   // Get current section data from the root data
   const ix = value.value.sections.findIndex(
@@ -318,26 +327,23 @@ const saveItem = (event) => {
 
   const currentData = value.value.sections[ix];
 
-  if(!currentData.items) {
-    currentData.items = []
+  if (!currentData.items) {
+    currentData.items = [];
   }
 
-  if(event.item.uid) {
-
+  if (event.item.uid) {
     // Update, find the item index
     const itemIx = currentData.items.findIndex(
       (element) => element.uid == event.item.uid
     );
 
     // Save the new data to the same index
-    currentData.items[ix] = event.item;
-
+    currentData.items[itemIx] = event.item;
   } else {
     // Add, uid and push to array
     event.item.uid = uuidv4();
-    currentData.items.push(event.item)
+    currentData.items.push(event.item);
   }
-
 };
 
 const magnifySection = (sectionKey) => {
@@ -354,7 +360,7 @@ const magnifySection = (sectionKey) => {
   //const currentSectionData = ref({ title: "", instructions: "" });
 };
 
-const removeItem = () => {
+const deleteItem = () => {
   // Get the current Section data
   const sectionDataIx = value.value.sections.findIndex(
     (element) => element.sectionKey == currentSectionKey.value
@@ -372,8 +378,6 @@ const removeItem = () => {
 
   // // Update the main data
   value.value.sections[sectionDataIx] = sectionData;
-
-  reset();
 };
 </script>
 

@@ -63,7 +63,7 @@ import { useDialogPluginComponent, useQuasar } from "quasar";
 const emit = defineEmits([
   ...useDialogPluginComponent.emits,
   "save",
-  "remove",
+  "delete",
 ]);
 
 const props = defineProps(["section", "item"]);
@@ -94,11 +94,8 @@ const saveItem = () => {
 };
 
 const deleteItem = () => {
-  emit('remove', props.section.sectionKey, editItem.value.uid )
+  emit('delete', props.section.sectionKey, editItem.value.uid )
   onDialogOK();
 }
 
-const reset = () => {
-  //edit.value = {};
-};
 </script>

@@ -1,5 +1,6 @@
 {
   "name": "Business Model Canvas",
+  "attribution": "Business Model Canvas by Alexander Osterwalder from <a href=\"https://www.strategyzer.com/\">Strategyzer.com</a>. The business model canvas itself is licensed under the <a href=\"https://\">CC BY SA 3.0</a>. Changes have been made to fit the site.",
   "sections": [
     {
       "title": "Key Activities",
@@ -57,7 +58,7 @@
     },
     {
       "title": "Channels",
-      "instructions": "What channels are right for your customer segments? How do you reach them in the best channels? How cost effective are the segments? How will you integrate the channels?",
+      "instructions": "<ul><li>What channels are right for your customer segments?&nbsp;</li><li>How do you reach them in the best channels?&nbsp;</li><li>How cost effective are the segments?&nbsp;</li><li>How will you integrate the channels?</li></ul>",
       "sectionKey": "channels",
       "gridColumn": "7/9",
       "gridRow": "3/5",

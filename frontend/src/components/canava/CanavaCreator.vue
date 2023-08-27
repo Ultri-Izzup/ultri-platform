@@ -42,34 +42,59 @@
       </div>
     </div>
     <div class="row full-width q-pt-sm">
-
       <div class="col q-px-lg">
         <div class="q-pt-sm q-pb-xs text-caption text-grey-8">Attribution</div>
         <q-editor
-                v-model="value.attribution"
-                min-height="5rem"
-                :dense="$q.screen.lt.md"
-                :toolbar="[
-                  ['bold', 'italic', 'subscript', 'superscript'],
-                  [
-                    {
-                      icon: 'mdi-format-size',
-                      fixedLabel: true,
-                      fixedIcon: true,
-                      list: 'no-icons',
-                      options: [
-                        'size-1',
-                        'size-2',
-                        'size-3',
-                        'size-4',
-                        'size-5',
-                      ],
-                    },
-                  ],
-                  ['hr', 'link'],
-                  ['quote', 'unordered', 'ordered', 'outdent', 'indent'],
-                ]"
-              ></q-editor>
+          v-model="value.attribution"
+          min-height="5rem"
+          :dense="$q.screen.lt.md"
+          :toolbar="[
+            ['bold', 'italic', 'subscript', 'superscript'],
+            [{
+                icon: 'mdi-format-size',
+                fixedLabel: true,
+                fixedIcon: true,
+                list: 'no-icons',
+                options: [
+                  'size-1',
+                  'size-2',
+                  'size-3',
+                  'size-4',
+                  'size-5',
+                ],
+            }],
+            [
+              {
+                icon: $q.iconSet.editor.font,
+                fixedIcon: true,
+                list: 'no-icons',
+                options: [
+                  'default_font',
+                  'arial',
+                  'arial_black',
+                  'comic_sans',
+                  'courier_new',
+                  'impact',
+                  'lucida_grande',
+                  'times_new_roman',
+                  'verdana',
+                ],
+              }
+            ],
+            ['hr', 'link'],
+            ['quote', 'unordered', 'ordered'],
+          ]"
+          :fonts="{
+            arial: 'Arial',
+            arial_black: 'Arial Black',
+            comic_sans: 'Comic Sans MS',
+            courier_new: 'Courier New',
+            impact: 'Impact',
+            lucida_grande: 'Lucida Grande',
+            times_new_roman: 'Times New Roman',
+            verdana: 'Verdana',
+          }"
+        ></q-editor>
       </div>
     </div>
     <div class="row full-width q-pt-md">

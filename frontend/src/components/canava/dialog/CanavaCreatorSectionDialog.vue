@@ -41,9 +41,37 @@
                   'size-5',
                 ],
             }],
+            [
+              {
+                icon: $q.iconSet.editor.font,
+                fixedIcon: true,
+                list: 'no-icons',
+                options: [
+                  'default_font',
+                  'arial',
+                  'arial_black',
+                  'comic_sans',
+                  'courier_new',
+                  'impact',
+                  'lucida_grande',
+                  'times_new_roman',
+                  'verdana',
+                ],
+              }
+            ],
             ['hr', 'link'],
-            ['quote', 'unordered', 'ordered', 'outdent', 'indent'],
+            ['quote', 'unordered', 'ordered'],
           ]"
+          :fonts="{
+            arial: 'Arial',
+            arial_black: 'Arial Black',
+            comic_sans: 'Comic Sans MS',
+            courier_new: 'Courier New',
+            impact: 'Impact',
+            lucida_grande: 'Lucida Grande',
+            times_new_roman: 'Times New Roman',
+            verdana: 'Verdana',
+          }"
         ></q-editor>
         <div class="q-pt-sm q-pb-none text-caption text-grey-8">Background</div>
         <q-input

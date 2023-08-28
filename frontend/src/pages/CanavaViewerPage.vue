@@ -1,11 +1,13 @@
 <template>
   <div>
-    <q-btn to="/canava" dense round flat icon="mdi-cog-outline" size="sm"><q-tooltip>Configure</q-tooltip></q-btn>
+    <q-btn :to="canvasConfigRoute" dense round flat icon="mdi-cog-outline" size="sm"><q-tooltip>Configure</q-tooltip></q-btn>
     <CanavaEditor v-model="canavaStore.canvasData" :canvasOpts="canavaStore.canvasOpts" @canvasSelected="(event) => canavaStore.loadCanvasTemplate(event) "></CanavaEditor>
   </div>
 </template>
 
 <script setup>
+import {ref, watch, computed } from "vue"
+import { useRoute } from "vue-router"
 // Import stores
 import { useCanavaStore } from "../stores/canava";
 
@@ -26,6 +28,27 @@ import productVisionBoardExtData from "../data/canava/productVisionBoardExt.json
 import productCanvasData from "../data/canava/productCanvas.json";
 
 const canavaStore = useCanavaStore();
+
+const route = useRoute();
+
+const canvasConfigRoute = computed(() => {
+  let configRoute = '';
+  switch(route.name) {
+    case 'canavaDesignerViewer':
+    configRoute = "/canava/designer"
+  }
+  return configRoute;
+})
+
+watch(
+  () => route.params.canvasTemplate,
+  (newTemplate) => {
+    if(newTemplate) {
+      canavaStore.loadCanvasTemplate(newTemplate)
+    }
+  },
+  { immediate: true }
+);
 
 const canvasMap = {
   businessModel: businessModelData,

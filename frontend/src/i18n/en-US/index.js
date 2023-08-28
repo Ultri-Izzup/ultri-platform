@@ -2,6 +2,7 @@ import account from './account';
 import apps from './apps';
 import auth from './auth';
 import canvas from './canvas';
+import canava from './canava';
 import circles from './circles';
 import controls from './controls';
 import homepage from './homepage';
@@ -18,6 +19,7 @@ export default {
   ...apps,
   ...auth,
   ...canvas,
+  ...canava,
   ...circles,
   ...controls,
   ...homepage,

@@ -32,7 +32,7 @@
         >
 
         <q-btn
-          to="/canava/viewer"
+          :to="canavaViewerRoute"
           color="secondary"
           icon="mdi-eye"
           class="q-ml-md"
@@ -101,6 +101,15 @@ const canavaStore = useCanavaStore();
 
 const selectedCanvas = ref(null);
 const displayUpload = ref(false);
+
+const canavaViewerRoute = computed(() => {
+  let viewerRoute = '';
+  switch(route.name) {
+    case 'canavaDesigner':
+    viewerRoute = "/canava/designer/view"
+  }
+  return viewerRoute;
+})
 
 const canvasMap = {
   businessModel: businessModelData,

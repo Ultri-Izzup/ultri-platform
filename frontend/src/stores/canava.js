@@ -69,25 +69,11 @@ const canvasMap = {
   productCanvas: productCanvasData,
 };
 
-const loadCanvasTemplate = () => {
-  console.log(selectedCanvas.value.value);
-
-  const templateData = canvasMap[selectedCanvas.value.value];
-
-  templateData.sections.forEach(function(item, index) {
-    if(!item.uid) {
-      item.uid = uuidv4();
-    }
-    console.log(item, index);
-  });
-
-  canavaStore.canvasData = templateData;
-};
-
+const defaultObject = { name: "", attribution: "", createdBy: "", createdAt: "", version: "", sections: [] }
 
 export const useCanavaStore = defineStore("canava", {
   state: () => ({
-    canvasData: useStorage("canvasData", { name: "", attribution: "", createdBy: "", createdAt: "", version: "", sections: [] }),
+    canvasData: useStorage("canvasData", defaultObject),
   }),
   getters: {
     canvasOpts() {

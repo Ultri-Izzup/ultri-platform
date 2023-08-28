@@ -20,7 +20,7 @@
     "calendar-link": "^2.4.0",
     "d3": "^7.8.5",
     "html-to-image": "^1.11.11",
-    "mermaid": "^10.3.1",
+    "mermaid": "^10.4.0",
     "nanoid": "^4.0.2",
     "performant-array-to-tree": "^1.11.0",
     "pinia": "^2.0.11",
@@ -35,6 +35,7 @@
     "vue-markdown-render": "^2.0.1",
     "vue-native-websocket-vue3": "^3.1.7",
     "vue-router": "^4.0.0",
+    "vue3-mermaid": "^0.0.6",
     "vue3-text-clamp": "^0.1.2",
     "vue3-ts-jsoneditor": "^2.9.0"
   },

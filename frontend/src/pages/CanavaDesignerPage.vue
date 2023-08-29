@@ -56,7 +56,9 @@
       </q-toolbar>
     </div>
     <q-separator />
-    <CanavaCreator v-model="canavaStore.canvasData" :canvasOpts="canvasOpts"></CanavaCreator>
+    <CanavaDesigner v-if="!canvasTemplate" v-model="canavaStore.canvasData" :canvasOpts="canvasOpts" />
+    <CanavaDesigner v-else v-model="canavaStore.storedCanvases[canvasTemplate]" :canvasOpts="canvasOpts" />
+
     <a id="downloadAnchorElem" style="display: none"></a>
     <UploadCanavaDialog
       v-model="displayUpload"
@@ -80,6 +82,7 @@ import { useCanavaStore } from "../stores/canava";
 
 // Import the individual canvas SFC module
 import CanavaCreator from "../components/canava/CanavaCreator.vue";
+import CanavaDesigner from "../components/canava/CanavaDesigner.vue";
 import UploadCanavaDialog from "../components/canava/dialog/UploadCanavaDialog.vue";
 
 import businessModelData from "../data/canava/businessModel.json";
@@ -99,6 +102,8 @@ const { t } = useI18n();
 const route = useRoute();
 
 const canavaStore = useCanavaStore();
+
+const canvasTemplate = ref(null);
 
 const selectedCanvas = ref(null);
 const displayUpload = ref(false);
@@ -128,6 +133,27 @@ const showDeleteOpts = computed(() => {
   }
   return shouldShow;
 })
+
+watch(
+  () => route.params.canvasTemplate,
+  (newTemplate) => {
+    if (newTemplate) {
+      // Load for default/custom or named template?
+      switch (route.name) {
+        case "canavaDesigner": {
+          canavaStore.loadCanvasTemplate(newTemplate);
+          break;
+        }
+        case "canavaTemplateDesigner": {
+          canavaStore.loadTemplateCanvas(newTemplate);
+          break;
+        }
+      }
+      canvasTemplate.value = newTemplate;
+    }
+  },
+  { immediate: true }
+);
 
 const canvasMap = {
   businessModel: businessModelData,

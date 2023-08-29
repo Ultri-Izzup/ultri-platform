@@ -71,8 +71,6 @@ watch(
         }
       }
       canvasTemplate.value = newTemplate;
-    } else {
-      canvasTemplate.value = null;
     }
   },
   { immediate: true }

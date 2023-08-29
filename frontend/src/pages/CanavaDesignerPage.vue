@@ -105,12 +105,15 @@ const displayUpload = ref(false);
 
 const canavaViewerRoute = computed(() => {
   let viewerRoute = '';
+  console.log(route.name)
   switch(route.name) {
     case 'canavaDesigner': {
       viewerRoute = "/canava/designer/view";
+      break;
     }
     case 'canavaTemplateDesigner': {
       viewerRoute = "/canava/template/" + route.params.canvasTemplate;
+      break;
     }
 
   }

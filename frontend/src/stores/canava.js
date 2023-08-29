@@ -74,6 +74,7 @@ const defaultObject = { name: "", attribution: "", createdBy: "", createdAt: "",
 export const useCanavaStore = defineStore("canava", {
   state: () => ({
     canvasData: useStorage("canvasData", defaultObject),
+    storedCanvases: useStorage("storedCanvases", {}),
   }),
   getters: {
     canvasOpts() {
@@ -94,8 +95,22 @@ export const useCanavaStore = defineStore("canava", {
       this.canvasData = templateData;
 
     },
+    loadTemplateCanvas(template) {
+      const templateData = canvasMap[template];
+
+      templateData.sections.forEach(function(item, index) {
+        if(!item.uid) {
+          item.uid = uuidv4();
+        }
+        console.log(item, index);
+      });
+
+      this.storedCanvases[template] = templateData;
+
+    },
     $reset() {
       this.canvasData = { name: "", attribution: "", createdBy: "", createdAt: "", version: "", sections: [] };
+      this.storedCanvases = {};
     }
   }
 });

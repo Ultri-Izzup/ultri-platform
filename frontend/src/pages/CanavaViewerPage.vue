@@ -34,8 +34,15 @@ const route = useRoute();
 const canvasConfigRoute = computed(() => {
   let configRoute = '';
   switch(route.name) {
-    case 'canavaDesignerViewer':
-    configRoute = "/canava/designer"
+    case 'canavaDesignerViewer': {
+      configRoute = "/canava/designer";
+    };
+
+    case 'canavaTemplate': {
+      configRoute = "/canava/template/" + route.params.canvasTemplate + "/designer";
+    };
+
+
   }
   return configRoute;
 })

@@ -28,6 +28,7 @@
           class="q-ml-md"
           size="md"
           dense
+          :disable="!showDeleteOpts"
           ><q-tooltip> Delete </q-tooltip></q-btn
         >
 
@@ -41,7 +42,7 @@
           ><q-tooltip> View Canvas </q-tooltip></q-btn
         >
       </q-toolbar>
-      <q-toolbar class="col-12 col-md-6">
+      <q-toolbar v-if="showDeleteOpts" class="col-12 col-md-6">
         <div class="text-body1 gt-md q-pl-lg q-pr-sm col-2">Template:</div>
 
         <div class="q-pl-md col">
@@ -105,10 +106,24 @@ const displayUpload = ref(false);
 const canavaViewerRoute = computed(() => {
   let viewerRoute = '';
   switch(route.name) {
-    case 'canavaDesigner':
-    viewerRoute = "/canava/designer/view"
+    case 'canavaDesigner': {
+      viewerRoute = "/canava/designer/view";
+    }
+    case 'canavaTemplateDesigner': {
+      viewerRoute = "/canava/template/" + route.params.canvasTemplate;
+    }
+
   }
   return viewerRoute;
+})
+
+const showDeleteOpts = computed(() => {
+  let shouldShow = true;
+  switch(route.name) {
+    case 'canavaTemplateDesigner':
+    shouldShow = false
+  }
+  return shouldShow;
 })
 
 const canvasMap = {

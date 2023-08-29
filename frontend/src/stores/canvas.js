@@ -94,7 +94,7 @@ export const useCanvasStore = defineStore("canvas", {
     $reset() {
       this.resetBusiness();
       this.resetS3Organization();
-      this.resetsS3Delegation();
+      this.resetS3Delegation();
       this.resetCoop();
     },
     resetBusiness() {

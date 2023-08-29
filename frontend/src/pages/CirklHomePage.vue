@@ -1,64 +1,21 @@
 <template>
   <q-page>
     <div class="text-h3 text-center justify-center row full-width q-pb-md">
-      {{ $t("circles.dashboard.title") }}
+      {{ $t("cirkel.dashboard.title", 'Cirkl') }}
     </div>
 
     <div class="row full-width">
 
       <div :class="Screen.lt.md ? ' col-12 q-px-md q-pb-md' : ' col-8 q-pl-md q-pr-sm'">
-        <CirclesTree />
+        benefits
       </div>
 
       <div :class="Screen.lt.md ? ' col-12 q-px-md q-pb-md' : ' col-4 q-pr-md q-pl-sm'">
-        <CircleMembersList />
+        Coming soon
       </div>
 
     </div>
 
-    <div class="fit">
-      <div>
-        <q-page-sticky
-          :position="Screen.gt.sm ? 'bottom-right' : 'bottom'"
-          :offset="fabPos"
-          class="ontop"
-        >
-          <q-fab
-            icon="mdi-file-arrow-up-down-outline"
-            direction="up"
-            color="accent"
-            :disable="draggingFab"
-            v-touch-pan.prevent.mouse="moveFab"
-            class="ontop"
-          >
-            <q-fab-action
-              @click="onDownloadClick()"
-              color="primary"
-              icon="mdi-download"
-              :disable="draggingFab"
-              class="ontop"
-            ></q-fab-action>
-            <q-fab-action
-              @click="onUploadClick"
-              color="primary"
-              icon="mdi-upload"
-              :disable="draggingFab"
-              class="ontop"
-            >
-            </q-fab-action>
-            <q-fab-action
-              @click="onDeleteClick()"
-              color="secondary"
-              icon="mdi-delete"
-              :disable="draggingFab"
-              class="ontop"
-            ></q-fab-action>
-          </q-fab>
-        </q-page-sticky>
-        <a id="downloadAnchorElem" style="display: none"></a>
-        <UploadCirclesDialog v-model="displayUpload" />
-      </div>
-    </div>
   </q-page>
 </template>
 

@@ -106,13 +106,10 @@ export const useCircleOKRStore = defineStore("circleOKR", () => {
   const $reset = () => {
     console.log("RESET MEMBERS");
     okrs.value = new Map();
-    invites.value = new Map();
     currentOKRUid.value = null;
     fetching.value = false;
     showCircleOKRDialog.value = false;
     showEditOKRDialog.value = false;
-    showKeyResultDialog.value = false;
-    currentOKRInternal.value = true;
   };
 
   return {

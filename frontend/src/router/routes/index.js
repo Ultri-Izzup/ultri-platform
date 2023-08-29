@@ -3,6 +3,8 @@ import site from './site'
 import canvas from './canvas'
 import canava from './canava'
 import circles from './circles'
+import cirkl from './cirkl'
+import okra from './okra'
 import org from './org'
 import features from './features'
 import debug from './debug'
@@ -15,6 +17,8 @@ const routes = [
   ...canvas,
   ...canava,
   ...circles,
+  ...cirkl,
+  ...okra,
   ...org,
   ...features,
   ...debug,

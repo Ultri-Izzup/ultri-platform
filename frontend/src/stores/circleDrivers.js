@@ -102,7 +102,6 @@ export const useCircleDriversStore = defineStore("circleDrivers", () => {
   const $reset = () => {
     console.log("RESET MEMBERS");
     drivers.value = new Map();
-    invites.value = new Map();
     currentDriverUid.value = null;
     fetching.value = false;
     showCircleDriverDialog.value = false;

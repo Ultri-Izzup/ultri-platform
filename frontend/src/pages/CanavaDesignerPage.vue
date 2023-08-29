@@ -4,13 +4,22 @@
       <q-toolbar class="col-6">
         <span class="gt-md text-body1">Canvas data:</span>
         <q-btn
-          @click="onDownloadClick()"
+          @click="onDownloadClick(canvasTemplate)"
           color="primary"
           icon="mdi-download"
           class="q-ml-md"
           size="md"
           dense
           ><q-tooltip> Download </q-tooltip></q-btn
+        >
+        <q-btn
+          @click="onDownloadClick('ALL')"
+          color="primary"
+          icon="mdi-download-multiple"
+          class="q-ml-md"
+          size="md"
+          dense
+          ><q-tooltip> All Canvas </q-tooltip></q-btn
         >
         <q-btn
           @click="onUploadClick"
@@ -56,8 +65,16 @@
       </q-toolbar>
     </div>
     <q-separator />
-    <CanavaDesigner v-if="!canvasTemplate" v-model="canavaStore.canvasData" :canvasOpts="canvasOpts" />
-    <CanavaDesigner v-else v-model="canavaStore.storedCanvases[canvasTemplate]" :canvasOpts="canvasOpts" />
+    <CanavaDesigner
+      v-if="!canvasTemplate"
+      v-model="canavaStore.canvasData"
+      :canvasOpts="canvasOpts"
+    />
+    <CanavaDesigner
+      v-else
+      v-model="canavaStore.storedCanvases[canvasTemplate]"
+      :canvasOpts="canvasOpts"
+    />
 
     <a id="downloadAnchorElem" style="display: none"></a>
     <UploadCanavaDialog
@@ -109,30 +126,29 @@ const selectedCanvas = ref(null);
 const displayUpload = ref(false);
 
 const canavaViewerRoute = computed(() => {
-  let viewerRoute = '';
-  console.log(route.name)
-  switch(route.name) {
-    case 'canavaDesigner': {
+  let viewerRoute = "";
+  console.log(route.name);
+  switch (route.name) {
+    case "canavaDesigner": {
       viewerRoute = "/canava/designer/view";
       break;
     }
-    case 'canavaTemplateDesigner': {
+    case "canavaTemplateDesigner": {
       viewerRoute = "/canava/template/" + route.params.canvasTemplate;
       break;
     }
-
   }
   return viewerRoute;
-})
+});
 
 const showDeleteOpts = computed(() => {
   let shouldShow = true;
-  switch(route.name) {
-    case 'canavaTemplateDesigner':
-    shouldShow = false
+  switch (route.name) {
+    case "canavaTemplateDesigner":
+      shouldShow = false;
   }
   return shouldShow;
-})
+});
 
 watch(
   () => route.params.canvasTemplate,
@@ -173,8 +189,8 @@ const loadCanvasTemplate = () => {
 
   const templateData = canvasMap[selectedCanvas.value.value];
 
-  templateData.sections.forEach(function(item, index) {
-    if(!item.uid) {
+  templateData.sections.forEach(function (item, index) {
+    if (!item.uid) {
       item.uid = uuidv4();
     }
     console.log(item, index);
@@ -193,48 +209,7 @@ const importUpload = (data) => {
   canavaStore.canvasData = data;
 };
 
-const canvasOpts = [
-  {
-    label: "Business Model Canvas",
-    value: "businessModel",
-  },
-  {
-    label: "Lean Canvas",
-    value: "leanCanvas",
-  },
-  {
-    label: "Lean UX Canvas",
-    value: "leanUX",
-  },
-  {
-    label: "Product Vision Board",
-    value: "productVisionBoard",
-  },
-  {
-    label: "Product Vision Board (extended)",
-    value: "productVisionBoardExt",
-  },
-  {
-    label: "Product Canvas",
-    value: "productCanvas",
-  },
-  {
-    label: "S3 Organization Canvas",
-    value: "s3Organization",
-  },
-  {
-    label: "S3 Delegation Canvas",
-    value: "s3Delegation",
-  },
-  {
-    label: "S3 Team Canvas",
-    value: "s3Team",
-  },
-  {
-    label: "Co-op Ownership Model",
-    value: "coopOwnership",
-  },
-];
+const canvasOpts = canavaStore.canvasOpts;
 
 const onUploadClick = () => {
   console.log("Upload Data for Current Canvas");
@@ -250,24 +225,34 @@ const reset = () => {
   selectedCanvas.value = null;
   displayUpload.value = false;
 };
-const onDownloadClick = () => {
-  console.log("Download Data for Current Canvas");
+const onDownloadClick = (targetCanvas = false) => {
+  console.log("Download Data for " + targetCanvas);
 
-  // Define an object to hold our ouput
-  const outObj = {
-    name: canavaStore.canvasData.name,
-    completedOn: canavaStore.canvasData.completedOn,
-    completedBy: canavaStore.canvasData.completedBy,
-    attribution: canavaStore.canvasData.attribution,
-    version: canavaStore.canvasData.version,
-    sections: canavaStore.canvasData.sections,
-    sequenced: canavaStore.canvasData.sequenced ? true : false,
-    canavaVers: "1.0.0",
-  };
+  // Define canvasesobject
+  let canvases = {};
+
+  if (!targetCanvas) {
+    canvases.custom = {
+      name: canavaStore.canvasData.name,
+      completedOn: canavaStore.canvasData.completedOn,
+      completedBy: canavaStore.canvasData.completedBy,
+      attribution: canavaStore.canvasData.attribution,
+      version: canavaStore.canvasData.version,
+      sections: canavaStore.canvasData.sections,
+      sequenced: canavaStore.canvasData.sequenced ? true : false,
+      canavaVers: "1.0.0",
+    };
+  } else if (targetCanvas === 'ALL') {
+    canvases = {...canavaStore.storedCanvases}
+  } else {
+    canvases[targetCanvas] = canavaStore.storedCanvases[targetCanvas];
+  }
+
+
 
   var dataStr =
     "data:text/json;charset=utf-8," +
-    encodeURIComponent(JSON.stringify(outObj, 0, 2));
+    encodeURIComponent(JSON.stringify({canvases: canvases}, 0, 2));
   var dlAnchorElem = document.getElementById("downloadAnchorElem");
   dlAnchorElem.setAttribute("href", dataStr);
   dlAnchorElem.setAttribute("download", "canvas.json");
@@ -275,5 +260,4 @@ const onDownloadClick = () => {
 };
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>

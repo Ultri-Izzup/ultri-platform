@@ -41,7 +41,9 @@
           ></q-icon>
         </div>
       </q-card-section>
-      <q-card-section class="q-pa-none"
+      <q-card-section class="q-pa-none" clickable
+            v-ripple
+            @click="triggerNew()"
         ><div v-html="section.instructions" />
       </q-card-section>
       <q-card-section v-if="section.items" class="q-pa-none">

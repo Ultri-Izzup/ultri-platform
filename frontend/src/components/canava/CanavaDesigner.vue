@@ -112,13 +112,19 @@
         <q-input label="Version" v-model="value.version"></q-input>
       </div>
     </div>
-    <CanavaCreatorSectionDialog
+    <CanavaDesignerSectionDialog
+      v-model="showSectionDialog"
+      :section="currentSectionData"
+      @save="(event) => saveSection(event)"
+      @delete="(event) => deleteSection(event)"
+    />
+    <!-- <CanavaCreatorSectionDialog
       v-model="showSectionDialog"
       :data="currentSectionData"
       @add="(event) => newSection(event)"
       @modify="(event) => updateSection(event)"
       @remove="(event) => removeSection(event)"
-    />
+    /> -->
   </div>
 </template>
 
@@ -129,7 +135,8 @@ import { ref, computed, watch } from "vue";
 
 import { useColorStore } from "../../stores/color";
 
-import CanavaCreatorSectionDialog from "../canava/dialog/CanavaCreatorSectionDialog.vue";
+// import CanavaCreatorSectionDialog from "../canava/dialog/CanavaCreatorSectionDialog.vue";
+import CanavaDesignerSectionDialog from "../canava/dialog/CanavaDesignerSectionDialog.vue";
 
 // Instantiate our stores early so they are available
 const colorStore = useColorStore();
@@ -171,14 +178,23 @@ const updateSection = (section) => {
   value.value.sections[ix] = section;
 };
 
-const removeSection = (section) => {
-  console.log(section);
-  // Find index of section
-  const ix = value.value.sections.findIndex(
-    (element) => element.uid == section
+const saveSection = (section) => {
+  if(section.uid) {
+    // Update
+    updateSection(section);
+  } else {
+    // Add
+    section.uid = uuidv4();
+    newSection(section)
+  }
+}
+
+const deleteSection = (sectionKey) => {
+  currentSectionKey.value = sectionKey;
+  value.value.sections.splice(
+    value.value.sections.findIndex((item) => item.sectionKey === sectionKey),
+    1
   );
-  value.value.sections.splice(ix, 1);
-  // Delete Index
 };
 
 watch(
@@ -227,13 +243,6 @@ const triggerNew = () => {
   showSectionDialog.value = true;
 };
 
-const deleteSection = (sectionKey) => {
-  currentSectionKey.value = sectionKey;
-  value.value.sections.splice(
-    value.value.sections.findIndex((item) => item.sectionKey === sectionKey),
-    1
-  );
-};
 </script>
 
 <style lang="scss" scoped>

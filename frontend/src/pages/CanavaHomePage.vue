@@ -18,7 +18,7 @@
             </p>
             <p class="text-h6 text-shd-p-90 q-px-lg">
               We have over ten popular canvases with more coming weekly. Choose
-              a template below.
+              a template below to get started.
             </p>
             <p class="row text-center justify-center">
               <q-select
@@ -60,16 +60,18 @@
               <li>Unlimited free canvases</li>
               <li>Export and import data</li>
               <li>Create custom canvases</li>
+              <li>Canvases for each circle</li>
               <li>Multiple open canvases</li>
               <li>Access to all canvas templates</li>
-              <li>Multiple viewing options</li>
               <li>PNG image export, more coming</li>
               <li>Multiple fonts provided</li>
               <li>Runs on desktop or mobile</li>
               <li>10+ free canvas templates</li>
               <li>New canvases added weekly</li>
+              <li>Integrated with circles and OKR</li>
               <li>Localization support</li>
-              <li>Open source, easily self-hosted</li>
+              <li>Free and open source code</li>
+              <li>Easily self-hosted</li>
             </ul>
           </q-card-section>
         </q-card>

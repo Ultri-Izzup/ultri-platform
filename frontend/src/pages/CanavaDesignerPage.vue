@@ -258,7 +258,17 @@ const onDownloadClick = (targetCanvas = false) => {
       canavaVers: "1.0.0",
     };
   } else if (targetCanvas === 'ALL') {
-    canvases = {...canavaStore.storedCanvases}
+    canvases = {...canavaStore.storedCanvases, ...{ custom: {
+      name: canavaStore.canvasData.name,
+      completedOn: canavaStore.canvasData.completedOn,
+      completedBy: canavaStore.canvasData.completedBy,
+      attribution: canavaStore.canvasData.attribution,
+      version: canavaStore.canvasData.version,
+      sections: canavaStore.canvasData.sections,
+      sequenced: canavaStore.canvasData.sequenced ? true : false,
+      canavaVers: "1.0.0",
+    }}
+  }
   } else {
     canvases[targetCanvas] = canavaStore.storedCanvases[targetCanvas];
   }

@@ -273,8 +273,6 @@ const onDownloadClick = (targetCanvas = false) => {
     canvases[targetCanvas] = canavaStore.storedCanvases[targetCanvas];
   }
 
-
-
   var dataStr =
     "data:text/json;charset=utf-8," +
     encodeURIComponent(JSON.stringify({canvases: canvases}, 0, 2));

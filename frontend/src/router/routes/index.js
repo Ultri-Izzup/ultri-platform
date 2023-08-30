@@ -6,7 +6,9 @@ import circles from './circles'
 import cirkl from './cirkl'
 import okra from './okra'
 import org from './org'
+import platform from './platform'
 import features from './features'
+import tools from './tools'
 import debug from './debug'
 import catchall from './catchall'
 
@@ -20,7 +22,9 @@ const routes = [
   ...cirkl,
   ...okra,
   ...org,
+  ...platform,
   ...features,
+  ...tools,
   ...debug,
   ...catchall // Keep catchall last
 ]

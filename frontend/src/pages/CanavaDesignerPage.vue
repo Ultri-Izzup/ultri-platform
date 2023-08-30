@@ -200,13 +200,25 @@ const loadCanvasTemplate = () => {
 };
 
 const importUpload = (data) => {
-  data.sections.sort(
+  Object.entries(data.canvases).forEach(([key, value]) => {
+    console.log(`${key} ${value}`); // "a 5", "b 7", "c 9"
+    importUploadedCanvas(key, value);
+  });
+};
+
+const importUploadedCanvas = (namespace, canvas) => {
+  canvas.sections.sort(
     (a, b) =>
       a.gridRow.localeCompare(b.gridRow) ||
       a.gridColumn.localeCompare(b.gridColumn)
   );
 
-  canavaStore.canvasData = data;
+  if(namespace === 'custom') {
+    canavaStore.canvasData = canvas;
+  } else {
+    canavaStore.storedCanvases[namespace] = canvas;
+  }
+
 };
 
 const canvasOpts = canavaStore.canvasOpts;
@@ -216,15 +228,18 @@ const onUploadClick = () => {
   // Display dialog
   displayUpload.value = true;
 };
+
 const onDeleteClick = () => {
   console.log("Delete All Data for Current Canvas");
   reset();
 };
+
 const reset = () => {
   canavaStore.$reset();
   selectedCanvas.value = null;
   displayUpload.value = false;
 };
+
 const onDownloadClick = (targetCanvas = false) => {
   console.log("Download Data for " + targetCanvas);
 

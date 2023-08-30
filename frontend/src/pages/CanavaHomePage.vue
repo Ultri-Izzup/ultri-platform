@@ -22,6 +22,7 @@
             </p>
             <p class="row text-center justify-center">
               <q-select
+                filled
                 label="Canvas Template"
                 v-model="selectedCanvas"
                 :options="canavaStore.canvasOpts"

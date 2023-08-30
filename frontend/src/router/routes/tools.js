@@ -11,23 +11,7 @@ const routes = [
       {
         name: "toolsHome",
         path: "",
-        component: () => import("pages/MermaidEditorPage.vue")
-      }
-    ]
-  },
-  // MERMAID EDITOR
-  {
-    path: "/tools/editor/mermaid",
-    component: () => import("layouts/MainLayout.vue"),
-    meta: {
-      drawer: null,
-      app: "Tools"
-    },
-    children: [
-      {
-        name: "MermaidEditor",
-        path: "",
-        component: () => import("pages/MermaidEditorPage.vue")
+        component: () => import("src/pages/MarkdownEditorPage.vue")
       }
     ]
   },
@@ -43,7 +27,7 @@ const routes = [
       {
         name: "MarkdownEditor",
         path: "",
-        component: () => import("pages/MermaidEditorPage.vue")
+        component: () => import("src/pages/MarkdownEditorPage.vue")
       }
     ]
   },

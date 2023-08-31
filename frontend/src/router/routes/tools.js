@@ -47,6 +47,22 @@ const routes = [
       }
     ]
   },
+  // IMAGE EDITOR
+  {
+    path: "/tools/editor/image",
+    component: () => import("layouts/MainLayout.vue"),
+    meta: {
+      drawer: null,
+      app: "Tools"
+    },
+    children: [
+      {
+        name: "ImageEditor",
+        path: "",
+        component: () => import("pages/ImageEditorPage.vue")
+      }
+    ]
+  },
 
 ]
 export default routes;

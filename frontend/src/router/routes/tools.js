@@ -17,7 +17,7 @@ const routes = [
   },
   // MARKDOWN EDITOR
   {
-    path: "/tools/editor/markdown",
+    path: "/editors/markdown",
     component: () => import("layouts/MainLayout.vue"),
     meta: {
       drawer: null,
@@ -33,7 +33,7 @@ const routes = [
   },
   // JSON EDITOR
   {
-    path: "/tools/editor/json",
+    path: "/editors/json",
     component: () => import("layouts/MainLayout.vue"),
     meta: {
       drawer: null,
@@ -49,7 +49,7 @@ const routes = [
   },
   // IMAGE EDITOR
   {
-    path: "/tools/editor/image",
+    path: "/editors/image",
     component: () => import("layouts/MainLayout.vue"),
     meta: {
       drawer: null,

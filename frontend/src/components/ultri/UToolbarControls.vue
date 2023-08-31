@@ -7,24 +7,24 @@
             $t("nav.canava")
           }}</router-link>
         </span>
-        <span class="gt-md q-pr-lg">
+        <!-- <span class="gt-md q-pr-lg">
           <router-link to="/canvas" class="navbar-text-link" color="primary">{{
             $t("nav.canvas")
           }}</router-link>
-        </span>
+        </span> -->
         <span class="gt-md q-pr-lg" v-if="featureStore.enabled('pricing')">
           <router-link to="/pricing" class="navbar-text-link" color="primary">{{
             $t("nav.pricing")
           }}</router-link>
         </span>
-        <span class="gt-md q-pr-lg">
+        <!-- <span class="gt-md q-pr-lg">
           <router-link
             to="/calendar"
             class="navbar-text-link"
             color="primary"
             >{{ $t("nav.calendar") }}</router-link
           >
-        </span>
+        </span> -->
       </span>
       <q-toggle
         v-model="colorStore.darkMode"

@@ -28,13 +28,13 @@
                 </q-item-section>
               </q-item>
 
-              <q-item clickable v-close-popup href="/editors/audio">
+              <q-item clickable v-close-popup  tag="a" href="/editors/audio" target="_new">
                 <q-item-section>
                   <q-item-label>Audio</q-item-label>
                 </q-item-section>
               </q-item>
 
-              <q-item clickable v-close-popup href="/editors/openapi">
+              <q-item clickable v-close-popup tag="a" href="/editors/openapi" target="_new">
                 <q-item-section>
                   <q-item-label>OpenAPI</q-item-label>
                 </q-item-section>

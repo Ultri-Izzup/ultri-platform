@@ -40,13 +40,13 @@
             <!-- <q-space /><a href="https://coop.ultri.com" class="navbar-text-link"
               >Co-op Info</a
             > -->
-            <q-space />
+            <!-- <q-space />
             <router-link
               to="/products"
               class="navbar-text-link"
               color="primary"
               >{{ $t("footer.products", "Products") }}</router-link
-            >
+            > -->
             <q-space />
             <router-link
               to="/services"

@@ -7,6 +7,42 @@
             $t("nav.canava")
           }}</router-link>
         </span>
+        <span class="q-pr-lg">
+          <q-btn-dropdown flat color="primary" label="Editors" no-caps>
+            <q-list>
+              <q-item clickable v-close-popup href="/editors/markdown">
+                <q-item-section>
+                  <q-item-label>Markdown</q-item-label>
+                </q-item-section>
+              </q-item>
+
+              <q-item clickable v-close-popup href="/editors/json">
+                <q-item-section>
+                  <q-item-label>JSON</q-item-label>
+                </q-item-section>
+              </q-item>
+
+              <q-item clickable v-close-popup href="/editors/image">
+                <q-item-section>
+                  <q-item-label>Image</q-item-label>
+                </q-item-section>
+              </q-item>
+
+              <q-item clickable v-close-popup href="/editors/audio">
+                <q-item-section>
+                  <q-item-label>Audio</q-item-label>
+                </q-item-section>
+              </q-item>
+
+              <q-item clickable v-close-popup href="/editors/openapi">
+                <q-item-section>
+                  <q-item-label>OpenAPI</q-item-label>
+                </q-item-section>
+              </q-item>
+
+            </q-list>
+          </q-btn-dropdown>
+        </span>
         <!-- <span class="gt-md q-pr-lg">
           <router-link to="/canvas" class="navbar-text-link" color="primary">{{
             $t("nav.canvas")
@@ -66,5 +102,4 @@ const authStore = useAuthStore();
 const featureStore = useFeatureStore();
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>

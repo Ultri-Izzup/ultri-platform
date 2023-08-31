@@ -8,6 +8,9 @@ import okra from './okra'
 import org from './org'
 import platform from './platform'
 import features from './features'
+import products from './products'
+import projects from './projects'
+import services from './services'
 import tools from './tools'
 import debug from './debug'
 import catchall from './catchall'
@@ -23,6 +26,9 @@ const routes = [
   ...okra,
   ...org,
   ...platform,
+  ...products,
+  ...projects,
+  ...services,
   ...features,
   ...tools,
   ...debug,

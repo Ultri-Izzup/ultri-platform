@@ -86,6 +86,11 @@ const canvasConfigRoute = computed(() => {
         "/canava/template/" + route.params.canvasTemplate + "/designer";
       break;
     }
+    case "canavaCustomViewer": {
+      configRoute =
+        "/canava/custom/" + route.params.canvasTemplate + "/designer";
+      break;
+    }
   }
   return configRoute;
 });

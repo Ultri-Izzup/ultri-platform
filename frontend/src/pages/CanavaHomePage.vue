@@ -13,7 +13,7 @@
               {{ $t("canava.home.getStarted") }}
             </div>
             <q-separator></q-separator>
-            <div v-if="canavaStore.openCanvasOpts.length > 0">
+            <div v-if="canavaStore.openTemplateOpts.length > 0">
             <p class="text-h5 text-bold q-px-md q-pt-lg text-primary">
               Your canvases
             </p>
@@ -22,7 +22,7 @@
                 filled
                 label="Open Canvases"
                 v-model="selectedSavedCanvas"
-                :options="canavaStore.openCanvasOpts"
+                :options="canavaStore.openTemplateOpts"
                 @update:model-value="loadSavedCanvas()"
                 style="width: 80%"
                 class="text-center"

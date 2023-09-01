@@ -80,12 +80,14 @@ export const useCanavaStore = defineStore("canava", {
     canvasOpts() {
       return canvasOpts;
     },
-    openCanvasOpts() {
+    openTemplateOpts() {
       const openOpts = [];
 
       Object.entries(this.storedCanvases).forEach(([canvasId, canvasData]) => {
-        const optsEntry = { label: canvasData.name, value: canvasId }
-        openOpts.push(optsEntry)
+        if (!isValidUUID(canvasId)) {
+          const optsEntry = { label: canvasData.name, value: canvasId }
+          openOpts.push(optsEntry)
+        }
       })
 
       return openOpts;
@@ -129,6 +131,9 @@ export const useCanavaStore = defineStore("canava", {
 
       this.storedCanvases[template] = templateData;
 
+    },
+    resetCanvasData() {
+      this.canvasData = defaultObject;
     },
     $reset() {
       this.canvasData = { name: "", attribution: "", createdBy: "", createdAt: "", version: "", sections: [] };

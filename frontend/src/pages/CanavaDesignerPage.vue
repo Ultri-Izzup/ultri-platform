@@ -125,7 +125,7 @@ import { ref, computed, watch, isProxy, toRaw } from "vue";
 
 import { useI18n } from "vue-i18n";
 
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 
 import { v4 as uuidv4 } from "uuid";
 
@@ -153,6 +153,7 @@ import productCanvasData from "../data/canava/productCanvas.json";
 const { t } = useI18n();
 
 const route = useRoute();
+const router = useRouter();
 
 const auth = useAuthStore();
 const canavaStore = useCanavaStore();
@@ -172,6 +173,10 @@ const canavaViewerRoute = computed(() => {
     }
     case "canavaTemplateDesigner": {
       viewerRoute = "/canava/template/" + route.params.canvasTemplate;
+      break;
+    }
+    case "canavaCustomDesigner": {
+      viewerRoute = "/canava/custom/" + route.params.canvasTemplate;
       break;
     }
   }
@@ -333,11 +338,16 @@ const saveToCloud = (targetCanvas = false) => {
   //     2. replace with a uuid and store as a new canvas
 
   // Define canvasesobject
-  let canvases = {};
+  let canvas = {};
 
   if (!targetCanvas) {
-    // If no target defined, use the custom canvas from designer
-    canvases[uuidv4()] = {
+    // If no target defined, use the custom canvas from designer.
+    // We know this doesn't have a `uuid` as the `uid` yet.
+    console.log('SAVING DESIGNER CANVAS')
+    const newUuid = uuidv4();
+    canvas = {
+      uid: newUuid,
+      templateName: 'custom',
       name: canavaStore.canvasData.name,
       completedOn: canavaStore.canvasData.completedOn,
       completedBy: canavaStore.canvasData.completedBy,
@@ -347,8 +357,22 @@ const saveToCloud = (targetCanvas = false) => {
       sequenced: canavaStore.canvasData.sequenced ? true : false,
       canavaVers: "1.0.0",
     };
+
+    // @TODO - POST CANVAS TO API
+
+    // Save the canvas to the storedCanvases
+    canavaStore.storedCanvases[newUuid] = canvas;
+
+    // Clear the designer canvas data
+    canavaStore.resetCanvasData();
+
+    // Push the client to the saved canvas route
+    router.push({name: 'canavaCustomViewer', params: {canvasTemplate: newUuid}})
+
+
   } else if (targetCanvas === "ALL") {
     // Store in cloud every canvas we have stored locally
+    console.log('ALL CANVAS')
     canvases[uuidv4()] = {
       name: canavaStore.canvasData.name,
       completedOn: canavaStore.canvasData.completedOn,
@@ -377,19 +401,20 @@ const saveToCloud = (targetCanvas = false) => {
     // };
   } else {
     // Store this one particular canvas in the cloud
-    canvases[uuidv4()] = {
-      name: canavaStore.canvasData.name,
-      completedOn: canavaStore.canvasData.completedOn,
-      completedBy: canavaStore.canvasData.completedBy,
-      attribution: canavaStore.canvasData.attribution,
-      version: canavaStore.canvasData.version,
-      sections: canavaStore.canvasData.sections,
-      sequenced: canavaStore.canvasData.sequenced ? true : false,
-      canavaVers: "1.0.0",
-    };
+    console.log('THIS CANVAS',  selectedCanvas)
+    // canvases[uuidv4()] = {
+    //   name: canavaStore.canvasData.name,
+    //   completedOn: canavaStore.canvasData.completedOn,
+    //   completedBy: canavaStore.canvasData.completedBy,
+    //   attribution: canavaStore.canvasData.attribution,
+    //   version: canavaStore.canvasData.version,
+    //   sections: canavaStore.canvasData.sections,
+    //   sequenced: canavaStore.canvasData.sequenced ? true : false,
+    //   canavaVers: "1.0.0",
+    // };
   }
 
-  console.log("Saving to cloud...", canvases);
+  //console.log("Saving to cloud...", canvases);
 };
 </script>
 

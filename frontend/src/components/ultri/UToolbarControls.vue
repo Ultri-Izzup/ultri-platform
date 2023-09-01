@@ -77,7 +77,7 @@
       </span> -->
 
       <!-- MEMBER BUTTON -->
-      <span v-if="featureStore.enabled('auth')">
+      <span>
         <MemberButton></MemberButton>
         <q-tooltip>{{ $t("member.hint") }}</q-tooltip>
       </span>

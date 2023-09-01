@@ -83,6 +83,38 @@ const routes = [
       }
     ]
   },
+  // CUSTOM/SAVED CANVAS VIEWER
+  // Design changes override the design for the named canvas
+  {
+    path: "/canava/custom/:canvasTemplate",
+    component: () => import("layouts/MainLayout.vue"),
+    meta: {
+      drawer: null,
+      app: "Logbook"
+    },
+    children: [
+      {
+        name: "canavaCustomViewer",
+        path: "",
+        component: () => import("pages/CanavaViewerPage.vue")
+      }
+    ]
+  },
+  {
+    path: "/canava/custom/:canvasTemplate/designer",
+    component: () => import("layouts/MainLayout.vue"),
+    meta: {
+      drawer: null,
+      app: "Logbook"
+    },
+    children: [
+      {
+        name: "canavaCustomDesigner",
+        path: "",
+        component: () => import("pages/CanavaDesignerPage.vue")
+      }
+    ]
+  },
 
 
   {

@@ -31,7 +31,7 @@ export const useFeatureStore = defineStore("feature", {
 
   actions: {
     $reset() {
-      this.authEnabled = false;
+      this.authEnabled = true;
       this.pricingEnabled = false;
       this.sociocracyEnabled = false;
       this.memberDashboard = false;
@@ -41,6 +41,7 @@ export const useFeatureStore = defineStore("feature", {
       this.disabledCanvas = [ ];
     },
     enabled(feature) {
+      console.log(boolFeatures[feature])
       return this[boolFeatures[feature]];
     },
     canvasDisabled(canvas) {

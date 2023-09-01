@@ -9,6 +9,15 @@
       size="sm"
       ><q-tooltip>Configure</q-tooltip></q-btn
     >
+    <q-btn
+          @click="onDownloadClick(canvasTemplate)"
+          icon="mdi-download"
+          size="sm"
+          dense
+          flat
+          round
+          ><q-tooltip> Download </q-tooltip></q-btn
+        >
    <!-- <pre>TEMPLATE {{canvasTemplate}} TEMPLATECANVASES{{canavaStore.storedCanvases}} </pre> -->
     <CanavaViewer
       v-if="!canvasTemplate"
@@ -21,6 +30,7 @@
       v-model="canavaStore.storedCanvases[canvasTemplate]"
       @canvasSelected="(event) => canavaStore.loadCanvasTemplate(event)"
     ></CanavaViewer>
+    <a id="downloadAnchorElem" style="display: none"></a>
   </div>
 </template>
 
@@ -75,6 +85,48 @@ watch(
   },
   { immediate: true }
 );
+
+const onDownloadClick = (targetCanvas = false) => {
+  console.log("Download Data for " + targetCanvas);
+
+  // Define canvasesobject
+  let canvases = {};
+
+  if (!targetCanvas) {
+    canvases.custom = {
+      name: canavaStore.canvasData.name,
+      completedOn: canavaStore.canvasData.completedOn,
+      completedBy: canavaStore.canvasData.completedBy,
+      attribution: canavaStore.canvasData.attribution,
+      version: canavaStore.canvasData.version,
+      sections: canavaStore.canvasData.sections,
+      sequenced: canavaStore.canvasData.sequenced ? true : false,
+      canavaVers: "1.0.0",
+    };
+  } else if (targetCanvas === 'ALL') {
+    canvases = {...canavaStore.storedCanvases, ...{ custom: {
+      name: canavaStore.canvasData.name,
+      completedOn: canavaStore.canvasData.completedOn,
+      completedBy: canavaStore.canvasData.completedBy,
+      attribution: canavaStore.canvasData.attribution,
+      version: canavaStore.canvasData.version,
+      sections: canavaStore.canvasData.sections,
+      sequenced: canavaStore.canvasData.sequenced ? true : false,
+      canavaVers: "1.0.0",
+    }}
+  }
+  } else {
+    canvases[targetCanvas] = canavaStore.storedCanvases[targetCanvas];
+  }
+
+  var dataStr =
+    "data:text/json;charset=utf-8," +
+    encodeURIComponent(JSON.stringify({canvases: canvases}, 0, 2));
+  var dlAnchorElem = document.getElementById("downloadAnchorElem");
+  dlAnchorElem.setAttribute("href", dataStr);
+  dlAnchorElem.setAttribute("download", "canvas.json");
+  dlAnchorElem.click();
+};
 </script>
 
 <style lang="scss"></style>

@@ -37,6 +37,7 @@
     "vue-i18n": "^9.0.0",
     "vue-json-pretty": "^2.2.4",
     "vue-markdown-render": "^2.0.1",
+    "vue-mermaid-render": "^0.1.1",
     "vue-native-websocket-vue3": "^3.1.7",
     "vue-router": "^4.0.0",
     "vue3-mermaid": "^0.0.6",

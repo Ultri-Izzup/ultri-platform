@@ -3554,7 +3554,7 @@ merge2@^1.3.0, merge2@^1.4.1:
   resolved "https://registry.npmjs.org/merge2/-/merge2-1.4.1.tgz"
   integrity sha512-8q7VEgMJW4J8tcfVPy8g09NcQwZdbwFEqhe/WZkoIzjn/3TGDwtOCYtXGxA3O8tPzpczCCDgv+P2P5y00ZJOOg==
 
-mermaid@^10.4.0:
+mermaid@^10.2.4, mermaid@^10.4.0:
   version "10.4.0"
   resolved "https://registry.yarnpkg.com/mermaid/-/mermaid-10.4.0.tgz#f89bf0ada161cbbe4dba2776e805119f7245a102"
   integrity sha512-4QCQLp79lvz7UZxow5HUX7uWTPJOaQBVExduo91tliXC7v78i6kssZOPHxLL+Xs30KU72cpPn3g3imw/xm/gaw==
@@ -4865,6 +4865,13 @@ vue-markdown-render@^2.0.1:
   dependencies:
     markdown-it "^12.3.2"
     vue "^3.2.45"
+
+vue-mermaid-render@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/vue-mermaid-render/-/vue-mermaid-render-0.1.1.tgz#ea43585dd96e46547c5923db19091eaf0bce7793"
+  integrity sha512-7oqw9uiiKrG7bCZ+hqUGzgwamSlhqQQdxPngfGOXxLDJcEOtMzxirlXZ+tBm0ObfAJ2Qyt9kdOoMkbR9h/guWQ==
+  dependencies:
+    mermaid "^10.2.4"
 
 vue-native-websocket-vue3@^3.1.7:
   version "3.1.7"

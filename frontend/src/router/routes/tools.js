@@ -63,6 +63,22 @@ const routes = [
       }
     ]
   },
+    // MERMAID RENDER
+    {
+      path: "/viewer/mermaid",
+      component: () => import("layouts/MainLayout.vue"),
+      meta: {
+        drawer: null,
+        app: "Tools"
+      },
+      children: [
+        {
+          name: "MermaidRender",
+          path: "",
+          component: () => import("pages/MermaidRenderPage.vue")
+        }
+      ]
+    },
 
 ]
 export default routes;

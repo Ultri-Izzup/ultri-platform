@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { useStorage } from "@vueuse/core";
-import { v4 as uuidv4 } from "uuid";
+import { v4 as uuidv4, validate as isValidUUID } from "uuid";
 
 import businessModelData from "../data/canava/businessModel.json";
 import s3DelegationData from "../data/canava/s3Delegation.json";
@@ -79,6 +79,28 @@ export const useCanavaStore = defineStore("canava", {
   getters: {
     canvasOpts() {
       return canvasOpts;
+    },
+    openCanvasOpts() {
+      const openOpts = [];
+
+      Object.entries(this.storedCanvases).forEach(([canvasId, canvasData]) => {
+        const optsEntry = { label: canvasData.name, value: canvasId }
+        openOpts.push(optsEntry)
+      })
+
+      return openOpts;
+    },
+    savedCanvasOpts() {
+      const savedOpts = [];
+
+      Object.entries(this.storedCanvases).forEach(([canvasId, canvasData]) => {
+        if (isValidUUID(canvasId)) {
+          const optsEntry = { label: canvasData.name, value: canvasId }
+          savedOpts.push(optsEntry)
+        }
+      })
+
+      return savedOpts;
     }
   },
   actions: {

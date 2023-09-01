@@ -10,7 +10,9 @@ export default {
 
     },
     home: {
-      heading: "Canava - a better canvas"
+      heading: "Canava - a better canvas",
+      benefits: 'Benefits',
+      getStarted: 'Get Started'
     },
     component: {
       designer: {

@@ -13,14 +13,14 @@ const boolFeatures = {
 
 export const useFeatureStore = defineStore("feature", {
   state: () => ({
-    authEnabled: useStorage('authEnabled', false),
+    authEnabled: useStorage('authEnabled', true),
     pricingEnabled: useStorage('pricingEnabled', false),
     sociocracyOnly: useStorage('sociocracyOnly', false),
     memberDashboard: useStorage('memberDashboard', false),
     i18nEnabled: useStorage('i18nEnabled', false),
     dbEnabled: useStorage('dbEnabled', false),
     enabledLocales: useStorage('enabledLocales', ['en-US','ro']),
-    disabledCanvas: useStorage('disabledCanvas', [ 's3team', 'lean', 'coop'])
+    disabledCanvas: []
   }),
 
   getters: {

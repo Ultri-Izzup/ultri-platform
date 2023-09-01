@@ -10,26 +10,35 @@
         <q-card class="q-pa-sm fit">
           <q-card-section>
             <div class="text-h4 text-bold text-primary q-pb-sm">
-              {{ $t("canava.home.getStarted", "Get Started") }}
+              {{ $t("canava.home.getStarted") }}
             </div>
             <q-separator></q-separator>
-            <div v-if="auth.isSignedIn">
+            <div v-if="canavaStore.openCanvasOpts.length > 0">
             <p class="text-h5 text-bold q-px-md q-pt-lg text-primary">
-              Stored canvases
-            </p>
-            <p class="text-h6 text-shd-p-90 q-px-lg">
-              Access your saved canvases.
+              Your canvases
             </p>
             <p class="row text-center justify-center">
               <q-select
                 filled
-                label="Canvas Template"
-                v-model="selectedCanvas"
-                :options="canavaStore.canvasOpts"
-                @update:model-value="loadCanvasTemplate()"
+                label="Open Canvases"
+                v-model="selectedSavedCanvas"
+                :options="canavaStore.openCanvasOpts"
+                @update:model-value="loadSavedCanvas()"
                 style="width: 80%"
                 class="text-center"
-              ></q-select>
+              ><q-tooltip>The canvas you have open in this session</q-tooltip></q-select>
+            </p>
+            <p class="row text-center justify-center">
+              <q-select
+                filled
+                label="Saved Canvases"
+                v-model="selectedSavedCanvas"
+                :options="canavaStore.savedCanvasOpts"
+                @update:model-value="loadSavedCanvas()"
+                style="width: 80%"
+                class="text-center"
+                :disable="!auth.isSignedIn"
+              ><q-tooltip> {{ auth.isSignedIn ? 'Saved in the cloud' : 'You must sign in to view saved canvas' }} </q-tooltip></q-select>
             </p>
           </div>
             <p class="text-h5 text-bold q-px-md q-pt-lg text-primary">
@@ -73,7 +82,7 @@
         <q-card class="q-pa-sm fit">
           <q-card-section>
             <div class="text-h4 text-bold text-primary q-pb-sm">
-              {{ $t("canava.home.benfits", "Free Canava Benefits") }}
+              {{ $t("canava.home.benefits", "Free Canava Benefits") }}
             </div>
             <q-separator></q-separator>
             <ul class="text-h6 text-shd-p-90">
@@ -409,10 +418,16 @@ const canavaStore = useCanavaStore();
 const router = useRouter();
 
 const selectedCanvas = ref(null);
+const selectedSavedCanvas = ref(null);
 
 const loadCanvasTemplate = () => {
   console.log(selectedCanvas.value)
   router.push({ name: 'canavaTemplate', params: {canvasTemplate: selectedCanvas.value.value }})
+}
+
+const loadSavedCanvas = () => {
+  console.log(selectedSavedCanvas.value)
+  router.push({ name: 'canavaTemplate', params: {canvasTemplate: selectedSavedCanvas.value.value }})
 }
 
 const autoplay = ref(true);

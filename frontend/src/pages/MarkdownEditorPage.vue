@@ -4,9 +4,9 @@
       Markdown Editor
     </div>
     <div class="row flex fit q-pa-sm">
-    <MdEditor v-model="editorStore.md" language="en-US"/>
+    <MdEditor v-model="editorStore.md" language="en-US" @onSave="(event) => downloadData(event)"/>
     </div>
-
+    <a id="downloadAnchorElem" style="display: none"></a>
   </q-page>
 </template>
 
@@ -22,6 +22,17 @@ import { useEditorStore } from "../stores/editor";
 const editorStore = useEditorStore();
 
 const mdData = ref('');
+
+const downloadData = (data) => {
+  console.log(data)
+  var dataStr =
+    "data:text/json;charset=utf-8," +
+    encodeURIComponent(`${data}`);
+  var dlAnchorElem = document.getElementById("downloadAnchorElem");
+  dlAnchorElem.setAttribute("href", dataStr);
+  dlAnchorElem.setAttribute("download", "document.md");
+  dlAnchorElem.click();
+};
 
 </script>
 <style></style>

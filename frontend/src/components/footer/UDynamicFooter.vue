@@ -52,7 +52,7 @@
               to="/services"
               class="navbar-text-link"
               color="primary"
-              >{{ $t("footer.services", "Services") }}</router-link
+              >{{ $t("nav.services", "Services") }}</router-link
             >
           </div>
           <div class="col text-right justify-right">
@@ -79,7 +79,7 @@
             to="/services"
             class="navbar-text-link"
             color="primary"
-            >{{ $t("footer.services", "Services") }}</router-link
+            >{{ $t("nav.services", "Services") }}</router-link
           >
           <q-space /><a
             href="https://www.opensociocracy.org"

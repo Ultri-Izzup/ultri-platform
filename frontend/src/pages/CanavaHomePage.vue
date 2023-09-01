@@ -13,6 +13,25 @@
               {{ $t("canava.home.getStarted", "Get Started") }}
             </div>
             <q-separator></q-separator>
+            <div v-if="auth.isSignedIn">
+            <p class="text-h5 text-bold q-px-md q-pt-lg text-primary">
+              Stored canvases
+            </p>
+            <p class="text-h6 text-shd-p-90 q-px-lg">
+              Access your saved canvases.
+            </p>
+            <p class="row text-center justify-center">
+              <q-select
+                filled
+                label="Canvas Template"
+                v-model="selectedCanvas"
+                :options="canavaStore.canvasOpts"
+                @update:model-value="loadCanvasTemplate()"
+                style="width: 80%"
+                class="text-center"
+              ></q-select>
+            </p>
+          </div>
             <p class="text-h5 text-bold q-px-md q-pt-lg text-primary">
               Popular Canvas Templates
             </p>

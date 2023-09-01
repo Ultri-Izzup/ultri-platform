@@ -47,7 +47,7 @@
         </q-item-section>
       </q-item>
       -->
-      <q-item clickable v-close-popup v-if="authStore.isSignedIn && ufs.enabled('dashboard')" to="/dashboard">
+      <!-- <q-item clickable v-close-popup v-if="authStore.isSignedIn && ufs.enabled('dashboard')" to="/dashboard">
         <q-item-section avatar>
           <q-icon name="mdi-view-dashboard" color="primary" />
         </q-item-section>
@@ -62,6 +62,15 @@
         </q-item-section>
         <q-item-section>
           <q-item-label>{{ $t("nav.organizations") }}</q-item-label>
+        </q-item-section>
+      </q-item> -->
+
+      <q-item clickable v-close-popup v-if="authStore.isSignedIn" to="/canava">
+        <q-item-section avatar>
+          <q-icon name="mdi-artboard" color="primary" />
+        </q-item-section>
+        <q-item-section>
+          <q-item-label>{{ $t("nav.storedCanvas") }}</q-item-label>
         </q-item-section>
       </q-item>
 

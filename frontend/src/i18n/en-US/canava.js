@@ -10,7 +10,7 @@ export default {
 
     },
     home: {
-      heading: "A better canvas solution"
+      heading: "Canava - a better canvas"
     },
     component: {
       designer: {
@@ -19,12 +19,6 @@ export default {
       template: {
         title: "Canava Template"
       },
-      editor: {
-        title: "Canava - Canvas Editor DEPRECATED"
-      },
-      renderer: {
-        title: "Canava - Canvas Display DEPRECATED"
-      }
     }
   }
 }

@@ -21,6 +21,8 @@ export default {
     publish: "Publish",
     share: "Share",
     sell: "Sell",
+    storedCanvas: "Stored canvas",
+    services: "Services",
     govern: "Govern",
     secure: "Secure",
     "co-op": "Co-op",

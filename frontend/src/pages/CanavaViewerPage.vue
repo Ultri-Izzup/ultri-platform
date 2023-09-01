@@ -10,15 +10,35 @@
       ><q-tooltip>Configure</q-tooltip></q-btn
     >
     <q-btn
-          @click="onDownloadClick(canvasTemplate)"
-          icon="mdi-download"
-          size="sm"
-          dense
-          flat
-          round
-          ><q-tooltip> Download </q-tooltip></q-btn
-        >
-   <!-- <pre>TEMPLATE {{canvasTemplate}} TEMPLATECANVASES{{canavaStore.storedCanvases}} </pre> -->
+      @click="onDownloadClick(canvasTemplate)"
+      icon="mdi-download"
+      size="sm"
+      dense
+      flat
+      round
+      ><q-tooltip> Download </q-tooltip></q-btn
+    >
+    <q-btn
+      :disabled="!auth.isSignedIn"
+      @click="saveToCloud(canvasTemplate)"
+      icon="mdi-content-save"
+      size="sm"
+      dense
+      flat
+      round
+      ><q-tooltip> {{ auth.isSignedIn ? 'Save canvas to cloud' : 'Login to save to cloud' }}</q-tooltip></q-btn
+    >
+    <!-- <q-btn
+      :disabled="!auth.isSignedIn"
+      @click="saveToCloud(canvasTemplate)"
+      icon="mdi-content-save-all"
+      size="sm"
+      dense
+      flat
+      round
+      ><q-tooltip> {{ auth.isSignedIn ? 'Save all data to cloud' : 'Login to save to cloud' }}</q-tooltip></q-btn
+    > -->
+    <!-- <pre>TEMPLATE {{canvasTemplate}} TEMPLATECANVASES{{canavaStore.storedCanvases}} </pre> -->
     <CanavaViewer
       v-if="!canvasTemplate"
       v-model="canavaStore.canvasData"
@@ -37,12 +57,17 @@
 <script setup>
 import { ref, watch, computed } from "vue";
 import { useRoute } from "vue-router";
+import { v4 as uuidv4 } from "uuid";
+
 // Import stores
+import { useAuthStore } from "../stores/auth";
 import { useCanavaStore } from "../stores/canava";
+
 
 // Import the individual canvas SFC module
 import CanavaViewer from "../components/canava/CanavaViewer.vue";
 
+const auth = useAuthStore();
 const canavaStore = useCanavaStore();
 
 const canvasTemplate = ref(null);
@@ -103,8 +128,51 @@ const onDownloadClick = (targetCanvas = false) => {
       sequenced: canavaStore.canvasData.sequenced ? true : false,
       canavaVers: "1.0.0",
     };
-  } else if (targetCanvas === 'ALL') {
-    canvases = {...canavaStore.storedCanvases, ...{ custom: {
+  } else if (targetCanvas === "ALL") {
+    canvases = {
+      ...canavaStore.storedCanvases,
+      ...{
+        custom: {
+          name: canavaStore.canvasData.name,
+          completedOn: canavaStore.canvasData.completedOn,
+          completedBy: canavaStore.canvasData.completedBy,
+          attribution: canavaStore.canvasData.attribution,
+          version: canavaStore.canvasData.version,
+          sections: canavaStore.canvasData.sections,
+          sequenced: canavaStore.canvasData.sequenced ? true : false,
+          canavaVers: "1.0.0",
+        },
+      },
+    };
+  } else {
+    canvases[targetCanvas] = canavaStore.storedCanvases[targetCanvas];
+  }
+
+  var dataStr =
+    "data:text/json;charset=utf-8," +
+    encodeURIComponent(JSON.stringify({ canvases: canvases }, 0, 2));
+  var dlAnchorElem = document.getElementById("downloadAnchorElem");
+  dlAnchorElem.setAttribute("href", dataStr);
+  dlAnchorElem.setAttribute("download", "canvas.json");
+  dlAnchorElem.click();
+};
+
+const saveToCloud = (targetCanvas = false) => {
+  console.log("Saving to cloud " + targetCanvas);
+
+  // Loop through canvases
+  // If the canvas prop is a uuid, it has already been stored in the cloud and we need to update that record
+  //
+  // If the canvas prop is an expected string:
+  //     1. make the canvas origin a prop on the canvas
+  //     2. replace with a uuid and store as a new canvas
+
+  // Define canvasesobject
+  let canvases = {};
+
+  if (!targetCanvas) {
+    // If no target defined, use the custom canvas from designer
+    canvases[uuidv4()] = {
       name: canavaStore.canvasData.name,
       completedOn: canavaStore.canvasData.completedOn,
       completedBy: canavaStore.canvasData.completedBy,
@@ -113,19 +181,51 @@ const onDownloadClick = (targetCanvas = false) => {
       sections: canavaStore.canvasData.sections,
       sequenced: canavaStore.canvasData.sequenced ? true : false,
       canavaVers: "1.0.0",
-    }}
-  }
+    };
+  } else if (targetCanvas === "ALL") {
+    // Store in cloud every canvas we have stored locally
+    canvases[uuidv4()] = {
+      name: canavaStore.canvasData.name,
+      completedOn: canavaStore.canvasData.completedOn,
+      completedBy: canavaStore.canvasData.completedBy,
+      attribution: canavaStore.canvasData.attribution,
+      version: canavaStore.canvasData.version,
+      sections: canavaStore.canvasData.sections,
+      sequenced: canavaStore.canvasData.sequenced ? true : false,
+      canavaVers: "1.0.0",
+    };
+    // canvases = {
+    //   ...canavaStore.storedCanvases,
+    //   ...{
+    //     [uuidv4()]: {
+    //       name: canavaStore.canvasData.name,
+    //       completedOn: canavaStore.canvasData.completedOn,
+    //       completedBy: canavaStore.canvasData.completedBy,
+    //       attribution: canavaStore.canvasData.attribution,
+    //       version: canavaStore.canvasData.version,
+    //       sections: canavaStore.canvasData.sections,
+
+    //       sequenced: canavaStore.canvasData.sequenced ? true : false,
+    //       canavaVers: "1.0.0",
+    //     },
+    //   },
+    // };
   } else {
-    canvases[targetCanvas] = canavaStore.storedCanvases[targetCanvas];
+    // Store this one particular canvas in the cloud
+    canvases[uuidv4()] = {
+      name: canavaStore.canvasData.name,
+      completedOn: canavaStore.canvasData.completedOn,
+      completedBy: canavaStore.canvasData.completedBy,
+      attribution: canavaStore.canvasData.attribution,
+      version: canavaStore.canvasData.version,
+      sections: canavaStore.canvasData.sections,
+      sequenced: canavaStore.canvasData.sequenced ? true : false,
+      canavaVers: "1.0.0",
+    };
   }
 
-  var dataStr =
-    "data:text/json;charset=utf-8," +
-    encodeURIComponent(JSON.stringify({canvases: canvases}, 0, 2));
-  var dlAnchorElem = document.getElementById("downloadAnchorElem");
-  dlAnchorElem.setAttribute("href", dataStr);
-  dlAnchorElem.setAttribute("download", "canvas.json");
-  dlAnchorElem.click();
+  console.log('Saving to cloud...', canvases)
+
 };
 </script>
 

@@ -220,6 +220,11 @@ watch(
         s.gridRow +
         "; } \n";
       dynamicStyles = dynamicStyles + sectionCSS;
+
+      // Fix null attribution
+      if(!value.value.attribution) {
+        value.value.attribution = ''
+      }
     });
 
     dynamicStyles = dynamicStyles + " } \n";

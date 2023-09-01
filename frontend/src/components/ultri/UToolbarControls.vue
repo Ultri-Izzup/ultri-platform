@@ -2,7 +2,7 @@
   <div>
     <div>
       <span v-if="route.name != 'canvasPage'">
-        <span class="q-pr-lg">
+        <span class="q-pr-lg text-body2 text-weight-bold">
           <router-link to="/canava" class="navbar-text-link" color="primary">{{
             $t("nav.canava")
           }}</router-link>

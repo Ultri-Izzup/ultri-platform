@@ -9,7 +9,7 @@
       <vue-jsoneditor
         height="400"
         mode="tree"
-        v-model:json="jsonData"
+        v-model:json="editorStore.json"
       />
     </div>
   </q-page>
@@ -25,6 +25,5 @@ import { useEditorStore } from "../stores/editor";
 
 const editorStore = useEditorStore();
 
-const jsonData = ref(null);
 </script>
 <style></style>

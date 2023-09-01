@@ -4,7 +4,7 @@
       Markdown Editor
     </div>
     <div class="row flex fit q-pa-sm">
-    <MdEditor v-model="mdData" language="en-US"/>
+    <MdEditor v-model="editorStore.md" language="en-US"/>
     </div>
 
   </q-page>

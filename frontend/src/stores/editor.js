@@ -3,8 +3,8 @@ import { useStorage } from "@vueuse/core";
 
 export const useEditorStore = defineStore("editor", {
   state: () => ({
-    md: useStorage("md", null),
-    json: useStorage("json", null),
+    md: useStorage("md", ''),
+    json: useStorage("json", ''),
   }),
   getters: {
 

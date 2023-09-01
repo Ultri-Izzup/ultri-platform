@@ -89,7 +89,7 @@ export const useCanavaStore = defineStore("canava", {
         if(!item.uid) {
           item.uid = uuidv4();
         }
-        console.log(item, index);
+        //console.log(item, index);
       });
 
       this.canvasData = templateData;
@@ -102,7 +102,7 @@ export const useCanavaStore = defineStore("canava", {
         if(!item.uid) {
           item.uid = uuidv4();
         }
-        console.log(item, index);
+        //console.log(item, index);
       });
 
       this.storedCanvases[template] = templateData;

@@ -164,7 +164,7 @@ const displayUpload = ref(false);
 
 const canavaViewerRoute = computed(() => {
   let viewerRoute = "";
-  console.log(route.name);
+  //console.log(route.name);
   switch (route.name) {
     case "canavaDesigner": {
       viewerRoute = "/canava/designer/view";

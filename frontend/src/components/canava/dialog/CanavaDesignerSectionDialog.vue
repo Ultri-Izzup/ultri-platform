@@ -136,7 +136,7 @@ const props = defineProps(["section"]);
 
 const editSection = ref({...props.section});
 
-console.log(editSection)
+// console.log(editSection)
 
 watch(
   () => props.section,

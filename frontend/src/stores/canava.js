@@ -80,6 +80,9 @@ export const useCanavaStore = defineStore("canava", {
     canvasOpts() {
       return canvasOpts;
     },
+    canvasMap() {
+      return canvasMap;
+    },
     openTemplateOpts() {
       const openOpts = [];
 

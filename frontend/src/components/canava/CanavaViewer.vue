@@ -150,7 +150,7 @@
             @delete="(event) => deleteItem(event)"
           />
         </div>
-        <div v-else class="q-ma-sm">
+        <!-- <div v-else class="q-ma-sm">
           <div class="text-h6">Select a Canvas Template</div>
           <q-select
             v-model="selectedCanvas"
@@ -158,7 +158,7 @@
             :options="canvasOpts"
             @update:model-value="emit('canvasSelected', selectedCanvas.value)"
           />
-        </div>
+        </div> -->
       </div>
       <div class="row full-width text-center q-pa-sm">
         <div class="col-12 q-pa-lg" v-html="value.attribution"></div>

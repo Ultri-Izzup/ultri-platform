@@ -77,10 +77,10 @@
       </span> -->
 
       <!-- MEMBER BUTTON -->
-      <span>
+      <!-- <span>
         <MemberButton></MemberButton>
         <q-tooltip>{{ $t("member.hint") }}</q-tooltip>
-      </span>
+      </span> -->
     </div>
   </div>
 </template>

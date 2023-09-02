@@ -26,7 +26,7 @@
       dense
       flat
       round
-      ><q-tooltip> {{ auth.isSignedIn ? 'Save canvas to cloud' : 'Login to save to cloud' }}</q-tooltip></q-btn
+      ><q-tooltip> {{ auth.isSignedIn ? 'Save canvas' : 'Sign in to save' }}</q-tooltip></q-btn
     >
     <!-- <q-btn
       :disabled="!auth.isSignedIn"
@@ -58,7 +58,7 @@
 
 <script setup>
 import { ref, watch, computed } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { v4 as uuidv4 } from "uuid";
 
 // Import stores
@@ -75,6 +75,7 @@ const canavaStore = useCanavaStore();
 const canvasTemplate = ref(null);
 
 const route = useRoute();
+const router = useRouter();
 
 const canvasConfigRoute = computed(() => {
   let configRoute = "";
@@ -175,63 +176,31 @@ const saveToCloud = (targetCanvas = false) => {
   //     2. replace with a uuid and store as a new canvas
 
   // Define canvasesobject
-  let canvases = {};
+  let canvas = {};
 
   if (!targetCanvas) {
-    // If no target defined, use the custom canvas from designer
-    canvases[uuidv4()] = {
-      name: canavaStore.canvasData.name,
-      completedOn: canavaStore.canvasData.completedOn,
-      completedBy: canavaStore.canvasData.completedBy,
-      attribution: canavaStore.canvasData.attribution,
-      version: canavaStore.canvasData.version,
-      sections: canavaStore.canvasData.sections,
-      sequenced: canavaStore.canvasData.sequenced ? true : false,
-      canavaVers: "1.0.0",
-    };
+    // If no target defined, use the custom canvas from designer.
+    // We know this doesn't have a `uuid` as the `uid` yet.
+    console.log('SAVING DESIGNER CANVAS')
+    const newUuid = canavaStore.saveDesignerCanvas()
+
+    // Push the client to the saved canvas route
+    router.push({name: 'canavaTemplate', params: {canvasTemplate: newUuid}})
+
   } else if (targetCanvas === "ALL") {
     // Store in cloud every canvas we have stored locally
-    canvases[uuidv4()] = {
-      name: canavaStore.canvasData.name,
-      completedOn: canavaStore.canvasData.completedOn,
-      completedBy: canavaStore.canvasData.completedBy,
-      attribution: canavaStore.canvasData.attribution,
-      version: canavaStore.canvasData.version,
-      sections: canavaStore.canvasData.sections,
-      sequenced: canavaStore.canvasData.sequenced ? true : false,
-      canavaVers: "1.0.0",
-    };
-    // canvases = {
-    //   ...canavaStore.storedCanvases,
-    //   ...{
-    //     [uuidv4()]: {
-    //       name: canavaStore.canvasData.name,
-    //       completedOn: canavaStore.canvasData.completedOn,
-    //       completedBy: canavaStore.canvasData.completedBy,
-    //       attribution: canavaStore.canvasData.attribution,
-    //       version: canavaStore.canvasData.version,
-    //       sections: canavaStore.canvasData.sections,
+    console.log('ALL CANVAS')
 
-    //       sequenced: canavaStore.canvasData.sequenced ? true : false,
-    //       canavaVers: "1.0.0",
-    //     },
-    //   },
-    // };
   } else {
     // Store this one particular canvas in the cloud
-    canvases[uuidv4()] = {
-      name: canavaStore.canvasData.name,
-      completedOn: canavaStore.canvasData.completedOn,
-      completedBy: canavaStore.canvasData.completedBy,
-      attribution: canavaStore.canvasData.attribution,
-      version: canavaStore.canvasData.version,
-      sections: canavaStore.canvasData.sections,
-      sequenced: canavaStore.canvasData.sequenced ? true : false,
-      canavaVers: "1.0.0",
-    };
-  }
+    console.log('SAVE THIS CANVAS',  targetCanvas)
 
-  console.log('Saving to cloud...', canvases)
+    // Save the canvas to the storedCanvases
+    const canvasTemplate = canavaStore.saveTemplateCanvas(targetCanvas);
+
+    // Push the client to the saved canvas route
+    router.push({name: 'canavaTemplate', params: {canvasTemplate: canvasTemplate}})
+  }
 
 };
 </script>

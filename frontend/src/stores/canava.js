@@ -116,8 +116,65 @@ export const useCanavaStore = defineStore("canava", {
     }
   },
   actions: {
-    saveCanvas(canvas) {
+    saveDesignerCanvas() {
 
+      const data = this.canvasData;
+
+      // add the source template to the canvas object
+      data.sourceTemplate = 'custom'
+
+      // new Uid
+      const newUuid = uuidv4();
+
+      // add the Uid to the canvas object
+      data.uid = newUuid
+
+      // save to API
+
+      // add to savedCanvases using Uid
+      this.storedCanvases[newUuid] = data;
+
+      this.resetCanvasData();
+
+      return newUuid;
+
+    },
+    saveTemplateCanvas(canvasTemplate) {
+      console.log(canvasTemplate);
+
+      if(isValidUUID(canvasTemplate)) {
+        // this has already been saved, we must update it.
+        console.log('Updating ' + canvasTemplate)
+
+        // save to API
+
+      } else {
+        console.log('Create new from ' + canvasTemplate)
+        // get the current data
+        const data = this.storedCanvases[canvasTemplate]
+
+        // add the source template to the canvas object
+        data.sourceTemplate = canvasTemplate
+
+        // new Uid
+        const newUuid = uuidv4();
+
+        // add the Uid to the canvas object
+        data.uid = newUuid
+        console.log(data)
+
+        // save to API
+
+        // add to savedCanvases using Uid
+        this.storedCanvases[newUuid] = data;
+
+        console.log(this.storedCanvases[newUuid])
+
+        // remove template name from savedCanvases
+        delete this.storedCanvases[canvasTemplate]
+
+        return newUuid;
+      }
     },
     loadCanvasTemplate(template) {
       const templateData = canvasMap[template];

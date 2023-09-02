@@ -52,7 +52,7 @@
     </div>
 
     <q-separator />
-    <div id="canvas-image-wrapper">
+    <div v-if="value" id="canvas-image-wrapper">
       <div class="row q-pa-md full-width">
         <span class="text-h3 full-width">{{ value.name }}</span>
         <q-space></q-space>
@@ -264,28 +264,29 @@ watch(
   value,
   (newVal, oldVal) => {
     let dynamicStyles = "@media screen and (min-width: 864px) { \n";
+    console.log(value);
+    if (value.value) {
+      value.value.sections.forEach((s) => {
+        const sectionCSS =
+          "." +
+          s.sectionKey +
+          " { grid-column: " +
+          s.gridColumn +
+          "; grid-row: " +
+          s.gridRow +
+          "; } \n";
 
-    value.value.sections.forEach((s) => {
-      const sectionCSS =
-        "." +
-        s.sectionKey +
-        " { grid-column: " +
-        s.gridColumn +
-        "; grid-row: " +
-        s.gridRow +
-        "; } \n";
+        dynamicStyles = dynamicStyles + sectionCSS;
 
-      dynamicStyles = dynamicStyles + sectionCSS;
-
-      if(s.sectionKey === currentSectionKey.value) {
-        currentSectionData.value = s
-      }
-    });
+        if (s.sectionKey === currentSectionKey.value) {
+          currentSectionData.value = s;
+        }
+      });
+    }
 
     dynamicStyles = dynamicStyles + " } \n";
 
     sheet.innerHTML = dynamicStyles;
-
   },
   { immediate: true }
 );

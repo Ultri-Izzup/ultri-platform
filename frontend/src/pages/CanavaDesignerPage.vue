@@ -53,7 +53,6 @@
 
 
         <q-btn
-          :disabled="!auth.isSignedIn"
           @click="saveToCloud(canvasTemplate)"
           icon="mdi-content-save"
           size="md"
@@ -63,12 +62,12 @@
           ><q-tooltip>
             {{
               auth.isSignedIn
-                ? "Save canvas to cloud"
-                : "Login to save to cloud"
+                ? "Save canvas"
+                : "Sign in to save"
             }}</q-tooltip
           ></q-btn
         >
-        <q-btn
+        <!-- <q-btn
           :disabled="!auth.isSignedIn"
           @click="saveToCloud(canvasTemplate)"
           icon="mdi-content-save-all"
@@ -83,7 +82,7 @@
                 : "Login to save to cloud"
             }}</q-tooltip
           ></q-btn
-        >
+        > -->
 
       </q-toolbar>
       <q-toolbar v-if="showDeleteOpts" class="col-12 col-md-6">
@@ -238,7 +237,7 @@ const loadCanvasTemplate = () => {
     if (!item.uid) {
       item.uid = uuidv4();
     }
-    console.log(item, index);
+    //console.log(item, index);
   });
 
   canavaStore.canvasData = templateData;
@@ -347,20 +346,10 @@ const saveToCloud = (targetCanvas = false) => {
     // If no target defined, use the custom canvas from designer.
     // We know this doesn't have a `uuid` as the `uid` yet.
     console.log('SAVING DESIGNER CANVAS')
-    const newUuid = uuidv4();
-    canvas = canavaStore.canvasData;
-    canvas.uid = newUuid;
-
-    // @TODO - POST CANVAS TO API
-
-    // Save the canvas to the storedCanvases
-    canavaStore.storedCanvases[newUuid] = canvas;
-
-    // Clear the designer canvas data
-    canavaStore.resetCanvasData();
+    const newUuid = canavaStore.saveDesignerCanvas()
 
     // Push the client to the saved canvas route
-    router.push({name: 'canavaTemplateViewer', params: {canvasTemplate: newUuid}})
+    router.push({name: 'canavaTemplate', params: {canvasTemplate: newUuid}})
 
   } else if (targetCanvas === "ALL") {
     // Store in cloud every canvas we have stored locally
@@ -368,24 +357,15 @@ const saveToCloud = (targetCanvas = false) => {
 
   } else {
     // Store this one particular canvas in the cloud
-    console.log('THIS CANVAS',  targetCanvas)
-    console.log(canavaStore.storedCanvases[targetCanvas])
-    const canvas = canavaStore.storedCanvases[targetCanvas]
-
-
-    // @TODO - POST CANVAS TO API
+    console.log('SAVE THIS CANVAS',  targetCanvas)
 
     // Save the canvas to the storedCanvases
-    canavaStore.storedCanvases[newUuid] = canvas;
-
-    // Clear the old template data
-    delete canavaStore.storedCanvases[targetCanvas];
+    const canvasTemplate = canavaStore.saveTemplateCanvas(targetCanvas);
 
     // Push the client to the saved canvas route
-    router.push({name: 'canavaTemplate', params: {canvasTemplate: newUuid}})
+    router.push({name: 'canavaTemplate', params: {canvasTemplate: canvasTemplate}})
   }
 
-  //console.log("Saving to cloud...", canvases);
 };
 </script>
 

@@ -116,6 +116,9 @@ export const useCanavaStore = defineStore("canava", {
     }
   },
   actions: {
+    saveCanvas(canvas) {
+
+    },
     loadCanvasTemplate(template) {
       const templateData = canvasMap[template];
 

@@ -13,7 +13,7 @@
               {{ $t("canava.home.getStarted") }}
             </div>
             <q-separator></q-separator>
-            <div v-if="canavaStore.openTemplateOpts.length > 0">
+            <div v-if="canavaStore.openTemplateOpts.length > 0 || canavaStore.savedCanvasOpts.length > 0">
             <p class="text-h5 text-bold q-px-md q-pt-lg text-primary">
               Your canvases
             </p>

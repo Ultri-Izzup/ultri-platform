@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="value">
     <div class="row q-pa-md">
       <q-input label="Canvas Name" v-model="value.name"></q-input
       ><q-space></q-space
@@ -50,19 +50,15 @@
           :dense="$q.screen.lt.md"
           :toolbar="[
             ['bold', 'italic', 'subscript', 'superscript'],
-            [{
+            [
+              {
                 icon: 'mdi-format-size',
                 fixedLabel: true,
                 fixedIcon: true,
                 list: 'no-icons',
-                options: [
-                  'size-1',
-                  'size-2',
-                  'size-3',
-                  'size-4',
-                  'size-5',
-                ],
-            }],
+                options: ['size-1', 'size-2', 'size-3', 'size-4', 'size-5'],
+              },
+            ],
             [
               {
                 icon: $q.iconSet.editor.font,
@@ -79,7 +75,7 @@
                   'times_new_roman',
                   'verdana',
                 ],
-              }
+              },
             ],
             ['hr', 'link'],
             ['quote', 'unordered', 'ordered'],
@@ -180,15 +176,15 @@ const updateSection = (section) => {
 };
 
 const saveSection = (section) => {
-  if(section.uid) {
+  if (section.uid) {
     // Update
     updateSection(section);
   } else {
     // Add
     section.uid = uuidv4();
-    newSection(section)
+    newSection(section);
   }
-}
+};
 
 const deleteSection = (sectionKey) => {
   currentSectionKey.value = sectionKey;
@@ -203,30 +199,32 @@ watch(
   (newVal, oldVal) => {
     let dynamicStyles = "@media screen and (min-width: 864px) { \n";
 
-    value.value.sections.sort(
-      (a, b) =>
-        (a.gridRow && b.gridRow && a.gridRow.localeCompare(b.gridRow)) ||
-        (a.gridColumn &&
-          b.gridColumn &&
-          a.gridColumn.localeCompare(b.gridColumn))
-    );
+    if (value.value) {
+      value.value.sections.sort(
+        (a, b) =>
+          (a.gridRow && b.gridRow && a.gridRow.localeCompare(b.gridRow)) ||
+          (a.gridColumn &&
+            b.gridColumn &&
+            a.gridColumn.localeCompare(b.gridColumn))
+      );
 
-    value.value.sections.forEach((s) => {
-      const sectionCSS =
-        "." +
-        s.sectionKey +
-        " { grid-column: " +
-        s.gridColumn +
-        "; grid-row: " +
-        s.gridRow +
-        "; } \n";
-      dynamicStyles = dynamicStyles + sectionCSS;
+      value.value.sections.forEach((s) => {
+        const sectionCSS =
+          "." +
+          s.sectionKey +
+          " { grid-column: " +
+          s.gridColumn +
+          "; grid-row: " +
+          s.gridRow +
+          "; } \n";
+        dynamicStyles = dynamicStyles + sectionCSS;
 
-      // Fix null attribution
-      if(!value.value.attribution) {
-        value.value.attribution = ''
-      }
-    });
+        // Fix null attribution
+        if (!value.value.attribution) {
+          value.value.attribution = "";
+        }
+      });
+    }
 
     dynamicStyles = dynamicStyles + " } \n";
 
@@ -248,7 +246,6 @@ const triggerNew = () => {
   currentSectionData.value = { instructions: "" };
   showSectionDialog.value = true;
 };
-
 </script>
 
 <style lang="scss" scoped>

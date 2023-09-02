@@ -36,7 +36,7 @@
 
               <q-item clickable v-close-popup tag="a" href="/editors/openapi" target="_new">
                 <q-item-section>
-                  <q-item-label>Swagger</q-item-label>
+                  <q-item-label>OpenAPI</q-item-label>
                 </q-item-section>
               </q-item>
 
@@ -48,11 +48,11 @@
             $t("nav.canvas")
           }}</router-link>
         </span> -->
-        <!-- <span class="gt-md q-pr-lg" v-if="featureStore.enabled('pricing')">
+        <span class="gt-md q-pr-lg" v-if="featureStore.enabled('pricing')">
           <router-link to="/pricing" class="navbar-text-link" color="primary">{{
             $t("nav.pricing")
           }}</router-link>
-        </span> -->
+        </span>
         <!-- <span class="gt-md q-pr-lg">
           <router-link
             to="/calendar"
@@ -70,17 +70,17 @@
         size="sm"
       ></q-toggle>
       <!-- NOTIFICATIONS BUTTON -->
-
-      <!-- <span v-if="featureStore.enabled('auth') && authStore.isSignedIn">
+<!--
+      <span v-if="featureStore.enabled('auth') && authStore.isSignedIn">
         <NotificationsButton></NotificationsButton>
         <q-tooltip>{{ $t("notifications.hint") }}</q-tooltip>
       </span> -->
 
       <!-- MEMBER BUTTON -->
-      <!-- <span>
+      <span v-if="featureStore.enabled('auth')">
         <MemberButton></MemberButton>
         <q-tooltip>{{ $t("member.hint") }}</q-tooltip>
-      </span> -->
+      </span>
     </div>
   </div>
 </template>

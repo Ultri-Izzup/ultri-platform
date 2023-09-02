@@ -16,44 +16,44 @@ import productCanvasData from "../data/canava/productCanvas.json";
 const canvasOpts = [
   {
     label: "Business Model Canvas",
-    value: "businessModel",
+    value: "businessModel"
   },
   {
     label: "Lean Canvas",
-    value: "leanCanvas",
+    value: "leanCanvas"
   },
   {
     label: "Lean UX Canvas",
-    value: "leanUX",
+    value: "leanUX"
   },
   {
     label: "Product Vision Board",
-    value: "productVisionBoard",
+    value: "productVisionBoard"
   },
   {
     label: "Product Vision Board (extended)",
-    value: "productVisionBoardExt",
+    value: "productVisionBoardExt"
   },
   {
     label: "Product Canvas",
-    value: "productCanvas",
+    value: "productCanvas"
   },
   {
     label: "S3 Organization Canvas",
-    value: "s3Organization",
+    value: "s3Organization"
   },
   {
     label: "S3 Delegation Canvas",
-    value: "s3Delegation",
+    value: "s3Delegation"
   },
   {
     label: "S3 Team Canvas",
-    value: "s3Team",
+    value: "s3Team"
   },
   {
     label: "Co-op Ownership Model",
-    value: "coopOwnership",
-  },
+    value: "coopOwnership"
+  }
 ];
 
 const canvasMap = {
@@ -66,15 +66,22 @@ const canvasMap = {
   leanUX: leanUXData,
   productVisionBoard: productVisionBoardData,
   productVisionBoardExt: productVisionBoardExtData,
-  productCanvas: productCanvasData,
+  productCanvas: productCanvasData
 };
 
-const defaultObject = { name: "", attribution: "", createdBy: "", createdAt: "", version: "", sections: [] }
+const defaultObject = {
+  name: "",
+  attribution: "",
+  createdBy: "",
+  createdAt: "",
+  version: "",
+  sections: []
+};
 
 export const useCanavaStore = defineStore("canava", {
   state: () => ({
     canvasData: useStorage("canvasData", defaultObject),
-    storedCanvases: useStorage("storedCanvases", {}),
+    storedCanvases: useStorage("storedCanvases", {})
   }),
   getters: {
     canvasOpts() {
@@ -88,10 +95,10 @@ export const useCanavaStore = defineStore("canava", {
 
       Object.entries(this.storedCanvases).forEach(([canvasId, canvasData]) => {
         if (!isValidUUID(canvasId)) {
-          const optsEntry = { label: canvasData.name, value: canvasId }
-          openOpts.push(optsEntry)
+          const optsEntry = { label: canvasData.name, value: canvasId };
+          openOpts.push(optsEntry);
         }
-      })
+      });
 
       return openOpts;
     },
@@ -100,10 +107,10 @@ export const useCanavaStore = defineStore("canava", {
 
       Object.entries(this.storedCanvases).forEach(([canvasId, canvasData]) => {
         if (isValidUUID(canvasId)) {
-          const optsEntry = { label: canvasData.name, value: canvasId }
-          savedOpts.push(optsEntry)
+          const optsEntry = { label: canvasData.name, value: canvasId };
+          savedOpts.push(optsEntry);
         }
-      })
+      });
 
       return savedOpts;
     }
@@ -112,34 +119,41 @@ export const useCanavaStore = defineStore("canava", {
     loadCanvasTemplate(template) {
       const templateData = canvasMap[template];
 
-      templateData.sections.forEach(function(item, index) {
-        if(!item.uid) {
+      templateData.sections.forEach(function (item, index) {
+        if (!item.uid) {
           item.uid = uuidv4();
         }
         //console.log(item, index);
       });
 
       this.canvasData = templateData;
-
     },
     loadTemplateCanvas(template) {
-      const templateData = canvasMap[template];
+      if (!this.storedCanvases[template]) {
+        const templateData = canvasMap[template];
 
-      templateData.sections.forEach(function(item, index) {
-        if(!item.uid) {
-          item.uid = uuidv4();
-        }
-        //console.log(item, index);
-      });
+        templateData.sections.forEach(function (item, index) {
+          if (!item.uid) {
+            item.uid = uuidv4();
+          }
+          //console.log(item, index);
+        });
 
-      this.storedCanvases[template] = templateData;
-
+        this.storedCanvases[template] = templateData;
+      }
     },
     resetCanvasData() {
       this.canvasData = defaultObject;
     },
     $reset() {
-      this.canvasData = { name: "", attribution: "", createdBy: "", createdAt: "", version: "", sections: [] };
+      this.canvasData = {
+        name: "",
+        attribution: "",
+        createdBy: "",
+        createdAt: "",
+        version: "",
+        sections: []
+      };
       this.storedCanvases = {};
     }
   }

@@ -1,15 +1,20 @@
 <template>
   <div>
+    <!-- TITLE ROW -->
     <div class="row q-pa-md">
+      <!-- CANVAS NAME -->
       <q-input label="Canvas Name" v-model="value.name"></q-input
       ><q-space></q-space
-      ><q-btn
+      >
+      <!-- ADD NEW BUTTON -->
+      <q-btn
         size="md"
         label="Add Section"
         @click="triggerNew()"
         color="primary"
       />
     </div>
+    <!-- SECTIONS CONTAINER -->
     <div class="q-pa-sm row">
       <div class="col container container-wrapper full-width">
         <q-card
@@ -141,8 +146,8 @@ import CanavaDesignerSectionDialog from "../canava/dialog/CanavaDesignerSectionD
 // Instantiate our stores early so they are available
 const colorStore = useColorStore();
 
-const props = defineProps(["modelValue"]);
-const emit = defineEmits(["update:modelValue"]);
+const props = defineProps(["canvasData"]);
+const emit = defineEmits(["save"]);
 
 const showEditDialog = ref(false);
 const showSectionDialog = ref(false);
@@ -152,10 +157,10 @@ const currentSectionData = ref({});
 
 const value = computed({
   get() {
-    return props.modelValue;
+    return props.canvasData;
   },
   set(value) {
-    emit("update:modelValue", value);
+    emit("save", value);
   },
 });
 
@@ -197,42 +202,42 @@ const deleteSection = (sectionKey) => {
   );
 };
 
-watch(
-  value,
-  (newVal, oldVal) => {
-    let dynamicStyles = "@media screen and (min-width: 864px) { \n";
+// watch(
+//   value,
+//   (newVal, oldVal) => {
+//     let dynamicStyles = "@media screen and (min-width: 864px) { \n";
 
-    value.value.sections.sort(
-      (a, b) =>
-        (a.gridRow && b.gridRow && a.gridRow.localeCompare(b.gridRow)) ||
-        (a.gridColumn &&
-          b.gridColumn &&
-          a.gridColumn.localeCompare(b.gridColumn))
-    );
+//     value.value.sections.sort(
+//       (a, b) =>
+//         (a.gridRow && b.gridRow && a.gridRow.localeCompare(b.gridRow)) ||
+//         (a.gridColumn &&
+//           b.gridColumn &&
+//           a.gridColumn.localeCompare(b.gridColumn))
+//     );
 
-    value.value.sections.forEach((s) => {
-      const sectionCSS =
-        "." +
-        s.sectionKey +
-        " { grid-column: " +
-        s.gridColumn +
-        "; grid-row: " +
-        s.gridRow +
-        "; } \n";
-      dynamicStyles = dynamicStyles + sectionCSS;
+//     value.value.sections.forEach((s) => {
+//       const sectionCSS =
+//         "." +
+//         s.sectionKey +
+//         " { grid-column: " +
+//         s.gridColumn +
+//         "; grid-row: " +
+//         s.gridRow +
+//         "; } \n";
+//       dynamicStyles = dynamicStyles + sectionCSS;
 
-      // Fix null attribution
-      if(!value.value.attribution) {
-        value.value.attribution = ''
-      }
-    });
+//       // Fix null attribution
+//       if(!value.value.attribution) {
+//         value.value.attribution = ''
+//       }
+//     });
 
-    dynamicStyles = dynamicStyles + " } \n";
+//     dynamicStyles = dynamicStyles + " } \n";
 
-    sheet.innerHTML = dynamicStyles;
-  },
-  { immediate: true }
-);
+//     sheet.innerHTML = dynamicStyles;
+//   },
+//   { immediate: true }
+// );
 
 const triggerEdit = (sectionKey) => {
   currentSectionKey.value = sectionKey;

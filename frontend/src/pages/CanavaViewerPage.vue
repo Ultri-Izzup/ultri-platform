@@ -39,6 +39,8 @@
       ><q-tooltip> {{ auth.isSignedIn ? 'Save all data to cloud' : 'Login to save to cloud' }}</q-tooltip></q-btn
     > -->
     <!-- <pre>TEMPLATE {{canvasTemplate}} TEMPLATECANVASES{{canavaStore.storedCanvases}} </pre> -->
+    <!-- <span v-if="canvasTemplate">TEMPLATE DATA: {{canavaStore.storedCanvases[canvasTemplate]}}</span>
+    <span v-if="!canvasTemplate">DESIGNER DATA: {{canavaStore.canvasData}}</span> -->
     <CanavaViewer
       v-if="!canvasTemplate"
       v-model="canavaStore.canvasData"

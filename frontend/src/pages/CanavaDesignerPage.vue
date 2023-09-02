@@ -100,15 +100,17 @@
       </q-toolbar>
     </div>
     <q-separator />
+    <!-- <span v-if="canvasTemplate">TEMPLATE DATA: {{canavaStore.storedCanvases[canvasTemplate]}}</span>
+    <span v-if="!canvasTemplate">DESIGNER DATA: {{canavaStore.canvasData}}</span> -->
     <CanavaDesigner
       v-if="!canvasTemplate"
+      v-model="canavaStore.canvasData"
       :canvasData="canavaStore.canvasData"
-      @save="(event) => saveData(event)"
       :canvasOpts="canvasOpts"
     />
     <CanavaDesigner
       v-else
-      :canvasData="canavaStore.storedCanvases[canvasTemplate]"
+      v-model="canavaStore.storedCanvases[canvasTemplate]"
       :canvasOpts="canvasOpts"
     />
 
@@ -123,15 +125,32 @@
 <script setup>
 // Import major 3rd party modules, in rough order of precedence
 import { ref, computed, watch, isProxy, toRaw } from "vue";
+
 import { useI18n } from "vue-i18n";
+
 import { useRoute, useRouter } from "vue-router";
+
 import { v4 as uuidv4 } from "uuid";
+
 // Import stores
 import { useAuthStore } from "../stores/auth";
 import { useCanavaStore } from "../stores/canava";
-// Import the individual canvas SFC module
-import CanavaDesigner from "../components/canava/CanavaDesigner.vue";
 
+// Import the individual canvas SFC module
+import CanavaCreator from "../components/canava/CanavaCreator.vue";
+import CanavaDesigner from "../components/canava/CanavaDesigner.vue";
+import UploadCanavaDialog from "../components/canava/dialog/UploadCanavaDialog.vue";
+
+import businessModelData from "../data/canava/businessModel.json";
+import s3DelegationData from "../data/canava/s3Delegation.json";
+import s3OrganizationData from "../data/canava/s3Organization.json";
+import s3TeamData from "../data/canava/s3Team.json";
+import coopOwnershipData from "../data/canava/coopOwnership.json";
+import leanCanvasData from "../data/canava/leanCanvas.json";
+import leanUXData from "../data/canava/leanUX.json";
+import productVisionBoardData from "../data/canava/productVisionBoard.json";
+import productVisionBoardExtData from "../data/canava/productVisionBoardExt.json";
+import productCanvasData from "../data/canava/productCanvas.json";
 
 // Create i18n accessor as t
 const { t } = useI18n();
@@ -143,6 +162,7 @@ const auth = useAuthStore();
 const canavaStore = useCanavaStore();
 
 const canvasTemplate = ref(null);
+
 const selectedCanvas = ref(null);
 const displayUpload = ref(false);
 
@@ -196,10 +216,23 @@ watch(
   { immediate: true }
 );
 
+const canvasMap = {
+  businessModel: businessModelData,
+  s3Delegation: s3DelegationData,
+  s3Organization: s3OrganizationData,
+  s3Team: s3TeamData,
+  coopOwnership: coopOwnershipData,
+  leanCanvas: leanCanvasData,
+  leanUX: leanUXData,
+  productVisionBoard: productVisionBoardData,
+  productVisionBoardExt: productVisionBoardExtData,
+  productCanvas: productCanvasData,
+};
+
 const loadCanvasTemplate = () => {
   console.log(selectedCanvas.value.value);
 
-  const templateData = canavaStore.canvasMap[selectedCanvas.value.value];
+  const templateData = canvasMap[selectedCanvas.value.value];
 
   templateData.sections.forEach(function (item, index) {
     if (!item.uid) {

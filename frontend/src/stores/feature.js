@@ -41,7 +41,6 @@ export const useFeatureStore = defineStore("feature", {
       this.disabledCanvas = [ ];
     },
     enabled(feature) {
-      console.log(boolFeatures[feature])
       return this[boolFeatures[feature]];
     },
     canvasDisabled(canvas) {

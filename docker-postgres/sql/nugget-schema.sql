@@ -472,7 +472,9 @@ CREATE TABLE nugget.nugget (
     created_by bigint,
     updated_by bigint,
     nugget_type_id bigint NOT NULL,
-    related_id bigint
+    related_id bigint,
+    editors character varying(250)[],
+    viewers character varying(250)[]
 );
 
 

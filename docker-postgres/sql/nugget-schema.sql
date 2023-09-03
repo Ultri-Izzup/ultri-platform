@@ -221,7 +221,9 @@ CREATE TABLE nugget.canvas (
     archived boolean DEFAULT false,
     member_id bigint,
     created_by bigint,
-    updated_by bigint
+    updated_by bigint,
+    editors character varying(250)[],
+    viewers character varying(250)[]
 );
 
 

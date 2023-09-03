@@ -3585,6 +3585,20 @@ GRANT ALL ON TABLE nugget_api.member_account_org_logbooks TO ultri_supertokens;
 
 
 --
+-- Name: TABLE member_canvas; Type: ACL; Schema: nugget_api; Owner: -
+--
+
+GRANT ALL ON TABLE nugget_api.member_canvas TO ultri_supertokens;
+
+
+--
+-- Name: SEQUENCE member_canvas_id_seq; Type: ACL; Schema: nugget_api; Owner: -
+--
+
+GRANT ALL ON SEQUENCE nugget_api.member_canvas_id_seq TO ultri_supertokens;
+
+
+--
 -- Name: SEQUENCE member_id_seq; Type: ACL; Schema: nugget_api; Owner: -
 --
 

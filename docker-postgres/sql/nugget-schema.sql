@@ -62,7 +62,8 @@ CREATE TYPE nugget.circle_roles AS ENUM (
     'delegate',
     'secretary',
     'facilitator',
-    'peer'
+    'peer',
+    'member'
 );
 
 
@@ -84,26 +85,26 @@ CREATE TYPE nugget.invite_status AS ENUM (
 
 
 --
--- Name: new_credential_from_user(); Type: FUNCTION; Schema: nugget; Owner: -
+-- Name: new_member_from_user(); Type: FUNCTION; Schema: nugget; Owner: -
 --
 
-CREATE FUNCTION nugget.new_credential_from_user() RETURNS trigger
+CREATE FUNCTION nugget.new_member_from_user() RETURNS trigger
     LANGUAGE plpgsql
     AS $$
-	DECLARE new_credential_id BIGINT;
+	DECLARE new_member_id BIGINT;
 	DECLARE new_account_id BIGINT;	
 BEGIN
 
-	INSERT INTO credential(uid, created_at)
-	 VALUES(uuid(NEW.user_id), to_timestamp(NEW.time_joined/1000) )
-	 RETURNING id INTO new_credential_id;
+	INSERT INTO nugget.member(uid, created_at, tenant_id)
+	 VALUES(uuid(NEW.user_id), to_timestamp(NEW.time_joined/1000), 1 )
+	 RETURNING id INTO new_member_id;
 	
-	INSERT INTO account(name)
-		 VALUES('Account for ' || new_credential_id )
+	INSERT INTO nugget.account(name, tenant_id)
+		 VALUES('Member Account for ' || new_member_id, 1)
 		 RETURNING id INTO new_account_id;
 		
-	INSERT INTO account_credential(account_id, credential_id, role)
-		 VALUES(new_account_id, new_member_id, 'owner');
+	INSERT INTO nugget.account_member(account_id, member_id, roles)
+		 VALUES(new_account_id, new_member_id, '{"owner"}');
 		 RETURN NEW;
 END;
 $$;
@@ -124,15 +125,15 @@ $$;
 
 
 --
--- Name: update_credential_email(); Type: FUNCTION; Schema: nugget; Owner: -
+-- Name: update_member_email(); Type: FUNCTION; Schema: nugget; Owner: -
 --
 
-CREATE FUNCTION nugget.update_credential_email() RETURNS trigger
+CREATE FUNCTION nugget.update_member_email() RETURNS trigger
     LANGUAGE plpgsql
     AS $$
 
 BEGIN
-	UPDATE nugget.credential 
+	UPDATE nugget.member 
 	SET email = NEW.email
 	WHERE uid::text = NEW.user_id ;
  RETURN NULL;
@@ -155,22 +156,9 @@ CREATE TABLE nugget.account (
     updated_at timestamp without time zone,
     tenant_id bigint NOT NULL,
     name character varying(64),
-    deleted boolean DEFAULT false NOT NULL
-);
-
-
---
--- Name: account_credential; Type: TABLE; Schema: nugget; Owner: -
---
-
-CREATE TABLE nugget.account_credential (
-    account_id bigint NOT NULL,
-    credential_id bigint NOT NULL,
-    uid uuid DEFAULT gen_random_uuid() NOT NULL,
-    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    updated_at timestamp without time zone,
-    role nugget.account_roles DEFAULT 'member'::nugget.account_roles NOT NULL,
-    deleted boolean DEFAULT false NOT NULL
+    deleted boolean DEFAULT false NOT NULL,
+    created_by bigint,
+    updated_by bigint
 );
 
 
@@ -194,6 +182,22 @@ ALTER SEQUENCE nugget.account_id_seq OWNED BY nugget.account.id;
 
 
 --
+-- Name: account_member; Type: TABLE; Schema: nugget; Owner: -
+--
+
+CREATE TABLE nugget.account_member (
+    account_id bigint NOT NULL,
+    member_id bigint NOT NULL,
+    uid uuid DEFAULT gen_random_uuid() NOT NULL,
+    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    created_by bigint,
+    updated_at timestamp without time zone,
+    updated_by bigint,
+    roles nugget.account_roles[] DEFAULT '{member}'::nugget.account_roles[] NOT NULL
+);
+
+
+--
 -- Name: canvas; Type: TABLE; Schema: nugget; Owner: -
 --
 
@@ -214,7 +218,10 @@ CREATE TABLE nugget.canvas (
     completed_by character varying(2056),
     version character varying(256),
     public boolean,
-    archived boolean DEFAULT false
+    archived boolean DEFAULT false,
+    member_id bigint,
+    created_by bigint,
+    updated_by bigint
 );
 
 
@@ -248,22 +255,9 @@ CREATE TABLE nugget.circle (
     updated_at timestamp without time zone,
     deleted boolean DEFAULT false NOT NULL,
     name character varying,
-    org_id bigint NOT NULL
-);
-
-
---
--- Name: circle_credential; Type: TABLE; Schema: nugget; Owner: -
---
-
-CREATE TABLE nugget.circle_credential (
-    circle_id bigint NOT NULL,
-    credential_id bigint NOT NULL,
-    roles nugget.circle_roles[] NOT NULL,
-    uid uuid DEFAULT gen_random_uuid(),
-    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    updated_at timestamp without time zone,
-    deleted boolean DEFAULT false NOT NULL
+    org_id bigint NOT NULL,
+    created_by bigint,
+    updated_by bigint
 );
 
 
@@ -287,38 +281,20 @@ ALTER SEQUENCE nugget.circle_id_seq OWNED BY nugget.circle.id;
 
 
 --
--- Name: credential; Type: TABLE; Schema: nugget; Owner: -
+-- Name: circle_member; Type: TABLE; Schema: nugget; Owner: -
 --
 
-CREATE TABLE nugget.credential (
-    id bigint NOT NULL,
-    uid uuid DEFAULT gen_random_uuid() NOT NULL,
-    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+CREATE TABLE nugget.circle_member (
+    circle_id bigint NOT NULL,
+    member_id bigint NOT NULL,
+    uid uuid NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    created_by bigint,
     updated_at timestamp without time zone,
-    email character varying(256),
-    tel character varying(128),
+    updated_by bigint,
     deleted boolean DEFAULT false NOT NULL,
-    tenant_id bigint
+    roles nugget.circle_roles[] DEFAULT '{member}'::nugget.circle_roles[]
 );
-
-
---
--- Name: credential_id_seq; Type: SEQUENCE; Schema: nugget; Owner: -
---
-
-CREATE SEQUENCE nugget.credential_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: credential_id_seq; Type: SEQUENCE OWNED BY; Schema: nugget; Owner: -
---
-
-ALTER SEQUENCE nugget.credential_id_seq OWNED BY nugget.credential.id;
 
 
 --
@@ -335,7 +311,9 @@ CREATE TABLE nugget.driver (
     uid uuid DEFAULT gen_random_uuid() NOT NULL,
     infinite boolean DEFAULT false NOT NULL,
     internal boolean DEFAULT true,
-    active boolean DEFAULT true NOT NULL
+    active boolean DEFAULT true NOT NULL,
+    updated_by bigint,
+    created_by bigint
 );
 
 
@@ -411,7 +389,9 @@ CREATE TABLE nugget.invite (
     email character varying(256) NOT NULL,
     name character varying(256) NOT NULL,
     message character varying(512),
-    status nugget.invite_status DEFAULT 'submitted'::nugget.invite_status
+    status nugget.invite_status DEFAULT 'submitted'::nugget.invite_status,
+    created_by bigint,
+    updated_by bigint
 );
 
 
@@ -435,6 +415,41 @@ ALTER SEQUENCE nugget.invite_id_seq OWNED BY nugget.invite.id;
 
 
 --
+-- Name: member; Type: TABLE; Schema: nugget; Owner: -
+--
+
+CREATE TABLE nugget.member (
+    id bigint NOT NULL,
+    uid uuid DEFAULT gen_random_uuid() NOT NULL,
+    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp without time zone,
+    deleted boolean DEFAULT false NOT NULL,
+    email character varying(255),
+    tel character varying(24),
+    tenant_id bigint
+);
+
+
+--
+-- Name: member_id_seq; Type: SEQUENCE; Schema: nugget; Owner: -
+--
+
+CREATE SEQUENCE nugget.member_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: member_id_seq; Type: SEQUENCE OWNED BY; Schema: nugget; Owner: -
+--
+
+ALTER SEQUENCE nugget.member_id_seq OWNED BY nugget.member.id;
+
+
+--
 -- Name: nugget; Type: TABLE; Schema: nugget; Owner: -
 --
 
@@ -451,7 +466,11 @@ CREATE TABLE nugget.nugget (
     label character varying(256),
     internal_label character varying(256),
     subtype character varying(256),
-    archived boolean DEFAULT false NOT NULL
+    archived boolean DEFAULT false NOT NULL,
+    created_by bigint,
+    updated_by bigint,
+    nugget_type_id bigint NOT NULL,
+    related_id bigint
 );
 
 
@@ -475,6 +494,35 @@ ALTER SEQUENCE nugget.nugget_id_seq OWNED BY nugget.nugget.id;
 
 
 --
+-- Name: nugget_type; Type: TABLE; Schema: nugget; Owner: -
+--
+
+CREATE TABLE nugget.nugget_type (
+    id bigint NOT NULL,
+    name character varying(32) NOT NULL
+);
+
+
+--
+-- Name: nugget_type_id_seq; Type: SEQUENCE; Schema: nugget; Owner: -
+--
+
+CREATE SEQUENCE nugget.nugget_type_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: nugget_type_id_seq; Type: SEQUENCE OWNED BY; Schema: nugget; Owner: -
+--
+
+ALTER SEQUENCE nugget.nugget_type_id_seq OWNED BY nugget.nugget_type.id;
+
+
+--
 -- Name: org; Type: TABLE; Schema: nugget; Owner: -
 --
 
@@ -486,7 +534,8 @@ CREATE TABLE nugget.org (
     account_id bigint NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
     name character varying(256) NOT NULL,
-    nugget_id bigint
+    created_by bigint,
+    updated_by bigint
 );
 
 
@@ -564,13 +613,6 @@ ALTER TABLE ONLY nugget.circle ALTER COLUMN id SET DEFAULT nextval('nugget.circl
 
 
 --
--- Name: credential id; Type: DEFAULT; Schema: nugget; Owner: -
---
-
-ALTER TABLE ONLY nugget.credential ALTER COLUMN id SET DEFAULT nextval('nugget.credential_id_seq'::regclass);
-
-
---
 -- Name: driver id; Type: DEFAULT; Schema: nugget; Owner: -
 --
 
@@ -592,10 +634,24 @@ ALTER TABLE ONLY nugget.invite ALTER COLUMN id SET DEFAULT nextval('nugget.invit
 
 
 --
+-- Name: member id; Type: DEFAULT; Schema: nugget; Owner: -
+--
+
+ALTER TABLE ONLY nugget.member ALTER COLUMN id SET DEFAULT nextval('nugget.member_id_seq'::regclass);
+
+
+--
 -- Name: nugget id; Type: DEFAULT; Schema: nugget; Owner: -
 --
 
 ALTER TABLE ONLY nugget.nugget ALTER COLUMN id SET DEFAULT nextval('nugget.nugget_id_seq'::regclass);
+
+
+--
+-- Name: nugget_type id; Type: DEFAULT; Schema: nugget; Owner: -
+--
+
+ALTER TABLE ONLY nugget.nugget_type ALTER COLUMN id SET DEFAULT nextval('nugget.nugget_type_id_seq'::regclass);
 
 
 --
@@ -613,11 +669,11 @@ ALTER TABLE ONLY nugget.tenant ALTER COLUMN id SET DEFAULT nextval('nugget.tenan
 
 
 --
--- Name: account_credential account_credential_pkey; Type: CONSTRAINT; Schema: nugget; Owner: -
+-- Name: account_member account_member_pkey; Type: CONSTRAINT; Schema: nugget; Owner: -
 --
 
-ALTER TABLE ONLY nugget.account_credential
-    ADD CONSTRAINT account_credential_pkey PRIMARY KEY (account_id, credential_id);
+ALTER TABLE ONLY nugget.account_member
+    ADD CONSTRAINT account_member_pkey PRIMARY KEY (account_id, member_id);
 
 
 --
@@ -637,11 +693,11 @@ ALTER TABLE ONLY nugget.canvas
 
 
 --
--- Name: circle_credential circle_credential_pkey; Type: CONSTRAINT; Schema: nugget; Owner: -
+-- Name: circle_member circle_member_pkey; Type: CONSTRAINT; Schema: nugget; Owner: -
 --
 
-ALTER TABLE ONLY nugget.circle_credential
-    ADD CONSTRAINT circle_credential_pkey PRIMARY KEY (credential_id, circle_id);
+ALTER TABLE ONLY nugget.circle_member
+    ADD CONSTRAINT circle_member_pkey PRIMARY KEY (circle_id, member_id);
 
 
 --
@@ -650,14 +706,6 @@ ALTER TABLE ONLY nugget.circle_credential
 
 ALTER TABLE ONLY nugget.circle
     ADD CONSTRAINT circle_pkey PRIMARY KEY (id);
-
-
---
--- Name: credential credential_pkey; Type: CONSTRAINT; Schema: nugget; Owner: -
---
-
-ALTER TABLE ONLY nugget.credential
-    ADD CONSTRAINT credential_pkey PRIMARY KEY (id);
 
 
 --
@@ -685,11 +733,27 @@ ALTER TABLE ONLY nugget.invite
 
 
 --
+-- Name: member member_pkey; Type: CONSTRAINT; Schema: nugget; Owner: -
+--
+
+ALTER TABLE ONLY nugget.member
+    ADD CONSTRAINT member_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: nugget nugget_pkey; Type: CONSTRAINT; Schema: nugget; Owner: -
 --
 
 ALTER TABLE ONLY nugget.nugget
     ADD CONSTRAINT nugget_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: nugget_type nugget_type_pkey; Type: CONSTRAINT; Schema: nugget; Owner: -
+--
+
+ALTER TABLE ONLY nugget.nugget_type
+    ADD CONSTRAINT nugget_type_pkey PRIMARY KEY (id);
 
 
 --
@@ -725,30 +789,6 @@ ALTER TABLE ONLY nugget.canvas
 
 
 --
--- Name: credential uq_credential_tenant_email; Type: CONSTRAINT; Schema: nugget; Owner: -
---
-
-ALTER TABLE ONLY nugget.credential
-    ADD CONSTRAINT uq_credential_tenant_email UNIQUE (email, tenant_id);
-
-
---
--- Name: credential uq_credential_tenant_tel; Type: CONSTRAINT; Schema: nugget; Owner: -
---
-
-ALTER TABLE ONLY nugget.credential
-    ADD CONSTRAINT uq_credential_tenant_tel UNIQUE (tel, tenant_id);
-
-
---
--- Name: credential uq_credential_tenant_uid; Type: CONSTRAINT; Schema: nugget; Owner: -
---
-
-ALTER TABLE ONLY nugget.credential
-    ADD CONSTRAINT uq_credential_tenant_uid UNIQUE (uid, tenant_id);
-
-
---
 -- Name: driver uq_driver_uid; Type: CONSTRAINT; Schema: nugget; Owner: -
 --
 
@@ -762,6 +802,22 @@ ALTER TABLE ONLY nugget.driver
 
 ALTER TABLE ONLY nugget.email
     ADD CONSTRAINT uq_email_uid UNIQUE (uid, account_id);
+
+
+--
+-- Name: member uq_member_uid; Type: CONSTRAINT; Schema: nugget; Owner: -
+--
+
+ALTER TABLE ONLY nugget.member
+    ADD CONSTRAINT uq_member_uid UNIQUE (uid, tenant_id);
+
+
+--
+-- Name: nugget_type uq_nugget_type_name; Type: CONSTRAINT; Schema: nugget; Owner: -
+--
+
+ALTER TABLE ONLY nugget.nugget_type
+    ADD CONSTRAINT uq_nugget_type_name UNIQUE (name);
 
 
 --
@@ -781,19 +837,11 @@ ALTER TABLE ONLY nugget.org
 
 
 --
--- Name: account_credential fk_account_credential_account; Type: FK CONSTRAINT; Schema: nugget; Owner: -
+-- Name: account fk_account_created_by_member; Type: FK CONSTRAINT; Schema: nugget; Owner: -
 --
 
-ALTER TABLE ONLY nugget.account_credential
-    ADD CONSTRAINT fk_account_credential_account FOREIGN KEY (account_id) REFERENCES nugget.account(id);
-
-
---
--- Name: account_credential fk_account_credential_credential; Type: FK CONSTRAINT; Schema: nugget; Owner: -
---
-
-ALTER TABLE ONLY nugget.account_credential
-    ADD CONSTRAINT fk_account_credential_credential FOREIGN KEY (credential_id) REFERENCES nugget.credential(id);
+ALTER TABLE ONLY nugget.account
+    ADD CONSTRAINT fk_account_created_by_member FOREIGN KEY (created_by) REFERENCES nugget.member(id) NOT VALID;
 
 
 --
@@ -805,11 +853,75 @@ ALTER TABLE ONLY nugget.account
 
 
 --
+-- Name: account fk_account_updated_by; Type: FK CONSTRAINT; Schema: nugget; Owner: -
+--
+
+ALTER TABLE ONLY nugget.account
+    ADD CONSTRAINT fk_account_updated_by FOREIGN KEY (updated_by) REFERENCES nugget.member(id) NOT VALID;
+
+
+--
+-- Name: canvas fk_account_updated_by; Type: FK CONSTRAINT; Schema: nugget; Owner: -
+--
+
+ALTER TABLE ONLY nugget.canvas
+    ADD CONSTRAINT fk_account_updated_by FOREIGN KEY (updated_by) REFERENCES nugget.member(id) NOT VALID;
+
+
+--
+-- Name: canvas fk_canvas_created_by; Type: FK CONSTRAINT; Schema: nugget; Owner: -
+--
+
+ALTER TABLE ONLY nugget.canvas
+    ADD CONSTRAINT fk_canvas_created_by FOREIGN KEY (created_by) REFERENCES nugget.member(id) NOT VALID;
+
+
+--
 -- Name: canvas fk_canvas_org; Type: FK CONSTRAINT; Schema: nugget; Owner: -
 --
 
 ALTER TABLE ONLY nugget.canvas
     ADD CONSTRAINT fk_canvas_org FOREIGN KEY (org_id) REFERENCES nugget.org(id) NOT VALID;
+
+
+--
+-- Name: circle fk_circle_created_by; Type: FK CONSTRAINT; Schema: nugget; Owner: -
+--
+
+ALTER TABLE ONLY nugget.circle
+    ADD CONSTRAINT fk_circle_created_by FOREIGN KEY (created_by) REFERENCES nugget.member(id) NOT VALID;
+
+
+--
+-- Name: circle_member fk_circle_member_circle; Type: FK CONSTRAINT; Schema: nugget; Owner: -
+--
+
+ALTER TABLE ONLY nugget.circle_member
+    ADD CONSTRAINT fk_circle_member_circle FOREIGN KEY (circle_id) REFERENCES nugget.circle(id) NOT VALID;
+
+
+--
+-- Name: circle_member fk_circle_member_created_by; Type: FK CONSTRAINT; Schema: nugget; Owner: -
+--
+
+ALTER TABLE ONLY nugget.circle_member
+    ADD CONSTRAINT fk_circle_member_created_by FOREIGN KEY (created_by) REFERENCES nugget.member(id) NOT VALID;
+
+
+--
+-- Name: circle_member fk_circle_member_member; Type: FK CONSTRAINT; Schema: nugget; Owner: -
+--
+
+ALTER TABLE ONLY nugget.circle_member
+    ADD CONSTRAINT fk_circle_member_member FOREIGN KEY (member_id) REFERENCES nugget.member(id) NOT VALID;
+
+
+--
+-- Name: circle_member fk_circle_member_updated_by; Type: FK CONSTRAINT; Schema: nugget; Owner: -
+--
+
+ALTER TABLE ONLY nugget.circle_member
+    ADD CONSTRAINT fk_circle_member_updated_by FOREIGN KEY (updated_by) REFERENCES nugget.member(id) NOT VALID;
 
 
 --
@@ -821,11 +933,19 @@ ALTER TABLE ONLY nugget.circle
 
 
 --
--- Name: credential fk_credential_tenant_id; Type: FK CONSTRAINT; Schema: nugget; Owner: -
+-- Name: circle fk_circle_updated_by; Type: FK CONSTRAINT; Schema: nugget; Owner: -
 --
 
-ALTER TABLE ONLY nugget.credential
-    ADD CONSTRAINT fk_credential_tenant_id FOREIGN KEY (tenant_id) REFERENCES nugget.tenant(id) NOT VALID;
+ALTER TABLE ONLY nugget.circle
+    ADD CONSTRAINT fk_circle_updated_by FOREIGN KEY (updated_by) REFERENCES nugget.member(id) NOT VALID;
+
+
+--
+-- Name: driver fk_driver_created_by; Type: FK CONSTRAINT; Schema: nugget; Owner: -
+--
+
+ALTER TABLE ONLY nugget.driver
+    ADD CONSTRAINT fk_driver_created_by FOREIGN KEY (created_by) REFERENCES nugget.member(id) NOT VALID;
 
 
 --
@@ -834,6 +954,14 @@ ALTER TABLE ONLY nugget.credential
 
 ALTER TABLE ONLY nugget.driver
     ADD CONSTRAINT fk_driver_org FOREIGN KEY (org_id) REFERENCES nugget.org(id) NOT VALID;
+
+
+--
+-- Name: driver fk_driver_updated_by; Type: FK CONSTRAINT; Schema: nugget; Owner: -
+--
+
+ALTER TABLE ONLY nugget.driver
+    ADD CONSTRAINT fk_driver_updated_by FOREIGN KEY (updated_by) REFERENCES nugget.member(id) NOT VALID;
 
 
 --
@@ -861,11 +989,67 @@ ALTER TABLE ONLY nugget.email
 
 
 --
+-- Name: invite fk_invite_created_by; Type: FK CONSTRAINT; Schema: nugget; Owner: -
+--
+
+ALTER TABLE ONLY nugget.invite
+    ADD CONSTRAINT fk_invite_created_by FOREIGN KEY (created_by) REFERENCES nugget.member(id) NOT VALID;
+
+
+--
+-- Name: invite fk_invite_org; Type: FK CONSTRAINT; Schema: nugget; Owner: -
+--
+
+ALTER TABLE ONLY nugget.invite
+    ADD CONSTRAINT fk_invite_org FOREIGN KEY (org_id) REFERENCES nugget.org(id) NOT VALID;
+
+
+--
+-- Name: invite fk_invite_updated_by; Type: FK CONSTRAINT; Schema: nugget; Owner: -
+--
+
+ALTER TABLE ONLY nugget.invite
+    ADD CONSTRAINT fk_invite_updated_by FOREIGN KEY (updated_by) REFERENCES nugget.member(id) NOT VALID;
+
+
+--
+-- Name: member fk_member_tenant; Type: FK CONSTRAINT; Schema: nugget; Owner: -
+--
+
+ALTER TABLE ONLY nugget.member
+    ADD CONSTRAINT fk_member_tenant FOREIGN KEY (tenant_id) REFERENCES nugget.tenant(id);
+
+
+--
+-- Name: nugget fk_nugget_created_by; Type: FK CONSTRAINT; Schema: nugget; Owner: -
+--
+
+ALTER TABLE ONLY nugget.nugget
+    ADD CONSTRAINT fk_nugget_created_by FOREIGN KEY (created_by) REFERENCES nugget.member(id) NOT VALID;
+
+
+--
 -- Name: nugget fk_nugget_org; Type: FK CONSTRAINT; Schema: nugget; Owner: -
 --
 
 ALTER TABLE ONLY nugget.nugget
     ADD CONSTRAINT fk_nugget_org FOREIGN KEY (org_id) REFERENCES nugget.org(id);
+
+
+--
+-- Name: nugget fk_nugget_type; Type: FK CONSTRAINT; Schema: nugget; Owner: -
+--
+
+ALTER TABLE ONLY nugget.nugget
+    ADD CONSTRAINT fk_nugget_type FOREIGN KEY (nugget_type_id) REFERENCES nugget.nugget_type(id) NOT VALID;
+
+
+--
+-- Name: nugget fk_nugget_updated_by; Type: FK CONSTRAINT; Schema: nugget; Owner: -
+--
+
+ALTER TABLE ONLY nugget.nugget
+    ADD CONSTRAINT fk_nugget_updated_by FOREIGN KEY (updated_by) REFERENCES nugget.member(id) NOT VALID;
 
 
 --
@@ -877,11 +1061,173 @@ ALTER TABLE ONLY nugget.org
 
 
 --
--- Name: org fk_org_nugget; Type: FK CONSTRAINT; Schema: nugget; Owner: -
+-- Name: org fk_org_created_by; Type: FK CONSTRAINT; Schema: nugget; Owner: -
 --
 
 ALTER TABLE ONLY nugget.org
-    ADD CONSTRAINT fk_org_nugget FOREIGN KEY (nugget_id) REFERENCES nugget.nugget(id) NOT VALID;
+    ADD CONSTRAINT fk_org_created_by FOREIGN KEY (created_by) REFERENCES nugget.member(id) NOT VALID;
+
+
+--
+-- Name: org fk_org_updated_by; Type: FK CONSTRAINT; Schema: nugget; Owner: -
+--
+
+ALTER TABLE ONLY nugget.org
+    ADD CONSTRAINT fk_org_updated_by FOREIGN KEY (updated_by) REFERENCES nugget.member(id) NOT VALID;
+
+
+--
+-- Name: SCHEMA nugget; Type: ACL; Schema: -; Owner: -
+--
+
+GRANT USAGE ON SCHEMA nugget TO ultri_supertokens;
+
+
+--
+-- Name: TABLE account; Type: ACL; Schema: nugget; Owner: -
+--
+
+GRANT ALL ON TABLE nugget.account TO ultri_supertokens;
+
+
+--
+-- Name: SEQUENCE account_id_seq; Type: ACL; Schema: nugget; Owner: -
+--
+
+GRANT ALL ON SEQUENCE nugget.account_id_seq TO ultri_supertokens;
+
+
+--
+-- Name: TABLE account_member; Type: ACL; Schema: nugget; Owner: -
+--
+
+GRANT ALL ON TABLE nugget.account_member TO ultri_supertokens;
+
+
+--
+-- Name: TABLE canvas; Type: ACL; Schema: nugget; Owner: -
+--
+
+GRANT ALL ON TABLE nugget.canvas TO ultri_supertokens;
+
+
+--
+-- Name: SEQUENCE canvas_id_seq; Type: ACL; Schema: nugget; Owner: -
+--
+
+GRANT ALL ON SEQUENCE nugget.canvas_id_seq TO ultri_supertokens;
+
+
+--
+-- Name: TABLE circle; Type: ACL; Schema: nugget; Owner: -
+--
+
+GRANT ALL ON TABLE nugget.circle TO ultri_supertokens;
+
+
+--
+-- Name: SEQUENCE circle_id_seq; Type: ACL; Schema: nugget; Owner: -
+--
+
+GRANT ALL ON SEQUENCE nugget.circle_id_seq TO ultri_supertokens;
+
+
+--
+-- Name: TABLE driver; Type: ACL; Schema: nugget; Owner: -
+--
+
+GRANT ALL ON TABLE nugget.driver TO ultri_supertokens;
+
+
+--
+-- Name: SEQUENCE driver_id_seq; Type: ACL; Schema: nugget; Owner: -
+--
+
+GRANT ALL ON SEQUENCE nugget.driver_id_seq TO ultri_supertokens;
+
+
+--
+-- Name: TABLE email; Type: ACL; Schema: nugget; Owner: -
+--
+
+GRANT ALL ON TABLE nugget.email TO ultri_supertokens;
+
+
+--
+-- Name: SEQUENCE email_id_seq; Type: ACL; Schema: nugget; Owner: -
+--
+
+GRANT ALL ON SEQUENCE nugget.email_id_seq TO ultri_supertokens;
+
+
+--
+-- Name: TABLE invite; Type: ACL; Schema: nugget; Owner: -
+--
+
+GRANT ALL ON TABLE nugget.invite TO ultri_supertokens;
+
+
+--
+-- Name: SEQUENCE invite_id_seq; Type: ACL; Schema: nugget; Owner: -
+--
+
+GRANT ALL ON SEQUENCE nugget.invite_id_seq TO ultri_supertokens;
+
+
+--
+-- Name: TABLE member; Type: ACL; Schema: nugget; Owner: -
+--
+
+GRANT ALL ON TABLE nugget.member TO ultri_supertokens;
+
+
+--
+-- Name: SEQUENCE member_id_seq; Type: ACL; Schema: nugget; Owner: -
+--
+
+GRANT ALL ON SEQUENCE nugget.member_id_seq TO ultri_supertokens;
+
+
+--
+-- Name: TABLE nugget; Type: ACL; Schema: nugget; Owner: -
+--
+
+GRANT ALL ON TABLE nugget.nugget TO ultri_supertokens;
+
+
+--
+-- Name: SEQUENCE nugget_id_seq; Type: ACL; Schema: nugget; Owner: -
+--
+
+GRANT ALL ON SEQUENCE nugget.nugget_id_seq TO ultri_supertokens;
+
+
+--
+-- Name: TABLE org; Type: ACL; Schema: nugget; Owner: -
+--
+
+GRANT ALL ON TABLE nugget.org TO ultri_supertokens;
+
+
+--
+-- Name: SEQUENCE org_id_seq; Type: ACL; Schema: nugget; Owner: -
+--
+
+GRANT ALL ON SEQUENCE nugget.org_id_seq TO ultri_supertokens;
+
+
+--
+-- Name: TABLE tenant; Type: ACL; Schema: nugget; Owner: -
+--
+
+GRANT ALL ON TABLE nugget.tenant TO ultri_supertokens;
+
+
+--
+-- Name: SEQUENCE tenant_id_seq; Type: ACL; Schema: nugget; Owner: -
+--
+
+GRANT ALL ON SEQUENCE nugget.tenant_id_seq TO ultri_supertokens;
 
 
 --

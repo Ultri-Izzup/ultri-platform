@@ -3,7 +3,7 @@
 --
 
 -- Dumped from database version 14.7 (Debian 14.7-1.pgdg110+1)
--- Dumped by pg_dump version 14.8 (Ubuntu 14.8-0ubuntu0.22.04.1)
+-- Dumped by pg_dump version 14.9 (Ubuntu 14.9-0ubuntu0.22.04.1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -2159,6 +2159,49 @@ CREATE VIEW nugget_api.member_account_org_logbooks AS
 
 
 --
+-- Name: member_canvas; Type: TABLE; Schema: nugget_api; Owner: -
+--
+
+CREATE TABLE nugget_api.member_canvas (
+    id bigint NOT NULL,
+    member_id bigint,
+    uid uuid DEFAULT gen_random_uuid() NOT NULL,
+    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp without time zone,
+    template character varying(32),
+    attribution character varying(4096),
+    sections jsonb,
+    sequenced boolean,
+    canava_vers character varying(48),
+    completed_on character varying(48),
+    completed_by character varying(128),
+    version character varying(48),
+    pub_at timestamp without time zone,
+    unpub_at timestamp without time zone,
+    deleted boolean
+);
+
+
+--
+-- Name: member_canvas_id_seq; Type: SEQUENCE; Schema: nugget_api; Owner: -
+--
+
+CREATE SEQUENCE nugget_api.member_canvas_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: member_canvas_id_seq; Type: SEQUENCE OWNED BY; Schema: nugget_api; Owner: -
+--
+
+ALTER SEQUENCE nugget_api.member_canvas_id_seq OWNED BY nugget_api.member_canvas.id;
+
+
+--
 -- Name: member_id_seq; Type: SEQUENCE; Schema: nugget_api; Owner: -
 --
 
@@ -2523,6 +2566,13 @@ ALTER TABLE ONLY nugget_api.member ALTER COLUMN id SET DEFAULT nextval('nugget_a
 
 
 --
+-- Name: member_canvas id; Type: DEFAULT; Schema: nugget_api; Owner: -
+--
+
+ALTER TABLE ONLY nugget_api.member_canvas ALTER COLUMN id SET DEFAULT nextval('nugget_api.member_canvas_id_seq'::regclass);
+
+
+--
 -- Name: nugget id; Type: DEFAULT; Schema: nugget_api; Owner: -
 --
 
@@ -2658,6 +2708,14 @@ ALTER TABLE ONLY nugget_api.logbook_entry
 
 ALTER TABLE ONLY nugget_api.logbook
     ADD CONSTRAINT logbook_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: member_canvas member_canvas_pkey; Type: CONSTRAINT; Schema: nugget_api; Owner: -
+--
+
+ALTER TABLE ONLY nugget_api.member_canvas
+    ADD CONSTRAINT member_canvas_pkey PRIMARY KEY (id);
 
 
 --
@@ -2834,6 +2892,14 @@ ALTER TABLE ONLY nugget_api.logbook
 
 ALTER TABLE ONLY nugget_api.logbook
     ADD CONSTRAINT uq_logbook_uid UNIQUE (uid);
+
+
+--
+-- Name: member_canvas uq_member_canvas_canvas_uid; Type: CONSTRAINT; Schema: nugget_api; Owner: -
+--
+
+ALTER TABLE ONLY nugget_api.member_canvas
+    ADD CONSTRAINT uq_member_canvas_canvas_uid UNIQUE (uid, member_id);
 
 
 --
@@ -3202,6 +3268,14 @@ ALTER TABLE ONLY nugget_api.member
 
 
 --
+-- Name: member_canvas fk_memeber_canvas_member_id; Type: FK CONSTRAINT; Schema: nugget_api; Owner: -
+--
+
+ALTER TABLE ONLY nugget_api.member_canvas
+    ADD CONSTRAINT fk_memeber_canvas_member_id FOREIGN KEY (member_id) REFERENCES nugget_api.member(id) NOT VALID;
+
+
+--
 -- Name: nugget fk_nugget_org_id; Type: FK CONSTRAINT; Schema: nugget_api; Owner: -
 --
 
@@ -3364,10 +3438,101 @@ GRANT ALL ON SEQUENCE nugget_api.asset_id_seq TO ultri_supertokens;
 
 
 --
+-- Name: TABLE calendar; Type: ACL; Schema: nugget_api; Owner: -
+--
+
+GRANT ALL ON TABLE nugget_api.calendar TO ultri_supertokens;
+
+
+--
+-- Name: SEQUENCE calendar_id_seq; Type: ACL; Schema: nugget_api; Owner: -
+--
+
+GRANT ALL ON SEQUENCE nugget_api.calendar_id_seq TO ultri_supertokens;
+
+
+--
 -- Name: TABLE comment; Type: ACL; Schema: nugget_api; Owner: -
 --
 
 GRANT ALL ON TABLE nugget_api.comment TO ultri_supertokens;
+
+
+--
+-- Name: TABLE email; Type: ACL; Schema: nugget_api; Owner: -
+--
+
+GRANT ALL ON TABLE nugget_api.email TO ultri_supertokens;
+
+
+--
+-- Name: SEQUENCE email_id_seq; Type: ACL; Schema: nugget_api; Owner: -
+--
+
+GRANT ALL ON SEQUENCE nugget_api.email_id_seq TO ultri_supertokens;
+
+
+--
+-- Name: TABLE entry_relation; Type: ACL; Schema: nugget_api; Owner: -
+--
+
+GRANT ALL ON TABLE nugget_api.entry_relation TO ultri_supertokens;
+
+
+--
+-- Name: SEQUENCE entry_relation_id_seq; Type: ACL; Schema: nugget_api; Owner: -
+--
+
+GRANT ALL ON SEQUENCE nugget_api.entry_relation_id_seq TO ultri_supertokens;
+
+
+--
+-- Name: TABLE invite; Type: ACL; Schema: nugget_api; Owner: -
+--
+
+GRANT ALL ON TABLE nugget_api.invite TO ultri_supertokens;
+
+
+--
+-- Name: SEQUENCE invite_id_seq; Type: ACL; Schema: nugget_api; Owner: -
+--
+
+GRANT ALL ON SEQUENCE nugget_api.invite_id_seq TO ultri_supertokens;
+
+
+--
+-- Name: TABLE ledger; Type: ACL; Schema: nugget_api; Owner: -
+--
+
+GRANT ALL ON TABLE nugget_api.ledger TO ultri_supertokens;
+
+
+--
+-- Name: TABLE ledger_account; Type: ACL; Schema: nugget_api; Owner: -
+--
+
+GRANT ALL ON TABLE nugget_api.ledger_account TO ultri_supertokens;
+
+
+--
+-- Name: SEQUENCE ledger_accounts_id_seq; Type: ACL; Schema: nugget_api; Owner: -
+--
+
+GRANT ALL ON SEQUENCE nugget_api.ledger_accounts_id_seq TO ultri_supertokens;
+
+
+--
+-- Name: SEQUENCE ledger_id_seq; Type: ACL; Schema: nugget_api; Owner: -
+--
+
+GRANT ALL ON SEQUENCE nugget_api.ledger_id_seq TO ultri_supertokens;
+
+
+--
+-- Name: TABLE ledger_transaction; Type: ACL; Schema: nugget_api; Owner: -
+--
+
+GRANT ALL ON TABLE nugget_api.ledger_transaction TO ultri_supertokens;
 
 
 --
@@ -3410,6 +3575,13 @@ GRANT ALL ON TABLE nugget_api.member TO ultri_supertokens;
 --
 
 GRANT ALL ON TABLE nugget_api.org TO ultri_supertokens;
+
+
+--
+-- Name: TABLE member_account_org_logbooks; Type: ACL; Schema: nugget_api; Owner: -
+--
+
+GRANT ALL ON TABLE nugget_api.member_account_org_logbooks TO ultri_supertokens;
 
 
 --
@@ -3487,6 +3659,34 @@ GRANT ALL ON TABLE nugget_api.reply TO ultri_supertokens;
 --
 
 GRANT ALL ON SEQUENCE nugget_api.response_id_seq TO ultri_supertokens;
+
+
+--
+-- Name: TABLE tenant; Type: ACL; Schema: nugget_api; Owner: -
+--
+
+GRANT ALL ON TABLE nugget_api.tenant TO ultri_supertokens;
+
+
+--
+-- Name: SEQUENCE tenant_id_seq; Type: ACL; Schema: nugget_api; Owner: -
+--
+
+GRANT ALL ON SEQUENCE nugget_api.tenant_id_seq TO ultri_supertokens;
+
+
+--
+-- Name: TABLE transaction_items; Type: ACL; Schema: nugget_api; Owner: -
+--
+
+GRANT ALL ON TABLE nugget_api.transaction_items TO ultri_supertokens;
+
+
+--
+-- Name: SEQUENCE transaction_items_id_seq; Type: ACL; Schema: nugget_api; Owner: -
+--
+
+GRANT ALL ON SEQUENCE nugget_api.transaction_items_id_seq TO ultri_supertokens;
 
 
 --

@@ -1,4 +1,5 @@
 #!/bin/bash
+pg_dump -s -O -h localhost -U postgres -d ultri -n nugget > ./docker-postgres/sql/nugget-schema.sql 
 pg_dump -s -O -h localhost -U postgres -d ultri -n nugget_api > ./docker-postgres/sql/api-schema.sql 
 pg_dump -s -O -h localhost -U postgres -d ultri -n reporting > ./docker-postgres/sql/reporting-schema.sql
 pg_dump -s -O -h localhost -U postgres -d ultri -n supertokens > ./docker-postgres/sql/supertokens-schema.sql 

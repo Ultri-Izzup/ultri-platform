@@ -47,6 +47,22 @@ const routes = [
       }
     ]
   },
+   // JSON SCHEMA EDITOR
+   {
+    path: "/editors/json-schema",
+    component: () => import("layouts/MainLayout.vue"),
+    meta: {
+      drawer: null,
+      app: "Tools"
+    },
+    children: [
+      {
+        name: "JSONSchemaEditor",
+        path: "",
+        component: () => import("pages/JSONSchemaEditorPage.vue")
+      }
+    ]
+  },
   // IMAGE EDITOR
   {
     path: "/editors/image",

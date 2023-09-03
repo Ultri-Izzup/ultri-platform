@@ -1,0 +1,135 @@
+services:
+  postgres:
+    container_name: ultri-pg
+    hostname: "postgres"
+    command: ["postgres", "-c", "log_statement=all"]
+    image: "postgres:14"
+    healthcheck:
+      test: ["CMD", "pg_isready", "-q", "-d", "postgres", "-U", "postgres"]
+      timeout: 45s
+      interval: 10s
+      retries: 10
+    ports:
+      - "5432:5432"
+    restart: "no"
+    env_file: ".env"
+    networks:
+      - ultri-net
+    volumes:
+      - "./docker-postgres/sql:/sql"
+      - ultri-pg:/var/lib/postgres/data
+      - ./docker-postgres:/docker-entrypoint-initdb.d/
+
+  redis:
+    image: redis:7.0.7
+    container_name: ultri-redis
+    restart: "no"
+    ports:
+      - "6379:6379"
+    networks:
+      - ultri-net
+    # command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+    command: redis-server --save 20 1 --loglevel warning
+    volumes:
+      - ultri-redis:/data
+
+  supertokens:
+    image: registry.supertokens.io/supertokens/supertokens-postgresql:6.0
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - 3567:3567
+    container_name: ultri-supertokens
+    env_file: ".env"
+    environment: 
+      - POSTGRESQL_TABLE_SCHEMA=supertokens
+    networks:
+      - ultri-net
+    restart: "no"
+    healthcheck:
+      test: >
+        bash -c 'exec 3<>/dev/tcp/0.0.0.0/3567 && echo -e "GET /hello HTTP/1.1\r\nhost: 0.0.0.0:3567\r\nConnection: close\r\n\r\n" >&3 && cat <&3 | grep "Hello"'
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  smtp4dev:
+    container_name: ultri-smtp4dev
+    image: rnwood/smtp4dev:v3
+    restart: "no"
+    env_file: ".env"
+    networks:
+      - ultri-net
+    ports:
+      - '5000:80'
+      - '25:25'
+      - '143:143'
+    volumes:
+      # This is where smtp4dev stores the database..
+      - ultri-smtp4dev:/smtp4dev
+
+  api:
+    container_name: ultri-nugget-api
+    image: ultri/nugget-api
+    restart: "no"
+    build: ./api
+    # command: ["npm", "run", "dev"]
+    # command: ["npm", "run", "start:debug"]
+    command: ["tsx", "watch", "src"]
+    ports:
+      - "3000:3000"
+    env_file: ".env"
+    networks:
+      - ultri-net
+    volumes:
+      - "./api/src/plugins:/usr/src/app/plugins"
+      - "./api/src/routes:/usr/src/app/routes"
+      - "./api/src/index.ts:/usr/src/app/index.ts"
+
+  gateway:
+    image: ultri/open-platform-gateway:latest
+    container_name: ultri-gateway
+    restart: "no"
+    ports:
+      - "80:80"
+      - "443:443"
+    env_file: ".env"
+    networks:
+      - ultri-net
+    volumes:
+      - "./gateway/certs/example.com+2-key.pem:/etc/openresty/default.key"
+      - "./gateway/certs/example.com+2.pem:/etc/openresty/default.pem"
+      - "./gateway/config/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf"
+      - "./gateway/html:/usr/local/openresty/nginx/html"
+      - "./logs/gateway:/usr/local/openresty/nginx/logs"
+    depends_on:
+      - api
+      - supertokens
+      - redis
+      - postgres
+
+  #quasar:
+  #  image: ultri/frontend
+  #  container_name: ultri-frontend
+  #  restart: "no"
+  #  build: ./frontend
+  #  command: ["quasar", "dev"]
+  #  ports:
+  #    - "9000:9000"
+  #  env_file: ".env"
+  #  networks:
+  #    - ultri-net
+  #  volumes:
+  #    - "./frontend:/app"
+
+
+volumes:
+  ultri-smtp4dev: {}
+  ultri-pg: {}
+  ultri-redis: {}
+
+networks:
+  ultri-net:
+    external: false
+    driver: bridge

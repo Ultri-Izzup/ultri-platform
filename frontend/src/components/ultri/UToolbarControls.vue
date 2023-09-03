@@ -22,6 +22,12 @@
                 </q-item-section>
               </q-item>
 
+              <!-- <q-item clickable v-close-popup href="/editors/json-schema">
+                <q-item-section>
+                  <q-item-label>JSON Schema</q-item-label>
+                </q-item-section>
+              </q-item> -->
+
               <q-item clickable v-close-popup href="/editors/image">
                 <q-item-section>
                   <q-item-label>Image</q-item-label>

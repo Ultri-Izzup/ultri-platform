@@ -106,7 +106,7 @@ async function createRoutes(server, options) {
   );
 
   server.delete(
-    "/orgs/:orgUid",
+    "/canava/canvas/:canvasUid",
     { preHandler: verifySession(),},
     
         async (request, reply) => {

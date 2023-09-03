@@ -33,6 +33,7 @@ module.exports = configure(function (/* ctx */) {
       'i18n',
       'axios',
       'mermaid',
+      'json-schema'
       // 'markdown-editor',
       //'websockets'
     ],

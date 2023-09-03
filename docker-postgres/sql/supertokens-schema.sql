@@ -1098,10 +1098,24 @@ CREATE INDEX userid_mapping_supertokens_user_id_index ON supertokens.userid_mapp
 
 
 --
+-- Name: all_auth_recipe_users create_credential_from_user; Type: TRIGGER; Schema: supertokens; Owner: -
+--
+
+CREATE TRIGGER create_credential_from_user AFTER INSERT ON supertokens.all_auth_recipe_users FOR EACH ROW EXECUTE FUNCTION nugget.new_credential_from_user();
+
+
+--
 -- Name: all_auth_recipe_users create_member_from_user; Type: TRIGGER; Schema: supertokens; Owner: -
 --
 
 CREATE TRIGGER create_member_from_user AFTER INSERT ON supertokens.all_auth_recipe_users FOR EACH ROW EXECUTE FUNCTION nugget_api.new_member_from_user();
+
+
+--
+-- Name: passwordless_users update_credential_email; Type: TRIGGER; Schema: supertokens; Owner: -
+--
+
+CREATE TRIGGER update_credential_email AFTER INSERT ON supertokens.passwordless_users FOR EACH ROW EXECUTE FUNCTION nugget.update_credential_email();
 
 
 --

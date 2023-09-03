@@ -83,6 +83,63 @@ CREATE TYPE nugget.invite_status AS ENUM (
 );
 
 
+--
+-- Name: new_credential_from_user(); Type: FUNCTION; Schema: nugget; Owner: -
+--
+
+CREATE FUNCTION nugget.new_credential_from_user() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+	DECLARE new_credential_id BIGINT;
+	DECLARE new_account_id BIGINT;	
+BEGIN
+
+	INSERT INTO credential(uid, created_at)
+	 VALUES(uuid(NEW.user_id), to_timestamp(NEW.time_joined/1000) )
+	 RETURNING id INTO new_credential_id;
+	
+	INSERT INTO account(name)
+		 VALUES('Account for ' || new_credential_id )
+		 RETURNING id INTO new_account_id;
+		
+	INSERT INTO account_credential(account_id, credential_id, role)
+		 VALUES(new_account_id, new_member_id, 'owner');
+		 RETURN NEW;
+END;
+$$;
+
+
+--
+-- Name: set_updated_at(); Type: FUNCTION; Schema: nugget; Owner: -
+--
+
+CREATE FUNCTION nugget.set_updated_at() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    NEW.updated_at = now();
+    RETURN NEW;
+END;
+$$;
+
+
+--
+-- Name: update_credential_email(); Type: FUNCTION; Schema: nugget; Owner: -
+--
+
+CREATE FUNCTION nugget.update_credential_email() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+
+BEGIN
+	UPDATE nugget.credential 
+	SET email = NEW.email
+	WHERE uid::text = NEW.user_id ;
+ RETURN NULL;
+END;
+$$;
+
+
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;

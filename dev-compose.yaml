@@ -74,9 +74,9 @@ services:
     image: ultri/nugget-api
     restart: "no"
     build: ./api
-    # command: ["npm", "run", "dev"]
+    command: ["npm", "run", "dev"]
     # command: ["npm", "run", "start:debug"]
-    command: ["npm", "run", "start:debug"]
+    # command: ["npm", "run", "start:debug"]
     ports:
       - "3000:3000"
     env_file: ".env"

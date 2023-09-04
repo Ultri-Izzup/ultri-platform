@@ -27,7 +27,7 @@ async function createRoutes(server, options) {
 
       const result = await server.canavaService.getMemberCanvases(memberUid);
 
-      return { orgs: result };
+      return { canvases: result };
     }
   );
 
@@ -44,7 +44,7 @@ async function createRoutes(server, options) {
             description: "Success Response",
             type: "object",
             properties: {
-              orgs: { type: "array" }
+              canvases: { type: "array" }
             },
           },
         },
@@ -55,7 +55,7 @@ async function createRoutes(server, options) {
 
       const result = await server.canavaService.getMemberCanvas(memberUid, canvasUid);
 
-      return { orgs: result };
+      return { canvases: result };
     }
   );
   

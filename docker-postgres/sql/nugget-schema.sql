@@ -111,6 +111,79 @@ $$;
 
 
 --
+-- Name: set_member_canvas(character varying, uuid, uuid, character varying, nugget.canvas_templates, character varying, jsonb, boolean, character varying, character varying, character varying, character varying, boolean, character varying[], character varying[]); Type: FUNCTION; Schema: nugget; Owner: -
+--
+
+CREATE FUNCTION nugget.set_member_canvas(in_tenant_name character varying, in_member_uid uuid, in_canvas_uid uuid, in_name character varying, in_template nugget.canvas_templates, in_attribution character varying, in_sections jsonb, in_sequenced boolean, in_canava_version character varying, in_completed_on character varying, in_completed_by character varying, in_version character varying, in_public boolean, in_editors character varying[], in_viewers character varying[]) RETURNS TABLE("createdAt" timestamp without time zone)
+    LANGUAGE plpgsql
+    AS $$
+#variable_conflict use_column
+
+DECLARE valid_tenant_id bigint;
+DECLARE valid_member_id bigint;
+DECLARE new_record_created_at timestamp without time zone;
+
+BEGIN
+
+SELECT id FROM nugget.tenant WHERE name = in_tenant_name INTO valid_tenant_id;
+SELECT id FROM nugget.member WHERE uid = in_member_uid AND tenant_id = valid_tenant_id INTO valid_member_id;
+
+INSERT INTO nugget.member_canvas(
+		uid,
+        member_id,
+        name, 
+        template, 
+        attribution, 
+        sections, 
+        sequenced, 
+        canava_version, 
+        completed_on, 
+        completed_by, 
+        version, 
+        public, 
+        editors, 
+        viewers,
+        created_by)
+        VALUES (
+			in_canvas_uid,
+			valid_member_id, 
+			in_name,
+			in_template::canvas_templates, 
+			in_attribution,
+			in_sections, 
+			in_sequenced, 
+			in_canava_version,
+			in_completed_on, 
+			in_completed_by, 
+			in_version,
+			in_public,
+			in_editors,
+			in_viewers,
+		    valid_member_id
+			)
+		ON CONFLICT ON CONSTRAINT uq_member_canvas_uid 
+		DO UPDATE SET 
+		name = EXCLUDED.name,
+		attribution = EXCLUDED.attribution,
+		sections = EXCLUDED.sections,
+		sequenced = EXCLUDED.sequenced,
+		canava_version = EXCLUDED.canava_version,
+		completed_on = EXCLUDED.completed_on,
+		completed_by = EXCLUDED.completed_by,
+		version = EXCLUDED.version,
+		public = EXCLUDED.public,
+		editors = EXCLUDED.editors,
+		viewers = EXCLUDED.viewers
+		
+ 	RETURNING nugget.member_canvas.created_at INTO new_record_created_at;
+	
+	RETURN QUERY SELECT new_record_created_at;
+	
+END; 
+$$;
+
+
+--
 -- Name: set_updated_at(); Type: FUNCTION; Schema: nugget; Owner: -
 --
 
@@ -203,8 +276,8 @@ CREATE TABLE nugget.account_member (
 
 CREATE TABLE nugget.canvas (
     id bigint NOT NULL,
-    uid uuid NOT NULL,
-    created_at timestamp without time zone NOT NULL,
+    uid uuid DEFAULT gen_random_uuid() NOT NULL,
+    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     updated_at timestamp without time zone,
     deleted boolean DEFAULT false NOT NULL,
     org_id bigint,
@@ -438,8 +511,8 @@ CREATE TABLE nugget.member (
 
 CREATE TABLE nugget.member_canvas (
     id bigint DEFAULT nextval('nugget_api.member_canvas_id_seq'::regclass) NOT NULL,
-    uid uuid NOT NULL,
-    created_at timestamp without time zone NOT NULL,
+    uid uuid DEFAULT gen_random_uuid() NOT NULL,
+    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     updated_at timestamp without time zone,
     deleted boolean DEFAULT false NOT NULL,
     name character varying(256) DEFAULT 'please provide a name'::character varying NOT NULL,
@@ -905,6 +978,13 @@ ALTER TABLE ONLY nugget.org
 
 
 --
+-- Name: member_canvas set_member_canvas_updated_at; Type: TRIGGER; Schema: nugget; Owner: -
+--
+
+CREATE TRIGGER set_member_canvas_updated_at BEFORE UPDATE ON nugget.member_canvas FOR EACH ROW EXECUTE FUNCTION nugget.set_updated_at();
+
+
+--
 -- Name: account fk_account_created_by_member; Type: FK CONSTRAINT; Schema: nugget; Owner: -
 --
 
@@ -1278,6 +1358,20 @@ GRANT ALL ON SEQUENCE nugget.invite_id_seq TO ultri_supertokens;
 --
 
 GRANT ALL ON TABLE nugget.member TO ultri_supertokens;
+
+
+--
+-- Name: TABLE member_canvas; Type: ACL; Schema: nugget; Owner: -
+--
+
+GRANT ALL ON TABLE nugget.member_canvas TO ultri_supertokens;
+
+
+--
+-- Name: SEQUENCE member_canvas_id_seq; Type: ACL; Schema: nugget; Owner: -
+--
+
+GRANT ALL ON SEQUENCE nugget.member_canvas_id_seq TO ultri_supertokens;
 
 
 --

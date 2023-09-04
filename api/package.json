@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon server.js",
     "start": "node server.js",
-    "start:debug": "DEBUG=com.supertokens* node server.js",
+    "start:debug": "DEBUG=com.supertokens* nodemon server.js",
     "docker:build": "docker build -t opensociocracy-api .",
     "docker:run": "npm run docker:build && docker run --rm -p 3001:3001 --name opensociocracy-api opensociocracy-api ",
     "docker:sh": "docker exec -it opensociocracy-api /bin/sh",

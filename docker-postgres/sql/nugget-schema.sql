@@ -433,6 +433,54 @@ CREATE TABLE nugget.member (
 
 
 --
+-- Name: member_canvas; Type: TABLE; Schema: nugget; Owner: -
+--
+
+CREATE TABLE nugget.member_canvas (
+    id bigint DEFAULT nextval('nugget_api.member_canvas_id_seq'::regclass) NOT NULL,
+    uid uuid NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone,
+    deleted boolean DEFAULT false NOT NULL,
+    name character varying(256) DEFAULT 'please provide a name'::character varying NOT NULL,
+    template nugget.canvas_templates DEFAULT 'custom'::nugget.canvas_templates NOT NULL,
+    attribution character varying(2056),
+    sections jsonb,
+    sequenced boolean,
+    canava_version character varying(15),
+    completed_on character varying(256),
+    completed_by character varying(2056),
+    version character varying(256),
+    public boolean,
+    archived boolean DEFAULT false,
+    member_id bigint,
+    created_by bigint,
+    updated_by bigint,
+    editors character varying(250)[],
+    viewers character varying(250)[]
+);
+
+
+--
+-- Name: member_canvas_id_seq; Type: SEQUENCE; Schema: nugget; Owner: -
+--
+
+CREATE SEQUENCE nugget.member_canvas_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: member_canvas_id_seq; Type: SEQUENCE OWNED BY; Schema: nugget; Owner: -
+--
+
+ALTER SEQUENCE nugget.member_canvas_id_seq OWNED BY nugget.member_canvas.id;
+
+
+--
 -- Name: member_id_seq; Type: SEQUENCE; Schema: nugget; Owner: -
 --
 
@@ -737,6 +785,14 @@ ALTER TABLE ONLY nugget.invite
 
 
 --
+-- Name: member_canvas member_canvas_pkey; Type: CONSTRAINT; Schema: nugget; Owner: -
+--
+
+ALTER TABLE ONLY nugget.member_canvas
+    ADD CONSTRAINT member_canvas_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: member member_pkey; Type: CONSTRAINT; Schema: nugget; Owner: -
 --
 
@@ -806,6 +862,14 @@ ALTER TABLE ONLY nugget.driver
 
 ALTER TABLE ONLY nugget.email
     ADD CONSTRAINT uq_email_uid UNIQUE (uid, account_id);
+
+
+--
+-- Name: member_canvas uq_member_canvas_uid; Type: CONSTRAINT; Schema: nugget; Owner: -
+--
+
+ALTER TABLE ONLY nugget.member_canvas
+    ADD CONSTRAINT uq_member_canvas_uid UNIQUE (uid, member_id);
 
 
 --
@@ -1017,6 +1081,30 @@ ALTER TABLE ONLY nugget.invite
 
 
 --
+-- Name: member_canvas fk_member_canvas_created_by; Type: FK CONSTRAINT; Schema: nugget; Owner: -
+--
+
+ALTER TABLE ONLY nugget.member_canvas
+    ADD CONSTRAINT fk_member_canvas_created_by FOREIGN KEY (created_by) REFERENCES nugget.member(id);
+
+
+--
+-- Name: member_canvas fk_member_canvas_member; Type: FK CONSTRAINT; Schema: nugget; Owner: -
+--
+
+ALTER TABLE ONLY nugget.member_canvas
+    ADD CONSTRAINT fk_member_canvas_member FOREIGN KEY (member_id) REFERENCES nugget.member(id);
+
+
+--
+-- Name: member_canvas fk_member_canvas_updated_by; Type: FK CONSTRAINT; Schema: nugget; Owner: -
+--
+
+ALTER TABLE ONLY nugget.member_canvas
+    ADD CONSTRAINT fk_member_canvas_updated_by FOREIGN KEY (updated_by) REFERENCES nugget.member(id);
+
+
+--
 -- Name: member fk_member_tenant; Type: FK CONSTRAINT; Schema: nugget; Owner: -
 --
 
@@ -1137,6 +1225,13 @@ GRANT ALL ON SEQUENCE nugget.circle_id_seq TO ultri_supertokens;
 
 
 --
+-- Name: TABLE circle_member; Type: ACL; Schema: nugget; Owner: -
+--
+
+GRANT ALL ON TABLE nugget.circle_member TO ultri_supertokens;
+
+
+--
 -- Name: TABLE driver; Type: ACL; Schema: nugget; Owner: -
 --
 
@@ -1204,6 +1299,20 @@ GRANT ALL ON TABLE nugget.nugget TO ultri_supertokens;
 --
 
 GRANT ALL ON SEQUENCE nugget.nugget_id_seq TO ultri_supertokens;
+
+
+--
+-- Name: TABLE nugget_type; Type: ACL; Schema: nugget; Owner: -
+--
+
+GRANT ALL ON TABLE nugget.nugget_type TO ultri_supertokens;
+
+
+--
+-- Name: SEQUENCE nugget_type_id_seq; Type: ACL; Schema: nugget; Owner: -
+--
+
+GRANT ALL ON SEQUENCE nugget.nugget_type_id_seq TO ultri_supertokens;
 
 
 --

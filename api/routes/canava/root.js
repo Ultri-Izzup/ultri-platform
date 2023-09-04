@@ -60,7 +60,7 @@ async function createRoutes(server, options) {
   );
   
   server.put(
-    "/canava/canvases/:canvasUid",
+    "/canava/canvases",
     {
       preHandler: verifySession(),
       schema: {

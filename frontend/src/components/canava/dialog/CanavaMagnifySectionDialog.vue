@@ -65,7 +65,7 @@
         </q-list>
       </q-card-section>
     </q-card>
-    <CanavaEditorSectionItemDialog
+    <CanavaViewerSectionItemDialog
       v-model="showItemDialog"
       :section="section"
       :item="currentItem"
@@ -81,7 +81,7 @@ import { useDialogPluginComponent, useQuasar } from "quasar";
 
 import { v4 as uuidv4 } from "uuid";
 
-import CanavaEditorSectionItemDialog from "./CanavaEditorSectionItemDialog.vue";
+import CanavaViewerSectionItemDialog from "./CanavaViewerSectionItemDialog.vue";
 
 const currentItem = ref({ uid: "", label: "", details: "" });
 

@@ -138,7 +138,7 @@
               </q-list>
             </q-card-section>
           </q-card>
-          <CanavaEditorSectionItemDialog
+          <CanavaViewerSectionItemDialog
             v-model="showItemDialog"
             :section="currentSectionData"
             :item="toValue(currentItem)"
@@ -181,7 +181,7 @@ import * as htmlToImage from "html-to-image";
 import { toPng, toJpeg, toBlob, toPixelData, toSvg } from "html-to-image";
 
 import CanavaMagnifySectionDialog from "../canava/dialog/CanavaMagnifySectionDialog.vue";
-import CanavaEditorSectionItemDialog from "../canava/dialog/CanavaEditorSectionItemDialog.vue";
+import CanavaViewerSectionItemDialog from "../canava/dialog/CanavaViewerSectionItemDialog.vue";
 
 import { useColorStore } from "../../stores/color";
 // Instantiate our stores early so they are available

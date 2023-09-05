@@ -1,7 +1,6 @@
 <template>
   <div class="container">
     <q-card
-      class="container-card"
       :class="data.sectionKey"
       :key="data.sectionKey"
       :style="
@@ -20,7 +19,7 @@
             ><span class="text-grey-8">{{ data.sequence }}</span></q-avatar
           >
           {{ data.title }}
-          <sup>
+          <sup v-if="data.instructions && data.instructions.length > 0">
             <q-icon name="mdi-help-circle" size="13px" color="grey-6" />
             <q-tooltip>
               <span v-html="data.instructions" />

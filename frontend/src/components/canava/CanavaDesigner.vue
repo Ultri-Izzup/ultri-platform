@@ -13,6 +13,7 @@
     <div class="q-pa-sm row">
       <div class="col container container-wrapper full-width">
         <q-card
+          square
           class="container-card"
           v-for="section in value.sections"
           :key="section.sectionKey"
@@ -256,7 +257,7 @@ const triggerNew = () => {
   border-style: solid;
   border-width: 1px;
   border-color: $grey-4;
-  border-radius: 5px;
+  border-radius: 0;
 }
 ::-webkit-scrollbar {
   display: none;

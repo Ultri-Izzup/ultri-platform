@@ -119,17 +119,16 @@ export const useCanavaStore = defineStore("canava", {
   },
   actions: {
     saveDesignerCanvas() {
-
       const data = this.canvasData;
 
       // add the source template to the canvas object
-      data.sourceTemplate = 'custom'
+      data.sourceTemplate = "custom";
 
       // new Uid
       const newUuid = uuidv4();
 
       // add the Uid to the canvas object
-      data.uid = newUuid
+      data.uid = newUuid;
 
       // save to API
 
@@ -139,48 +138,47 @@ export const useCanavaStore = defineStore("canava", {
       this.resetCanvasData();
 
       return newUuid;
-
     },
     async saveTemplateCanvas(canvasTemplate) {
       console.log(canvasTemplate);
 
-      if(isValidUUID(canvasTemplate)) {
+      if (isValidUUID(canvasTemplate)) {
         // this has already been saved, we must update it.
-        console.log('Updating ' + canvasTemplate)
+        console.log("Updating " + canvasTemplate);
         const data = this.storedCanvases[canvasTemplate];
 
-        console.log("DATATATAT", data)
+        console.log("DATATATAT", data);
 
         // save to API
         const result = await api.put("/canava/canvases", data);
 
-        console.log(result)
+        console.log(result);
 
+        return canvasTemplate;
       } else {
-        console.log('Create new from ' + canvasTemplate)
+        console.log("Create new from " + canvasTemplate);
         // get the current data
-        const data = this.storedCanvases[canvasTemplate]
+        const data = this.storedCanvases[canvasTemplate];
 
         // add the source template to the canvas object
-        data.sourceTemplate = canvasTemplate
+        data.sourceTemplate = canvasTemplate;
 
         // new Uid
         const newUuid = uuidv4();
 
         // add the Uid to the canvas object
-        data.uid = newUuid
-        console.log(data)
+        data.uid = newUuid;
+        console.log(data);
 
         // save to API
-
 
         // add to savedCanvases using Uid
         this.storedCanvases[newUuid] = data;
 
-        console.log(this.storedCanvases[newUuid])
+        console.log(this.storedCanvases[newUuid]);
 
         // remove template name from savedCanvases
-        delete this.storedCanvases[canvasTemplate]
+        delete this.storedCanvases[canvasTemplate];
 
         return newUuid;
       }

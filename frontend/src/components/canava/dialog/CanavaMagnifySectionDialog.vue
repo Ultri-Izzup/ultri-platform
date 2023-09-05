@@ -20,7 +20,7 @@
             <q-avatar v-if="section.sequence" size="24px" color="grey-4"
               ><span class="text-grey-8">{{ section.sequence }}</span></q-avatar
             >
-            {{ section.title }}
+            <span class="text-bold text-h6 q-pl-sm">{{ section.title }}</span>
           </p>
           <q-space />
           <q-icon
@@ -41,12 +41,12 @@
           ></q-icon>
         </div>
       </q-card-section>
-      <q-card-section class="q-pa-none" clickable
+      <q-card-section class="q-px-lg q-pt-none text-italic" clickable
             v-ripple
             @click="triggerNew()"
         ><div v-html="section.instructions" />
       </q-card-section>
-      <q-card-section v-if="section.items" class="q-pa-none">
+      <q-card-section v-if="section.items" class="q-pa-none q-pl-md">
         <q-list separator>
           <q-item
             v-for="item in section.items"

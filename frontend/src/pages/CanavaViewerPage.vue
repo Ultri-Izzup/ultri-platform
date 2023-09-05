@@ -197,6 +197,8 @@ const saveToCloud = (targetCanvas = false) => {
 
     // Save the canvas to the storedCanvases
     canavaStore.saveTemplateCanvas(targetCanvas);
+
+    // If the name changed from a template to a UUID, push to new page
   }
 
 };

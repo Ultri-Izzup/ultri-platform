@@ -230,7 +230,6 @@ const showItems = ref(true);
 const vh = ref(80);
 
 watch(vh, (oldVal, newVal) => {
-  console.log(vh.value);
   const element = document.querySelector(".container");
   element.style.height = vh.value + "vh";
 });

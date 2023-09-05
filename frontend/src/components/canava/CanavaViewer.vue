@@ -82,7 +82,7 @@
                   }}</span></q-avatar
                 >
                 {{ section.title }}
-                <sup>
+                <sup v-if="section.instructions && section.instructions.length > 0">
                   <q-icon name="mdi-help-circle" size="13px" color="grey-6" />
                   <q-tooltip>
                     <span v-html="section.instructions" />

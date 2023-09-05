@@ -404,7 +404,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { useQuasar } from "quasar";
 import { useAuthStore } from "../stores/auth";
@@ -419,6 +419,11 @@ const router = useRouter();
 
 const selectedCanvas = ref(null);
 const selectedSavedCanvas = ref(null);
+
+onMounted(async () => {
+  console.log(`the component is now mounted.`)
+  const storedCanvases = await canavaStore.loadMemberCanvas();
+})
 
 const loadCanvasTemplate = () => {
   console.log(selectedCanvas.value)

@@ -186,6 +186,23 @@ export const useCanavaStore = defineStore("canava", {
         return result.data.uid;
       }
     },
+    async loadMemberCanvas() {
+
+        // save to API
+        const result = await api.get("/canava/canvases");
+
+        console.log(result);
+
+        if(result.data.canvases && result.data.canvases.length > 0) {
+
+          result.data.canvases.forEach((canvas) => {
+            this.storedCanvases[canvas.uid] = canvas;
+          })
+        }
+
+        return result;
+
+    },
     loadCanvasTemplate(template) {
       const templateData = canvasMap[template];
 

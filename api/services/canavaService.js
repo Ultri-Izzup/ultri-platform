@@ -10,7 +10,20 @@ const CanavaService = (postgres) => {
       const {
         rows,
       } = await client.query(
-        ` SELECT mc.*
+        ` SELECT 
+          mc.archived,
+          mc.attribution,
+          mc.canava_version,
+          mc.completed_by,
+          mc.completed_on,
+          mc.editors,
+          mc.name,
+          mc.public,
+          mc.sections,
+          mc.sequenced,
+          mc.template,
+          mc.uid,
+          mc.version
         FROM member_canvas mc 
         JOIN member m ON m.id = mc.member_id
         WHERE m.uid = $1 

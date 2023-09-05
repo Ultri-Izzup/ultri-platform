@@ -53,6 +53,7 @@
 
 
         <q-btn
+          :disabled="!auth.isSignedIn"
           @click="saveToCloud(canvasTemplate)"
           icon="mdi-content-save"
           size="md"

@@ -11,7 +11,7 @@ export default {
     },
     home: {
       heading: "Canava - a better canvas",
-      benefits: 'Benefits',
+      benefits: 'Free Features',
       getStarted: 'Get Started'
     },
     component: {

@@ -196,10 +196,7 @@ const saveToCloud = (targetCanvas = false) => {
     console.log('SAVE THIS CANVAS',  targetCanvas)
 
     // Save the canvas to the storedCanvases
-    const canvasTemplate = canavaStore.saveTemplateCanvas(targetCanvas);
-
-    // Push the client to the saved canvas route
-    router.push({name: 'canavaTemplate', params: {canvasTemplate: canvasTemplate}})
+    canavaStore.saveTemplateCanvas(targetCanvas);
   }
 
 };

@@ -85,23 +85,23 @@
               {{ $t("canava.home.benefits", "Free Canava Benefits") }}
             </div>
             <q-separator></q-separator>
+            <div :class="Screen.lt.md ? 'q-pt-sm' : 'q-pt-xl q-pl-xl'">
             <ul class="text-h6 text-shd-p-90">
-              <li>Unlimited free canvases</li>
-              <li>Export and import data</li>
-              <li>Create custom canvases</li>
-              <li>Canvases for each circle</li>
-              <li>Multiple open canvases</li>
-              <li>Access to all canvas templates</li>
-              <li>PNG image export, more coming</li>
-              <li>Multiple fonts provided</li>
-              <li>Runs on desktop or mobile</li>
-              <li>10+ free canvas templates</li>
-              <li>New canvases added weekly</li>
-              <li>Integrated with circles and OKR</li>
-              <li>Localization support</li>
-              <li>Free and open source code</li>
-              <li>Easily self-hosted</li>
+              <li class="q-ma-xs" >Unlimited free canvases</li>
+              <li class="q-ma-sm" >Export and import data</li>
+              <li class="q-ma-sm" >Create custom canvases</li>
+              <li class="q-ma-sm" >Multiple open canvases</li>
+              <li class="q-ma-sm" >Access to all canvas templates</li>
+              <li class="q-ma-sm" >PNG image export, more coming</li>
+              <li class="q-ma-sm" >Multiple fonts provided</li>
+              <li class="q-ma-sm" >Runs on desktop or mobile</li>
+              <li class="q-ma-sm" >10+ free canvas templates</li>
+              <li class="q-ma-sm" >New canvases added weekly</li>
+              <li class="q-ma-sm" >Localization support</li>
+              <li class="q-ma-sm" >Free and open source code</li>
+              <li class="q-ma-sm" >Easily self-hosted</li>
             </ul>
+          </div>
           </q-card-section>
         </q-card>
       </div>

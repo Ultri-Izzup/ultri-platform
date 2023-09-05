@@ -13,6 +13,8 @@ import productVisionBoardData from "../data/canava/productVisionBoard.json";
 import productVisionBoardExtData from "../data/canava/productVisionBoardExt.json";
 import productCanvasData from "../data/canava/productCanvas.json";
 
+import { api } from "boot/axios";
+
 const canvasOpts = [
   {
     label: "Business Model Canvas",
@@ -139,14 +141,20 @@ export const useCanavaStore = defineStore("canava", {
       return newUuid;
 
     },
-    saveTemplateCanvas(canvasTemplate) {
+    async saveTemplateCanvas(canvasTemplate) {
       console.log(canvasTemplate);
 
       if(isValidUUID(canvasTemplate)) {
         // this has already been saved, we must update it.
         console.log('Updating ' + canvasTemplate)
+        const data = this.storedCanvases[canvasTemplate];
+
+        console.log("DATATATAT", data)
 
         // save to API
+        const result = await api.put("/canava/canvases", data);
+
+        console.log(result)
 
       } else {
         console.log('Create new from ' + canvasTemplate)
@@ -164,6 +172,7 @@ export const useCanavaStore = defineStore("canava", {
         console.log(data)
 
         // save to API
+
 
         // add to savedCanvases using Uid
         this.storedCanvases[newUuid] = data;

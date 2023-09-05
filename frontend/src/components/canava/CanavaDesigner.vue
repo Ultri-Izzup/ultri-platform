@@ -14,6 +14,7 @@
       <div class="col container container-wrapper full-width">
         <q-card
           square
+          flat
           class="container-card"
           v-for="section in value.sections"
           :key="section.sectionKey"

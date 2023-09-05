@@ -60,7 +60,8 @@
       <div class="q-ma-sm container-wrapper">
         <div v-if="value.sections.length > 0" class="container">
           <q-card
-          square
+            square
+            flat
             class="container-card"
             :class="section.sectionKey"
             v-for="section in value.sections"

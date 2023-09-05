@@ -330,7 +330,7 @@ const onDownloadClick = (targetCanvas = false) => {
   dlAnchorElem.click();
 };
 
-const saveToCloud = (targetCanvas = false) => {
+const saveToCloud = async (targetCanvas = false) => {
   console.log("Saving to cloud " + targetCanvas);
 
   // Loop through canvases
@@ -361,10 +361,11 @@ const saveToCloud = (targetCanvas = false) => {
     console.log('SAVE THIS CANVAS',  targetCanvas)
 
     // Save the canvas to the storedCanvases
-    const canvasTemplate = canavaStore.saveTemplateCanvas(targetCanvas);
+    const canvasTemplate = await canavaStore.saveTemplateCanvas(targetCanvas);
 
     // Push the client to the saved canvas route
     router.push({name: 'canavaTemplate', params: {canvasTemplate: canvasTemplate}})
+
   }
 
 };

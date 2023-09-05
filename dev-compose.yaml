@@ -102,6 +102,7 @@ services:
     volumes:
       - "./gateway/certs/example.com+2-key.pem:/etc/openresty/default.key"
       - "./gateway/certs/example.com+2.pem:/etc/openresty/default.pem"
+      - "./gateway/certs/rootCA.pem:/etc/openresty/rootCA.pem"
       - "./gateway/config/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf"
       - "./gateway/html:/usr/local/openresty/nginx/html"
       - "./logs/gateway:/usr/local/openresty/nginx/logs"

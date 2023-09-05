@@ -62,6 +62,8 @@ const CanavaService = (postgres) => {
 
     //   const newData = result.rows[0];
 
+    return { uid: canvas.uid }
+
     //   // Note: avoid doing expensive computation here, this will block releasing the client
     //   return {
     //     uid: newData.uid,

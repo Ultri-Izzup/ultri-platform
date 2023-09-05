@@ -92,7 +92,7 @@
         clickable
         v-close-popup
         v-if="authStore.isSignedIn"
-        @click="authStore.signOut('/')"
+        @click="platformSignOut('/')"
       >
         <q-item-section avatar>
           <q-icon name="mdi-logout" color="primary" />
@@ -108,6 +108,7 @@
 <script setup language="ts">
 import { useAuthStore } from "../../../stores/auth";
 import { useColorStore } from "../../../stores/color";
+import { useCanavaStore } from "../../../stores/canava";
 import { useFeatureStore } from "../../../stores/feature";
 
 import { useQuasar } from "quasar";
@@ -123,7 +124,14 @@ const $q = useQuasar();
 
 const authStore = useAuthStore();
 const colorStore = useColorStore();
+const canavaStore = useCanavaStore();
 const ufs = useFeatureStore();
+
+const platformSignOut = async(path) => {
+  await authStore.signOut();
+  canavaStore.$reset();
+  router.push(path)
+}
 
 $q.dark.set(colorStore.darkMode);
 colorStore.$subscribe((mutation, state) => {

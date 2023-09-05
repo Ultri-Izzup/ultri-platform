@@ -1,3 +1,4 @@
+import { toValue } from "vue";
 import { defineStore } from "pinia";
 import { useStorage } from "@vueuse/core";
 import { v4 as uuidv4, validate as isValidUUID } from "uuid";
@@ -161,14 +162,14 @@ export const useCanavaStore = defineStore("canava", {
         const data = this.storedCanvases[canvasTemplate];
 
         // add the source template to the canvas object
-        data.sourceTemplate = canvasTemplate;
+        data.templateName = canvasTemplate;
 
         // new Uid
         const newUuid = uuidv4();
 
         // add the Uid to the canvas object
         data.uid = newUuid;
-        console.log(data);
+        console.log(toValue(data));
 
         // save to API
         const result = await api.put("/canava/canvases", data);
@@ -182,7 +183,7 @@ export const useCanavaStore = defineStore("canava", {
         // remove template name from savedCanvases
         delete this.storedCanvases[canvasTemplate];
 
-        return result.uid;
+        return result.data.uid;
       }
     },
     loadCanvasTemplate(template) {

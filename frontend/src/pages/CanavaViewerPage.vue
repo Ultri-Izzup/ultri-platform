@@ -165,7 +165,7 @@ const onDownloadClick = (targetCanvas = false) => {
   dlAnchorElem.click();
 };
 
-const saveToCloud = (targetCanvas = false) => {
+const saveToCloud = async (targetCanvas = false) => {
   console.log("Saving to cloud " + targetCanvas);
 
   // Loop through canvases
@@ -197,13 +197,13 @@ const saveToCloud = (targetCanvas = false) => {
     console.log('SAVE THIS CANVAS',  targetCanvas)
 
     // Save the canvas to the storedCanvases
-    const savedUid = canavaStore.saveTemplateCanvas(targetCanvas);
+    const savedUid = await canavaStore.saveTemplateCanvas(targetCanvas);
 
     // If the name changed from a template to a UUID, push to new pag
     if(savedUid != targetCanvas) {
 
       console.log('CHNAGED', targetCanvas, savedUid)
-      //router.push({name: 'canavaTemplate', params: {canvasTemplate: savedUid}})
+      router.push({name: 'canavaTemplate', params: {canvasTemplate: savedUid}})
     }
   }
 

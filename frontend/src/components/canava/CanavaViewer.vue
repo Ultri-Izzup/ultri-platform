@@ -265,7 +265,7 @@ watch(
   value,
   (newVal, oldVal) => {
     let dynamicStyles = "@media screen and (min-width: 864px) { \n";
-    console.log(value);
+    //console.log(value);
     if (value.value) {
       value.value.sections.forEach((s) => {
         const sectionCSS =

@@ -190,15 +190,21 @@ const saveToCloud = (targetCanvas = false) => {
   } else if (targetCanvas === "ALL") {
     // Store in cloud every canvas we have stored locally
     console.log('ALL CANVAS')
+    // NOTE: WE ARE NOT IMPLEMENTING THIS IMMEDIATELY
 
   } else {
     // Store this one particular canvas in the cloud
     console.log('SAVE THIS CANVAS',  targetCanvas)
 
     // Save the canvas to the storedCanvases
-    canavaStore.saveTemplateCanvas(targetCanvas);
+    const savedUid = canavaStore.saveTemplateCanvas(targetCanvas);
 
-    // If the name changed from a template to a UUID, push to new page
+    // If the name changed from a template to a UUID, push to new pag
+    if(savedUid != targetCanvas) {
+
+      console.log('CHNAGED', targetCanvas, savedUid)
+      //router.push({name: 'canavaTemplate', params: {canvasTemplate: savedUid}})
+    }
   }
 
 };

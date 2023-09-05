@@ -171,6 +171,8 @@ export const useCanavaStore = defineStore("canava", {
         console.log(data);
 
         // save to API
+        const result = await api.put("/canava/canvases", data);
+        console.log(result)
 
         // add to savedCanvases using Uid
         this.storedCanvases[newUuid] = data;
@@ -180,7 +182,7 @@ export const useCanavaStore = defineStore("canava", {
         // remove template name from savedCanvases
         delete this.storedCanvases[canvasTemplate];
 
-        return newUuid;
+        return result.uid;
       }
     },
     loadCanvasTemplate(template) {

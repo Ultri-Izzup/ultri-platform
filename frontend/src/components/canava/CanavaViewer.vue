@@ -60,6 +60,7 @@
       <div class="q-ma-sm container-wrapper">
         <div v-if="value.sections.length > 0" class="container">
           <q-card
+          square
             class="container-card"
             :class="section.sectionKey"
             v-for="section in value.sections"
@@ -391,7 +392,7 @@ const deleteItem = () => {
   border-style: solid;
   border-width: 1px;
   border-color: $grey-4;
-  border-radius: 5px;
+  border-radius: 0;
 }
 ::-webkit-scrollbar {
   display: none;

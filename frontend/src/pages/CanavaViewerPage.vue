@@ -182,7 +182,7 @@ const saveToCloud = async (targetCanvas = false) => {
     // If no target defined, use the custom canvas from designer.
     // We know this doesn't have a `uuid` as the `uid` yet.
     console.log('SAVING DESIGNER CANVAS')
-    const newUuid = canavaStore.saveDesignerCanvas()
+    const newUuid = await canavaStore.saveDesignerCanvas()
 
     // Push the client to the saved canvas route
     router.push({name: 'canavaTemplate', params: {canvasTemplate: newUuid}})

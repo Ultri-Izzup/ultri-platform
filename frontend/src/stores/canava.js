@@ -193,7 +193,7 @@ export const useCanavaStore = defineStore("canava", {
 
         if(result) {
           // remove template name from savedCanvases
-          delete this.storedCanvases[canvasTemplate];
+          delete this.storedCanvases[canvasUid];
         }
 
     },
@@ -202,7 +202,7 @@ export const useCanavaStore = defineStore("canava", {
         // save to API
         const result = await api.get("/canava/canvases");
 
-        console.log(result);
+        //console.log(result);
 
         if(result.data.canvases && result.data.canvases.length > 0) {
 

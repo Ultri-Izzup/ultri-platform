@@ -81,6 +81,7 @@
             color="primary"
             >{{ $t("nav.services", "Services") }}</router-link
           >
+          <q-space />
           <router-link
             to="/about-ultri"
             class="navbar-text-link"

@@ -1,3 +1,4 @@
+import about from './about';
 import account from './account';
 import apps from './apps';
 import auth from './auth';
@@ -15,6 +16,7 @@ import tos from './tos';
 import pricing from './pricing';
 
 export default {
+  ...about,
   ...account,
   ...apps,
   ...auth,

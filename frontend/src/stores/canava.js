@@ -119,11 +119,11 @@ export const useCanavaStore = defineStore("canava", {
     }
   },
   actions: {
-    saveDesignerCanvas() {
+    async saveDesignerCanvas() {
       const data = this.canvasData;
 
       // add the source template to the canvas object
-      data.sourceTemplate = "custom";
+      data.templateName = "custom";
 
       // new Uid
       const newUuid = uuidv4();
@@ -132,6 +132,7 @@ export const useCanavaStore = defineStore("canava", {
       data.uid = newUuid;
 
       // save to API
+      const result = await api.put("/canava/canvases", data);
 
       // add to savedCanvases using Uid
       this.storedCanvases[newUuid] = data;

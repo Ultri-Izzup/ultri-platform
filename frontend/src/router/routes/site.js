@@ -51,6 +51,14 @@ const routes = [
     ]
   },
 
+  {
+    path: "/about-ultri",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [
+      { path: "", component: () => import("pages/AboutUltriPage.vue") }
+    ]
+  },
+
 ];
 
 export default routes;

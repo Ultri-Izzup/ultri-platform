@@ -81,11 +81,17 @@
             color="primary"
             >{{ $t("nav.services", "Services") }}</router-link
           >
-          <q-space /><a
+          <router-link
+            to="/about-ultri"
+            class="navbar-text-link"
+            color="primary"
+            >{{ $t("nav.about", "About Ultri") }}</router-link
+          >
+          <!-- <q-space /><a
             href="https://www.opensociocracy.org"
             class="navbar-text-link"
             >OpenSociocracy</a
-          >
+          > -->
           <q-space /><a
             href="https://www.linkedin.com/company/ultri/"
             class="navbar-text-link"

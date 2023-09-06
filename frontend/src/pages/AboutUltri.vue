@@ -45,7 +45,7 @@
               Popular Canvas Templates
             </p>
             <p class="text-h6 text-shd-p-90 q-px-lg">
-              We have over fifteen popular canvases with more coming weekly. Choose
+              We have over ten popular canvases with more coming weekly. Choose
               a template below to get started.
             </p>
             <p class="row text-center justify-center">

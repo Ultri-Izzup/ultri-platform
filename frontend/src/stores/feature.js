@@ -13,7 +13,7 @@ const boolFeatures = {
 
 export const useFeatureStore = defineStore("feature", {
   state: () => ({
-    authEnabled: useStorage('authEnabled', false),
+    authEnabled: useStorage('authEnabled', true),
     pricingEnabled: useStorage('pricingEnabled', false),
     sociocracyOnly: useStorage('sociocracyOnly', false),
     memberDashboard: useStorage('memberDashboard', false),
@@ -31,7 +31,7 @@ export const useFeatureStore = defineStore("feature", {
 
   actions: {
     $reset() {
-      this.authEnabled = false;
+      this.authEnabled = true;
       this.pricingEnabled = false;
       this.sociocracyEnabled = false;
       this.memberDashboard = false;

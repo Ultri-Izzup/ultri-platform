@@ -421,8 +421,7 @@ const selectedCanvas = ref(null);
 const selectedSavedCanvas = ref(null);
 
 onMounted(async () => {
-  console.log(`the component is now mounted.`)
-  const storedCanvases = await canavaStore.loadMemberCanvas();
+  canavaStore.loadMemberCanvas();
 })
 
 const loadCanvasTemplate = () => {

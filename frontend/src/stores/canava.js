@@ -202,7 +202,7 @@ export const useCanavaStore = defineStore("canava", {
         // save to API
         const result = await api.get("/canava/canvases");
 
-        //console.log(result);
+        console.log(result);
 
         if(result.data.canvases && result.data.canvases.length > 0) {
 

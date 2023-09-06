@@ -1,0 +1,57 @@
+{
+  "name": "Kanban Canvas",
+  "attribution": "",
+  "version": "",
+  "sections": [
+    {
+      "instructions": "",
+      "gridColumn": "1/3",
+      "gridRow": "1/2",
+      "title": "Tasks",
+      "sectionKey": "tasks",
+      "uid": "0c6d620c-a412-4b35-98b0-2f65302da71c"
+    },
+    {
+      "instructions": "",
+      "gridColumn": "3/5",
+      "gridRow": "1/2",
+      "title": "Blocker",
+      "sectionKey": "blocker",
+      "uid": "95e610cc-ebbf-403c-b33d-3ed07180f638"
+    },
+    {
+      "instructions": "",
+      "gridColumn": "5/7",
+      "gridRow": "1/2",
+      "title": "Work in Progress",
+      "sectionKey": "inProgress",
+      "uid": "287ea8bd-956d-4e65-bc38-dc181b6b0aa9"
+    },
+    {
+      "instructions": "",
+      "gridColumn": "7/9",
+      "gridRow": "1/2",
+      "title": "Done",
+      "sectionKey": "done",
+      "uid": "72631587-98e6-4f98-a95b-d684063dc7d3"
+    },
+    {
+      "instructions": "",
+      "gridColumn": "9/11",
+      "gridRow": "1/2",
+      "title": "Reviewed",
+      "sectionKey": "reviewed",
+      "uid": "5275efb2-e99d-4c9a-a30d-f464fe489a30"
+    },
+    {
+      "instructions": "",
+      "gridColumn": "1/11",
+      "gridRow": "2/3",
+      "title": "Brainstorming",
+      "sectionKey": "brainstorming",
+      "uid": "a7dd6e08-cffc-41ba-81fc-70d6237dcc4c"
+    }
+  ],
+  "sequenced": false,
+  "canavaVers": "1.0.0"
+}

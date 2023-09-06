@@ -3,6 +3,7 @@ import { defineStore } from "pinia";
 import { useStorage } from "@vueuse/core";
 import { v4 as uuidv4, validate as isValidUUID } from "uuid";
 
+import the4LRetrospectiveData from "../data/canava/the4LRetrospective.json";
 import businessModelData from "../data/canava/businessModel.json";
 import s3DelegationData from "../data/canava/s3Delegation.json";
 import s3OrganizationData from "../data/canava/s3Organization.json";
@@ -13,6 +14,9 @@ import leanUXData from "../data/canava/leanUX.json";
 import productVisionBoardData from "../data/canava/productVisionBoard.json";
 import productVisionBoardExtData from "../data/canava/productVisionBoardExt.json";
 import productCanvasData from "../data/canava/productCanvas.json";
+import kanbanCanvasData from "../data/canava/kanbanCanvas.json";
+import swotAnalysisData from "../data/canava/swotAnalysis.json";
+
 
 import { api } from "boot/axios";
 
@@ -30,6 +34,10 @@ const canvasOpts = [
     value: "leanUX"
   },
   {
+    label: "4L Retrospective",
+    value: "the4LRetrospective"
+  },
+  {
     label: "Product Vision Board",
     value: "productVisionBoard"
   },
@@ -40,6 +48,10 @@ const canvasOpts = [
   {
     label: "Product Canvas",
     value: "productCanvas"
+  },
+  {
+    label: "SWOT Analysis",
+    value: "swotAnalysis"
   },
   {
     label: "S3 Organization Canvas",
@@ -56,10 +68,15 @@ const canvasOpts = [
   {
     label: "Co-op Ownership Model",
     value: "coopOwnership"
-  }
+  },
+  {
+    label: "Kanban Canvas",
+    value: "kanbanCanvas"
+  },
 ];
 
 const canvasMap = {
+  the4LRetrospective: the4LRetrospectiveData,
   businessModel: businessModelData,
   s3Delegation: s3DelegationData,
   s3Organization: s3OrganizationData,
@@ -69,7 +86,9 @@ const canvasMap = {
   leanUX: leanUXData,
   productVisionBoard: productVisionBoardData,
   productVisionBoardExt: productVisionBoardExtData,
-  productCanvas: productCanvasData
+  productCanvas: productCanvasData,
+  kanbanCanvas: kanbanCanvasData,
+  swotAnalysis: swotAnalysisData
 };
 
 const defaultObject = {

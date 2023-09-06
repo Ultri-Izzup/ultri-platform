@@ -73,7 +73,7 @@
             verdana: 'Verdana',
           }"
         ></q-editor>
-        <div class="q-pt-sm q-pb-none text-caption text-grey-8">Background</div>
+        <div class="q-pt-sm q-pb-none text-caption text-grey-8">Background color</div>
         <q-input
         v-model="editSection.backgroundColor"
         :rules="['anyColor']"
@@ -87,7 +87,7 @@
           </q-icon>
         </template>
       </q-input>
-      <div class="q-pt-sm q-pb-none text-caption text-grey-8">Text</div>
+      <div class="q-pt-sm q-pb-none text-caption text-grey-8">Text color</div>
       <q-input
         v-model="editSection.textColor"
         :rules="['anyColor']"

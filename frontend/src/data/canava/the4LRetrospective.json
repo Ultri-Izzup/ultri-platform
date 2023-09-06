@@ -1,0 +1,41 @@
+{
+  "attribution": "",
+  "canavaVers": "1.0.0",
+  "name": "4L Retrospective Canvas",
+  "sections": [
+    {
+      "uid": "b1024da4-db17-4153-8057-a5748c5228a7",
+      "title": "Liked",
+      "gridRow": "1/2",
+      "gridColumn": "1/2",
+      "sectionKey": "liked",
+      "instructions": "What did you like? Keep doing these things."
+    },
+    {
+      "uid": "b55c88d5-f42b-44e5-9277-77ff71aa2e94",
+      "title": "Lacked",
+      "gridRow": "1/2",
+      "textColor": "",
+      "gridColumn": "2/3",
+      "sectionKey": "lacking",
+      "instructions": "What was lacking? These may represent easy wins or low-hanging fruit."
+    },
+    {
+      "uid": "3b6f0b65-7cf3-45e0-9b89-fec4c54e969a",
+      "title": "Learned",
+      "gridRow": "2/3",
+      "gridColumn": "1/2",
+      "sectionKey": "learned",
+      "instructions": "What was learned? You can learn from both good and bad experiences."
+    },
+    {
+      "uid": "bededd3c-0600-415c-a201-21618c556bcd",
+      "title": "Longed for",
+      "gridRow": "2/3",
+      "gridColumn": "2/3",
+      "instructions": "What did you long for? What would have been a big time saver?&nbsp;"
+    }
+  ],
+  "sequenced": false,
+  "version": ""
+}

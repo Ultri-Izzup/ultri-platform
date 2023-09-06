@@ -1,0 +1,49 @@
+{
+  "name": "SWOT Analysis",
+  "attribution": "",
+  "version": "",
+  "sections": [
+    {
+      "instructions": "",
+      "gridColumn": "1/7",
+      "gridRow": "1/2",
+      "title": "Strengths",
+      "sectionKey": "strengths",
+      "uid": "09841dec-f351-434c-afd5-d407610cec67"
+    },
+    {
+      "instructions": "",
+      "gridColumn": "7/13",
+      "gridRow": "1/2",
+      "sectionKey": "weaknesses",
+      "title": "Weaknesses",
+      "uid": "f1398a37-d5cf-41a2-9e4f-501c856fd253"
+    },
+    {
+      "instructions": "",
+      "gridColumn": "1/7",
+      "gridRow": "2/3",
+      "title": "Opportunities",
+      "sectionKey": "opportunities",
+      "uid": "d3f063a0-21c8-4951-bc66-fe0b75f84764"
+    },
+    {
+      "instructions": "",
+      "gridColumn": "7/13",
+      "gridRow": "2/3",
+      "title": "Threats",
+      "sectionKey": "threats",
+      "uid": "f30f8b81-4393-40f7-9ebf-6eebc812055d"
+    },
+    {
+      "instructions": "",
+      "gridColumn": "1/13",
+      "gridRow": "3/4",
+      "title": "Brainstorming",
+      "sectionKey": "brainstorming",
+      "uid": "5f08e1a8-7c3e-4a88-b80f-89e4e48e92aa"
+    }
+  ],
+  "sequenced": false,
+  "canavaVers": "1.0.0"
+}

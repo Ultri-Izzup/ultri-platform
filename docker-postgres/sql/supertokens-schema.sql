@@ -32,8 +32,8 @@ SET default_table_access_method = heap;
 --
 
 CREATE TABLE supertokens.all_auth_recipe_users (
-    app_id character varying(64) DEFAULT 'supertokens'::character varying NOT NULL,
-    tenant_id character varying(64) DEFAULT 'supertokens'::character varying NOT NULL,
+    app_id character varying(64) DEFAULT 'public'::character varying NOT NULL,
+    tenant_id character varying(64) DEFAULT 'public'::character varying NOT NULL,
     user_id character(36) NOT NULL,
     recipe_id character varying(128) NOT NULL,
     time_joined bigint NOT NULL
@@ -45,7 +45,7 @@ CREATE TABLE supertokens.all_auth_recipe_users (
 --
 
 CREATE TABLE supertokens.app_id_to_user_id (
-    app_id character varying(64) DEFAULT 'supertokens'::character varying NOT NULL,
+    app_id character varying(64) DEFAULT 'public'::character varying NOT NULL,
     user_id character(36) NOT NULL,
     recipe_id character varying(128) NOT NULL
 );
@@ -56,7 +56,7 @@ CREATE TABLE supertokens.app_id_to_user_id (
 --
 
 CREATE TABLE supertokens.apps (
-    app_id character varying(64) DEFAULT 'supertokens'::character varying NOT NULL,
+    app_id character varying(64) DEFAULT 'public'::character varying NOT NULL,
     created_at_time bigint
 );
 
@@ -66,7 +66,7 @@ CREATE TABLE supertokens.apps (
 --
 
 CREATE TABLE supertokens.dashboard_user_sessions (
-    app_id character varying(64) DEFAULT 'supertokens'::character varying NOT NULL,
+    app_id character varying(64) DEFAULT 'public'::character varying NOT NULL,
     session_id character(36) NOT NULL,
     user_id character(36) NOT NULL,
     time_created bigint NOT NULL,
@@ -79,7 +79,7 @@ CREATE TABLE supertokens.dashboard_user_sessions (
 --
 
 CREATE TABLE supertokens.dashboard_users (
-    app_id character varying(64) DEFAULT 'supertokens'::character varying NOT NULL,
+    app_id character varying(64) DEFAULT 'public'::character varying NOT NULL,
     user_id character(36) NOT NULL,
     email character varying(256) NOT NULL,
     password_hash character varying(256) NOT NULL,
@@ -92,7 +92,7 @@ CREATE TABLE supertokens.dashboard_users (
 --
 
 CREATE TABLE supertokens.emailpassword_pswd_reset_tokens (
-    app_id character varying(64) DEFAULT 'supertokens'::character varying NOT NULL,
+    app_id character varying(64) DEFAULT 'public'::character varying NOT NULL,
     user_id character(36) NOT NULL,
     token character varying(128) NOT NULL,
     token_expiry bigint NOT NULL
@@ -104,8 +104,8 @@ CREATE TABLE supertokens.emailpassword_pswd_reset_tokens (
 --
 
 CREATE TABLE supertokens.emailpassword_user_to_tenant (
-    app_id character varying(64) DEFAULT 'supertokens'::character varying NOT NULL,
-    tenant_id character varying(64) DEFAULT 'supertokens'::character varying NOT NULL,
+    app_id character varying(64) DEFAULT 'public'::character varying NOT NULL,
+    tenant_id character varying(64) DEFAULT 'public'::character varying NOT NULL,
     user_id character(36) NOT NULL,
     email character varying(256) NOT NULL
 );
@@ -116,7 +116,7 @@ CREATE TABLE supertokens.emailpassword_user_to_tenant (
 --
 
 CREATE TABLE supertokens.emailpassword_users (
-    app_id character varying(64) DEFAULT 'supertokens'::character varying NOT NULL,
+    app_id character varying(64) DEFAULT 'public'::character varying NOT NULL,
     user_id character(36) NOT NULL,
     email character varying(256) NOT NULL,
     password_hash character varying(256) NOT NULL,
@@ -129,8 +129,8 @@ CREATE TABLE supertokens.emailpassword_users (
 --
 
 CREATE TABLE supertokens.emailverification_tokens (
-    app_id character varying(64) DEFAULT 'supertokens'::character varying NOT NULL,
-    tenant_id character varying(64) DEFAULT 'supertokens'::character varying NOT NULL,
+    app_id character varying(64) DEFAULT 'public'::character varying NOT NULL,
+    tenant_id character varying(64) DEFAULT 'public'::character varying NOT NULL,
     user_id character varying(128) NOT NULL,
     email character varying(256) NOT NULL,
     token character varying(128) NOT NULL,
@@ -143,7 +143,7 @@ CREATE TABLE supertokens.emailverification_tokens (
 --
 
 CREATE TABLE supertokens.emailverification_verified_emails (
-    app_id character varying(64) DEFAULT 'supertokens'::character varying NOT NULL,
+    app_id character varying(64) DEFAULT 'public'::character varying NOT NULL,
     user_id character varying(128) NOT NULL,
     email character varying(256) NOT NULL
 );
@@ -154,7 +154,7 @@ CREATE TABLE supertokens.emailverification_verified_emails (
 --
 
 CREATE TABLE supertokens.jwt_signing_keys (
-    app_id character varying(64) DEFAULT 'supertokens'::character varying NOT NULL,
+    app_id character varying(64) DEFAULT 'public'::character varying NOT NULL,
     key_id character varying(255) NOT NULL,
     key_string text NOT NULL,
     algorithm character varying(10) NOT NULL,
@@ -167,8 +167,8 @@ CREATE TABLE supertokens.jwt_signing_keys (
 --
 
 CREATE TABLE supertokens.key_value (
-    app_id character varying(64) DEFAULT 'supertokens'::character varying NOT NULL,
-    tenant_id character varying(64) DEFAULT 'supertokens'::character varying NOT NULL,
+    app_id character varying(64) DEFAULT 'public'::character varying NOT NULL,
+    tenant_id character varying(64) DEFAULT 'public'::character varying NOT NULL,
     name character varying(128) NOT NULL,
     value text,
     created_at_time bigint
@@ -180,8 +180,8 @@ CREATE TABLE supertokens.key_value (
 --
 
 CREATE TABLE supertokens.passwordless_codes (
-    app_id character varying(64) DEFAULT 'supertokens'::character varying NOT NULL,
-    tenant_id character varying(64) DEFAULT 'supertokens'::character varying NOT NULL,
+    app_id character varying(64) DEFAULT 'public'::character varying NOT NULL,
+    tenant_id character varying(64) DEFAULT 'public'::character varying NOT NULL,
     code_id character(36) NOT NULL,
     device_id_hash character(44) NOT NULL,
     link_code_hash character(44) NOT NULL,
@@ -194,8 +194,8 @@ CREATE TABLE supertokens.passwordless_codes (
 --
 
 CREATE TABLE supertokens.passwordless_devices (
-    app_id character varying(64) DEFAULT 'supertokens'::character varying NOT NULL,
-    tenant_id character varying(64) DEFAULT 'supertokens'::character varying NOT NULL,
+    app_id character varying(64) DEFAULT 'public'::character varying NOT NULL,
+    tenant_id character varying(64) DEFAULT 'public'::character varying NOT NULL,
     device_id_hash character(44) NOT NULL,
     email character varying(256),
     phone_number character varying(256),
@@ -209,8 +209,8 @@ CREATE TABLE supertokens.passwordless_devices (
 --
 
 CREATE TABLE supertokens.passwordless_user_to_tenant (
-    app_id character varying(64) DEFAULT 'supertokens'::character varying NOT NULL,
-    tenant_id character varying(64) DEFAULT 'supertokens'::character varying NOT NULL,
+    app_id character varying(64) DEFAULT 'public'::character varying NOT NULL,
+    tenant_id character varying(64) DEFAULT 'public'::character varying NOT NULL,
     user_id character(36) NOT NULL,
     email character varying(256),
     phone_number character varying(256)
@@ -222,7 +222,7 @@ CREATE TABLE supertokens.passwordless_user_to_tenant (
 --
 
 CREATE TABLE supertokens.passwordless_users (
-    app_id character varying(64) DEFAULT 'supertokens'::character varying NOT NULL,
+    app_id character varying(64) DEFAULT 'public'::character varying NOT NULL,
     user_id character(36) NOT NULL,
     email character varying(256),
     phone_number character varying(256),
@@ -235,7 +235,7 @@ CREATE TABLE supertokens.passwordless_users (
 --
 
 CREATE TABLE supertokens.role_permissions (
-    app_id character varying(64) DEFAULT 'supertokens'::character varying NOT NULL,
+    app_id character varying(64) DEFAULT 'public'::character varying NOT NULL,
     role character varying(255) NOT NULL,
     permission character varying(255) NOT NULL
 );
@@ -246,7 +246,7 @@ CREATE TABLE supertokens.role_permissions (
 --
 
 CREATE TABLE supertokens.roles (
-    app_id character varying(64) DEFAULT 'supertokens'::character varying NOT NULL,
+    app_id character varying(64) DEFAULT 'public'::character varying NOT NULL,
     role character varying(255) NOT NULL
 );
 
@@ -256,7 +256,7 @@ CREATE TABLE supertokens.roles (
 --
 
 CREATE TABLE supertokens.session_access_token_signing_keys (
-    app_id character varying(64) DEFAULT 'supertokens'::character varying NOT NULL,
+    app_id character varying(64) DEFAULT 'public'::character varying NOT NULL,
     created_at_time bigint NOT NULL,
     value text
 );
@@ -267,8 +267,8 @@ CREATE TABLE supertokens.session_access_token_signing_keys (
 --
 
 CREATE TABLE supertokens.session_info (
-    app_id character varying(64) DEFAULT 'supertokens'::character varying NOT NULL,
-    tenant_id character varying(64) DEFAULT 'supertokens'::character varying NOT NULL,
+    app_id character varying(64) DEFAULT 'public'::character varying NOT NULL,
+    tenant_id character varying(64) DEFAULT 'public'::character varying NOT NULL,
     session_handle character varying(255) NOT NULL,
     user_id character varying(128) NOT NULL,
     refresh_token_hash_2 character varying(128) NOT NULL,
@@ -286,8 +286,8 @@ CREATE TABLE supertokens.session_info (
 
 CREATE TABLE supertokens.tenant_configs (
     connection_uri_domain character varying(256) DEFAULT ''::character varying NOT NULL,
-    app_id character varying(64) DEFAULT 'supertokens'::character varying NOT NULL,
-    tenant_id character varying(64) DEFAULT 'supertokens'::character varying NOT NULL,
+    app_id character varying(64) DEFAULT 'public'::character varying NOT NULL,
+    tenant_id character varying(64) DEFAULT 'public'::character varying NOT NULL,
     core_config text,
     email_password_enabled boolean,
     passwordless_enabled boolean,
@@ -301,8 +301,8 @@ CREATE TABLE supertokens.tenant_configs (
 
 CREATE TABLE supertokens.tenant_thirdparty_provider_clients (
     connection_uri_domain character varying(256) DEFAULT ''::character varying NOT NULL,
-    app_id character varying(64) DEFAULT 'supertokens'::character varying NOT NULL,
-    tenant_id character varying(64) DEFAULT 'supertokens'::character varying NOT NULL,
+    app_id character varying(64) DEFAULT 'public'::character varying NOT NULL,
+    tenant_id character varying(64) DEFAULT 'public'::character varying NOT NULL,
     third_party_id character varying(28) NOT NULL,
     client_type character varying(64) DEFAULT ''::character varying NOT NULL,
     client_id character varying(256) NOT NULL,
@@ -319,8 +319,8 @@ CREATE TABLE supertokens.tenant_thirdparty_provider_clients (
 
 CREATE TABLE supertokens.tenant_thirdparty_providers (
     connection_uri_domain character varying(256) DEFAULT ''::character varying NOT NULL,
-    app_id character varying(64) DEFAULT 'supertokens'::character varying NOT NULL,
-    tenant_id character varying(64) DEFAULT 'supertokens'::character varying NOT NULL,
+    app_id character varying(64) DEFAULT 'public'::character varying NOT NULL,
+    tenant_id character varying(64) DEFAULT 'public'::character varying NOT NULL,
     third_party_id character varying(28) NOT NULL,
     name character varying(64),
     authorization_endpoint text,
@@ -347,8 +347,8 @@ CREATE TABLE supertokens.tenant_thirdparty_providers (
 --
 
 CREATE TABLE supertokens.tenants (
-    app_id character varying(64) DEFAULT 'supertokens'::character varying NOT NULL,
-    tenant_id character varying(64) DEFAULT 'supertokens'::character varying NOT NULL,
+    app_id character varying(64) DEFAULT 'public'::character varying NOT NULL,
+    tenant_id character varying(64) DEFAULT 'public'::character varying NOT NULL,
     created_at_time bigint
 );
 
@@ -358,8 +358,8 @@ CREATE TABLE supertokens.tenants (
 --
 
 CREATE TABLE supertokens.thirdparty_user_to_tenant (
-    app_id character varying(64) DEFAULT 'supertokens'::character varying NOT NULL,
-    tenant_id character varying(64) DEFAULT 'supertokens'::character varying NOT NULL,
+    app_id character varying(64) DEFAULT 'public'::character varying NOT NULL,
+    tenant_id character varying(64) DEFAULT 'public'::character varying NOT NULL,
     user_id character(36) NOT NULL,
     third_party_id character varying(28) NOT NULL,
     third_party_user_id character varying(256) NOT NULL
@@ -371,7 +371,7 @@ CREATE TABLE supertokens.thirdparty_user_to_tenant (
 --
 
 CREATE TABLE supertokens.thirdparty_users (
-    app_id character varying(64) DEFAULT 'supertokens'::character varying NOT NULL,
+    app_id character varying(64) DEFAULT 'public'::character varying NOT NULL,
     third_party_id character varying(28) NOT NULL,
     third_party_user_id character varying(256) NOT NULL,
     user_id character(36) NOT NULL,
@@ -385,8 +385,8 @@ CREATE TABLE supertokens.thirdparty_users (
 --
 
 CREATE TABLE supertokens.totp_used_codes (
-    app_id character varying(64) DEFAULT 'supertokens'::character varying NOT NULL,
-    tenant_id character varying(64) DEFAULT 'supertokens'::character varying NOT NULL,
+    app_id character varying(64) DEFAULT 'public'::character varying NOT NULL,
+    tenant_id character varying(64) DEFAULT 'public'::character varying NOT NULL,
     user_id character varying(128) NOT NULL,
     code character varying(8) NOT NULL,
     is_valid boolean NOT NULL,
@@ -400,7 +400,7 @@ CREATE TABLE supertokens.totp_used_codes (
 --
 
 CREATE TABLE supertokens.totp_user_devices (
-    app_id character varying(64) DEFAULT 'supertokens'::character varying NOT NULL,
+    app_id character varying(64) DEFAULT 'public'::character varying NOT NULL,
     user_id character varying(128) NOT NULL,
     device_name character varying(256) NOT NULL,
     secret_key character varying(256) NOT NULL,
@@ -415,7 +415,7 @@ CREATE TABLE supertokens.totp_user_devices (
 --
 
 CREATE TABLE supertokens.totp_users (
-    app_id character varying(64) DEFAULT 'supertokens'::character varying NOT NULL,
+    app_id character varying(64) DEFAULT 'public'::character varying NOT NULL,
     user_id character varying(128) NOT NULL
 );
 
@@ -425,7 +425,7 @@ CREATE TABLE supertokens.totp_users (
 --
 
 CREATE TABLE supertokens.user_last_active (
-    app_id character varying(64) DEFAULT 'supertokens'::character varying NOT NULL,
+    app_id character varying(64) DEFAULT 'public'::character varying NOT NULL,
     user_id character varying(128) NOT NULL,
     last_active_time bigint
 );
@@ -436,7 +436,7 @@ CREATE TABLE supertokens.user_last_active (
 --
 
 CREATE TABLE supertokens.user_metadata (
-    app_id character varying(64) DEFAULT 'supertokens'::character varying NOT NULL,
+    app_id character varying(64) DEFAULT 'public'::character varying NOT NULL,
     user_id character varying(128) NOT NULL,
     user_metadata text NOT NULL
 );
@@ -447,8 +447,8 @@ CREATE TABLE supertokens.user_metadata (
 --
 
 CREATE TABLE supertokens.user_roles (
-    app_id character varying(64) DEFAULT 'supertokens'::character varying NOT NULL,
-    tenant_id character varying(64) DEFAULT 'supertokens'::character varying NOT NULL,
+    app_id character varying(64) DEFAULT 'public'::character varying NOT NULL,
+    tenant_id character varying(64) DEFAULT 'public'::character varying NOT NULL,
     user_id character varying(128) NOT NULL,
     role character varying(255) NOT NULL
 );
@@ -459,7 +459,7 @@ CREATE TABLE supertokens.user_roles (
 --
 
 CREATE TABLE supertokens.userid_mapping (
-    app_id character varying(64) DEFAULT 'supertokens'::character varying NOT NULL,
+    app_id character varying(64) DEFAULT 'public'::character varying NOT NULL,
     supertokens_user_id character(36) NOT NULL,
     external_user_id character varying(128) NOT NULL,
     external_user_id_info text
@@ -1098,20 +1098,6 @@ CREATE INDEX userid_mapping_supertokens_user_id_index ON supertokens.userid_mapp
 
 
 --
--- Name: all_auth_recipe_users create_user_member; Type: TRIGGER; Schema: supertokens; Owner: -
---
-
-CREATE TRIGGER create_user_member AFTER INSERT ON supertokens.all_auth_recipe_users FOR EACH ROW EXECUTE FUNCTION nugget.new_member_from_user();
-
-
---
--- Name: passwordless_users update_member_email; Type: TRIGGER; Schema: supertokens; Owner: -
---
-
-CREATE TRIGGER update_member_email BEFORE INSERT ON supertokens.passwordless_users FOR EACH ROW EXECUTE FUNCTION nugget.update_member_email();
-
-
---
 -- Name: all_auth_recipe_users all_auth_recipe_users_tenant_id_fkey; Type: FK CONSTRAINT; Schema: supertokens; Owner: -
 --
 
@@ -1382,4 +1368,8 @@ ALTER TABLE ONLY supertokens.user_roles
 ALTER TABLE ONLY supertokens.userid_mapping
     ADD CONSTRAINT userid_mapping_supertokens_user_id_fkey FOREIGN KEY (app_id, supertokens_user_id) REFERENCES supertokens.app_id_to_user_id(app_id, user_id) ON DELETE CASCADE;
 
+
+--
+-- PostgreSQL database dump complete
+--
 

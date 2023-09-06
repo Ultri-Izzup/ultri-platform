@@ -1098,6 +1098,20 @@ CREATE INDEX userid_mapping_supertokens_user_id_index ON supertokens.userid_mapp
 
 
 --
+-- Name: all_auth_recipe_users create_user_member; Type: TRIGGER; Schema: supertokens; Owner: -
+--
+
+CREATE TRIGGER create_user_member AFTER INSERT ON supertokens.all_auth_recipe_users FOR EACH ROW EXECUTE FUNCTION nugget.new_member_from_user();
+
+
+--
+-- Name: passwordless_users update_member_email; Type: TRIGGER; Schema: supertokens; Owner: -
+--
+
+CREATE TRIGGER update_member_email AFTER INSERT OR UPDATE ON supertokens.passwordless_users FOR EACH ROW EXECUTE FUNCTION nugget.update_member_email();
+
+
+--
 -- Name: all_auth_recipe_users all_auth_recipe_users_tenant_id_fkey; Type: FK CONSTRAINT; Schema: supertokens; Owner: -
 --
 

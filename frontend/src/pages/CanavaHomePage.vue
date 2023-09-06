@@ -87,6 +87,7 @@
             <q-separator></q-separator>
             <div :class="Screen.lt.md ? 'q-pt-sm' : 'q-pt-xl q-pl-xl'">
             <ul class="text-h6 text-shd-p-90">
+              <li class="q-ma-xs text-h5 text-primary text-bold" >Save your canvas online!</li>
               <li class="q-ma-xs" >Unlimited free canvases</li>
               <li class="q-ma-sm" >Export and import data</li>
               <li class="q-ma-sm" >Create custom canvases</li>

@@ -106,18 +106,18 @@ async function createRoutes(server, options) {
   );
 
   server.delete(
-    "/canava/canvas/:canvasUid",
+    "/canava/canvases/:canvasUid",
     { preHandler: verifySession(),},
     
         async (request, reply) => {
       const memberUid = request.session.getUserId();
 
-      const orgUid = request.params.orgUid;
+      const canvasUid = request.params.canvasUid;
 
       console.log('MADE IT', memberUid)
 
-      const result = await server.orgService.deleteMemberOrg(
-        memberUid, orgUid);
+      const result = await server.canavaService.deleteMemberCanvas(
+        memberUid, canvasUid);
 
       return result;
     }

@@ -37,7 +37,7 @@
           class="q-ml-md"
           size="md"
           dense
-          :disable="!showDeleteOpts"
+          :disable="!canavaStore.isStored(canvasTemplate)"
           ><q-tooltip> Delete </q-tooltip></q-btn
         >
 
@@ -274,8 +274,10 @@ const onUploadClick = () => {
 };
 
 const onDeleteClick = () => {
-  console.log("Delete All Data for Current Canvas");
-  reset();
+  console.log("Delete All Data for Current Canvas: " + canvasTemplate.value);
+  canavaStore.deleteMemberCanvas(canvasTemplate.value)
+  router.push("/canava");
+  //reset();
 };
 
 const reset = () => {

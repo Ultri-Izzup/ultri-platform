@@ -45,7 +45,6 @@ const CanavaService = (postgres) => {
     let query;
     let values;
 
-    console.log('======================CANVAS==========================', canvas)
 
     query = `SELECT * from nugget.set_member_canvas($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15)`;
 
@@ -67,30 +66,60 @@ const CanavaService = (postgres) => {
         '{}'
     ];
 
-    console.log('===VALUES===', values);
-
     try {
       const result = await client.query(query, values);
-      console.log('RESULT', result)
 
-    //   const newData = result.rows[0];
-
-    return { uid: canvas.uid }
+      return { uid: canvas.uid }
 
     //   // Note: avoid doing expensive computation here, this will block releasing the client
-    //   return {
-    //     uid: newData.uid,
-    //     createdAt: newData.createdAt,
-    //     name: orgData.name,
-    //     logbookUid: newData.logbookUid
-    //   };
+
     } finally {
       // Release the client immediately after query resolves, or upon error
       client.release();
     }
   };
 
-  return { getMemberCanvases, setMemberCanvas };
+  const deleteMemberCanvas = async (memberUid, canvasUid) => {
+    const client = await postgres.connect();
+
+    let query;
+    let values;
+
+
+    query = `SELECT * from nugget.set_member_canvas($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15)`;
+
+    values = [
+        'platform',
+        memberUid, 
+        canvas.uid, 
+        canvas.name ? canvas.name : '', 
+        canvas.templateName ? canvas.templateName : '',
+        canvas.attribution ? canvas.attribution : '',
+        canvas.sections ? JSON.stringify(canvas.sections) : '{}',
+        canvas.sequenced,
+        canvas.canavaVers  ? canvas.canavaVers : '',
+        canvas.completedOn ? canvas.completedOn : '',
+        canvas.completedBy ? canvas.completedBy : '',
+        canvas.version ? canvas.version : '',
+        canvas.public ? canvas.public : false,
+        '{}',
+        '{}'
+    ];
+
+    try {
+      const result = await client.query(query, values);
+
+      return { uid: canvas.uid }
+
+    //   // Note: avoid doing expensive computation here, this will block releasing the client
+
+    } finally {
+      // Release the client immediately after query resolves, or upon error
+      client.release();
+    }
+  };
+
+  return { getMemberCanvases, setMemberCanvas, deleteMemberUid };
 };
 
 export default fp((server, options, next) => {

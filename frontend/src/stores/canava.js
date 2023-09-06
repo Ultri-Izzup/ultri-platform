@@ -186,6 +186,17 @@ export const useCanavaStore = defineStore("canava", {
         return result.data.uid;
       }
     },
+    async deleteMemberCanvas(canvasUid) {
+
+        const result = await api.delete("/canava/canvases/" + canvasUid);
+        console.log(result)
+
+        if(result) {
+          // remove template name from savedCanvases
+          delete this.storedCanvases[canvasTemplate];
+        }
+
+    },
     async loadMemberCanvas() {
 
         // save to API
@@ -202,6 +213,9 @@ export const useCanavaStore = defineStore("canava", {
 
         return result;
 
+    },
+    isStored(canvasTemplate) {
+        return this.storedCanvases.hasOwnProperty(canvasTemplate);
     },
     loadCanvasTemplate(template) {
       const templateData = canvasMap[template];

@@ -1,0 +1,89 @@
+{
+  "name": "Pitch Planning Canvas",
+  "attribution": "",
+  "version": "",
+  "sections": [
+    {
+      "instructions": "",
+      "gridColumn": "1/5",
+      "gridRow": "1/2",
+      "title": "THEM",
+      "sectionKey": "them",
+      "uid": "85fda99f-881e-4d96-9160-b1b121c09274"
+    },
+    {
+      "instructions": "",
+      "gridColumn": "5/9",
+      "gridRow": "1/2",
+      "title": "CONTEXT",
+      "sectionKey": "context",
+      "uid": "d13161f4-25d7-478c-8640-97cc717b8a71"
+    },
+    {
+      "instructions": "",
+      "gridColumn": "9/13",
+      "gridRow": "1/2",
+      "title": "YOU",
+      "sectionKey": "you",
+      "uid": "e597168a-3c5b-4d17-b75c-f8b5e4aa9d22"
+    },
+    {
+      "instructions": "",
+      "gridColumn": "1/5",
+      "gridRow": "2/3",
+      "title": "Their Needs",
+      "sectionKey": "theirNeeds",
+      "uid": "ad47adba-09e7-4062-b806-573dc0137545"
+    },
+    {
+      "instructions": "",
+      "gridColumn": "9/13",
+      "gridRow": "2/3",
+      "title": "Your Key Message",
+      "sectionKey": "yourMessage",
+      "uid": "3e2925a2-f05c-4ed8-9364-445b10b1bc60"
+    },
+    {
+      "instructions": "",
+      "gridColumn": "5/9",
+      "gridRow": "2/5",
+      "title": "CONTENT",
+      "sectionKey": "content",
+      "uid": "93b9d70a-23d8-45a3-8a85-002dbfe6f5ce"
+    },
+    {
+      "instructions": "",
+      "gridColumn": "1/5",
+      "gridRow": "3/4",
+      "title": "Their Objectives",
+      "sectionKey": "theirObjectives",
+      "uid": "7196a6be-39fa-48b4-aeb3-2c8618388d35"
+    },
+    {
+      "instructions": "",
+      "gridColumn": "9/13",
+      "gridRow": "3/4",
+      "title": "Your Objectives",
+      "sectionKey": "yourObjectives",
+      "uid": "fdcca194-ecfd-4a96-a636-03b3e06a227a"
+    },
+    {
+      "instructions": "",
+      "gridColumn": "1/5",
+      "gridRow": "4/5",
+      "title": "Their Reservations",
+      "sectionKey": "theirReservations",
+      "uid": "3a9a423e-020f-41df-95ef-a9ed7afee4a6"
+    },
+    {
+      "instructions": "",
+      "gridColumn": "9/13",
+      "gridRow": "4/5",
+      "title": "Call To Action",
+      "sectionKey": "cta",
+      "uid": "6465f7fe-0c3d-4d5f-a49d-233810ffeda5"
+    }
+  ],
+  "sequenced": false,
+  "canavaVers": "1.0.0"
+}

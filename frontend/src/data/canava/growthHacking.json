@@ -1,0 +1,89 @@
+{
+  "name": "Growth Hacking Canvas",
+  "attribution": "",
+  "version": "",
+  "sections": [
+    {
+      "instructions": "",
+      "gridColumn": "3/5",
+      "gridRow": "1/3",
+      "title": "Lexicon",
+      "sectionKey": "lexicon",
+      "uid": "710472cc-ac06-4bbd-943a-363a20d3d616"
+    },
+    {
+      "instructions": "",
+      "gridColumn": "1/3",
+      "gridRow": "1/4",
+      "title": "Organic Channels",
+      "sectionKey": "organicChannels",
+      "uid": "db9d1e3b-8b53-4757-aa4a-dcb7619ddd67"
+    },
+    {
+      "instructions": "",
+      "gridColumn": "5/7",
+      "gridRow": "1/7",
+      "title": "Brand Experiences",
+      "sectionKey": "bransExperiences",
+      "uid": "cf548e7e-4f38-4698-9493-05a1f3ab4569"
+    },
+    {
+      "instructions": "",
+      "gridColumn": "7/9",
+      "gridRow": "1/7",
+      "title": "Value Propositions",
+      "sectionKey": "valueprops",
+      "uid": "64a2fa8d-f74b-4535-8e08-2e38fc1c2dd9"
+    },
+    {
+      "instructions": "",
+      "gridColumn": "9/11",
+      "gridRow": "1/7",
+      "title": "Segments and Personas",
+      "sectionKey": "segementsPersonas",
+      "uid": "58a689e9-3783-4d4f-af4f-9aeda3758a26"
+    },
+    {
+      "instructions": "",
+      "gridColumn": "3/5",
+      "gridRow": "3/5",
+      "title": "Assets",
+      "sectionKey": "assets",
+      "uid": "1e34b667-9149-4ca6-bebe-26aa762761e1"
+    },
+    {
+      "instructions": "",
+      "gridColumn": "1/3",
+      "gridRow": "4/7",
+      "title": "Paid Channels",
+      "sectionKey": "paidChannels",
+      "uid": "f7484dc4-6172-4420-b7f3-6976266b0dde"
+    },
+    {
+      "instructions": "",
+      "gridColumn": "3/5",
+      "gridRow": "5/7",
+      "title": "Activities",
+      "sectionKey": "activities",
+      "uid": "5c195adf-9a53-4943-9c5d-400801e8169e"
+    },
+    {
+      "instructions": "",
+      "gridColumn": "1/6",
+      "gridRow": "7/9",
+      "title": "Promotional Infrastructure",
+      "sectionKey": "promoInfra",
+      "uid": "0fa917e2-9ea3-4181-beb7-f7fcedda7ceb"
+    },
+    {
+      "instructions": "",
+      "gridColumn": "6/11",
+      "gridRow": "7/9",
+      "title": "Branding",
+      "sectionKey": "branding",
+      "uid": "6debfa4a-1027-41bc-a79e-5fd8a54032e5"
+    }
+  ],
+  "sequenced": false,
+  "canavaVers": "1.0.0"
+}

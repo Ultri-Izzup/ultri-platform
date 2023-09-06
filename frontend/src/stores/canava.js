@@ -16,6 +16,9 @@ import productVisionBoardExtData from "../data/canava/productVisionBoardExt.json
 import productCanvasData from "../data/canava/productCanvas.json";
 import kanbanCanvasData from "../data/canava/kanbanCanvas.json";
 import swotAnalysisData from "../data/canava/swotAnalysis.json";
+import growthHackingData from "../data/canava/growthHacking.json";
+import leanChangeData from "../data/canava/leanChange.json";
+import pitchCanvasData from "../data/canava/pitchCanvas.json";
 
 
 import { api } from "boot/axios";
@@ -32,6 +35,10 @@ const canvasOpts = [
   {
     label: "Lean UX Canvas",
     value: "leanUX"
+  },
+  {
+    label: "Lean Change Canvas",
+    value: "leanChange"
   },
   {
     label: "4L Retrospective",
@@ -73,6 +80,14 @@ const canvasOpts = [
     label: "Kanban Canvas",
     value: "kanbanCanvas"
   },
+  {
+    label: "Growth Hacking",
+    value: "growthHacking"
+  },
+  {
+    label: "Pitch Canvas",
+    value: "pitchCanvas"
+  }
 ];
 
 const canvasMap = {
@@ -88,7 +103,10 @@ const canvasMap = {
   productVisionBoardExt: productVisionBoardExtData,
   productCanvas: productCanvasData,
   kanbanCanvas: kanbanCanvasData,
-  swotAnalysis: swotAnalysisData
+  swotAnalysis: swotAnalysisData,
+  growthHacking: growthHackingData,
+  leanChange: leanChangeData,
+  pitchCanvas: pitchCanvasData
 };
 
 const defaultObject = {

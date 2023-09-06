@@ -90,14 +90,14 @@
               <li class="q-ma-xs text-h5 text-primary text-bold" >Save your canvas online!</li>
               <li class="q-ma-xs text-h5 text-primary text-bold" >Save 1000 canvases for free!</li>
               <li class="q-ma-xs text-h5 text-primary text-bold" >Export / import unlimited canvases!</li>
+              <li class="q-ma-xs text-h5 text-primary text-bold" >15+ free canvas templates!</li>
               <li class="q-ma-xs text-h5 text-primary text-bold" >Create custom canvases!</li>
+              <li class="q-ma-sm" >New canvases added weekly</li>
               <li class="q-ma-sm" >Multiple open canvases</li>
               <li class="q-ma-sm" >Access to all canvas templates</li>
               <li class="q-ma-sm" >PNG image export, more coming</li>
               <li class="q-ma-sm" >Multiple fonts provided</li>
               <li class="q-ma-sm" >Runs on desktop or mobile</li>
-              <li class="q-ma-sm" >10+ free canvas templates</li>
-              <li class="q-ma-sm" >New canvases added weekly</li>
               <li class="q-ma-sm" >Localization support</li>
               <li class="q-ma-sm" >Free and open source code</li>
               <li class="q-ma-sm" >Easily self-hosted</li>

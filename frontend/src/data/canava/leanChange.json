@@ -1,0 +1,81 @@
+{
+  "name": "Lean Change Canvas",
+  "attribution": "",
+  "version": "",
+  "sections": [
+    {
+      "instructions": "",
+      "gridColumn": "3/5",
+      "gridRow": "1/2",
+      "title": "Target State",
+      "sectionKey": "targetState",
+      "uid": "98f178ee-a3f1-4c17-b749-494fa8086544"
+    },
+    {
+      "instructions": "",
+      "gridColumn": "7/9",
+      "gridRow": "1/2",
+      "title": "Communication",
+      "sectionKey": "communication",
+      "uid": "4556b2ca-7fed-48a7-8dea-deccb8daf6d4"
+    },
+    {
+      "instructions": "",
+      "gridColumn": "1/3",
+      "gridRow": "1/3",
+      "title": "Urgency",
+      "sectionKey": "urgency",
+      "uid": "565aa6ea-102c-44cb-87c8-dbbaaf03b735"
+    },
+    {
+      "instructions": "",
+      "gridColumn": "5/7",
+      "gridRow": "1/3",
+      "title": "Vision",
+      "sectionKey": "vision",
+      "uid": "2de1ea55-ce2d-4372-9c25-d87d9127fbe6"
+    },
+    {
+      "instructions": "",
+      "gridColumn": "9/11",
+      "gridRow": "1/3",
+      "title": "Chaneg Recipients",
+      "sectionKey": "changeRecipients",
+      "uid": "7d320ac6-e8b9-4c04-8323-a08086d60d81"
+    },
+    {
+      "instructions": "",
+      "gridColumn": "3/5",
+      "gridRow": "2/3",
+      "title": "Action",
+      "sectionKey": "action",
+      "uid": "8ea3102d-1841-4033-bb40-4740978ba0e8"
+    },
+    {
+      "instructions": "",
+      "gridColumn": "7/9",
+      "gridRow": "2/3",
+      "title": "Success Criteria",
+      "sectionKey": "successCriteria",
+      "uid": "6272c86e-85da-4336-948f-39bf6c6724f6"
+    },
+    {
+      "instructions": "",
+      "gridColumn": "1/6",
+      "gridRow": "3/4",
+      "title": "Required Investments",
+      "sectionKey": "reqInvestments",
+      "uid": "aee5117b-169e-4e50-9a3f-b948e5253b33"
+    },
+    {
+      "instructions": "",
+      "gridColumn": "6/11",
+      "gridRow": "3/4",
+      "title": "Wins",
+      "sectionKey": "wins",
+      "uid": "fba4fd5d-9308-4dba-97e6-49c0934ad407"
+    }
+  ],
+  "sequenced": false,
+  "canavaVers": "1.0.0"
+}

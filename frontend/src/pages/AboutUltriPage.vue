@@ -17,7 +17,7 @@
           subtitle="December 2022"
           side="left"
           icon="mdi-account-group"
-          color="green"
+          color="green-5"
         >
           <div>
             A Discord channel was created to discuss what a "tech co-op" was and
@@ -32,7 +32,7 @@
           title="Creating a Strong Core"
           subtitle="Early 2023"
           side="right"
-          color="green"
+          color="green-7"
           icon="mdi-arm-flex"
         >
           <div>
@@ -60,7 +60,7 @@
           subtitle="Spring 2023"
           side="left"
           icon="mdi-alert"
-          color="secondary"
+          color="light-blue-5"
         >
           <div>
             Various co-op groups couldn't decide on a project to move fowards,
@@ -76,7 +76,7 @@
           subtitle="May 1, 2023"
           side="right"
           icon="mdi-account-heart"
-          color="secondary"
+          color="light-blue-7"
         >
           <div>
             We decided to create the sociocracy tools we wished were there for
@@ -103,7 +103,7 @@
           title="Ultri Launched"
           subtitle="June 2023"
           side="left"
-          color="orange-9"
+          color="orange-4"
           icon="mdi-rocket-launch"
         >
           <div>
@@ -117,7 +117,7 @@
           title="Parallel Work on Products"
           subtitle="July 2023"
           side="right"
-          color="orange-9"
+          color="orange-6"
           icon="mdi-math-norm"
         >
           <div>
@@ -130,7 +130,7 @@
           title="Canava is Born"
           subtitle="August 2023"
           side="left"
-          color="orange-9"
+          color="orange-7"
           icon="mdi-cake-variant"
         >
           <div>
@@ -230,7 +230,7 @@
 
         <q-timeline-entry
           title="Izzup - Sharing and Publishing"
-          subtitle="2024"
+          subtitle="Q1 2024"
           side="right"
           color="blue-8"
           icon="mdi-view-dashboard"
@@ -244,6 +244,26 @@
             </ul>
           </div>
         </q-timeline-entry>
+
+        <q-timeline-entry
+          title="SharedChain - Blockchain enabling Ultri and Izzup"
+          subtitle="Q2-Q4 2024"
+          side="right"
+          color="blue-9"
+          icon="mdi-link-lock"
+        >
+          <div>
+            SharedChain will add blockchain connectivity to Ultri and Izzup products
+            <ul>
+              <li>Use with any software</li>
+              <li>Optimized for Ultri and Izzup platforms</li>
+              <li>Uses internal provate blockchains</li>
+              <li>Enables smart contracts written in Typescript</li>
+              <li>WASM server deployment for low energy consumption and speed</li>
+            </ul>
+          </div>
+        </q-timeline-entry>
+
 
       </q-timeline>
     </div>

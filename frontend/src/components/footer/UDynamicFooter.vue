@@ -83,7 +83,7 @@
           >
           <q-space />
           <router-link
-            to="/about-ultri"
+            to="/about"
             class="navbar-text-link"
             color="primary"
             >{{ $t("nav.about", "About Ultri") }}</router-link

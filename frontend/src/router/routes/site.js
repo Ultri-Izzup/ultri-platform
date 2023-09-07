@@ -52,7 +52,15 @@ const routes = [
   },
 
   {
-    path: "/about-ultri",
+    path: "/about",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [
+      { path: "", component: () => import("pages/AboutUltriPage.vue") }
+    ]
+  },
+
+  {
+    path: "/about/:tab",
     component: () => import("layouts/MainLayout.vue"),
     children: [
       { path: "", component: () => import("pages/AboutUltriPage.vue") }

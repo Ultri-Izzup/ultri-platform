@@ -1,10 +1,10 @@
 <template>
   <q-page class="justify-center">
     <div class="text-h4 row full-width justify-center text-center text-bold text-primary">
-      Markdown Editor
+      <span class="q-px-md">Markdown Editor</span> <q-space /> <q-btn icon="mdi-eye" label="Web Preview" to="/editors/markdown/viewer"></q-btn>
     </div>
     <div class="row flex fit q-pa-sm">
-    <MdEditor v-model="editorStore.md" language="en-US" @onSave="(event) => downloadData(event)"/>
+    <MdEditor v-model="editorStore.md" language="en-US" @onSave="(event) => downloadData(event)" />
     </div>
     <a id="downloadAnchorElem" style="display: none"></a>
   </q-page>

@@ -83,6 +83,14 @@ const routes = [
     ]
   },
 
+  {
+    path: "/data-request",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [
+      { path: "", component: () => import("pages/DataRequestPage.vue") }
+    ]
+  },
+
 ];
 
 export default routes;

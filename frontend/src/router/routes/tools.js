@@ -11,11 +11,11 @@ const routes = [
       {
         name: "toolsHome",
         path: "",
-        component: () => import("src/pages/MarkdownEditorPage.vue")
+        component: () => import("src/pages/MermaidMarkdownEditorPage.vue")
       }
     ]
   },
-  // MARKDOWN EDITOR
+  // MERMAID MARKDOWN EDITOR
   {
     path: "/editors/markdown",
     component: () => import("layouts/MainLayout.vue"),
@@ -27,7 +27,23 @@ const routes = [
       {
         name: "MarkdownEditor",
         path: "",
-        component: () => import("src/pages/MarkdownEditorPage.vue")
+        component: () => import("src/pages/MermaidMarkdownEditorPage.vue")
+      }
+    ]
+  },
+  // MARKDOWN-IT VIEWER
+  {
+    path: "/editors/markdown/viewer",
+    component: () => import("layouts/MainLayout.vue"),
+    meta: {
+      drawer: null,
+      app: "Tools"
+    },
+    children: [
+      {
+        name: "MarkdownItViewer",
+        path: "",
+        component: () => import("src/pages/MarkdownItViewerPage.vue")
       }
     ]
   },

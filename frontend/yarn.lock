@@ -3508,6 +3508,11 @@ markdown-it-anchor@^8.6.7:
   resolved "https://registry.yarnpkg.com/markdown-it-anchor/-/markdown-it-anchor-8.6.7.tgz#ee6926daf3ad1ed5e4e3968b1740eef1c6399634"
   integrity sha512-FlCHFwNnutLgVTflOYHPW2pPcl2AACqVzExlkGQNsi4CJgqOHN7YTgDd4LuhgN1BFO3TS0vLAruV1Td6dwWPJA==
 
+markdown-it-attrs@^4.1.6:
+  version "4.1.6"
+  resolved "https://registry.yarnpkg.com/markdown-it-attrs/-/markdown-it-attrs-4.1.6.tgz#2bc331c7649d8c6396a0613c2bba1093f3e64da9"
+  integrity sha512-O7PDKZlN8RFMyDX13JnctQompwrrILuz2y43pW2GagcwpIIElkAdfeek+erHfxUOlXWPsjFeWmZ8ch1xtRLWpA==
+
 markdown-it-footnote@^3.0.3:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/markdown-it-footnote/-/markdown-it-footnote-3.0.3.tgz#e0e4c0d67390a4c5f0c75f73be605c7c190ca4d8"
@@ -3524,6 +3529,11 @@ markdown-it-image-figures@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/markdown-it-image-figures/-/markdown-it-image-figures-2.1.1.tgz#fd32a2d0cec60ed8c3916d74fea70d5f9b56e4c7"
   integrity sha512-mwXSQ2nPeVUzCMIE3HlLvjRioopiqyJLNph0pyx38yf9mpqFDhNGnMpAXF9/A2Xv0oiF2cVyg9xwfF0HNAz05g==
+
+markdown-it-style@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/markdown-it-style/-/markdown-it-style-1.0.0.tgz#e78222b8e659bcc07dd1b4735850638b424fa85d"
+  integrity sha512-FPXnDboB+VK+R2Ofs0HoMyGTE10KYEGiTYFpdKn3Pt9YfYYnQip8+QA86Q1suMHR5skj1WXjCx7pGOxAJvHs5A==
 
 markdown-it-sub@^1.0.0:
   version "1.0.0"

@@ -13,7 +13,7 @@
       active-color="primary"
       indicator-color="primary"
       align="justify"
-      narrow-indicator
+
     >
       <q-tab name="privacy" label="Privacy Policy"></q-tab>
       <q-tab name="tos" label="Terms of Service"></q-tab>
@@ -27,10 +27,12 @@
 
     <q-tab-panels v-model="tab" animated>
       <q-tab-panel name="privacy">
-        <ultri-privacy-policy />
+        <span>
+        <u-md-view v-model="privacyMd" class="markdown"/>
+      </span>
       </q-tab-panel>
       <q-tab-panel name="tos">
-        <u-md-view v-model="privacyPolicy" />
+
       </q-tab-panel>
       <q-tab-panel>
 
@@ -60,14 +62,38 @@ const route = useRoute();
 const selectedCanvas = ref(null);
 const selectedSavedCanvas = ref(null);
 
-const tab = ref("privacy-policy");
+const tab = ref("privacy");
+
+const privacyMd = ref('');
+
 
 
 
 onMounted(async () => {
-  canavaStore.loadMemberCanvas();
+
+  if(privacyMd.value.length < 1) {
+    fetch('/md/privacy-policy.md')
+    .then(response => {
+      console.log('response', response);
+      console.log('response.status:', response.status);
+      console.log('response.statusText:', response.statusText);
+      console.log('response.ok:', response.ok);
+      return response.text();
+    })
+    .then(responseBody => {
+      console.log('responseBody:', responseBody);
+      privacyMd.value = responseBody;
+    });
+  }
+
 });
 
 
 </script>
 
+<style lang="scss" scoped>
+markdown {
+  color: blue
+}
+
+</style>

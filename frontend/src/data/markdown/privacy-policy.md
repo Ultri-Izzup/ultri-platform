@@ -1,4 +1,10 @@
-# PRIVACY POLICY { class: markdown}
+# PRIVACY POLICY
+## PRIVACY POLICY
+### PRIVACY POLICY
+#### PRIVACY POLICY
+##### PRIVACY POLICY
+###### PRIVACY POLICY
+
 
 Last updated September 01, 2023
 

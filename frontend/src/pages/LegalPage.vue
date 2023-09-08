@@ -1,15 +1,12 @@
 <template>
-  <q-page class="row items-center justify-evenly">
+    <q-page class="row">
     <div
       class="text-h2 full-width text-center text-bold navbar-brand-link q-ma-md"
     >
-      {{ $t("about.title") }}
+      {{ $t("legal.title", "Legal Documents") }}
     </div>
-    <div class="gt-md text-h6 full-width text-center text-bold q-pt-sm q-pb-lg">
-      Created by and for, open source developers.
-    </div>
-
-    <q-tabs
+    <div class="row full-width justify-center">
+      <q-tabs
       v-model="tab"
       dense
       class="text-grey q-pb-lg"
@@ -18,18 +15,22 @@
       align="justify"
       narrow-indicator
     >
-      <q-tab name="timeline" label="Timeline"></q-tab>
-      <q-tab name="services" label="Services"></q-tab>
-      <q-tab name="products" label="Products"></q-tab>
-      <q-tab name="projects" label="Projects"></q-tab>
+      <q-tab name="privacy" label="Privacy Policy"></q-tab>
+      <q-tab name="tos" label="Terms of Service"></q-tab>
+      <q-tab name="dataRights" label="Data Rights"></q-tab>
+      <q-tab name="eula" label="EULA"></q-tab>
     </q-tabs>
 
+    </div>
+
+
+
     <q-tab-panels v-model="tab" animated>
-      <q-tab-panel name="timeline">
-        <ultri-timeline />
+      <q-tab-panel name="privacy">
+        <ultri-privacy-policy />
       </q-tab-panel>
-      <q-tab-panel name="services">
-        <ultri-services />
+      <q-tab-panel name="tos">
+        <u-md-view v-model="privacyPolicy" />
       </q-tab-panel>
       <q-tab-panel>
 
@@ -45,8 +46,12 @@ import { useRouter, useRoute } from "vue-router";
 import { useAuthStore } from "../stores/auth";
 import { useColorStore } from "../stores/color";
 import { useCanavaStore } from "../stores/canava";
-import UltriTimeline from "../components/ultri/UltriTimeline.vue"
+import UltriPrivacyPolicy from "../components/ultri/UltriPrivacyPolicy.vue"
 import UltriServices from "../components/ultri/UltriServices.vue"
+
+import UMdView from "../components/ultri/UMdView.vue"
+
+import privacyPolicy from "../data/markdown/privacy-policy.md"
 
 const auth = useAuthStore();
 const colorStore = useColorStore();
@@ -57,7 +62,9 @@ const route = useRoute();
 const selectedCanvas = ref(null);
 const selectedSavedCanvas = ref(null);
 
-const tab = ref("timeline");
+const tab = ref("privacy-policy");
+
+
 
 onMounted(async () => {
   canavaStore.loadMemberCanvas();
@@ -65,3 +72,4 @@ onMounted(async () => {
 
 
 </script>
+

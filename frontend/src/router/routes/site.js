@@ -67,6 +67,22 @@ const routes = [
     ]
   },
 
+  {
+    path: "/legal",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [
+      { path: "", component: () => import("pages/LegalPage.vue") }
+    ]
+  },
+
+  {
+    path: "/legal/:tab",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [
+      { path: "", component: () => import("pages/LegalPage.vue") }
+    ]
+  },
+
 ];
 
 export default routes;

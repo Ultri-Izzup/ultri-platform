@@ -51,8 +51,6 @@ import UltriServices from "../components/ultri/UltriServices.vue"
 
 import UMdView from "../components/ultri/UMdView.vue"
 
-import privacyPolicy from "../data/markdown/privacy-policy.md"
-
 const auth = useAuthStore();
 const colorStore = useColorStore();
 const canavaStore = useCanavaStore();

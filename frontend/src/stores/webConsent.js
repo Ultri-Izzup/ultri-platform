@@ -4,7 +4,8 @@ import { useStorage } from '@vueuse/core';
 
 export const useWebConsentStore = defineStore('webConsent', {
   state: () => ({
-    cookies: useStorage('cookies', null),
+    trackingCookie: useStorage('trackingCookie', null),
+    appCookie: useStorage('appCookie', null),
     tos: useStorage('tos', null),
     privacy: useStorage('privacy', null),
     disclaimers: useStorage('disclaimers', null),

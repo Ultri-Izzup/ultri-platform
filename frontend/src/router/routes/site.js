@@ -76,7 +76,7 @@ const routes = [
   },
 
   {
-    path: "/legal/:tab",
+    path: "/legal/:policy",
     component: () => import("layouts/MainLayout.vue"),
     children: [
       { path: "", component: () => import("pages/LegalPage.vue") }
@@ -88,6 +88,14 @@ const routes = [
     component: () => import("layouts/MainLayout.vue"),
     children: [
       { path: "", component: () => import("pages/DataRequestPage.vue") }
+    ]
+  },
+
+  {
+    path: "/cookies",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [
+      { path: "", component: () => import("pages/CookiesPage.vue") }
     ]
   },
 

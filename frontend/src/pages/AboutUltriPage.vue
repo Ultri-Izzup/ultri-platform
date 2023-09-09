@@ -20,8 +20,8 @@
     >
       <q-tab name="timeline" label="Timeline"></q-tab>
       <q-tab name="services" label="Services"></q-tab>
-      <q-tab name="products" label="Products"></q-tab>
-      <q-tab name="projects" label="Projects"></q-tab>
+      <!-- <q-tab name="products" label="Products"></q-tab>
+      <q-tab name="projects" label="Projects"></q-tab> -->
     </q-tabs>
 
     <q-tab-panels v-model="tab" animated>

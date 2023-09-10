@@ -35,31 +35,59 @@
               <div class="dialog-body">
                 {{ $t("webConsent.dialog.cookie.instructions") }}
               </div>
+              <div
+                v-if="!cookiePolicyAccepted"
+                class="dialog-body text-weight-bold"
+              >
+                {{
+                  $t(
+                    "webConsent.dialog.cookie.policyRequired",
+                    "You must accept the the cookie policy before accepting any cookies."
+                  )
+                }}
+              </div>
             </q-card-section>
-            <q-card-section :class="authCookiesAccepted ? '' : ' text-grey-6'">
+            <q-card-section>
+              <q-toggle
+                v-model="cookiePolicyAccepted"
+                :label="$t('webConsent.dialog.policies.cookie.label')"
+                :class="cookiePolicyAccepted ? '' : 'text-grey-6'"
+              ></q-toggle>
+              <q-btn
+                @click="policyDialog('cookies')"
+                no-caps
+                flat
+                label="[ View ]"
+                class="text-caption"
+              ></q-btn>
+            </q-card-section>
+            <q-card-section>
               <q-toggle
                 v-model="authCookiesAccepted"
+                :disable="!cookiePolicyAccepted"
                 :label="$t('webConsent.dialog.cookie.authCookies.label')"
-              ></q-toggle>
+                :class="authCookiesAccepted ? '' : ' text-grey-6'"
+              ><q-tooltip v-if="!cookiePolicyAccepted"
+                  >You must accept the cookie policy first</q-tooltip
+                ><q-tooltip v-else
+                  >Required to sign in</q-tooltip
+                ></q-toggle>
             </q-card-section>
             <q-card-section
-              :class="trackingCookiesAccepted ? '' : 'text-grey-6'"
+
             >
               <q-toggle
                 v-model="trackingCookiesAccepted"
+                :disable="!cookiePolicyAccepted"
+                color="primary"
                 :label="$t('webConsent.dialog.cookie.trackingCookies.label')"
-              ></q-toggle>
-            </q-card-section>
-            <q-card-section>
-              <div class="row full-width justify-center text-center">
-                <q-btn
-                  @click="policyDialog('cookies')"
-                  no-caps
-                  flat
-                  label="[ View Cookie Policy ]"
-                  class="text-caption"
-                ></q-btn>
-              </div>
+                :class="trackingCookiesAccepted ? '' : 'text-grey-6'"
+                ><q-tooltip v-if="!cookiePolicyAccepted"
+                  >You must accept the cookie policy first</q-tooltip
+                ><q-tooltip v-else
+                  >Enable analytics tracking</q-tooltip
+                ></q-toggle
+              >
             </q-card-section>
           </q-tab-panel>
           <q-tab-panel name="policies">
@@ -80,26 +108,12 @@
                 :class="privacyPolicyAccepted ? '' : 'text-grey-6'"
               ></q-toggle>
               <q-btn
-                  @click="policyDialog('privacy')"
-                  no-caps
-                  flat
-                  label="[ View ]"
-                  class="text-caption"
-                ></q-btn>
-            </q-card-section>
-            <q-card-section>
-              <q-toggle
-                v-model="cookiePolicyAccepted"
-                :label="$t('webConsent.dialog.policies.cookie.label')"
-                :class="cookiePolicyAccepted ? '' : 'text-grey-6'"
-              ></q-toggle>
-              <q-btn
-                  @click="policyDialog('cookies')"
-                  no-caps
-                  flat
-                  label="[ View ]"
-                  class="text-caption"
-                ></q-btn>
+                @click="policyDialog('privacy')"
+                no-caps
+                flat
+                label="[ View ]"
+                class="text-caption"
+              ></q-btn>
             </q-card-section>
           </q-tab-panel>
           <q-tab-panel name="email">
@@ -119,7 +133,12 @@
               <q-toggle
                 v-model="marketingEmailsAccepted"
                 :label="$t('webConsent.dialog.emails.marketingEmails.label')"
-              ></q-toggle>
+                :disable="!isSignedIn"
+              ><q-tooltip v-if="!isSignedIn"
+                  >You must be signed in to manage email settings</q-tooltip
+                ><q-tooltip v-else
+                  >We do not send many marketing emails.</q-tooltip
+                ></q-toggle>
             </q-card-section>
           </q-tab-panel>
         </q-tab-panels>
@@ -151,8 +170,7 @@
             </q-btn>
           </q-bar>
 
-          <q-card-section>
-            <u-md-view v-model="policyData" /> </q-card-section
+          <q-card-section> <u-md-view v-model="policyData" /> </q-card-section
         ></q-card>
       </div>
     </q-dialog>
@@ -180,6 +198,10 @@ const mdData = ref({
   privacy: "",
   cookies: "",
 });
+
+const {
+  isSignedIn
+} = storeToRefs(auth);
 
 const {
   authCookiesAccepted,

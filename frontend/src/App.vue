@@ -13,16 +13,26 @@ import Passwordless from "supertokens-web-js/recipe/passwordless";
 
 import { useAuthStore } from "./stores/auth";
 import { useOrgStore } from "./stores/org";
+import { useWebConsentStore } from "./stores/webConsent";
 
 const authStore = useAuthStore();
 const orgStore = useOrgStore();
+const webConsentStore = useWebConsentStore();
 
 const { isSignedIn } = storeToRefs(authStore);
-
 watch(isSignedIn, () => {
   console.log('SIGNED IN', isSignedIn)
   if(!isSignedIn.value) {
     orgStore.$reset();
+  }
+});
+
+const { cookiePolicyAccepted, authCookiesAccepted, trackingCookiesAccepted } = storeToRefs(webConsentStore);
+watch(cookiePolicyAccepted, () => {
+  console.log('SIGNED IN', isSignedIn)
+  if(!cookiePolicyAccepted.value) {
+    trackingCookiesAccepted.value = false;
+    authCookiesAccepted.value = false;
   }
 });
 

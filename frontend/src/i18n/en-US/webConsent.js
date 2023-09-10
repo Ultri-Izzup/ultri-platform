@@ -4,7 +4,7 @@ export default {
       title: 'Consent and Acceptance',
       cookie: {
         headline: 'Cookie Consent',
-        instructions: 'Select the cookies you consent to receive, and then click "Save" to activate them.',
+        instructions: 'Select the cookies you consent to receive.',
         authCookies: {
           label: 'Authentication Cookies'
         },

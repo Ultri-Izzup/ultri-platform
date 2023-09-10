@@ -14,6 +14,7 @@ import notifications from './notifications';
 import orgs from './orgs';
 import tos from './tos';
 import pricing from './pricing';
+import webConsent from './webConsent';
 
 export default {
   ...about,
@@ -31,5 +32,6 @@ export default {
   ...notifications,
   ...orgs,
   ...tos,
-  ...pricing
+  ...pricing,
+  ...webConsent
 };

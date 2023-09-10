@@ -20,6 +20,9 @@
       <PasswordlessAuthDialog
         v-model="authStore.signInRequired"
       ></PasswordlessAuthDialog>
+      <WebConsentDialog
+        v-model="webConsentStore.showDialog"
+      ></WebConsentDialog>
       <WelcomeDialog v-model="authStore.isNewMember"></WelcomeDialog>
       <OrgCreateLogbookEntryDialog
         v-model="orgStore.showOrgCreateLogbookEntryDialog"
@@ -43,6 +46,7 @@ import { useQuasar, setCssVar } from "quasar";
 import { useAuthStore } from "../stores/auth";
 import { useOrgStore } from "../stores/org";
 import { useColorStore } from "../stores/color";
+import { useWebConsentStore } from "../stores/webConsent";
 
 import LogbookDrawer from "./drawers/LogbookDrawer.vue";
 import DefaultDrawer from "./drawers/DefaultDrawer.vue";
@@ -58,6 +62,7 @@ import WelcomeDialog from "../components/auth/dialog/WelcomeDialog.vue";
 import OrgCreateDialog from "../components/org/dialog/OrgCreateDialog.vue";
 import OrgCreateLogbookEntryDialog from "../components/org/dialog/OrgCreateLogbookEntryDialog.vue";
 import OrgMissionDialog from "../components/org/dialog/OrgMissionDialog.vue";
+import WebConsentDialog from "../components/ultri/dialog/WebConsentDialog.vue";
 
 import UHeader from "../components/ultri/UHeader.vue";
 import UDynamicFooter from "../components/footer/UDynamicFooter.vue";
@@ -70,6 +75,7 @@ const route = useRoute();
 const authStore = useAuthStore();
 const colorStore = useColorStore();
 const orgStore = useOrgStore();
+const webConsentStore = useWebConsentStore();
 
 watch(
   () => colorStore.darkMode,

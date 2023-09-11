@@ -16,6 +16,7 @@ export const useWebConsentStore = defineStore('webConsent', {
     marketingEmailsAccepted: useStorage('marketingEmailsAccepted', false),
     showDialog: useStorage('showDialog', false),
     consentTab: useStorage('consentTab', 'cookies'),
+    authRequired: false
   }),
 
   getters: {
@@ -33,11 +34,13 @@ export const useWebConsentStore = defineStore('webConsent', {
       this.eula = false,
       this.marketingEmails = false,
       this.showDialog = false,
-      this.consentTab = 'cookies'
+      this.consentTab = 'cookies',
+      this.authRequired = false
     },
-    triggerDialog(tab='cookies') {
+    triggerDialog(tab='cookies', requireAuth=false) {
       this.consentTab = tab;
       this.showDialog = true;
+      this.authRequired = requireAuth;
     }
   }
 });

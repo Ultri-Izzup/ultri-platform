@@ -19,20 +19,22 @@ const authStore = useAuthStore();
 const orgStore = useOrgStore();
 const webConsentStore = useWebConsentStore();
 
-const { isSignedIn } = storeToRefs(authStore);
+const { isSignedIn, signOut } = storeToRefs(authStore);
 watch(isSignedIn, () => {
   console.log('SIGNED IN', isSignedIn)
   if(!isSignedIn.value) {
     orgStore.$reset();
+    webConsentStore.$reset();
   }
 });
 
 const { cookiePolicyAccepted, authCookiesAccepted, trackingCookiesAccepted } = storeToRefs(webConsentStore);
-watch(cookiePolicyAccepted, () => {
-  console.log('SIGNED IN', isSignedIn)
+watch(cookiePolicyAccepted, async () => {
+
   if(!cookiePolicyAccepted.value) {
     trackingCookiesAccepted.value = false;
     authCookiesAccepted.value = false;
+    await authStore.signOut();
   }
 });
 

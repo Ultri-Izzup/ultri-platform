@@ -32,19 +32,33 @@
                   {{ $t("webConsent.dialog.cookie.headline") }}
                 </div>
               </div>
-              <div class="dialog-body">
-                {{ $t("webConsent.dialog.cookie.instructions") }}
+              <div v-if="authRequired && (!authCookiesAccepted || !cookiePolicyAccepted)">
+                <div
+                  class="dialog-body text-weight-bold text-negative"
+                >
+                  {{
+                    $t(
+                      "webConsent.dialog.cookie.authRequired",
+                      "You must accept the the Cookie Policy and allow Authentication Cookies to sign in."
+                    )
+                  }}
+                </div>
               </div>
-              <div
-                v-if="!cookiePolicyAccepted"
-                class="dialog-body text-weight-bold"
-              >
-                {{
-                  $t(
-                    "webConsent.dialog.cookie.policyRequired",
-                    "You must accept the the cookie policy before accepting any cookies."
-                  )
-                }}
+                <div v-else>
+                <div class="dialog-body">
+                  {{ $t("webConsent.dialog.cookie.instructions") }}
+                </div>
+                <div
+                  v-if="!cookiePolicyAccepted"
+                  class="dialog-body text-weight-bold"
+                >
+                  {{
+                    $t(
+                      "webConsent.dialog.cookie.policyRequired",
+                      "You must accept the the Cookie Policy before accepting any cookies."
+                    )
+                  }}
+                </div>
               </div>
             </q-card-section>
             <q-card-section>
@@ -67,15 +81,12 @@
                 :disable="!cookiePolicyAccepted"
                 :label="$t('webConsent.dialog.cookie.authCookies.label')"
                 :class="authCookiesAccepted ? '' : ' text-grey-6'"
-              ><q-tooltip v-if="!cookiePolicyAccepted"
+                ><q-tooltip v-if="!cookiePolicyAccepted"
                   >You must accept the cookie policy first</q-tooltip
-                ><q-tooltip v-else
-                  >Required to sign in</q-tooltip
-                ></q-toggle>
+                ><q-tooltip v-else>Required to sign in</q-tooltip></q-toggle
+              >
             </q-card-section>
-            <q-card-section
-
-            >
+            <q-card-section>
               <q-toggle
                 v-model="trackingCookiesAccepted"
                 :disable="!cookiePolicyAccepted"
@@ -134,11 +145,12 @@
                 v-model="marketingEmailsAccepted"
                 :label="$t('webConsent.dialog.emails.marketingEmails.label')"
                 :disable="!isSignedIn"
-              ><q-tooltip v-if="!isSignedIn"
+                ><q-tooltip v-if="!isSignedIn"
                   >You must be signed in to manage email settings</q-tooltip
                 ><q-tooltip v-else
                   >We do not send many marketing emails.</q-tooltip
-                ></q-toggle>
+                ></q-toggle
+              >
             </q-card-section>
           </q-tab-panel>
         </q-tab-panels>
@@ -146,7 +158,6 @@
     </q-card>
     <q-dialog
       v-model="showPolicyDialog"
-      persistent
       maximized
       transition-show="slide-up"
       transition-hide="slide-down"
@@ -155,23 +166,41 @@
         class="fit"
         :style="Screen.lt.md ? 'max-width: 98%' : 'max-width: 80%'"
       >
-        <q-card class="fit">
+        <q-card class="full-width">
           <q-bar class="bg-primary">
             <q-space></q-space>
 
-            <q-btn
-              dense
-              flat
-              icon="mdi-close"
-              v-close-popup
-              @click="auth.setTargetUrl(null)"
-            >
+            <q-btn dense flat icon="mdi-close" v-close-popup>
               <q-tooltip>{{ $t("nav.close") }} </q-tooltip>
             </q-btn>
           </q-bar>
 
-          <q-card-section> <u-md-view v-model="policyData" /> </q-card-section
-        ></q-card>
+          <q-card-section> <u-md-view v-model="policyData" /> </q-card-section>
+          <q-card-section>
+            <q-toggle
+              v-if="currentPolicy == 'privacy'"
+              v-model="privacyPolicyAccepted"
+              :label="
+                $t(
+                  'webConsent.dialog.policies.privacy.acceptance',
+                  'I accept the Privacy Policy'
+                )
+              "
+              :class="privacyPolicyAccepted ? '' : 'text-grey-6 text-strike'"
+            ></q-toggle>
+            <q-toggle
+              v-if="currentPolicy == 'cookies'"
+              v-model="cookiePolicyAccepted"
+              :label="
+                $t(
+                  'webConsent.dialog.policies.cookie.acceptance',
+                  'I accept the Cookie Policy'
+                )
+              "
+              :class="cookiePolicyAccepted ? '' : 'text-grey-6 text-strike'"
+            ></q-toggle>
+          </q-card-section>
+        </q-card>
       </div>
     </q-dialog>
   </q-dialog>
@@ -198,10 +227,9 @@ const mdData = ref({
   privacy: "",
   cookies: "",
 });
+const currentPolicy = ref();
 
-const {
-  isSignedIn
-} = storeToRefs(auth);
+const { isSignedIn } = storeToRefs(auth);
 
 const {
   authCookiesAccepted,
@@ -210,12 +238,15 @@ const {
   cookiePolicyAccepted,
   privacyPolicyAccepted,
   marketingEmailsAccepted,
+  authRequired,
 } = storeToRefs(webConsentStore);
 
 const showPolicyDialog = ref(false);
 
 const policyDialog = (policy) => {
   showPolicyDialog.value = true;
+
+  currentPolicy.value = policy;
 
   switch (policy) {
     case "cookies":

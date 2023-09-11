@@ -14,7 +14,7 @@ export default {
       },
       policies: {
         headline: 'Policy Acceptance',
-        instructions: 'Select the policies which you accept. These settings may affect your access to the site.',
+        instructions: 'Select the policies which you have read, and accept. The free apps will not work if you do not accept these.',
         cookie: {
           label: 'Cookie Policy'
         },

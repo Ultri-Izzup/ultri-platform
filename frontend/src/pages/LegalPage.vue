@@ -1,10 +1,11 @@
 <template>
   <div class="row">
-
-    <div v-if="!currentPolicy" class="text-h2 text-center full-width text-bold text-primary q-pb-lg">
-     Legal Policies
+    <div
+      v-if="!currentPolicy"
+      class="text-h2 text-center full-width text-bold text-primary q-pb-lg"
+    >
+      Legal Policies
     </div>
-
 
     <div class="text-h6 text-center full-width">
       <q-tabs>
@@ -14,17 +15,46 @@
     </div>
     <div
       v-if="currentPolicy && policyData.length > 0"
-      class="row full-width justify-center q-px-xl q-pt-md"
+      class="row full-width justify-left q-px-xl q-pt-md"
     >
       <u-md-view v-model="policyData" />
+      <div>
+        <q-toggle
+          v-if="currentPolicy == 'privacy'"
+          v-model="privacyPolicyAccepted"
+          :label="
+            $t(
+              'webConsent.dialog.policies.privacy.acceptance',
+              'I accept the Privacy Policy'
+            )
+          "
+          :class="privacyPolicyAccepted ? '' : 'text-grey-6 text-strike'"
+        ></q-toggle>
+        <q-toggle
+          v-if="currentPolicy == 'cookies'"
+          v-model="cookiePolicyAccepted"
+          :label="
+            $t(
+              'webConsent.dialog.policies.cookie.acceptance',
+              'I accept the Cookie Policy'
+            )
+          "
+          :class="cookiePolicyAccepted ? '' : 'text-grey-6 text-strike'"
+        ></q-toggle>
+      </div>
     </div>
     <div
       v-if="!currentPolicy"
       class="q-pt-sm row full-width justify-center q-px-xl"
     >
-    <p class="text-body1 text-bold justify-center " >View policies using the links above</p>
+      <p class="text-body1 text-bold justify-center">
+        View policies using the links above
+      </p>
     </div>
-    <div v-if="!currentPolicy" class="q-pt-sm row full-width justify-center q-px-sm">
+    <div
+      v-if="!currentPolicy"
+      class="q-pt-sm row full-width justify-center q-px-sm"
+    >
       <ul>
         <li class="q-py-sm">All policies are subject to change.</li>
         <li>The latest policies will always be posted here.</li>
@@ -34,11 +64,13 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed, watch } from "vue";
+import { ref, computed, watch } from "vue";
 import { useRouter, useRoute } from "vue-router";
+import { storeToRefs } from "pinia";
 
 import { useAuthStore } from "../stores/auth";
 import { useColorStore } from "../stores/color";
+import { useWebConsentStore } from "../stores/webConsent";
 
 import UltriPrivacyPolicy from "../components/ultri/UltriPrivacyPolicy.vue";
 import UltriServices from "../components/ultri/UltriServices.vue";
@@ -47,6 +79,7 @@ import UMdView from "../components/ultri/UMdView.vue";
 
 const auth = useAuthStore();
 const colorStore = useColorStore();
+const webConsentStore = useWebConsentStore();
 const router = useRouter();
 const route = useRoute();
 
@@ -57,6 +90,15 @@ const mdData = ref({
 });
 
 const currentPolicy = computed(() => route.params.policy);
+
+const {
+  authCookiesAccepted,
+  trackingCookiesAccepted,
+  consentTab,
+  cookiePolicyAccepted,
+  privacyPolicyAccepted,
+  marketingEmailsAccepted,
+} = storeToRefs(webConsentStore);
 
 watch(
   currentPolicy,
@@ -91,11 +133,9 @@ watch(
         }
         break;
     }
-
   },
   { immediate: true }
 );
-
 </script>
 
 <style lang="scss" scoped></style>

@@ -110,21 +110,26 @@ import { useAuthStore } from "../../../stores/auth";
 import { useColorStore } from "../../../stores/color";
 import { useCanavaStore } from "../../../stores/canava";
 import { useFeatureStore } from "../../../stores/feature";
+import { useWebConsentStore } from "../../../stores/webConsent";
 
 import { useQuasar } from "quasar";
 import { useI18n } from "vue-i18n";
 
-import { useRouter } from "vue-router";
+import { storeToRefs} from "pinia";
+
+import { useRouter, useRoute } from "vue-router";
 
 import { ref } from "vue";
 
 const router = useRouter();
+const route = useRoute();
 
 const $q = useQuasar();
 
 const authStore = useAuthStore();
 const colorStore = useColorStore();
 const canavaStore = useCanavaStore();
+const webConsentStore = useWebConsentStore();
 const ufs = useFeatureStore();
 
 const platformSignOut = async(path) => {
@@ -146,8 +151,17 @@ const locales = [
   { value: "ro", label: "Romanian" },
 ];
 
+const {
+  authCookiesAccepted
+} = storeToRefs(webConsentStore);
+
 const triggerSignInDialog = async () => {
-  authStore.setTargetUrl("/");
-  authStore.setSignInRequired(true);
+  if(authCookiesAccepted.value) {
+    authStore.setTargetUrl(route.path);
+    authStore.setSignInRequired(true);
+  } else {
+    webConsentStore.triggerDialog('cookies', 'You must accept the Cookie Policy and enable Authentication Cookies to sign in.')
+  }
+
 };
 </script>

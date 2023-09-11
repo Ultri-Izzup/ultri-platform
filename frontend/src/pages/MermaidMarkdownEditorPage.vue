@@ -2,11 +2,12 @@
   <q-page class="justify-center">
     <div class="text-h4 row full-width justify-center text-center text-bold text-primary">
       <span class="q-px-md">Markdown Editor</span>  <q-space />
-      <q-btn v-if="$q.platform.is.desktop && $q.platform.is.chrome" label="Open" class="q-mx-sm"></q-btn>
+      <q-btn v-if="$q.platform.is.desktop && $q.platform.is.chrome" label="Open" class="q-mx-sm" @click="triggerFilePicker()"></q-btn>
       <!-- <q-btn icon="mdi-eye" label="View" to="/editors/markdown/viewer" class="q-mx-md"></q-btn> -->
     </div>
     <div class="row flex fit q-pa-sm">
-    <MdEditor v-model="editorStore.md" language="en-US" @onSave="(event) => downloadData(event)" />
+    <MdEditor v-model="editorStore.md" language="en-US" @onSave="(event) => saveToFile(event)" />
+      <!-- <MdEditor v-model="editorStore.md" language="en-US" @onSave="(event) => downloadData(event)" /> -->
     </div>
     <a id="downloadAnchorElem" style="display: none"></a>
   </q-page>
@@ -23,8 +24,9 @@ import { useEditorStore } from "../stores/editor";
 
 const editorStore = useEditorStore();
 
-
 const $q = useQuasar();
+
+const fh = ref();
 
 const downloadData = (data) => {
   console.log(data)
@@ -36,6 +38,24 @@ const downloadData = (data) => {
   dlAnchorElem.setAttribute("download", "document.md");
   dlAnchorElem.click();
 };
+
+const triggerFilePicker = async () => {
+  console.log('test')
+
+  const [fileHandle] = await window.showOpenFilePicker();
+  console.log(fileHandle)
+  fh.value = fileHandle;
+  const file = await fileHandle.getFile();
+  const contents = await file.text();
+  console.log(contents)
+  editorStore.md = contents;
+}
+
+const saveToFile = async (contents) => {
+  const writable = await fh.value.createWritable();
+  await writable.write(contents);
+  return await writable.close();
+}
 
 </script>
 <style></style>

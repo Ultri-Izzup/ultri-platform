@@ -85,6 +85,7 @@
                   >You must accept the cookie policy first</q-tooltip
                 ><q-tooltip v-else>Required to sign in</q-tooltip></q-toggle
               >
+              Required for sign in
             </q-card-section>
             <q-card-section>
               <q-toggle
@@ -174,7 +175,6 @@
               <q-tooltip>{{ $t("nav.close") }} </q-tooltip>
             </q-btn>
           </q-bar>
-
           <q-card-section> <u-md-view v-model="policyData" /> </q-card-section>
           <q-card-section>
             <q-toggle

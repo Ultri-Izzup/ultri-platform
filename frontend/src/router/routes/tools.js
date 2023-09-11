@@ -31,9 +31,9 @@ const routes = [
       }
     ]
   },
-  // MARKDOWN-IT VIEWER
+  // MARKDOWN-IT HTML VIEWER
   {
-    path: "/editors/markdown/viewer",
+    path: "/editors/markdown/html",
     component: () => import("layouts/MainLayout.vue"),
     meta: {
       drawer: null,
@@ -44,6 +44,38 @@ const routes = [
         name: "MarkdownItViewer",
         path: "",
         component: () => import("src/pages/MarkdownItViewerPage.vue")
+      }
+    ]
+  },
+  // MARKDOWN VIEWER
+  {
+    path: "/editors/markdown/viewer",
+    component: () => import("layouts/MainLayout.vue"),
+    meta: {
+      drawer: null,
+      app: "Tools"
+    },
+    children: [
+      {
+        name: "MarkdownViewer",
+        path: "",
+        component: () => import("src/pages/MarkdownRenderPage.vue")
+      }
+    ]
+  },
+  // MARKDOWN MERMAID VIEWER
+  {
+    path: "/editors/markdown/mermaid",
+    component: () => import("layouts/MainLayout.vue"),
+    meta: {
+      drawer: null,
+      app: "Tools"
+    },
+    children: [
+      {
+        name: "MarkdownMermaidViewer",
+        path: "",
+        component: () => import("src/pages/MermaidRenderPage.vue")
       }
     ]
   },
@@ -63,8 +95,8 @@ const routes = [
       }
     ]
   },
-   // JSON SCHEMA EDITOR
-   {
+  // JSON SCHEMA EDITOR
+  {
     path: "/editors/json-schema",
     component: () => import("layouts/MainLayout.vue"),
     meta: {
@@ -95,22 +127,21 @@ const routes = [
       }
     ]
   },
-    // MERMAID RENDER
-    {
-      path: "/viewer/mermaid",
-      component: () => import("layouts/MainLayout.vue"),
-      meta: {
-        drawer: null,
-        app: "Tools"
-      },
-      children: [
-        {
-          name: "MermaidRender",
-          path: "",
-          component: () => import("pages/MermaidRenderPage.vue")
-        }
-      ]
+  // MERMAID RENDER
+  {
+    path: "/viewer/mermaid",
+    component: () => import("layouts/MainLayout.vue"),
+    meta: {
+      drawer: null,
+      app: "Tools"
     },
-
-]
+    children: [
+      {
+        name: "MermaidRender",
+        path: "",
+        component: () => import("pages/MermaidRenderPage.vue")
+      }
+    ]
+  }
+];
 export default routes;

@@ -1,7 +1,9 @@
 <template>
   <q-page class="justify-center">
     <div class="text-h4 row full-width justify-center text-center text-bold text-primary">
-      <span class="q-px-md">Markdown Editor</span> <q-space /> <q-btn icon="mdi-eye" label="Web Preview" to="/editors/markdown/viewer"></q-btn>
+      <span class="q-px-md">Markdown Editor</span>  <q-space />
+      <q-btn v-if="$q.platform.is.desktop && $q.platform.is.chrome" label="Open" class="q-mx-sm"></q-btn>
+      <!-- <q-btn icon="mdi-eye" label="View" to="/editors/markdown/viewer" class="q-mx-md"></q-btn> -->
     </div>
     <div class="row flex fit q-pa-sm">
     <MdEditor v-model="editorStore.md" language="en-US" @onSave="(event) => downloadData(event)" />
@@ -12,7 +14,7 @@
 
 <script setup>
 import { ref, computed, toValue } from "vue";
-import { Screen } from "quasar";
+import { useQuasar, Screen } from "quasar";
 
 import { MdEditor } from 'md-editor-v3';
 import 'md-editor-v3/lib/style.css';
@@ -21,7 +23,8 @@ import { useEditorStore } from "../stores/editor";
 
 const editorStore = useEditorStore();
 
-const mdData = ref('');
+
+const $q = useQuasar();
 
 const downloadData = (data) => {
   console.log(data)

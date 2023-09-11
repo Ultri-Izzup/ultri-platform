@@ -50,7 +50,7 @@ export const useAuthStore = defineStore("auth", {
     setTargetUrl(url) {
       this.targetUrl = url;
     },
-    setSignInRequired(bool) {
+    setSignInRequired(bool=true) {
       this.signInRequired = bool;
     },
     setSignInRequiredMsg(msg) {

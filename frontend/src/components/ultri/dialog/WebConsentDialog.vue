@@ -32,7 +32,7 @@
                   {{ $t("webConsent.dialog.cookie.headline") }}
                 </div>
               </div>
-              <div v-if="authRequired && (!authCookiesAccepted || !cookiePolicyAccepted)">
+              <div v-if="authBlocked">
                 <div
                   class="dialog-body text-weight-bold text-negative"
                 >
@@ -208,7 +208,7 @@
 
 <script setup>
 import { storeToRefs } from "pinia";
-import { ref } from "vue";
+import { ref, computed, watch } from "vue";
 import { useDialogPluginComponent, Screen } from "quasar";
 import { useI18n } from "vue-i18n";
 
@@ -242,6 +242,15 @@ const {
 } = storeToRefs(webConsentStore);
 
 const showPolicyDialog = ref(false);
+
+const authBlocked = computed(() => (authRequired.value && (!authCookiesAccepted.value || !cookiePolicyAccepted.value)));
+
+watch((authBlocked), (oldVal, newVal) => {
+  if(!oldVal && newVal)
+  {
+    auth.setSignInRequired()
+  }
+})
 
 const policyDialog = (policy) => {
   showPolicyDialog.value = true;

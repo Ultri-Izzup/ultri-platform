@@ -3,9 +3,45 @@
     <div>
       <span v-if="route.name != 'canvasPage'">
         <span class="q-pr-lg text-body2 text-weight-bold">
-          <router-link to="/canava" class="navbar-text-link" color="primary">{{
-            $t("nav.canava")
-          }}</router-link>
+          <q-btn-dropdown flat color="primary" label="Products" no-caps>
+            <q-list>
+              <q-item clickable v-close-popup href="/cerc">
+                <q-item-section>
+                  <q-item-label>Cerc</q-item-label>
+                  <q-item-label caption>Circle manager</q-item-label>
+                </q-item-section>
+              </q-item>
+
+              <q-item clickable v-close-popup href="/canava">
+                <q-item-section>
+                  <q-item-label>Canava</q-item-label>
+                  <q-item-label caption>Canvas Tool</q-item-label>
+                </q-item-section>
+              </q-item>
+
+              <q-item clickable v-close-popup href="/bord">
+                <q-item-section>
+                  <q-item-label>Bord</q-item-label>
+                  <q-item-label caption>Dashboard Builder</q-item-label>
+                </q-item-section>
+              </q-item>
+
+              <q-item clickable v-close-popup href="/vot">
+                <q-item-section>
+                  <q-item-label>Voto</q-item-label>
+                  <q-item-label caption>Voting and Decisions</q-item-label>
+                </q-item-section>
+              </q-item>
+
+              <q-item clickable v-close-popup href="/websted">
+                <q-item-section>
+                  <q-item-label>Websted</q-item-label>
+                  <q-item-label caption>Microsite Builder</q-item-label>
+                </q-item-section>
+              </q-item>
+
+            </q-list>
+          </q-btn-dropdown>
         </span>
         <span class="q-pr-lg">
           <q-btn-dropdown flat color="primary" label="Editors" no-caps>
@@ -34,18 +70,29 @@
                 </q-item-section>
               </q-item>
 
-              <q-item clickable v-close-popup  tag="a" href="/editors/audio" target="_new">
+              <q-item
+                clickable
+                v-close-popup
+                tag="a"
+                href="/editors/audio"
+                target="_new"
+              >
                 <q-item-section>
                   <q-item-label>Audio</q-item-label>
                 </q-item-section>
               </q-item>
 
-              <q-item clickable v-close-popup tag="a" href="/editors/openapi" target="_new">
+              <q-item
+                clickable
+                v-close-popup
+                tag="a"
+                href="/editors/openapi"
+                target="_new"
+              >
                 <q-item-section>
                   <q-item-label>OpenAPI</q-item-label>
                 </q-item-section>
               </q-item>
-
             </q-list>
           </q-btn-dropdown>
         </span>
@@ -76,7 +123,7 @@
         size="sm"
       ></q-toggle>
       <!-- NOTIFICATIONS BUTTON -->
-<!--
+      <!--
       <span v-if="featureStore.enabled('auth') && authStore.isSignedIn">
         <NotificationsButton></NotificationsButton>
         <q-tooltip>{{ $t("notifications.hint") }}</q-tooltip>

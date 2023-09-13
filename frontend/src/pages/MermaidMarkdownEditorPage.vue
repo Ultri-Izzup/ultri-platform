@@ -17,10 +17,36 @@
 import { ref, computed, toValue } from "vue";
 import { useQuasar, Screen } from "quasar";
 
-import { MdEditor } from 'md-editor-v3';
+import { MdEditor, config } from 'md-editor-v3';
 import 'md-editor-v3/lib/style.css';
 
+import MarkdownItAbbr from "markdown-it-abbr";
+import MarkdownItAnchor from "markdown-it-anchor";
+import MarkdownItFootnote from "markdown-it-footnote";
+import MarkdownItHighlightjs from "markdown-it-highlightjs";
+import MarkdownItSub from "markdown-it-sub";
+import MarkdownItSup from "markdown-it-sup";
+import MarkdownItTasklists from "markdown-it-task-lists";
+import MarkdownItTOC from "markdown-it-toc-done-right";
+import MarkdownItAttrs from "markdown-it-attrs";
+import MarkdownItStyle from "markdown-it-style";
+
 import { useEditorStore } from "../stores/editor";
+
+config({
+  markdownItConfig(mdit) {
+    mdit.use(MarkdownItAbbr);
+    mdit.use(MarkdownItAnchor);
+    mdit.use(MarkdownItFootnote);
+    mdit.use(MarkdownItHighlightjs);
+    mdit.use(MarkdownItSub);
+    mdit.use(MarkdownItSup);
+    mdit.use(MarkdownItTasklists);
+    mdit.use(MarkdownItTOC);
+    mdit.use(MarkdownItAttrs);
+    mdit.use(MarkdownItStyle);
+  }
+});
 
 const editorStore = useEditorStore();
 

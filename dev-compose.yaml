@@ -20,19 +20,6 @@ services:
       - ultri-pg:/var/lib/postgres/data
       - ./docker-postgres:/docker-entrypoint-initdb.d/
 
-  redis:
-    image: redis:7.0.7
-    container_name: ultri-redis
-    restart: "no"
-    ports:
-      - "6379:6379"
-    networks:
-      - ultri-net
-    # command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
-    command: redis-server --save 20 1 --loglevel warning
-    volumes:
-      - ultri-redis:/data
-
   supertokens:
     image: registry.supertokens.io/supertokens/supertokens-postgresql:6.0
     depends_on:
@@ -109,7 +96,6 @@ services:
     depends_on:
       - api
       - supertokens
-      - redis
       - postgres
 
   #quasar:
@@ -130,7 +116,6 @@ services:
 volumes:
   ultri-smtp4dev: {}
   ultri-pg: {}
-  ultri-redis: {}
 
 networks:
   ultri-net:

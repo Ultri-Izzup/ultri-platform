@@ -51,9 +51,30 @@ async function auth(server, options) {
         },
       }),
       EmailPassword.init(), // initializes signin / sign up features
-      Session.init({
+      Session.init(
+        {
             getTokenTransferMethod: () => "cookie", // "header",
             exposeAccessTokenToFrontendInCookieBasedAuth: true,
+            override: {
+              functions: (originalImplementation) => {
+                  return {
+                      ...originalImplementation,
+
+                      // here we are only overriding the function that's responsible
+                      // for creating a new session
+                      consumeCode: async function (input) {
+                          // TODO: some custom logic
+
+                          // or call the default behaviour as show below
+                          const originalResult = await originalImplementation.consumeCode(input);
+
+                          console.log('ORIGINAL', originalResult);
+                      },
+                      // ...
+                      // TODO: override more functions
+                  }
+              }
+          }
           }), // initializes session features
     ],
   });

@@ -84,4 +84,10 @@ const saveToFile = async (contents) => {
 }
 
 </script>
-<style></style>
+<style lang="scss" scoped>
+body { scroll-behavior: smooth; }
+
+ol { counter-reset: list-item; }
+li { display: block; counter-increment: list-item; }
+li:before { content: counters(list-item,'.') ' '; }
+</style>

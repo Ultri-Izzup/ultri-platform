@@ -132,3 +132,6 @@ dist
 gateway/certs/*.pem
 
 yarn.lock
+gateway/NEW/fullchain.pem
+gateway/NEW/account.key
+gateway/NEW/privkey.pem

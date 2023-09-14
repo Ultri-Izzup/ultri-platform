@@ -5,12 +5,12 @@
         <span class="q-pr-lg text-body2 text-weight-bold">
           <q-btn-dropdown flat color="primary" label="Products" no-caps>
             <q-list>
-              <q-item clickable v-close-popup href="/cerc">
+              <!-- <q-item clickable v-close-popup href="/cerc">
                 <q-item-section>
                   <q-item-label>Cerc</q-item-label>
                   <q-item-label caption>Circle manager</q-item-label>
                 </q-item-section>
-              </q-item>
+              </q-item> -->
 
               <q-item clickable v-close-popup href="/canava">
                 <q-item-section>
@@ -18,7 +18,7 @@
                   <q-item-label caption>Canvas Tool</q-item-label>
                 </q-item-section>
               </q-item>
-
+<!--
               <q-item clickable v-close-popup href="/bord">
                 <q-item-section>
                   <q-item-label>Bord</q-item-label>
@@ -38,7 +38,7 @@
                   <q-item-label>Websted</q-item-label>
                   <q-item-label caption>Microsite Builder</q-item-label>
                 </q-item-section>
-              </q-item>
+              </q-item> -->
 
             </q-list>
           </q-btn-dropdown>

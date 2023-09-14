@@ -3,8 +3,6 @@ import  fastifyWebsocket  from "@fastify/websocket";
 import { fileURLToPath } from 'url'
 import { dirname, join } from 'path'
 
-import funcs from "./plugins/funcs.js";
-
 import config from "./plugins/config.js";
 import auth from "./plugins/auth.js";
 import swagger from "./plugins/swagger.js";
@@ -17,7 +15,7 @@ import autoLoad from '@fastify/autoload'
 export default async function appFramework() {
   const fastify = Fastify({ logger: true });
   fastify.register(fastifyWebsocket);
-  fastify.register(funcs);
+
   await fastify.register(config);
   fastify.register(auth);
   fastify.register(swagger);

@@ -100,11 +100,12 @@
             </div>
             <q-separator></q-separator>
             <div :class="Screen.lt.md ? 'q-pt-sm' : 'q-pt-lg q-pl-xl'">
-              <div class="text-h5 q-pb-sm" color="secondary">Create a free account for additional benefits</div>
+              <div class="text-h5 q-pb-sm" color="secondary">Create a free account for additional benefits:</div>
             <ul class="text-h6 text-shd-p-90">
-              <li class="q-ma-xs text-h5 text-primary text-bold" >Local editor mode enabled</li>
-              <li class="q-ma-xs text-h5 text-primary text-bold" >Integrated with orgs and circles</li>
+              <li class="q-ma-xs text-h5 text-primary text-bold" >Local editor mode enabled*</li>
+              <li class="q-ma-xs text-h5 text-primary text-bold" >Integrated with orgs and circles*</li>
             </ul>
+            <div class="full-width text-italic text-right q-pr-xl">* Requires a Chrome desktop browser.</div>
           </div>
           </q-card-section>
           <q-card-actions class="justify-center">

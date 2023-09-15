@@ -121,7 +121,8 @@ const defaultObject = {
 export const useCanavaStore = defineStore("canava", {
   state: () => ({
     canvasData: useStorage("canvasData", defaultObject),
-    storedCanvases: useStorage("storedCanvases", {})
+    storedCanvases: useStorage("storedCanvases", {}),
+    canvasFh: {},
   }),
   getters: {
     canvasOpts() {
@@ -186,12 +187,13 @@ export const useCanavaStore = defineStore("canava", {
         console.log("Updating " + canvasTemplate);
         const data = this.storedCanvases[canvasTemplate];
 
-        console.log("DATATATAT", data);
+        // Store on disk
+        const fh = this.canvasFh[canvasTemplate];
+        fh.value = fh;
+        const writable = await fh.value.createWritable();
+        await writable.write(JSON.stringify(data, 0, 2));
+        await writable.close();
 
-        // save to API
-        const result = await api.put("/canava/canvases", data);
-
-        console.log(result);
 
         return canvasTemplate;
       } else {
@@ -209,19 +211,24 @@ export const useCanavaStore = defineStore("canava", {
         data.uid = newUuid;
         console.log(toValue(data));
 
-        // save to API
-        const result = await api.put("/canava/canvases", data);
-        console.log(result)
-
         // add to savedCanvases using Uid
         this.storedCanvases[newUuid] = data;
 
         console.log(this.storedCanvases[newUuid]);
 
+        // Store on disk
+        const fh = await window.showSaveFilePicker({suggestedName: 'canvas.json'});
+        console.log(fh);
+        this.canvasFh[data.uid] = fh;
+        fh.value = fh;
+        const writable = await fh.value.createWritable();
+        await writable.write(JSON.stringify(data, 0, 2));
+        await writable.close();
+
         // remove template name from savedCanvases
         delete this.storedCanvases[canvasTemplate];
 
-        return result.data.uid;
+        return data.uid;
       }
     },
     async deleteMemberCanvas(canvasUid) {

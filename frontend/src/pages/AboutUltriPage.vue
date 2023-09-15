@@ -18,8 +18,8 @@
       align="justify"
       narrow-indicator
     >
-      <q-tab name="timeline" label="Timeline"></q-tab>
       <q-tab name="services" label="Services"></q-tab>
+      <q-tab name="timeline" label="Timeline"></q-tab>
       <!-- <q-tab name="products" label="Products"></q-tab>
       <q-tab name="projects" label="Projects"></q-tab> -->
     </q-tabs>
@@ -57,7 +57,7 @@ const route = useRoute();
 const selectedCanvas = ref(null);
 const selectedSavedCanvas = ref(null);
 
-const tab = ref("timeline");
+const tab = ref("services");
 
 onMounted(async () => {
   canavaStore.loadMemberCanvas();

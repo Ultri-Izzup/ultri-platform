@@ -202,7 +202,7 @@ const saveToCloud = async (targetCanvas = false) => {
     // If the name changed from a template to a UUID, push to new pag
     if(savedUid != targetCanvas) {
 
-      console.log('CHNAGED', targetCanvas, savedUid)
+      console.log('CHANGED', targetCanvas, savedUid)
       router.push({name: 'canavaTemplate', params: {canvasTemplate: savedUid}})
     }
   }

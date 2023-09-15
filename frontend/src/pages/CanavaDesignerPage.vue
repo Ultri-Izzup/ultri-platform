@@ -330,15 +330,8 @@ const onDownloadClick = (targetCanvas = false) => {
   dlAnchorElem.click();
 };
 
-const saveToCloud = async (targetCanvas = false) => {
-  console.log("Saving to cloud " + targetCanvas);
-
-  // Loop through canvases
-  // If the canvas prop is a uuid, it has already been stored in the cloud and we need to update that record
-  //
-  // If the canvas prop is an expected string:
-  //     1. make the canvas origin a prop on the canvas
-  //     2. replace with a uuid and store as a new canvas
+const saveCanvas = async (targetCanvas = false) => {
+  console.log("Saving " + targetCanvas);
 
   // Define canvasesobject
   let canvas = {};

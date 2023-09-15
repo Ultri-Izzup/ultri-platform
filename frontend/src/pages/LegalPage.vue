@@ -78,8 +78,6 @@ import 'md-editor-v3/lib/style.css';
 import UltriPrivacyPolicy from "../components/ultri/UltriPrivacyPolicy.vue";
 import UltriServices from "../components/ultri/UltriServices.vue";
 
-import UMdView from "../components/ultri/UMdView.vue";
-
 const auth = useAuthStore();
 const colorStore = useColorStore();
 const webConsentStore = useWebConsentStore();

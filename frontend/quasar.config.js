@@ -32,7 +32,7 @@ module.exports = configure(function (/* ctx */) {
     boot: [
       'i18n',
       'axios',
-      'mermaid',
+      // 'mermaid',
       'json-schema',
       'gtag'
       // 'markdown-editor',

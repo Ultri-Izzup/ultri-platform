@@ -50,11 +50,9 @@
           dense
           ><q-tooltip> View Canvas </q-tooltip></q-btn
         >
-
-
         <q-btn
           :disabled="!auth.isSignedIn"
-          @click="saveToCloud(canvasTemplate)"
+          @click="saveCanvas(canvasTemplate)"
           icon="mdi-content-save"
           size="md"
           color="primary"

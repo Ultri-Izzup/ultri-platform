@@ -1,12 +1,23 @@
 <template>
   <q-page class="justify-center">
-    <div class="text-h4 row full-width justify-center text-center text-bold text-primary">
-      <span class="q-px-md">Markdown Editor</span>  <q-space />
-      <q-btn v-if="$q.platform.is.desktop && $q.platform.is.chrome" label="Open" class="q-mx-sm" @click="triggerFilePicker()"></q-btn>
+    <div
+      class="text-h4 row full-width justify-center text-center text-bold text-primary"
+    >
+      <span class="q-px-md">Markdown Editor</span> <q-space />
+      <q-btn
+        v-if="$q.platform.is.desktop && $q.platform.is.chrome"
+        label="Open"
+        class="q-mx-sm"
+        @click="triggerFilePicker()"
+      ></q-btn>
       <!-- <q-btn icon="mdi-eye" label="View" to="/editors/markdown/viewer" class="q-mx-md"></q-btn> -->
     </div>
     <div class="row flex fit q-pa-sm">
-    <MdEditor v-model="editorStore.md" language="en-US" @onSave="(event) => saveToFile(event)" />
+      <MdEditor
+        v-model="editorStore.md"
+        language="en-US"
+        @onSave="(event) => saveToFile(event)"
+      />
       <!-- <MdEditor v-model="editorStore.md" language="en-US" @onSave="(event) => downloadData(event)" /> -->
     </div>
     <a id="downloadAnchorElem" style="display: none"></a>
@@ -17,8 +28,8 @@
 import { ref, computed, toValue } from "vue";
 import { useQuasar, Screen } from "quasar";
 
-import { MdEditor, config } from 'md-editor-v3';
-import 'md-editor-v3/lib/style.css';
+import { MdEditor, config } from "md-editor-v3";
+import "md-editor-v3/lib/style.css";
 
 import MarkdownItAbbr from "markdown-it-abbr";
 import MarkdownItAnchor from "markdown-it-anchor";
@@ -45,7 +56,7 @@ config({
     mdit.use(MarkdownItTOC);
     mdit.use(MarkdownItAttrs);
     mdit.use(MarkdownItStyle);
-  }
+  },
 });
 
 const editorStore = useEditorStore();
@@ -55,10 +66,8 @@ const $q = useQuasar();
 const fh = ref();
 
 const downloadData = (data) => {
-  console.log(data)
-  var dataStr =
-    "data:text/json;charset=utf-8," +
-    encodeURIComponent(`${data}`);
+  console.log(data);
+  var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(`${data}`);
   var dlAnchorElem = document.getElementById("downloadAnchorElem");
   dlAnchorElem.setAttribute("href", dataStr);
   dlAnchorElem.setAttribute("download", "document.md");
@@ -66,28 +75,36 @@ const downloadData = (data) => {
 };
 
 const triggerFilePicker = async () => {
-  console.log('test')
+  console.log("test");
 
   const [fileHandle] = await window.showOpenFilePicker();
-  console.log(fileHandle)
+  console.log(fileHandle);
   fh.value = fileHandle;
   const file = await fileHandle.getFile();
   const contents = await file.text();
-  console.log(contents)
+  console.log(contents);
   editorStore.md = contents;
-}
+};
 
 const saveToFile = async (contents) => {
   const writable = await fh.value.createWritable();
   await writable.write(contents);
   return await writable.close();
-}
-
+};
 </script>
 <style lang="scss" scoped>
-body { scroll-behavior: smooth; }
+body {
+  scroll-behavior: smooth;
+}
 
-ol { counter-reset: list-item; }
-li { display: block; counter-increment: list-item; }
-li:before { content: counters(list-item,'.') ' '; }
+ol {
+  counter-reset: list-item;
+}
+li {
+  display: block;
+  counter-increment: list-item;
+}
+li:before {
+  content: counters(list-item, ".") " ";
+}
 </style>

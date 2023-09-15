@@ -69,7 +69,7 @@
             <p class="text-center">
               <q-btn
                 label="Custom Canvas"
-                color="primary"
+                color="secondary"
                 clickable
                 v-ripple
                 :to="{ name: 'canavaDesigner' }"
@@ -85,25 +85,31 @@
               {{ $t("canava.home.benefits", "Free Canava Benefits") }}
             </div>
             <q-separator></q-separator>
-            <div :class="Screen.lt.md ? 'q-pt-sm' : 'q-pt-xl q-pl-xl'">
+            <div :class="Screen.lt.md ? 'q-pt-sm' : 'q-pt-lg q-pl-xl q-pb-md'">
             <ul class="text-h6 text-shd-p-90">
-              <li class="q-ma-xs text-h5 text-primary text-bold" >Save your canvas online!</li>
               <li class="q-ma-xs text-h5 text-primary text-bold" >Create unlimited canvases!</li>
-              <li class="q-ma-xs text-h5 text-primary text-bold" >Save 100 canvases for free!</li>
               <li class="q-ma-xs text-h5 text-primary text-bold" >15+ free canvas templates!</li>
               <li class="q-ma-xs text-h5 text-primary text-bold" >Create custom canvases!</li>
-              <li class="q-ma-sm" >New canvases added weekly</li>
-              <li class="q-ma-sm" >Multiple open canvases</li>
-              <li class="q-ma-sm" >Access to all canvas templates</li>
               <li class="q-ma-sm" >PNG image export, more coming</li>
               <li class="q-ma-sm" >Multiple fonts provided</li>
-              <li class="q-ma-sm" >Runs on desktop or mobile</li>
-              <li class="q-ma-sm" >Localization support</li>
               <li class="q-ma-sm" >Free and open source code</li>
-              <li class="q-ma-sm" >Easily self-hosted</li>
+            </ul>
+          </div>
+          <div class="text-h4 text-bold text-primary q-pb-sm">
+              {{ $t("canava.home.memberBenefits") }}
+            </div>
+            <q-separator></q-separator>
+            <div :class="Screen.lt.md ? 'q-pt-sm' : 'q-pt-lg q-pl-xl'">
+              <div class="text-h5 q-pb-sm" color="secondary">Create a free account for additional benefits</div>
+            <ul class="text-h6 text-shd-p-90">
+              <li class="q-ma-xs text-h5 text-primary text-bold" >Local editor mode enabled</li>
+              <li class="q-ma-xs text-h5 text-primary text-bold" >Integrated with orgs and circles</li>
             </ul>
           </div>
           </q-card-section>
+          <q-card-actions class="justify-center">
+            <q-btn @click="auth.setSignInRequired()" size="xl" color="primary" label="Join Now"></q-btn>
+          </q-card-actions>
         </q-card>
       </div>
     </div>

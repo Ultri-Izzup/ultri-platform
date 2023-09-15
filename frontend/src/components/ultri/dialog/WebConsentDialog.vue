@@ -175,7 +175,7 @@
               <q-tooltip>{{ $t("nav.close") }} </q-tooltip>
             </q-btn>
           </q-bar>
-          <q-card-section> <u-md-view v-model="policyData" /> </q-card-section>
+          <q-card-section>   <MdPreview v-model="policyData" language="en-US" /> </q-card-section>
           <q-card-section>
             <q-toggle
               v-if="currentPolicy == 'privacy'"
@@ -215,7 +215,8 @@ import { useI18n } from "vue-i18n";
 import { useAuthStore } from "../../../stores/auth";
 import { useWebConsentStore } from "../../../stores/webConsent";
 
-import UMdView from "../UMdView.vue";
+import { MdPreview } from 'md-editor-v3';
+import 'md-editor-v3/lib/style.css';
 
 const { t } = useI18n();
 

@@ -17,7 +17,7 @@
       v-if="currentPolicy && policyData.length > 0"
       class="row full-width justify-left q-px-xl q-pt-md"
     >
-      <u-md-view v-model="policyData" />
+      <MdPreview v-model="policyData" language="en-US" />
       <div>
         <q-toggle
           v-if="currentPolicy == 'privacy'"
@@ -71,6 +71,9 @@ import { storeToRefs } from "pinia";
 import { useAuthStore } from "../stores/auth";
 import { useColorStore } from "../stores/color";
 import { useWebConsentStore } from "../stores/webConsent";
+
+import { MdPreview } from 'md-editor-v3';
+import 'md-editor-v3/lib/style.css';
 
 import UltriPrivacyPolicy from "../components/ultri/UltriPrivacyPolicy.vue";
 import UltriServices from "../components/ultri/UltriServices.vue";
@@ -129,6 +132,7 @@ watch(
               policyData.value = responseBody;
             });
         } else {
+          console.log('use existing privacy')
           policyData.value = mdData.value[newValue];
         }
         break;

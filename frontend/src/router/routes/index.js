@@ -3,7 +3,7 @@ import site from './site'
 import canvas from './canvas'
 import canava from './canava'
 import circles from './circles'
-import cirkl from './cirkl'
+import cerc from './cerc'
 import okra from './okra'
 import org from './org'
 import platform from './platform'
@@ -22,7 +22,7 @@ const routes = [
   ...canvas,
   ...canava,
   ...circles,
-  ...cirkl,
+  ...cerc,
   ...okra,
   ...org,
   ...platform,

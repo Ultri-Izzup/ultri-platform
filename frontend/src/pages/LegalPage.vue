@@ -15,7 +15,7 @@
     </div>
     <div
       v-if="currentPolicy && policyData.length > 0"
-      class="row full-width justify-left q-px-xl q-pt-md"
+      class="row full-width justify-left q-px-xl"
     >
       <MdPreview v-model="policyData" language="en-US" />
       <div>
@@ -140,4 +140,9 @@ watch(
 );
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+h1 {
+  margin: 0;
+  padding: 0
+}
+</style>

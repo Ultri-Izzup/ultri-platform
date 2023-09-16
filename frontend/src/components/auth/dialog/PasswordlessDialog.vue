@@ -11,8 +11,11 @@
           </q-btn>
         </q-bar>
         <q-card-section>
-          <div class="dialog-header row">
-            <div class="col">
+          <div class="row">
+            <div v-if="auth.signInRequiredMsg" class="row text-h6 justify-center text-italic text-negative full-width q-pa-xs">
+              {{ auth.signInRequiredMsg }}
+            </div>
+            <div class="dialog-header row full-width">
               {{ $t('auth.passwordless.dialog.email-formTitle') }}
             </div>
           </div>

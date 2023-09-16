@@ -1,17 +1,17 @@
 const routes = [
-  // CIRKEL HOME
+  // CERC HOME
   {
-    path: "/cirkl",
+    path: "/cerc",
     component: () => import("layouts/MainLayout.vue"),
     meta: {
       drawer: null,
-      app: "Logbook"
+      app: "Cerc"
     },
     children: [
       {
-        name: "cirklHome",
+        name: "cercHome",
         path: "",
-        component: () => import("src/pages/CirklHomePage.vue")
+        component: () => import("src/pages/CercHomePage.vue")
       }
     ]
   },

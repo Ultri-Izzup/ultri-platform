@@ -3,8 +3,8 @@
 Your data never leaves your computer, so we need a place to store it. The Chrome Filesystem API allows storing the data in a directory of your choosing.
 
 * You **must** grant the browser permssion for the app to work.
-* We will create a `WORKSPACE-MANIFEST.json` in the root of the directory.
-* We create a `nuggets` subdirectory for the data files.
+* We will create a `ULTRI-WORKSPACE.json` in the root of the directory.
+* We create a `ultri-workspace` subdirectory for the data files.
 * You may grant the app access to other directories, outside of the main workspace.
 
 ## Creating and Defining an Organization

@@ -10,8 +10,8 @@
     <div class="row full-width">
 
       <div :class="$q.screen.lt.md ? ' col-12 q-px-md q-pb-md' : ' col-5 q-pl-xl q-pr-lg'">
-        <q-card>
-          <q-card-section class="bg-blue-5">
+        <q-card class="u-card">
+          <q-card-section class="u-card-titlebar">
             <div class="full-width text-center text-h5 text-bold">Cerc - Domain Circles</div>
           </q-card-section>
 
@@ -21,10 +21,10 @@
 
           <div v-if="workspace.fsaApiEnabled" class="q-pb-lg">
             <q-card-actions class="justify-center">
-              <q-btn @click="workspace.createWorkspace()" label="Create Workspace" color="orange-10" size="xl"></q-btn>
+              <q-btn @click="createWorkspace()" label="Create Workspace" class="u-btn-cta" size="xl"></q-btn>
             </q-card-actions>
             <q-card-actions v-if="workspace.hasWorkspaces" class="justify-center q-pb-xl">
-              <q-btn @click="workspace.openWorkspace()" flat label="Open Workspace" color="primary" size="xl"></q-btn>
+              <q-btn @click="workspace.openWorkspace()" flat label="Open Workspace" size="xl" class="u-btn-cta"></q-btn>
             </q-card-actions>
           </div>
           <div v-else>
@@ -60,8 +60,8 @@
 
 
       <div :class="$q.screen.lt.md ? ' col-12 q-px-md q-pb-md' : ' col-7 q-pr-xl q-pl-lg'">
-        <q-card>
-          <q-card-section class="bg-blue-5">
+        <q-card class="u-card">
+          <q-card-section class="u-card-titlebar">
             <div class="full-width text-center text-h5 text-bold">Additional Info</div>
           </q-card-section>
           <q-card-section class="q-pt-none word-wrap">
@@ -71,6 +71,36 @@
       </div>
 
     </div>
+
+    <q-dialog v-model="workspace.showNameDialog">
+      <q-card>
+        <q-card-section>
+          <div class="text-h6">Alert</div>
+        </q-card-section>
+
+        <q-card-section class="q-pt-none">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum repellendus sit voluptate voluptas eveniet porro. Rerum blanditiis perferendis totam, ea at omnis vel numquam exercitationem aut, natus minima, porro labore.
+        </q-card-section>
+
+        <q-card-actions align="right">
+          <q-btn flat label="OK" color="primary" v-close-popup></q-btn>
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
+
+    <q-dialog v-model="showWorkspaceDialog" persistent>
+      <q-card>
+        <q-card-section class="row items-center">
+          <q-avatar icon="signal_wifi_off" color="primary" text-color="white"></q-avatar>
+          <span class="q-ml-sm">You are currently not connected to any network.</span>
+        </q-card-section>
+
+        <q-card-actions align="right">
+          <q-btn flat label="Cancel" color="primary" v-close-popup></q-btn>
+          <q-btn flat label="Turn on Wifi" color="primary" v-close-popup></q-btn>
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
 
   </q-page>
 </template>
@@ -85,14 +115,19 @@ import 'md-editor-v3/lib/style.css';
 import { useWorkspaceStore } from "../stores/workspace";
 import { useCercStore } from "../stores/cerc";
 
+// Quasar
+const $q = useQuasar();
+
+// Stores
 const workspace = useWorkspaceStore();
 const cerc = useCercStore();
 
-// Info page content stored in Markdown and fetched on first load.
+// Display new workspace dialog?
+const showWorkspaceDialog = ref(false);
+
+// Page content markdown, fetched on first load.
 const cercInfo = ref('');
-
-const $q = useQuasar();
-
+// If ref is empty, fetch Markdown and store in ref
 if (cercInfo.value.length < 1) {
   fetch("/md/cerc-info.md")
     .then((response) => {
@@ -101,6 +136,36 @@ if (cercInfo.value.length < 1) {
     .then((responseBody) => {
       cercInfo.value = responseBody
     });
+}
+
+// Create a new workspace
+const createWorkspace = async () => {
+  // Display a dialog to collect the workspace name
+  showNameDialog.value = true;
+
+  // Start the process to select a directory using the store
+
+  // Failure? - Show error dialog, try again or cancel?
+
+  // Success?
+
+  // Register Cerc app in workspace
+
+
+}
+
+const getWorkspaceOrgs = async () => {
+  // Display a dialog to collect the Org name
+
+  // Create Org and forward
+
+}
+
+const createOrg = async () => {
+  // Display a dialog to collect the Org name
+
+  // Create Org and forward
+
 }
 
 

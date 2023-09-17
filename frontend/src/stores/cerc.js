@@ -55,12 +55,12 @@ export const useCercStore = defineStore("cerc", () => {
     let isEmpty = true;
     let manifestFound = false;
 
-    // The directory must be empty, or have an ULTRI-MANIFEST.json file
+    // The directory must be empty, or have an ULTRI-WORKSPACE.json file
     for await (const e of appDirHandle.entries()) {
       // Entry found, not an empty directory
       isEmpty = false;
 
-      if (e[0] == "ULTRI-MANIFEST.json") {
+      if (e[0] == "ULTRI-WORKSPACE.json") {
         manifestFound = true;
       }
 

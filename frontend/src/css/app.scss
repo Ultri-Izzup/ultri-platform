@@ -34,11 +34,53 @@ h1 {
   text-decoration: none;
 }
 
-.body--light {
-  /* ... */
+.body--light .u-card-titlebar {
+  --u-card-titlebar-color: white ;
+  --u-card-titlebar-bg-color: #{$blue-7};
+}
+
+.body--dark .u-dialog-titlebar {
+  --u-dialog-titlebar-color: white;
+  --u-dialog-titlebar-bg-color: #{$blue-7};
+}
+
+.body--light .u-btn-cta {
+  --u-btn-cta-color:white ;
+  --u-btn-cta-bg-color: #{$cta};
 }
 
 .body--dark .md-editor {
   --md-color: white !important;
   --md-bk-color: #1D1D1D !important;
+}
+
+.body--dark .u-card-titlebar {
+  --u-card-titlebar-color:#{$grey-1};
+  --u-card-titlebar-bg-color: #{$grey-9};
+}
+
+.body--dark .u-dialog-titlebar {
+  --u-dialog-titlebar-color:#{$grey-1};
+  --u-dialog-titlebar-bg-color: #{$grey-8};
+}
+
+.body--dark .u-btn-cta {
+  --u-btn-cta-color: white ;
+  --u-btn-cta-bg-color: #{$cta};
+}
+
+
+.u-card-titlebar {
+  color: var(--u-card-titlebar-color);
+  background-color: var(--u-card-titlebar-bg-color);
+}
+
+.u-dialog-titlebar {
+  color: var(--u-dialog-titlebar-color);
+  background-color: var(--u-dialog-titlebar-bg-color);
+}
+
+.u-btn-cta {
+  color: var(--u-btn-cta-color);
+  background-color: var(--u-btn-cta-bg-color);
 }

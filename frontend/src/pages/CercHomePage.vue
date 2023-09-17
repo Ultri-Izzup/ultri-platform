@@ -11,7 +11,7 @@
 
       <div :class="$q.screen.lt.md ? ' col-12 q-px-md q-pb-md' : ' col-5 q-pl-xl q-pr-lg'">
         <q-card>
-          <q-card-section class="bg-blue-2">
+          <q-card-section class="bg-blue-5">
             <div class="full-width text-center text-h5 text-bold">Cerc - Domain Circles</div>
           </q-card-section>
 
@@ -61,7 +61,7 @@
 
       <div :class="$q.screen.lt.md ? ' col-12 q-px-md q-pb-md' : ' col-7 q-pr-xl q-pl-lg'">
         <q-card>
-          <q-card-section class="bg-blue-2">
+          <q-card-section class="bg-blue-5">
             <div class="full-width text-center text-h5 text-bold">Additional Info</div>
           </q-card-section>
           <q-card-section class="q-pt-none word-wrap">

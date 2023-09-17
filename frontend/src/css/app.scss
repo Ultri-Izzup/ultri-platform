@@ -33,3 +33,12 @@ h1 {
   color: $primary;
   text-decoration: none;
 }
+
+.body--light {
+  /* ... */
+}
+
+.body--dark .md-editor {
+  --md-color: white !important;
+  --md-bk-color: #1D1D1D !important;
+}

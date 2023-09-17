@@ -38,11 +38,11 @@ export const useWorkspaceStore = defineStore("workspace", () => {
 
     // Only authenticated members can use this feature
     if (!auth.isSignedIn) {
-      auth.setSignInRequiredMsg("You must sign in to use Cerc");
+      auth.setSignInRequiredMsg("You must sign in to create a workspace");
       auth.setSignInRequired(true);
     }
 
-    const tempDirHandle = await window.showDirectoryPicker( { startIn: 'documents', mode: 'readwrite'});
+    const workspaceDirHandle = await window.showDirectoryPicker( { startIn: 'documents', mode: 'readwrite'});
     // Add to IndexDB
     // await projectsTable.setItem('cerc1', appDirHandle)
 

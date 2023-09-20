@@ -7,6 +7,9 @@
   font-size: x-large;
 }
 .dialog-body {
+  padding: 0 1em 0 1em;
+}
+.dialog-instructions {
   font-style: italic;
   padding: 0 1em 0 1em;
 }
@@ -34,14 +37,14 @@ h1 {
   text-decoration: none;
 }
 
-.body--light .u-card-titlebar {
-  --u-card-titlebar-color: white ;
-  --u-card-titlebar-bg-color: #{$blue-7};
+.body--light .u-card-toolbar {
+  --u-card-toolbar-color: white ;
+  --u-card-toolbar-bg-color: #{$blue-7};
 }
 
-.body--dark .u-dialog-titlebar {
-  --u-dialog-titlebar-color: white;
-  --u-dialog-titlebar-bg-color: #{$blue-7};
+.body--light .u-dialog-toolbar {
+  --u-dialog-toolbar-color: white;
+  --u-dialog-toolbar-bg-color: #{$blue-8};
 }
 
 .body--light .u-btn-cta {
@@ -49,19 +52,23 @@ h1 {
   --u-btn-cta-bg-color: #{$cta};
 }
 
+.body--light .md-editor {
+  background-color: #{$grey-1} !important;
+}
+
 .body--dark .md-editor {
   --md-color: white !important;
   --md-bk-color: #1D1D1D !important;
 }
 
-.body--dark .u-card-titlebar {
-  --u-card-titlebar-color:#{$grey-1};
-  --u-card-titlebar-bg-color: #{$grey-9};
+.body--dark .u-card-toolbar {
+  --u-card-toolbar-color:#{$grey-1};
+  --u-card-toolbar-bg-color: #{$grey-9};
 }
 
-.body--dark .u-dialog-titlebar {
-  --u-dialog-titlebar-color:#{$grey-1};
-  --u-dialog-titlebar-bg-color: #{$grey-8};
+.body--dark .u-dialog-toolbar {
+  --u-dialog-toolbar-color:#{$grey-1};
+  --u-dialog-toolbar-bg-color: #{$grey-8};
 }
 
 .body--dark .u-btn-cta {
@@ -69,15 +76,23 @@ h1 {
   --u-btn-cta-bg-color: #{$cta};
 }
 
-
-.u-card-titlebar {
-  color: var(--u-card-titlebar-color);
-  background-color: var(--u-card-titlebar-bg-color);
+.body--light  .u-card {
+  background-color: #{$grey-1};
 }
 
-.u-dialog-titlebar {
-  color: var(--u-dialog-titlebar-color);
-  background-color: var(--u-dialog-titlebar-bg-color);
+.body--light  .u-dialog {
+  background-color: #{$grey-2};
+  min-width: 350px
+}
+
+.u-card-toolbar {
+  color: var(--u-card-toolbar-color);
+  background-color: var(--u-card-toolbar-bg-color);
+}
+
+.u-dialog-toolbar {
+  color: var(--u-dialog-toolbar-color);
+  background-color: var(--u-dialog-toolbar-bg-color);
 }
 
 .u-btn-cta {

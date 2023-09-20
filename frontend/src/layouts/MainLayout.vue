@@ -11,6 +11,7 @@
         <OrgDrawer v-if="route.meta.drawer == 'Org'" />
         <OrgCirclesDrawer v-if="route.meta.drawer == 'OrgCircle'" />
         <CirclesDrawer v-if="route.meta.drawer == 'Circle'" />
+        <WorkspacesDrawer v-if="route.meta.drawer == 'Workspaces'" />
       </q-drawer>
     </div>
 
@@ -55,6 +56,7 @@ import CanvasDrawer from "./drawers/CanvasDrawer.vue";
 import OrgDrawer from "./drawers/OrgDrawer.vue";
 import CirclesDrawer from "./drawers/CirclesDrawer.vue";
 import OrgCirclesDrawer from "./drawers/OrgCirclesDrawer.vue";
+import WorkspacesDrawer from "./drawers/WorkspacesDrawer.vue";
 
 import PasswordlessAuthDialog from "../components/auth/dialog/PasswordlessDialog.vue";
 import WelcomeDialog from "../components/auth/dialog/WelcomeDialog.vue";

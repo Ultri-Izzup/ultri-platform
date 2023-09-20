@@ -103,7 +103,7 @@ module.exports = configure(function (/* ctx */) {
     devServer: {
       https: true,
       host: 'dev.ultri.com',
-      open: true // opens browser window automatically
+      open: false // opens browser window automatically
     },
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#framework

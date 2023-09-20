@@ -1,17 +1,13 @@
 <template>
   <q-page>
-    <div class="text-h3 text-center justify-center row full-width q-pb-sm text-primary text-bold">
-      {{ $t("cerc.dashboard.title", 'Cerc') }}
+    <div class="text-center justify-center row full-width q-pb-lg text-primary text-bold items-center">
+      <span class="text-h2 text-bold">{{ $t("cerc.dashboard.title", 'Cerc') }}</span><span class="q-pl-md gt-sm text-h3 text-italic">&mdash; {{ $t("cerc.dashboard.subtitle", 'Organize your org') }}</span>
     </div>
-    <div class="text-h4 text-italic text-center justify-center row full-width q-pb-lg text-primary text-bold">
-      {{ $t("cerc.dashboard.subtitle", 'Organize your org') }}
-    </div>
-
     <div class="row full-width">
 
       <div :class="$q.screen.lt.md ? ' col-12 q-px-md q-pb-md' : ' col-5 q-pl-xl q-pr-lg'">
         <q-card class="u-card">
-          <q-card-section class="u-card-titlebar">
+          <q-card-section class="u-card-toolbar">
             <div class="full-width text-center text-h5 text-bold">Cerc - Domain Circles</div>
           </q-card-section>
 
@@ -21,7 +17,7 @@
 
           <div v-if="workspace.fsaApiEnabled" class="q-pb-lg">
             <q-card-actions class="justify-center">
-              <q-btn @click="createWorkspace()" label="Create Workspace" class="u-btn-cta" size="xl"></q-btn>
+              <q-btn @click="triggerWorkspaceDialog()" label="Create Workspace" class="u-btn-cta" size="xl"></q-btn>
             </q-card-actions>
             <q-card-actions v-if="workspace.hasWorkspaces" class="justify-center q-pb-xl">
               <q-btn @click="workspace.openWorkspace()" flat label="Open Workspace" size="xl" class="u-btn-cta"></q-btn>
@@ -51,6 +47,7 @@
               <li class="q-py-sm">Data is stored in a local workspace directory.</li>
               <li class="q-py-sm">New or existing directories can be workspace enabled.</li>
               <li class="q-py-sm">Multiple apps can access the same workspace.</li>
+              <li class="q-py-sm">Integrated canvases, using <a href="/canava">Canava technology</a>.</li>
             </ul>
             </p>
           </q-card-section>
@@ -58,10 +55,9 @@
         </q-card>
       </div>
 
-
-      <div :class="$q.screen.lt.md ? ' col-12 q-px-md q-pb-md' : ' col-7 q-pr-xl q-pl-lg'">
+      <div :class="$q.screen.lt.md ? ' col-12 q-px-md q-pb-md' : ' col-7 q-pr-xl q-pl-lg '">
         <q-card class="u-card">
-          <q-card-section class="u-card-titlebar">
+          <q-card-section class="u-card-toolbar">
             <div class="full-width text-center text-h5 text-bold">Additional Info</div>
           </q-card-section>
           <q-card-section class="q-pt-none word-wrap">
@@ -70,37 +66,18 @@
         </q-card>
       </div>
 
+      <UDialogPrompt
+        v-model="showWorkspaceDialog"
+        toolbar-text="Create Workspace"
+        headline-text="Workspace Alias"
+        instructions-text="Enter a name or alias to use, then choose the directory."
+        label-text="32 characters or less, no special characters"
+        button-text="Choose Directory"
+        :validator="(str) => { return ! (str && /^[A-Za-z0-9_-]{1,32}$/.test(str)); }"
+        @ok="(event) => workspace.createWorkspace(event)"
+      ></UDialogPrompt>
+
     </div>
-
-    <q-dialog v-model="workspace.showNameDialog">
-      <q-card>
-        <q-card-section>
-          <div class="text-h6">Alert</div>
-        </q-card-section>
-
-        <q-card-section class="q-pt-none">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum repellendus sit voluptate voluptas eveniet porro. Rerum blanditiis perferendis totam, ea at omnis vel numquam exercitationem aut, natus minima, porro labore.
-        </q-card-section>
-
-        <q-card-actions align="right">
-          <q-btn flat label="OK" color="primary" v-close-popup></q-btn>
-        </q-card-actions>
-      </q-card>
-    </q-dialog>
-
-    <q-dialog v-model="showWorkspaceDialog" persistent>
-      <q-card>
-        <q-card-section class="row items-center">
-          <q-avatar icon="signal_wifi_off" color="primary" text-color="white"></q-avatar>
-          <span class="q-ml-sm">You are currently not connected to any network.</span>
-        </q-card-section>
-
-        <q-card-actions align="right">
-          <q-btn flat label="Cancel" color="primary" v-close-popup></q-btn>
-          <q-btn flat label="Turn on Wifi" color="primary" v-close-popup></q-btn>
-        </q-card-actions>
-      </q-card>
-    </q-dialog>
 
   </q-page>
 </template>
@@ -113,16 +90,22 @@ import { MdPreview } from 'md-editor-v3';
 import 'md-editor-v3/lib/style.css';
 
 import { useWorkspaceStore } from "../stores/workspace";
+import { useAuthStore } from "../stores/auth";
 import { useCercStore } from "../stores/cerc";
+
+import UDialogPrompt from "../components/ultri/dialog/UDialogPrompt.vue";
 
 // Quasar
 const $q = useQuasar();
 
 // Stores
 const workspace = useWorkspaceStore();
+const auth = useAuthStore();
 const cerc = useCercStore();
 
-// Display new workspace dialog?
+// Alias for a new or current Workspace
+const workspaceAlias = ref();
+
 const showWorkspaceDialog = ref(false);
 
 // Page content markdown, fetched on first load.
@@ -138,20 +121,10 @@ if (cercInfo.value.length < 1) {
     });
 }
 
-// Create a new workspace
-const createWorkspace = async () => {
+// Disaply dialog to collect info for a new workspace
+const triggerWorkspaceDialog = async () => {
   // Display a dialog to collect the workspace name
-  showNameDialog.value = true;
-
-  // Start the process to select a directory using the store
-
-  // Failure? - Show error dialog, try again or cancel?
-
-  // Success?
-
-  // Register Cerc app in workspace
-
-
+  showWorkspaceDialog.value = true;
 }
 
 const getWorkspaceOrgs = async () => {
@@ -168,6 +141,30 @@ const createOrg = async () => {
 
 }
 
+// const showWorkspaceDialog = async () => {
+
+//   workspace.authCheck();
+
+//   $q.dialog({
+//     title: 'Workspace alias',
+//     message: 'Enter an alias for the workspace',
+//     prompt: {
+//       model: '',
+//       type: 'text', // optional
+//       label: 'Less than 32 characters, no spaces or special characters allowed.'
+//     },
+//     cancel: true,
+//     persistent: true
+//   }).onOk(async data => {
+//      console.log('>>>> OK, received', data)
+//      await workspace.createWorkspace(data)
+//   }).onCancel(() => {
+//      console.log('>>>> Cancel')
+//   }).onDismiss(() => {
+//      console.log('I am triggered on both OK and Cancel')
+//   })
+
+// }
 
 </script>
 

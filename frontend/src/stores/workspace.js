@@ -1,8 +1,11 @@
+import { ref, reactive, computed } from "vue";
 import { defineStore, storeToRefs } from "pinia";
-import { Dialog } from "quasar";
 import { useStorage } from "@vueuse/core";
-import { ref, computed } from "vue";
-import { v4 as uuidv4 } from "uuid";
+import { Dialog } from "quasar";
+
+
+// import { v4 as uuidv4 } from "uuid";
+import { nanoid } from 'nanoid';
 import localforage from "localforage";
 
 import { useAuthStore } from "./auth";
@@ -25,8 +28,11 @@ const workspaceTable = localforage.createInstance({
  */
 export const useWorkspaceStore = defineStore("workspace", () => {
 
+  // Have the workspaces ben loaded from IndexDB to a Map?
+  const workspacesLoaded = ref(false);
+
   // Map to store workspace handles by name
-  const workspaces = reactive(new Map);
+  const workspaceMap = reactive(new Map);
 
   // SUPPORTED? Does the browser support FileSystem Access API?
   const fsaApiEnabled = computed(() => {
@@ -38,33 +44,37 @@ export const useWorkspaceStore = defineStore("workspace", () => {
   });
 
   // CREATE a new workspace
-  const createWorkspace = async (workspaceName) => {
+  const createWorkspace = async (workspaceAlias) => {
+
+    console.log('CREATING', workspaceAlias)
 
     try {
-      // Only authenticated members can use this feature
-      if (!auth.isSignedIn) {
-        auth.setSignInRequiredMsg("You must sign in to create a workspace");
-        auth.setSignInRequired(true);
-      }
+      authCheck();
+
+      const newUid = nanoid();
+      console.log(newUid)
 
       const workspaceDirHandle = await window.showDirectoryPicker({
-        id: workspaceName,
+        id: workspaceAlias,
         startIn: "documents",
-        mode: "readwrite"
+        mode: "readwrite",
       });
 
-      let existingWorkspace = false;
-
-      for await (const e of workspaceDirHandle.entries()) {
-
-        if (e[0] == "ULTRI-WORKSPACE.json") {
-          existingWorkspace = true;
-        }
-
-        console.log(e);
+      const workspaceObject = {
+        alias: workspaceAlias,
+        uid: newUid,
+        createdAt: new Date().toISOString(),
+        dirHandle: workspaceDirHandle
       }
+
+      // Store reactive value in Map
+      workspaceMap.set(workspaceAlias, workspaceObject)
+
+      // Store in IndexDB to persist through reboot
+      workspaceTable.setItem(workspaceAlias, workspaceObject)
+
     } catch (e) {
-      return
+      console.log(e)
 
     }
 
@@ -72,55 +82,82 @@ export const useWorkspaceStore = defineStore("workspace", () => {
 
   // OPEN an existing workspace
   const openWorkspace = async () => {
-    // Only authenticated members can use this feature
-    if (!auth.isSignedIn) {
-      auth.setSignInRequiredMsg("You must sign in to use Cerc");
-      auth.setSignInRequired(true);
-    }
+    authCheck();
 
-    //console.log(appDirHandle.resolve())
   };
 
   // CLEAR all files from a workspace
   const clearWorkspace = async () => {
-    // Only authenticated members can use this feature
-    if (!auth.isSignedIn) {
-      auth.setSignInRequiredMsg("You must sign in to use Cerc");
-      auth.setSignInRequired(true);
-    }
+    authCheck();
   };
 
   // INIT directory with WORKSPACE-MANIFEST.json and directories
   const initWorkspace = async () => {
-    // Only authenticated members can use this feature
-    if (!auth.isSignedIn) {
-      auth.setSignInRequiredMsg("You must sign in to use Cerc");
-      auth.setSignInRequired(true);
-    }
+    authCheck();
   };
 
   // UPGRADE a workspace WORKSPACE-MANIFEST.json and directories
   const upgradeWorkspace = async () => {
-    // Only authenticated members can use this feature
-    if (!auth.isSignedIn) {
-      auth.setSignInRequiredMsg("You must sign in to use Cerc");
-      auth.setSignInRequired(true);
-    }
+    authCheck();
   };
+
+  // LOAD LIST of Workspaces from IndexDB, refresh the store's Map
+  const loadWorkspaces = async () => {
+    workspaceTable.iterate(function(value, key, ix) {
+      console.log([key, value]);
+      workspaceMap.set(key, value);
+  }).then(function() {
+      workspacesLoaded.value = true;
+  }).catch(function(err) {
+      console.log(err);
+  });
+  }
+
+  // LOAD a SINGLE Workspace from disk
+  const loadWorkspace = async (workspaceAlias) => {
+    // Get the aliases directory handle
+    const workspaceDirHandle = workspaceMap.get(workspaceAlias).dirHandle;
+
+    // Loop through directory contents.
+    console.log(workspaceDirHandle);
+
+    // Store all file and dir handles in the local Map.
+    // Store key file and directory handles in IndexDb.
+  }
 
   // RESET
   const $reset = () => {
-    console.log("RESET CERC");
+    console.log("Reset Workspace");
+    workspacesLoaded.value = false;
+    workspaceMap.clear();
   };
+
+  const authCheck = () => {
+    // Only authenticated members can use this feature
+    if (!auth.isSignedIn) {
+      auth.setSignInRequiredMsg("Sign in to create a workspace");
+      auth.setSignInRequired(true);
+      auth.setTargetUrl(null);
+    }
+    return;
+  }
+
+  const validWorkspaceAlias = (workspaceAlias) => {
+    return /[a-z0-9_-]{1,32}$/.test(workspaceAlias);
+  }
 
   return {
     fsaApiEnabled,
-    showNameDialog,
+    workspaceMap,
+    loadWorkspace,
+    loadWorkspaces,
     createWorkspace,
     openWorkspace,
     clearWorkspace,
     initWorkspace,
     upgradeWorkspace,
+    authCheck,
+    validWorkspaceAlias,
     $reset
   };
 });

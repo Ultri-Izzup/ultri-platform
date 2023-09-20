@@ -5,17 +5,17 @@
         <span class="q-pr-lg text-body2 text-weight-bold">
           <q-btn-dropdown flat color="primary" label="Products" no-caps>
             <q-list>
-              <!-- <q-item clickable v-close-popup href="/cerc">
+              <q-item clickable v-close-popup href="/workspaces">
                 <q-item-section>
-                  <q-item-label>Cerc</q-item-label>
-                  <q-item-label caption>Circle manager</q-item-label>
+                  <q-item-label>Workspaces</q-item-label>
+                  <q-item-label caption>Hybrid data management</q-item-label>
                 </q-item-section>
-              </q-item> -->
+              </q-item>
 
               <q-item clickable v-close-popup href="/canava">
                 <q-item-section>
                   <q-item-label>Canava</q-item-label>
-                  <q-item-label caption>Canvas Tool</q-item-label>
+                  <q-item-label caption>Custom Canvas Tool</q-item-label>
                 </q-item-section>
               </q-item>
 <!--

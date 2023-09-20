@@ -134,8 +134,8 @@ const reset = () => {
 defineEmits([
   // REQUIRED; need to specify some events that your
   // component will emit through useDialogPluginComponent()
-  //...useDialogPluginComponent.emits,
-  'ok',
+  ...useDialogPluginComponent.emits,
+  // 'ok',
 ]);
 
 const onEmailSubmit = async () => {

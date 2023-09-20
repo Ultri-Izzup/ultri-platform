@@ -83,9 +83,8 @@
                 :class="authCookiesAccepted ? '' : ' text-grey-6'"
                 ><q-tooltip v-if="!cookiePolicyAccepted"
                   >You must accept the cookie policy first</q-tooltip
-                ><q-tooltip v-else>Required to sign in</q-tooltip></q-toggle
-              >
-              Required for sign in
+                ><q-tooltip v-else>Required to sign in</q-tooltip>
+              </q-toggle>
             </q-card-section>
             <q-card-section>
               <q-toggle

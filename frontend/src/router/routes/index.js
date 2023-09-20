@@ -12,6 +12,7 @@ import products from './products'
 import projects from './projects'
 import services from './services'
 import tools from './tools'
+import workspaces from './workspaces'
 import debug from './debug'
 import catchall from './catchall'
 
@@ -31,6 +32,7 @@ const routes = [
   ...services,
   ...features,
   ...tools,
+  ...workspaces,
   ...debug,
   ...catchall // Keep catchall last
 ]

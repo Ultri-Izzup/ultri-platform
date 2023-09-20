@@ -31,22 +31,6 @@ const routes = [
       }
     ]
   },
-  // MARKDOWN-IT HTML VIEWER
-  {
-    path: "/editors/markdown/html",
-    component: () => import("layouts/MainLayout.vue"),
-    meta: {
-      drawer: null,
-      app: "Tools"
-    },
-    children: [
-      {
-        name: "MarkdownItViewer",
-        path: "",
-        component: () => import("src/pages/MarkdownItViewerPage.vue")
-      }
-    ]
-  },
   // MARKDOWN VIEWER
   {
     path: "/editors/markdown/viewer",

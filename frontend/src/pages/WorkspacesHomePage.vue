@@ -3,7 +3,7 @@
     <div class="text-center justify-center row full-width q-pb-lg text-primary text-bold items-center">
       <span class="text-h2 text-bold">{{
           $t("cerc.dashboard.title", "Workspaces")
-      }}</span><span class="q-pl-md gt-sm text-h3 text-italic">&mdash; {{ getRandTagline() }}</span>
+      }}</span><span class="q-pl-md gt-sm text-h3 text-italic">&mdash; {{ tagline }}</span>
     </div>
     <div class="row full-width">
       <q-card class="full-width">
@@ -34,7 +34,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from "vue";
+import { ref, watch } from "vue";
 import { useQuasar } from "quasar";
 
 import { MdPreview } from 'md-editor-v3';
@@ -60,6 +60,7 @@ const personalMd = ref('');
 const techDetailsMd = ref('');
 
 
+const tagline = ref('Get it going')
 
 
   // If ref is empty, fetch Markdown and store in ref
@@ -94,6 +95,10 @@ const techDetailsMd = ref('');
   }
 
 
+  watch((tab), (oldVal, newVal) => {
+    tagline.value = getRandTagline();
+  })
+
 
 
 const taglines = [
@@ -104,6 +109,8 @@ const taglines = [
   'Get it right',
   'Get it faster',
   'Get it your way',
+  'Get it started',
+  'Get it launched'
 ]
 
 const getRandTagline = () => {

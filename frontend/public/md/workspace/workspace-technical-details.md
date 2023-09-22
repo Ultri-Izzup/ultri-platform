@@ -14,7 +14,7 @@
 
 ```mermaid
 sequenceDiagram
-  Webapp-->>Store: A web or mobile app accecss the store
+  Webapp-->>Store: A web or mobile app accesses the store
   Store-->>Map: Pinia stores reactive data in Maps
   Store-->>IndexDB: Core Maps cached in IndexDB
   IndexDB-->>Map: Core Maps gets hydrated after reboot

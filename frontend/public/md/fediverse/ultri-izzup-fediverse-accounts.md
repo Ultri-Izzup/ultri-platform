@@ -1,13 +1,13 @@
 ## Ultri - Izzup Fediverse Accounts - COMING SOON!!
 
-Each membership in the Ultri Collective is allowed to create multiple business and personal Fediverse accounts.
+Each member of Ultri is allowed to create multiple business and personal Fediverse accounts.
 
 The accounts are either `@ultri.com` or `@izzup.com`.
 
 * Izzup is a social with as few barriers as possible, we try to be open with who we connect with.
 * Ultri.com provides a more professional environment, is only federated with a handful of sites, one of them being Izzup.com.
 * We can host open or closed, Fediverse services for your domain.
-  
+
 ### Free Fediverse Accounts With Each Membership
 
 * One social account at izzup.com *(username@izzup.com)*
@@ -23,11 +23,11 @@ You control the rules and moderation within your Fediverse, we only provide the 
 * The hostname for the member account: *username@{your-domain}*
 * The hostname for the Fediverse API services. examples: [fedi.izzup.com](https://fedi.izzup.com) and [members.ultri.com](https://members.ultri.com).
 * The hostname for the web client. examples: [fedi.ultri.com](https://fedi.ultri.com) and [what.izzup.com](https://what.izzup.com)
-* The appearance of the web client. We offer development services to customize versions of the web client. AGPL licensing requires that those derivatives be shared, here is [ours](https://github.com/Ultri-Izzup/antlers). 
+* The appearance of the web client. We offer development services to customize versions of the web client. AGPL licensing requires that those derivatives be shared, here is [ours](https://github.com/Ultri-Izzup/antlers).
 
 ### Ultri + Izzup - The Fediverse on Steroids
 
-We provide Fediverse services using [GoToSocial](https://docs.gotosocial.org/en/latest/) on the backend and [Elk](https://github.com/elk-zone/elk) on the front end. 
+We provide Fediverse services using [GoToSocial](https://docs.gotosocial.org/en/latest/) on the backend and [Elk](https://github.com/elk-zone/elk) on the front end.
 
 We also support a suite of publishing tools through Ultri, that can be integrated with your social or professional Fediverse accounts. You can configure centralized alerts or keep things siloed, it is all up to you.
 

@@ -5,6 +5,13 @@
         <span class="q-pr-lg text-body2 text-weight-bold">
           <q-btn-dropdown flat color="primary" label="Products" no-caps>
             <q-list>
+              <q-item clickable v-close-popup href="/fediverse">
+                <q-item-section>
+                  <q-item-label>Fediverse</q-item-label>
+                  <q-item-label caption>Fediverse made easy</q-item-label>
+                </q-item-section>
+              </q-item>
+
               <q-item clickable v-close-popup href="/workspaces">
                 <q-item-section>
                   <q-item-label>Workspaces</q-item-label>
